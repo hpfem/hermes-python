@@ -1,1 +1,2 @@
-print "This is where python wrappers for Hermes2D are going to be"
+include "src/mesh/mesh.pyx"
+include "src/mesh/mesh_reader_h2d_xml.pyx"
