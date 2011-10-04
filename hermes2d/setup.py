@@ -4,5 +4,5 @@ from Cython.Distutils import build_ext
 
 setup(
     cmdclass = {'build_ext': build_ext},
-    ext_modules = [Extension("hermes2d", ["hermes2d.pyx"],language="c++")]
+    ext_modules = [Extension("hermes2d", ["hermes2d.pyx",],language="c++",libraries=["hermes2d"])]
 )
