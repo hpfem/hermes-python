@@ -1,1 +1,1 @@
-include "src/exceptions.pyx"
+include "src/exceptions.pxi"
