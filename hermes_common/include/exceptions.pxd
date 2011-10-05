@@ -39,6 +39,11 @@ cdef class PyException(Exception):
   cdef cException * thisptr
   cdef str msg #hermes needs constant string so string must not be freed
 
+
+
+cdef extern from "translate_exception.h":
+  cdef translateException() #translation function, all functions which can throw hermes exception should contain "except +translateException"
+
 #cdef class PyNullException(PyException)
 #cdef class LengthException(PyException)
 #cdef class PyLinearSolverException(PyException)

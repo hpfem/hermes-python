@@ -1,5 +1,5 @@
 cdef class PyException:
-  def __cinit__(self, msg = None,*args):
+  def __cinit__(self, msg = None, *args):
     if type(self) != PyException:
       return
     if (msg is None):
@@ -67,4 +67,26 @@ cdef class PyValueException(PyException):
     return (<ValueException *>self.thisptr).getValue()
   def getAllowed(self):
     return (<ValueException *>self.thisptr).getAllowed()
+
+#function to raise python exceptions
+#these functions is called from translate_exceptions.cpp
+#TODO preserve name of function with error
+
+cdef public void raiseException(cException*e):
+  raise PyException(e.getMsg())
+
+cdef public void raiseNullException(NullException*e):
+  raise PyNullException(e.getParamIdx(),e.getItemIdx())
+
+cdef public void raiseLengthException(LengthException*e):
+  if (e.getSecondParamIdx()>-1):
+    raise PyLengthException(e.getFirstParamIdx(),e.getSecondParamIdx(),e.getFirstLength(),e.getExpectedLength())
+  else:
+    raise PyLengthException(e.getFirstParamIdx(),e.getFirstLength(),e.getExpectedLength())
+
+cdef public void raiseLinearSolverException(LinearSolverException*e):
+  raise PyLinearSolverException((<cException*>e).getMsg()) #TODO better message (this is recursive we need original mesage)
+
+cdef public void raiseValueException(ValueException*e):
+  raise PyValueException("TODO value name",e.getValue(),e.getAllowed())
 
