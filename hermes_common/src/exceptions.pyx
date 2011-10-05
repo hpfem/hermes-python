@@ -1,12 +1,12 @@
 cdef class PyException:
-  def __cinit__(self, msg = None):
+  def __cinit__(self, msg = None,*args):
     if type(self) != PyException:
       return
     if (msg is None):
-      self.thisptr = new Exception()
+      self.thisptr = new cException()
     else:
       self.msg = msg
-      self.thisptr = new Exception(msg)
+      self.thisptr = new cException(msg)
   def __dealloc__(self):
     del self.thisptr
   def printMsg(self):
@@ -21,9 +21,9 @@ cdef class PyNullException(PyException):
     if type(self) != PyNullException:
       return
     if (itemIdx is None ):
-      self.thisptr=<Exception *> new NullException(paramIdx)
+      self.thisptr=<cException *> new NullException(paramIdx)
     else:
-      self.thisptr=<Exception *> new NullException(paramIdx, itemIdx)
+      self.thisptr=<cException *> new NullException(paramIdx, itemIdx)
   def getParamIdx(self):
     return (<NullException *>self.thisptr).getParamIdx()
   def getItemIdx(self):
@@ -34,9 +34,9 @@ cdef class PyLengthException(PyException):
     if type(self) != PyLengthException:
       return
     if (c is None):
-      self.thisptr=<Exception *> new LengthException(fstParamIdx, a, b)
+      self.thisptr=<cException *> new LengthException(fstParamIdx, a, b)
     else:
-      self.thisptr=<Exception *> new LengthException(fstParamIdx, a, b, c)
+      self.thisptr=<cException *> new LengthException(fstParamIdx, a, b, c)
   def getFirstParamIdx(self):
     return (<LengthException *>self.thisptr).getFirstParamIdx()
   def getSecondParamIdx(self):
@@ -51,18 +51,18 @@ cdef class PyLinearSolverException(PyException):
     if type(self) != PyLinearSolverException:
       return
     if (reason is None):
-      self.thisptr=<Exception *> new LinearSolverException()
+      self.thisptr=<cException *> new LinearSolverException()
     else:
-      self.thisptr=<Exception *> new LinearSolverException(reason)
+      self.thisptr=<cException *> new LinearSolverException(reason)
 
 cdef class PyValueException(PyException):
   def __cinit__(self, char * name, double value, double allowed1, allowed2=None):
     if type(self) != PyValueException:
       return
     if (allowed2 is None):
-      self.thisptr=<Exception *> new ValueException( name, value, allowed1)
+      self.thisptr=<cException *> new ValueException( name, value, allowed1)
     else:
-      self.thisptr=<Exception *> new ValueException( name, value, allowed1, allowed2)
+      self.thisptr=<cException *> new ValueException( name, value, allowed1, allowed2)
   def getValue(self):
     return (<ValueException *>self.thisptr).getValue()
   def getAllowed(self):

@@ -1,7 +1,7 @@
 cdef extern from "exceptions.h" namespace "Hermes::Exceptions":
-  cdef cppclass Exception:
-    Exception()
-    Exception(char * msg)
+  cdef cppclass cException "Hermes::Exceptions::Exception": #Exception is python buildin
+    cException()
+    cException(char * msg)
     void printMsg()
     char * getMsg()
     char * getFuncName()
@@ -30,8 +30,13 @@ cdef extern from "exceptions.h" namespace "Hermes::Exceptions":
     double getValue()
     double getAllowed()
 
-cdef class PyException:
-  cdef Exception * thisptr
+
+cdef extern from "pyerrors.h":
+  ctypedef class exceptions.Exception [object PyBaseExceptionObject]:
+    pass
+
+cdef class PyException(Exception):
+  cdef cException * thisptr
   cdef str msg #hermes needs constant string so string must not be freed
 
 #cdef class PyNullException(PyException)
