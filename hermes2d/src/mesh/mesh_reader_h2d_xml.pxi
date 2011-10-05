@@ -5,9 +5,9 @@ cdef class PyMeshReaderH2DXML:
     del self.thisptr
 
   def load(self,filename, PyMesh mesh):
-    return self.thisptr.load(filename,mesh.thisptr)
+    return self.thisptr.load(<char*>filename,<Mesh*>mesh.thisptr)
 
   def save(self,filename, PyMesh mesh):
-    return self.thisptr.save(filename,mesh.thisptr)
+    return self.thisptr.save(<char*>filename,<Mesh*>mesh.thisptr)
 
 

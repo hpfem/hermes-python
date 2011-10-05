@@ -8,6 +8,7 @@ setup(
     "hermes_common.pyx",
     "translate_exception.cpp",
     "include/exceptions.pxd",
-    "src/exceptions.pxi"
+    "src/exceptions.pxi",
+    "include/vector.pxd"
     ],language="c++",libraries=["hermes_common"])]
 )
