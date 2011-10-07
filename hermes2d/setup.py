@@ -7,6 +7,7 @@ setup(
     ext_modules = [Extension("hermes2d", [
     "hermes2d.pyx",
     "hermes2d.pxd",
+    "src/asmlist.pxi",
     "include/asmlist.pxd",
     "src/mesh/mesh.pxi",
     "include/mesh/mesh.pxd",
