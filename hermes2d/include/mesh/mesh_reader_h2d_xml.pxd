@@ -1,5 +1,3 @@
-from hermes_common cimport vector
-
 cdef extern from "mesh/mesh_reader_h2d_xml.h" namespace "Hermes::Hermes2D":
   cdef cppclass MeshReaderH2DXML:
     bool load(char *filename, Mesh *mesh)
