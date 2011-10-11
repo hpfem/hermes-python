@@ -6,6 +6,7 @@ from hermes_common cimport Scalar2
 from hermes_common cimport Ord
 
 include "include/asmlist.pxd"
+include "include/hermes2d_common_defs.pxd"
 include "include/function/exact_solution.pxd"
 include "include/boundary_conditions/essential_boundary_conditions.pxd"
 include "include/shapeset/shapeset.pxd"
