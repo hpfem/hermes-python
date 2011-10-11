@@ -10,6 +10,7 @@ setup(
     "src/asmlist.pxi",
     "include/hermes2d_common_defs.pxd",
     "include/asmlist.pxd",
+    "include/mesh/traverse.pxd",
     "include/function/exact_solution.pxd",
     "include/calculation_continuity.pxd",
     "include/boundary_conditions/essential_boundary_conditions.pxd",

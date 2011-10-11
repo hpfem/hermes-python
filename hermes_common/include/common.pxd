@@ -4,6 +4,18 @@ cdef extern from "common.h" :
   cdef cppclass Scalar3[Scalar]:
     pass
 
+  ctypedef int int2[2]
+  ctypedef int int3[3]
+  ctypedef int int4[4]
+  ctypedef int int5[5]
+
+  ctypedef double double2[2]
+  ctypedef double double3[3]
+  ctypedef double double4[4]
+  ctypedef double double2x2[2][2]
+  ctypedef double double3x2[3][2]
+  ctypedef double double3x3[3][3]
+
 cdef extern from "common.h" namespace "Hermes":
   enum MatrixSolverType:
     SOLVER_UMFPACK = 0
