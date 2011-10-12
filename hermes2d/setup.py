@@ -10,6 +10,8 @@ setup(
     "src/asmlist.pxi",
     "include/hermes2d_common_defs.pxd",
     "include/asmlist.pxd",
+    "include/shapeset/precalc.pxd",
+    "include/function/solution.pxd",
     "include/mesh/traverse.pxd",
     "include/function/exact_solution.pxd",
     "include/calculation_continuity.pxd",

@@ -42,6 +42,8 @@ cdef extern from "boundary_conditions/essential_boundary_conditions.h" namespace
     EssentialBoundaryCondition[Scalar]* get_boundary_condition(string marker)
     void set_current_time(double time)
 
+  ctypedef void* pEssentialBCs "EssentialBCs<Scalar>*" #cython error override
+
 
 cdef class PyEssentialBoundaryConditionReal:
   cdef EssentialBoundaryCondition[double] * thisptr

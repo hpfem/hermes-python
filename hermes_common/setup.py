@@ -9,6 +9,7 @@ setup(
     "hermes_common.pxd",
     "include/common.pxd",
     "include/ord.pxd",
+    "include/matrix.pxd",
     "translate_exception.cpp",
     "include/exceptions.pxd",
     "src/exceptions.pxi",
