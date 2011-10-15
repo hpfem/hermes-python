@@ -19,7 +19,6 @@ setup(
     "src/boundary_conditions/essential_boundary_conditions.pxi",
     "include/shapeset/shapeset.pxd",
     "include/space/space.pxd",
-    "src/mesh/mesh.pxi",
     "include/mesh/mesh.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
