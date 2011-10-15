@@ -52,7 +52,28 @@ cdef class PyDefaultEssentialBCConstReal(PyEssentialBoundaryConditionReal):
     else:
       s.assign(<char*>markers)
       self.thisptr=<EssentialBoundaryCondition[double]* > new DefaultEssentialBCConst[double](s,<double> value_const)
-#
+
+cdef class PyDefaultEssentialBCConstComplex(PyEssentialBoundaryConditionComplex):
+  def __cinit__(self,markers,value_const):
+    cdef cComplex[double] *value 
+    cdef vector[string] v
+    cdef string s
+    cdef EssentialBoundaryCondition[cComplex[double]]* b
+    if (type(self)!=PyDefaultEssentialBCConstReal):
+      return
+    value = new cComplex[double](value_const.real,value_const.imag)
+    if isinstance(markers,list):
+      for m in markers:
+        s.assign(<char*>m)
+        v.push_back(s)
+
+      self.thisptr=<EssentialBoundaryCondition[cComplex[double]]* > new DefaultEssentialBCConst[cComplex[double]](v, value[0])
+    else:
+      s.assign(<char*>markers)
+      self.thisptr=<EssentialBoundaryCondition[cComplex[double]]* > new DefaultEssentialBCConst[cComplex[double]](s, value[0])
+    del value
+
+
 #  cdef cppclass DefaultEssentialBCNonConst[Scalar]:#(EssentialBoundaryCondition[Scalar])
 #    DefaultEssentialBCNonConst(vector[string] markers_, ExactSolutionScalar[Scalar]* exact_solution) 
 #    DefaultEssentialBCNonConst(string marker, ExactSolutionScalar[Scalar]* exact_solution) 

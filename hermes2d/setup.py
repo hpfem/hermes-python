@@ -20,6 +20,7 @@ setup(
     "include/shapeset/shapeset.pxd",
     "include/space/space.pxd",
     "include/mesh/mesh.pxd",
+    "src/mesh/mesh.pxi",
     "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
