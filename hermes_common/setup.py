@@ -8,6 +8,8 @@ setup(
     "hermes_common.pyx",
     "hermes_common.pxd",
     "include/common.pxd",
+    "include/common_time_period.pxd",
+    "src/common_time_period.pxi",
     "include/ord.pxd",
     "include/matrix.pxd",
     "translate_exception.cpp",
