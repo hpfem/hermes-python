@@ -18,6 +18,8 @@ setup(
     "src/exceptions.pxi",
     "include/vector.pxd",
     "include/hermes_function.pxd",
+    "include/tables.pxd",
+    "src/tables.pxi",
     "src/hermes_function.pxi"
     ],language="c++",libraries=["hermes_common"])]
 )

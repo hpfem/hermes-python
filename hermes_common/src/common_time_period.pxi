@@ -1,6 +1,6 @@
 
 class PyTimerPeriodTickType:
-    HERMES_ACCUMULATE,HERMES_SKIP=[1,2]
+    HERMES_ACCUMULATE,HERMES_SKIP=[0,1]
 
 cdef class PyTimePeriod:
   def __cinit__(self,char * name=NULL):
