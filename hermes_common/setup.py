@@ -11,6 +11,7 @@ setup(
     "include/common_time_period.pxd",
     "src/common_time_period.pxi",
     "include/ord.pxd",
+    "src/ord.pxi",
     "include/matrix.pxd",
     "translate_exception.cpp",
     "include/exceptions.pxd",
