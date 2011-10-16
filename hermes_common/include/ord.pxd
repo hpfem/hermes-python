@@ -49,3 +49,7 @@ cdef extern from "ord.h" namespace "Hermes":
   cdef Ord log(Ord &a)
   cdef Ord exp(Ord &a)
 
+cdef class PyOrd:
+  cdef Ord * thisptr
+
+

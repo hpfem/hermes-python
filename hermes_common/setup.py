@@ -15,6 +15,8 @@ setup(
     "translate_exception.cpp",
     "include/exceptions.pxd",
     "src/exceptions.pxi",
-    "include/vector.pxd"
+    "include/vector.pxd",
+    "include/hermes_function.pxd",
+    "src/hermes_function.pxi"
     ],language="c++",libraries=["hermes_common"])]
 )
