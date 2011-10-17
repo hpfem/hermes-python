@@ -1,0 +1,57 @@
+How-to wrap hermes classes
+Vladimír Černý
+
+=Directory structure=
+
+Directory structure is the same as structure of hermes. 
+
+- hermes_common
+ - include
+
+   declaration files *.pxd. Files correspods with *.h files in hermes.
+ - src
+
+   definition files *.pxi. Files corresponds with *.cpp files in hermes.
+- hermes2d
+ - include
+ - src
+
+All files are included in corresponding setup.py and in 
+hermes_common.pxd/hermes2d.pxd (pxd files) or hermes_common.pyx/hermes2d.pyx 
+(pxi files)
+
+=Definition files=
+
+Definition file can be created from header files. 
+This is example and it doesn't correspond to the real matrix.pxd file.
+```
+cdef extern from "matrix.h" namespace "Hermes::Algebra":
+  enum EMatrixDumpFormat:
+    DF_MATLAB_SPARSE
+    DF_PLAIN_ASCII
+
+  cdef cppclass Matrix[Scalar]: #abstract
+    Scalar get(unsigned int m, unsigned int n)
+    bool dump(FILE *file, char *var_name, EMatrixDumpFormat fmt)
+    bool dump(FILE *file, char *var_name)
+
+  cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar> 
+    SparseMatrix()
+    SparseMatrix(unsigned int size)
+    void prealloc(unsigned int n)
+```
+Line ``cdef extern from "matrix.h" namespace "Hermes::Algebra":`` contains 
+link to header and namespace.
+ 
+``enum EMatrixDumpFormat:`` is enum definition
+  
+``cdef cppclass Matrix[Scalar]: #abstract`` is templated class.
+I use "abstract" comment to indicate this class is abstract.
+There are no need to have constructor in abstract class.
+
+``bool dump(FILE *file, char *var_name, EMatrixDumpFormat fmt)`` is declaration
+of function. Function declaration in cython can't have default values so 
+``bool dump(FILE *file, char *var_name)`` is used as overloaded function.
+original function looks like this: ``bool dump(FILE *file, const char *var_name, EMatrixDumpFormat fmt = DF_MATLAB_SPARSE)``
+
+``cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar>`` after declaration of subclass I add comment of parent class as a reminder.
