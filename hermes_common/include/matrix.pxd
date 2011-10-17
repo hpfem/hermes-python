@@ -20,7 +20,7 @@ cdef extern from "matrix.h" namespace "Hermes::Algebra":
     void add(unsigned int m, unsigned int n, Scalar v)
     void add(unsigned int m, unsigned int n, Scalar **mat, int *rows, int *cols)
     bool dump(FILE *file, char *var_name, EMatrixDumpFormat fmt)
-    #bool dump(FILE *file, const char *var_name, EMatrixDumpFormat fmt = DF_MATLAB_SPARSE)
+    bool dump(FILE *file, char *var_name)
     unsigned int get_matrix_size()
 
   cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar> { #abstract

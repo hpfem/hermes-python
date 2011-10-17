@@ -9,7 +9,7 @@ cdef extern from "common_time_period.h" namespace "Hermes":
     TimePeriod& reset()
     TimePeriod& tick_reset()
     TimePeriod& tick(TimerPeriodTickType type)
-    #TimePeriod& tick(TimerPeriodTickType type = HERMES_ACCUMULATE)
+    TimePeriod& tick()
     string& name()
     double accumulated()
     string accumulated_str()

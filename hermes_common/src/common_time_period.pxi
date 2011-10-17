@@ -20,10 +20,11 @@ cdef class PyTimePeriod:
     self.thisptr.tick_reset()
     return self
 
-  def tick(self,TimerPeriodTickType type):
-    if not type:
-      type=HERMES_ACCUMULATE
-    self.thisptr.tick(type)
+  def tick(self, type=None):
+    if type:
+      self.thisptr.tick(type)
+    else:
+      self.thisptr.tick()
     return self
 
   def name(self):
