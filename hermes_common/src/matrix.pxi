@@ -47,6 +47,49 @@ cdef class PyMatrixReal: #abstract
   def get_matrix_size(self):
     return self.thisptr.get_matrix_size()
 
+cdef class PyMatrixComplex: #abstract
+  def __dealloc__(self):
+    del self.thisptr
+
+  def get_size(self):
+    return self.thisptr.get_size()
+  def alloc(self):
+    self.thisptr.alloc()
+  def free(self):
+    self.thisptr.free()
+  def get(self, unsigned int m, unsigned int n):
+    self.thisptr.get(m, n)
+  def zero(self):
+    self.thisptr.zero()
+  def add_to_diagonal(self, v):
+    self.thisptr.add_to_diagonal(cComplex[double](v.real,v.imag))
+  def add(self, unsigned int m, unsigned int n, mat, rows=None, cols=None):
+    cdef int *crows
+    cdef int *ccols
+    cdef cComplex[double] **cmat
+    cdef int i
+    cdef int j
+    if not rows:
+      self.thisptr.add(m, n, cComplex[double](mat.real,mat.imag))
+    else:
+      crows=intArray(rows)
+      ccols=intArray(cols)
+      cmat=complex2Array(mat)
+
+      self.thisptr.add(m, n, cmat, crows, ccols)
+      delInts(crows)
+      delInts(ccols)
+      del2Complexes(cmat,len(mat))
+
+  def dump(self, file, char *var_name, fmt=None):
+    cdef FILE * f = PyFile_AsFile(file)
+    if fmt:
+      return self.thisptr.dump(f, var_name,fmt)
+    else:
+      return self.thisptr.dump(f, var_name)
+  def get_matrix_size(self):
+    return self.thisptr.get_matrix_size()
+
 #  cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar> { #abstract
 #    SparseMatrix()
 #    SparseMatrix(unsigned int size)
