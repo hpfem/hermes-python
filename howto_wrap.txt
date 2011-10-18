@@ -55,3 +55,7 @@ of function. Function declaration in cython can't have default values so
 original function looks like this: ``bool dump(FILE *file, const char *var_name, EMatrixDumpFormat fmt = DF_MATLAB_SPARSE)``
 
 ``cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar>`` after declaration of subclass I add comment of parent class as a reminder.
+
+TODO
+string, vector, enum, arrays, FILE, cComplex
+

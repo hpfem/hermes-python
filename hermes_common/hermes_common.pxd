@@ -3,6 +3,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libc.stdio cimport FILE
 
+include "utils.pxd"
 include "include/common.pxd"
 include "include/ord.pxd"
 include "include/vector.pxd"

@@ -63,4 +63,6 @@ cdef extern from "matrix.h" namespace "Hermes::Algebra":
     #bool dump(FILE *file, const char *var_name,EMatrixDumpFormat fmt = DF_MATLAB_SPARSE)
 
     #template<typename Scalar> HERMES_API SparseMatrix<Scalar>*  create_matrix(Hermes::MatrixSolverType matrix_solver_type)
+cdef class PyMatrixReal:
+  cdef Matrix[double] * thisptr
 

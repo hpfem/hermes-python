@@ -13,6 +13,7 @@ setup(
     "include/ord.pxd",
     "src/ord.pxi",
     "include/matrix.pxd",
+    "src/matrix.pxi",
     "translate_exception.cpp",
     "include/exceptions.pxd",
     "src/exceptions.pxi",
@@ -20,6 +21,8 @@ setup(
     "include/hermes_function.pxd",
     "include/tables.pxd",
     "src/tables.pxi",
+    "utils.pxd",
+    "utils.pxi",
     "src/hermes_function.pxi"
     ],language="c++",libraries=["hermes_common"])]
 )
