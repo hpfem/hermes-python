@@ -90,27 +90,71 @@ cdef class PyMatrixComplex: #abstract
   def get_matrix_size(self):
     return self.thisptr.get_matrix_size()
 
-#  cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar> { #abstract
-#    SparseMatrix()
-#    SparseMatrix(unsigned int size)
-#
-#    void prealloc(unsigned int n)
-#    void pre_add_ij(unsigned int row, unsigned int col)
-#    void finish()
-#    unsigned int get_size()
-#    void add_sparse_matrix(SparseMatrix* mat)
-#    void add_sparse_to_diagonal_blocks(int num_stages, SparseMatrix[Scalar]* mat)
-#    int get_num_row_entries(unsigned int row)
-#    void extract_row_copy(unsigned int row, unsigned int len,unsigned int &n_entries, double *vals,unsigned int *idxs)
-#    int get_num_col_entries(unsigned int col)
-#    void extract_col_copy(unsigned int col, unsigned int len,unsigned int &n_entries, double *vals,unsigned int *idxs)
-#    void multiply_with_vector(Scalar* vector_in, Scalar* vector_out)
-#    void multiply_with_Scalar(Scalar value)
-#    SparseMatrix* duplicate()
-#    double get_fill_in()
+cdef class PySparseMatrixReal(PyMatrixReal): #abstract
+  def prealloc(self,unsigned int n):
+    (<SparseMatrix[double] *> self.thisptr).prealloc(n)
+  def pre_add_ij(self,unsigned int row, unsigned int col):
+    (<SparseMatrix[double] *> self.thisptr).pre_add_ij(row, col)
+  def finish(self):
+    (<SparseMatrix[double] *> self.thisptr).finish()
+  def add_sparse_matrix(self,PySparseMatrixReal mat):
+    (<SparseMatrix[double] *> self.thisptr).add_sparse_matrix(<SparseMatrix[double]*> mat.thisptr)
+  def add_sparse_to_diagonal_blocks(self,int num_stages, PySparseMatrixReal mat):
+    (<SparseMatrix[double] *> self.thisptr).add_sparse_to_diagonal_blocks(num_stages, <SparseMatrix[double]*> mat.thisptr)
+  def get_num_row_entries(self,row):
+    return (<SparseMatrix[double] *> self.thisptr).get_num_row_entries(row)
+
+  """n_entries doesn't work use len(vals) instead, vals must be a list"""
+  def extract_row_copy(self,unsigned int row, unsigned int l,n_entries, vals,idxs):
+    cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
+    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef int i
+    (<SparseMatrix[double] *> self.thisptr).extract_row_copy(row, l, n_entries, buff,cidxs)
+    for i in range(n_entries):
+      vals.append(buff[i])
+    delInts(<int*>cidxs) 
+    delDoubles(buff) 
+
+  def get_num_col_entries(self,unsigned int col):
+    return (<SparseMatrix[double] *> self.thisptr).get_num_col_entries(col)
+
+  """n_entries doesn't work use len(vals) instead, vals must be a list""" #TODO returning values of arguments
+  def extract_col_copy(self,unsigned int col, unsigned int l,n_entries, vals,idxs):
+    cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
+    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef int i
+    (<SparseMatrix[double] *> self.thisptr).extract_col_copy(col, l, n_entries, buff,cidxs)
+    for i in range(n_entries):
+      vals.append(buff[i])
+    delInts(<int*>cidxs) 
+    delDoubles(buff) 
+
+  def multiply_with_vector(self, vector_in, vector_out):
+    cdef double * cvectorin = doubleArray(vector_in)
+    cdef double * cvectorout = <double*> newBuffer(sizeof(double)*len(vector_in))
+    cdef int i
+    (<SparseMatrix[double] *> self.thisptr).multiply_with_vector(cvectorin, cvectorout)
+    for i in range(len(vector_in)):
+      vector_out.append(cvectorout[i])
+    delDoubles(cvectorin)
+    delDoubles(cvectorout)
+
+  def multiply_with_Scalar(self,double value):
+    (<SparseMatrix[double] *> self.thisptr).multiply_with_Scalar(value)
+  def duplicate(self):
+    dup=PySparseMatrixReal()
+    dup.thisptr= (<SparseMatrix[double] *> self.thisptr).duplicate()
+    return dup
+
+  def get_fill_in(self):
+    return (<SparseMatrix[double] *> self.thisptr).get_fill_in()
+#  def row_storage
 #    unsigned row_storage
+#  def col_storage
 #    unsigned col_storage
-#    unsigned int get_nnz()
+  def get_nnz(self):
+    return (<SparseMatrix[double] *> self.thisptr).get_nnz()
+
 #
 #  cdef cppclass Vector[Scalar]: #abstract
 #    void alloc(unsigned int ndofs)

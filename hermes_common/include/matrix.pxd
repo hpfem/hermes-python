@@ -24,13 +24,9 @@ cdef extern from "matrix.h" namespace "Hermes::Algebra":
     unsigned int get_matrix_size()
 
   cdef cppclass SparseMatrix[Scalar]:# public Matrix<Scalar> { #abstract
-    SparseMatrix()
-    SparseMatrix(unsigned int size)
-
     void prealloc(unsigned int n)
     void pre_add_ij(unsigned int row, unsigned int col)
     void finish()
-    unsigned int get_size()
     void add_sparse_matrix(SparseMatrix* mat)
     void add_sparse_to_diagonal_blocks(int num_stages, SparseMatrix[Scalar]* mat)
     int get_num_row_entries(unsigned int row)
