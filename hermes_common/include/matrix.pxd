@@ -58,7 +58,11 @@ cdef extern from "matrix.h" namespace "Hermes::Algebra":
     bool dump(FILE *file, char *var_name,EMatrixDumpFormat fmt)
     bool dump(FILE *file, char *var_name)
 
-    #template<typename Scalar> HERMES_API SparseMatrix<Scalar>*  create_matrix(Hermes::MatrixSolverType matrix_solver_type)
+  cdef cppclass create_matrix[Scalar]: #cython do not support templated functions so this is small hack
+    create_matrix(MatrixSolverType matrix_solver_type)
+  cdef cppclass create_vector[Scalar]: #cython do not support templated functions so this is small hack
+    create_vector(MatrixSolverType matrix_solver_type)
+
 cdef class PyMatrixReal:
   cdef Matrix[double] * thisptr
 

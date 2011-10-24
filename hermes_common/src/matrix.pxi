@@ -329,5 +329,22 @@ cdef class PyVectorComplex: #abstract
     else:
       return self.thisptr.dump(f, var_name)
 
-#template<typename Scalar> HERMES_API SparseMatrix<Scalar>*  create_matrix(Hermes::MatrixSolverType matrix_solver_type)
+def PyCreateMatrixReal(matrix_solver_type):
+  matrix=PySparseMatrixReal()
+  matrix.thisptr=<Matrix[double]*> create_matrix[double](matrix_solver_type)
+  return matrix
 
+def PyCreateMatrixComplex(matrix_solver_type):
+  matrix=PySparseMatrixComplex()
+  matrix.thisptr=<Matrix[cComplex[double]]*> create_matrix[cComplex[double]](matrix_solver_type)
+  return matrix
+
+def PyCreateVectorReal(vector_solver_type):
+  vector=PyVectorReal()
+  vector.thisptr=<Vector[double]*> create_vector[double](vector_solver_type)
+  return vector
+
+def PyCreateVectorComplex(vector_solver_type):
+  vector=PyVectorComplex()
+  vector.thisptr=<Vector[cComplex[double]]*> create_vector[cComplex[double]](vector_solver_type)
+  return vector
