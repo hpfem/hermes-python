@@ -15,6 +15,12 @@ cdef cComplex[double] ** complex2Array(a)
 cdef del2Doubles(double ** a,int n)
 cdef del2Complexes(cComplex[double] ** a,int n)
 
+cdef inline cComplex[double] ccomplex(complex c):
+  return cComplex[double](c.real, c.imag)
+
+cdef inline complex pcomplex(cComplex[double]c):
+  return complex(c.real(), c.imag())
+
 cdef class PyCArray:	#TODO implement members acces
   cdef int length
 

@@ -280,6 +280,54 @@ cdef class PyVectorReal: #abstract
     else:
       return self.thisptr.dump(f, var_name)
 
+cdef class PyVectorComplex: #abstract
+  def alloc(self,unsigned int ndofs):
+    self.thisptr.alloc(ndofs)
+  def free(self):
+    self.thisptr.free()
+  def finish(self):
+    self.thisptr.finish()
+  def get(self, unsigned int idx):
+    cdef cComplex[double] c= self.thisptr.get(idx)
+    return complex(c.real(),c.imag())
+  def extract(self,v):
+    cdef n=self.thisptr.length()
+    cdef cComplex[double] * cv=<cComplex[double]*>newBuffer(sizeof(cComplex[double])*n)
+    cdef int i
+    self.thisptr.extract(cv)
+    for i in range(n):
+      v.append(complex(cv[i].real(),cv[i].imag()))
+    delComplexes(cv)
+  def zero(self):
+    self.thisptr.zero()
+  def change_sign(self):
+    self.thisptr.change_sign()
+  def set(self,unsigned int idx, y):
+    self.thisptr.set(idx, ccomplex(y))
+  def add(self,unsigned int idx, y):
+    self.thisptr.add(idx, ccomplex(y))
+  def add_vector(self, vec):
+    cdef cComplex[double] * cvec
+    if isinstance(vec,list):
+      cvec=complexArray(vec)
+      self.thisptr.add_vector(cvec)
+      delComplexes(cvec)
+    else:
+      self.thisptr.add_vector((<PyVectorComplex>vec).thisptr)
+  def add(self,unsigned int n, idx, y):
+    cdef cComplex[double] * cy = complexArray(y)
+    cdef unsigned int * cidx = uintArray(idx)
+    self.thisptr.add(n, cidx, cy)
+    delComplexes(cy)
+    delInts(<int*> cidx)
+  def length(self):
+    return self.thisptr.length()
+  def dump(self,file, char *var_name,fmt=None):
+    cdef FILE * f = PyFile_AsFile(file)
+    if fmt:
+      return self.thisptr.dump(f, var_name,fmt)
+    else:
+      return self.thisptr.dump(f, var_name)
 
 #template<typename Scalar> HERMES_API SparseMatrix<Scalar>*  create_matrix(Hermes::MatrixSolverType matrix_solver_type)
 
