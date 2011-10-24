@@ -1,6 +1,3 @@
-#def void ludcmp(double **a, int n, int *indx, double *d)
-#def void choldc(double **a, int n, double p[])
-
 class PyEMatrixDumpFormat:
   DF_MATLAB_SPARSE, DF_PLAIN_ASCII, DF_HERMES_BIN, DF_NATIVE, DF_MATRIX_MARKET=range(5)
 
@@ -148,10 +145,17 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
 
   def get_fill_in(self):
     return (<SparseMatrix[double] *> self.thisptr).get_fill_in()
-#  def row_storage
-#    unsigned row_storage
-#  def col_storage
-#    unsigned col_storage
+
+  property row_storage:
+    def __get__(self):
+      return (<SparseMatrix[double] *> self.thisptr).row_storage
+    def __set__(self,row_storage):
+      (<SparseMatrix[double] *> self.thisptr).row_storage=row_storage
+  property col_storage:
+    def __get__(self):
+      return (<SparseMatrix[double] *> self.thisptr).col_storage
+    def __set__(self,col_storage):
+      (<SparseMatrix[double] *> self.thisptr).col_storage=col_storage
   def get_nnz(self):
     return (<SparseMatrix[double] *> self.thisptr).get_nnz()
 
