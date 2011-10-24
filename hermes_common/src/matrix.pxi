@@ -159,6 +159,78 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
   def get_nnz(self):
     return (<SparseMatrix[double] *> self.thisptr).get_nnz()
 
+cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
+  def prealloc(self,unsigned int n):
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).prealloc(n)
+  def pre_add_ij(self,unsigned int row, unsigned int col):
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).pre_add_ij(row, col)
+  def finish(self):
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).finish()
+  def add_sparse_matrix(self,PySparseMatrixReal mat):
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).add_sparse_matrix(<SparseMatrix[cComplex[double]]*> mat.thisptr)
+  def add_sparse_to_diagonal_blocks(self,int num_stages, PySparseMatrixReal mat):
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).add_sparse_to_diagonal_blocks(num_stages, <SparseMatrix[cComplex[double]]*> mat.thisptr)
+  def get_num_row_entries(self,row):
+    return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_num_row_entries(row)
+
+  """n_entries doesn't work use len(vals) instead, vals must be a list"""
+  def extract_row_copy(self,unsigned int row, unsigned int l,n_entries, vals,idxs):
+    cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
+    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef int i
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).extract_row_copy(row, l, n_entries, buff,cidxs)
+    for i in range(n_entries):
+      vals.append(buff[i])
+    delInts(<int*>cidxs) 
+    delDoubles(buff) 
+
+  def get_num_col_entries(self,unsigned int col):
+    return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_num_col_entries(col)
+
+  """n_entries doesn't work use len(vals) instead, vals must be a list""" #TODO returning values of arguments
+  def extract_col_copy(self,unsigned int col, unsigned int l,n_entries, vals,idxs):
+    cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
+    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef int i
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).extract_col_copy(col, l, n_entries, buff,cidxs)
+    for i in range(n_entries):
+      vals.append(buff[i])
+    delInts(<int*>cidxs) 
+    delDoubles(buff) 
+
+  def multiply_with_vector(self, vector_in, vector_out):
+    cdef cComplex[double] * cvectorin = complexArray(vector_in)
+    cdef cComplex[double] * cvectorout = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*len(vector_in))
+    cdef int i
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).multiply_with_vector(cvectorin, cvectorout)
+    for i in range(len(vector_in)):
+      vector_out.append(complex(cvectorout[i].real(),cvectorout[i].imag()))
+    delComplexes(cvectorin)
+    delComplexes(cvectorout)
+
+  def multiply_with_Scalar(self, value):
+    (<SparseMatrix[cComplex[double]] *> self.thisptr).multiply_with_Scalar(cComplex[double](value.real,value.imag))
+  def duplicate(self):
+    dup=PySparseMatrixComplex()
+    dup.thisptr= (<SparseMatrix[cComplex[double]] *> self.thisptr).duplicate()
+    return dup
+
+  def get_fill_in(self):
+    return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_fill_in()
+
+  property row_storage:
+    def __get__(self):
+      return (<SparseMatrix[cComplex[double]] *> self.thisptr).row_storage
+    def __set__(self,row_storage):
+      (<SparseMatrix[cComplex[double]] *> self.thisptr).row_storage=row_storage
+  property col_storage:
+    def __get__(self):
+      return (<SparseMatrix[cComplex[double]] *> self.thisptr).col_storage
+    def __set__(self,col_storage):
+      (<SparseMatrix[cComplex[double]] *> self.thisptr).col_storage=col_storage
+  def get_nnz(self):
+    return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_nnz()
+
 #
 #  cdef cppclass Vector[Scalar]: #abstract
 #    void alloc(unsigned int ndofs)
