@@ -231,23 +231,55 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
   def get_nnz(self):
     return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_nnz()
 
-#
-#  cdef cppclass Vector[Scalar]: #abstract
-#    void alloc(unsigned int ndofs)
-#    void free()
-#    void finish()
-#    Scalar get(unsigned int idx)
-#    void extract(Scalar *v)
-#    void zero()
-#    void change_sign()
-#    void set(unsigned int idx, Scalar y)
-#    void add(unsigned int idx, Scalar y)
-#    void add_vector(Vector[Scalar]* vec)
-#    void add_vector(Scalar* vec)
-#    void add(unsigned int n, unsigned int *idx, Scalar *y)
-#    unsigned int length()
-#    bool dump(FILE *file, char *var_name,EMatrixDumpFormat fmt)
-#    #bool dump(FILE *file, const char *var_name,EMatrixDumpFormat fmt = DF_MATLAB_SPARSE)
-#
-#    #template<typename Scalar> HERMES_API SparseMatrix<Scalar>*  create_matrix(Hermes::MatrixSolverType matrix_solver_type)
+
+cdef class PyVectorReal: #abstract
+  def alloc(self,unsigned int ndofs):
+    self.thisptr.alloc(ndofs)
+  def free(self):
+    self.thisptr.free()
+  def finish(self):
+    self.thisptr.finish()
+  def get(self, unsigned int idx):
+    return self.thisptr.get(idx)
+  def extract(self,v):
+    cdef n=self.thisptr.length()
+    cdef double * cv=<double*>newBuffer(sizeof(double)*n)
+    cdef int i
+    self.thisptr.extract(cv)
+    for i in range(n):
+      v.append(cv[i])
+    delDoubles(cv)
+  def zero(self):
+    self.thisptr.zero()
+  def change_sign(self):
+    self.thisptr.change_sign()
+  def set(self,unsigned int idx, double y):
+    self.thisptr.set(idx, y)
+  def add(self,unsigned int idx, double y):
+    self.thisptr.add(idx, y)
+  def add_vector(self, vec):
+    cdef double * cvec
+    if isinstance(vec,list):
+      cvec=doubleArray(vec)
+      self.thisptr.add_vector(cvec)
+      delDoubles(cvec)
+    else:
+      self.thisptr.add_vector((<PyVectorReal>vec).thisptr)
+  def add(self,unsigned int n, idx, y):
+    cdef double * cy = doubleArray(y)
+    cdef unsigned int * cidx = uintArray(idx)
+    self.thisptr.add(n, cidx, cy)
+    delDoubles(cy)
+    delInts(<int*> cidx)
+  def length(self):
+    return self.thisptr.length()
+  def dump(self,file, char *var_name,fmt=None):
+    cdef FILE * f = PyFile_AsFile(file)
+    if fmt:
+      return self.thisptr.dump(f, var_name,fmt)
+    else:
+      return self.thisptr.dump(f, var_name)
+
+
+#template<typename Scalar> HERMES_API SparseMatrix<Scalar>*  create_matrix(Hermes::MatrixSolverType matrix_solver_type)
 

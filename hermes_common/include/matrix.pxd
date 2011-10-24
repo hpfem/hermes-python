@@ -65,3 +65,8 @@ cdef class PyMatrixReal:
 cdef class PyMatrixComplex:
   cdef Matrix[cComplex[double]] * thisptr
 
+cdef class PyVectorReal:
+  cdef Vector[double] * thisptr
+
+cdef class PyVectorComplex:
+  cdef Vector[cComplex[double]] * thisptr

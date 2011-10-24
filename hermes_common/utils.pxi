@@ -6,6 +6,14 @@ cdef int * intArray(a):
     out[i]=a[i]
   return out
 
+cdef unsigned int * uintArray(a):
+  cdef int n = len(a)
+  cdef unsigned int *out=<unsigned int*> newBuffer(sizeof(int)*n)
+  cdef int i
+  for i in range(n):
+    out[i]=a[i]
+  return out
+
 cdef double * doubleArray(a):
   cdef int n = len(a)
   cdef double *out=<double*> newBuffer(sizeof(double)*n)

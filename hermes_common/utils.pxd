@@ -7,6 +7,7 @@ cdef extern from "utils.h":
   cdef void delComplexesPointer(cComplex[double] ** buffer)
 
 cdef int * intArray(a)
+cdef unsigned int * uintArray(a)
 cdef int ** int2Array(a)
 cdef double ** double2Array(a)
 cdef cComplex[double] * complexArray(a)
