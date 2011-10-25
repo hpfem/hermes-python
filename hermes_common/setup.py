@@ -24,6 +24,7 @@ setup(
     "src/tables.pxi",
     "utils.pxd",
     "utils.pxi",
+    "include/solvers/linear_solver.pxd",
     "src/hermes_function.pxi"
     ],language="c++",libraries=["hermes_common"])]
 )
