@@ -1,4 +1,4 @@
-cdef extern from "linera_solver.h" namespace "Hermes::Solvers":
+cdef extern from "solvers/linear_solver.h" namespace "Hermes::Solvers":
   enum FactorizationScheme:
     HERMES_FACTORIZE_FROM_SCRATCH
     HERMES_REUSE_MATRIX_REORDERING
