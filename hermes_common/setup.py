@@ -26,6 +26,7 @@ setup(
     "utils.pxi",
     "include/solvers/linear_solver.pxd",
     "include/solvers/precond.pxd",
+    "src/solvers/linear_solver.pxi",
     "src/hermes_function.pxi"
     ],language="c++",libraries=["hermes_common"])]
 )
