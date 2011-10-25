@@ -7,6 +7,7 @@ cdef extern from "solvers/linear_solver.h" namespace "Hermes::Solvers":
 
   cdef cppclass LinearSolver[Scalar]: #abstract
     bool solve()
+    int get_matrix_size()
     Scalar *get_sln_vector()
     int get_error()
     double get_time()
@@ -28,4 +29,10 @@ cdef extern from "solvers/linear_solver.h" namespace "Hermes::Solvers":
 
   cdef cppclass create_linear_solver[Scalar]:
     create_linear_solver(MatrixSolverType matrix_solver_type, Matrix[Scalar]* matrix, Vector[Scalar]* rhs)
+
+cdef class PyLinearSolverReal:
+  cdef LinearSolver[double] * thisptr
+
+cdef class PyLinearSolverComplex:
+  cdef LinearSolver[cComplex[double]] * thisptr
 
