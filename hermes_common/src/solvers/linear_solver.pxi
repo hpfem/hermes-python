@@ -42,19 +42,27 @@ cdef class PyLinearSolverComplex: #abstract
       self.thisptr.set_factorization_scheme(reuse_scheme)
     else:
       self.thisptr.set_factorization_scheme()
-#
-#
-#  cdef cppclass DirectSolver[Scalar]: # virtual public LinearSolver<Scalar> abstract
-#    pass
-#
-#  cdef cppclass IterSolver[Scalar]: # public virtual LinearSolver<Scalar> abstract
-#    int get_num_iters()
-#    double get_residual()
-#    void set_tolerance(double tol)
-#    void set_max_iters(int iters)
-#    void set_precond(char *name)
-#    #void set_precond(Teuchos::RCP<Precond<Scalar> > &pc)
-#    void set_precond(Precond[Scalar] *pc)
+
+cdef class PyDirectSolverReal(PyLinearSolverReal): #abstract
+    pass
+
+cdef class PyDirectSolverComplex(PyLinearSolverComplex): #abstract
+    pass
+
+cdef class PyIterSolverReal(PyLinearSolverReal): #abstract
+  cdef get_num_iters(self):
+    return (<IterSolver[double]*> self.thisptr).get_num_iters()
+  cdef get_residual(self):
+    return (<IterSolver[double]*> self.thisptr).get_residual()
+  cdef set_tolerance(self, double tol):
+    (<IterSolver[double]*> self.thisptr).set_tolerance(tol)
+  cdef set_max_iters(self, int iters):
+    (<IterSolver[double]*> self.thisptr).set_max_iters(iters)
+  cdef set_precond(self, pc):
+    if isinstance(pc,PyPrecondReal):
+      (<IterSolver[double]*> self.thisptr).set_precond((<PyPrecondReal> pc).thisptr)
+    else:
+      (<IterSolver[double]*> self.thisptr).set_precond(<char * > pc)
 #
 #  cdef cppclass create_linear_solver[Scalar]:
 #    create_linear_solver(MatrixSolverType matrix_solver_type, Matrix[Scalar]* matrix, Vector[Scalar]* rhs)

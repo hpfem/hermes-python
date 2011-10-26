@@ -24,7 +24,6 @@ cdef extern from "solvers/linear_solver.h" namespace "Hermes::Solvers":
     void set_tolerance(double tol)
     void set_max_iters(int iters)
     void set_precond(char *name)
-    #void set_precond(Teuchos::RCP<Precond<Scalar> > &pc)
     void set_precond(Precond[Scalar] *pc)
 
   cdef cppclass create_linear_solver[Scalar]:
