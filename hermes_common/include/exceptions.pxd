@@ -42,7 +42,7 @@ cdef class PyException(Exception):
 
 
 cdef extern from "translate_exception.h":
-  cdef translateException() #translation function, all functions which can throw hermes exception should contain "except +translateException"
+  cdef void translateException() #translation function, all functions which can throw hermes exception should contain "except +translateException"
 
 #cdef class PyNullException(PyException)
 #cdef class LengthException(PyException)

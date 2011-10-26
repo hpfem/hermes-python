@@ -6,7 +6,7 @@ cdef extern from "solvers/linear_solver.h" namespace "Hermes::Solvers":
     HERMES_REUSE_FACTORIZATION_COMPLETELY
 
   cdef cppclass LinearSolver[Scalar]: #abstract
-    bool solve()
+    bool solve() except +translateException
     int get_matrix_size()
     Scalar *get_sln_vector()
     int get_error()

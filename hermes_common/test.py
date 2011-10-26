@@ -35,8 +35,11 @@ f2.close()
 
 s=hermes_common.PyCreateLinearSolverReal(hermes_common.PyMatrixSolverType.SOLVER_UMFPACK,mat,rhs)
 
-s.solve()
-sln=s.get_sln_vector()
-print sln
+try:
+  s.solve()
+  sln=s.get_sln_vector()
+  print sln
+except hermes_common.PyException as e:
+  e.printMsg()
 
 
