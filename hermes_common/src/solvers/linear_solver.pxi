@@ -79,12 +79,12 @@ cdef class PyIterSolverComplex(PyLinearSolverComplex): #abstract
     else:
       (<IterSolver[cComplex[double]]*> self.thisptr).set_precond(<char * > pc)
 
-def PyCreate_linear_solverReal(matrix_solver_type, PyMatrixReal matrix, PyVectorReal rhs):
+def PyCreateLinearSolverReal(matrix_solver_type, PyMatrixReal matrix, PyVectorReal rhs):
   s=PyLinearSolverReal()
   s.thisptr=<LinearSolver[double]*> create_linear_solver[double](matrix_solver_type, matrix.thisptr, rhs.thisptr)
   return s
 
-def PyCreate_linear_solverComplex(matrix_solver_type, PyMatrixComplex matrix, PyVectorComplex rhs):
+def PyCreateLinearSolverComplex(matrix_solver_type, PyMatrixComplex matrix, PyVectorComplex rhs):
   s=PyLinearSolverComplex()
   s.thisptr=<LinearSolver[cComplex[double]]*> create_linear_solver[cComplex[double]](matrix_solver_type, matrix.thisptr, rhs.thisptr)
   return s
