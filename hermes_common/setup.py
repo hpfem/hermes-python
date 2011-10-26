@@ -4,5 +4,29 @@ from Cython.Distutils import build_ext
 
 setup(
     cmdclass = {'build_ext': build_ext},
-    ext_modules = [Extension("hermes_common", ["hermes_common.pyx"],language="c++",libraries=["hermes_common"])]
+    ext_modules = [Extension("hermes_common", [
+    "hermes_common.pyx",
+    "hermes_common.pxd",
+    "include/common.pxd",
+    "src/common.pxi",
+    "include/common_time_period.pxd",
+    "src/common_time_period.pxi",
+    "include/ord.pxd",
+    "src/ord.pxi",
+    "include/matrix.pxd",
+    "src/matrix.pxi",
+    "translate_exception.cpp",
+    "include/exceptions.pxd",
+    "src/exceptions.pxi",
+    "include/vector.pxd",
+    "include/hermes_function.pxd",
+    "include/tables.pxd",
+    "src/tables.pxi",
+    "utils.pxd",
+    "utils.pxi",
+    "include/solvers/linear_solver.pxd",
+    "include/solvers/precond.pxd",
+    "src/solvers/linear_solver.pxi",
+    "src/hermes_function.pxi"
+    ],language="c++",libraries=["hermes_common"])]
 )
