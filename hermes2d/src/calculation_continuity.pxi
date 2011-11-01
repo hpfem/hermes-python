@@ -18,7 +18,7 @@ cdef class PyContinuityReal:
       self.thisptr.add_record(<double>time)
       return
     if number:
-      self.thisptr.add_record(<unsigned int>number) #TODO test overloading
+      self.thisptr.add_record(<unsigned int>number) 
       return
   def have_record_available(self):
     return self.thisptr.have_record_available()
@@ -40,7 +40,7 @@ cdef class PyRecordReal:
     if (type(time)==int):
       self.thisptr=new Continuity[double].Record(<unsigned int>time)
     else:
-      self.thisptr=new Continuity[double].Record(<double>time) #TODO test overloading
+      self.thisptr=new Continuity[double].Record(<double>time) 
 
   def save_meshes(self, meshes):
     cdef vector[Mesh *] cmeshes
@@ -173,7 +173,7 @@ cdef class PyContinuityComplex:
       self.thisptr.add_record(<double>time)
       return
     if number:
-      self.thisptr.add_record(<unsigned int>number) #TODO test overloading
+      self.thisptr.add_record(<unsigned int>number) 
       return
   def have_record_available(self):
     return self.thisptr.have_record_available()
@@ -195,7 +195,7 @@ cdef class PyRecordComplex:
     if (type(time)==int):
       self.thisptr=new Continuity[cComplex[double]].Record(<unsigned int>time)
     else:
-      self.thisptr=new Continuity[cComplex[double]].Record(<double>time) #TODO test overloading
+      self.thisptr=new Continuity[cComplex[double]].Record(<double>time) 
 
   def save_meshes(self, meshes):
     cdef vector[Mesh *] cmeshes
