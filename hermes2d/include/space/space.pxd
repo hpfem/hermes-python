@@ -1,7 +1,7 @@
 cdef extern from "space/space.h" namespace "Hermes::Hermes2D":
   ctypedef void* pSpace "Space<Scalar>*" #cython error override
   ctypedef void* pSpaceReal "Hermes::Hermes2D::Space<double>*" #cython error override
-  ctypedef void* pSpaceComplex "Hermes::Hermes2D::Space<std::complex<double>>*" #cython error override
+  ctypedef void* pSpaceComplex "Hermes::Hermes2D::Space<std::complex<double> >*" #cython error override
   cdef cppclass Space[Scalar]:
     Space(Mesh* mesh, Shapeset* shapeset, EssentialBCs[Scalar]* essential_bcs, Ord2 p_init)
     void set_element_order(int id, int order)

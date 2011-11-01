@@ -5,6 +5,8 @@ from hermes_common cimport vector
 from hermes_common cimport Scalar2
 from hermes_common cimport Ord
 from hermes_common cimport Vector
+from hermes_common cimport pcomplex
+from hermes_common cimport ccomplex
 
 include "include/asmlist.pxd"
 include "include/shapeset/precalc.pxd"

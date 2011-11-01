@@ -3,6 +3,7 @@ cdef extern from "calculation_continuity.h" namespace "Hermes::Hermes2D":
     timeAndNumber
     onlyTime
     onlyNumber
+  ctypedef IdentificationMethod IdentificationMethodComplex "Hermes::Hermes2D::Continuity<std::complex<double> >::IdentificationMethod"
   cdef cppclass Continuity[Scalar]:
     Continuity(IdentificationMethod identification_method)
     cppclass Record:
