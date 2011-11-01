@@ -23,13 +23,16 @@ cdef class PyContinuityReal:
   def have_record_available(self):
     return self.thisptr.have_record_available()
   def get_last_record(self):
-    cdef Continuity[double].Record*r = self.thisptr.get_last_record()
-    #TODO return r
+    cdef PyRecordReal r=PyRecordReal(0,init = False)
+    r.thisptr=self.thisptr.get_last_record()
+    return r
   def get_num(self):
     return self.thisptr.get_num()
 
 cdef class PyRecordReal:
-  def __cinit__(self,time, number=None):
+  def __cinit__(self,time, number=None, init=True):
+    if not init:
+      return
     if (type(self)!=PyRecordReal):
       return 
     if number:
@@ -139,10 +142,12 @@ cdef class PyRecordReal:
   def load_solution(self, PySolutionReal solution, PySpaceReal space):
     self.thisptr.load_solution(solution.thisptr, space.thisptr)
   def load_time_step_length(self):
+    """function returns value instead of setting refernce"""
     cdef double time_step_length=0
     self.thisptr.load_time_step_length(time_step_length)
     return time_step_length
   def load_error(self):
+    """function returns value instead of setting refernce"""
     cdef double error=0
     self.thisptr.load_error(error)
     return error
