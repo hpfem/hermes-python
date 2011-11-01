@@ -34,6 +34,8 @@ cdef extern from "hermes2d_common_defs.h" namespace "Hermes::Hermes2D":
     HERMES_UNSET_NORM
 
   ctypedef void* pSolution "Solution<Scalar>*" #cython error override
+  ctypedef void* pSolutionReal "Hermes::Hermes2D::Solution<double>*" #cython error override
+  ctypedef void* pSolutionComplex "Hermes::Hermes2D::Solution<std::complex<double> >*" #cython error override
 #  cdef cppclass Global[Scalar]:
 #    double calc_rel_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
 #    double calc_abs_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)

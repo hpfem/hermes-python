@@ -27,6 +27,8 @@ cdef extern from "boundary_conditions/essential_boundary_conditions.h" namespace
     ExactSolutionVector[Scalar]* exact_solution2
 
   ctypedef void* pEssentialBoundaryCondition "EssentialBoundaryCondition<Scalar>*" #cython error override
+  ctypedef void* pEssentialBoundaryConditionReal "Hermes::Hermes2D::EssentialBoundaryCondition<double>*" #cython error override
+  ctypedef void* pEssentialBoundaryConditionComplex "Hermes::Hermes2D::EssentialBoundaryCondition<std::complex<double> >*" #cython error override
   cdef cppclass EssentialBCs[Scalar]:
     EssentialBCs()
     #EssentialBCs(vector[EssentialBoundaryCondition[Scalar]*] essential_bcs)
@@ -41,6 +43,8 @@ cdef extern from "boundary_conditions/essential_boundary_conditions.h" namespace
     void set_current_time(double time)
 
   ctypedef void* pEssentialBCs "EssentialBCs<Scalar>*" #cython error override
+  ctypedef void* pEssentialBCsReal "Hermes::Hermes2D::EssentialBCs<double>*" #cython error override
+  ctypedef void* pEssentialBCsComplex "Hermes::Hermes2D::EssentialBCs<std::complex<double> >*" #cython error override
 
 
 cdef class PyEssentialBoundaryConditionReal:
@@ -48,4 +52,10 @@ cdef class PyEssentialBoundaryConditionReal:
 
 cdef class PyEssentialBoundaryConditionComplex:
   cdef EssentialBoundaryCondition[cComplex[double]] * thisptr
+ 
+cdef class PyEssentialBCsReal:
+  cdef EssentialBCs[double] * thisptr
+
+cdef class PyEssentialBCsComplex:
+  cdef EssentialBCs[cComplex[double]] * thisptr
 
