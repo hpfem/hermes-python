@@ -7,6 +7,7 @@ from hermes_common cimport Ord
 from hermes_common cimport Vector
 from hermes_common cimport pcomplex
 from hermes_common cimport ccomplex
+from hermes_common cimport double2
 
 include "include/asmlist.pxd"
 include "include/shapeset/precalc.pxd"
@@ -20,3 +21,4 @@ include "include/calculation_continuity.pxd"
 include "include/mesh/mesh.pxd"
 include "include/mesh/traverse.pxd"
 include "include/mesh/mesh_reader_h2d_xml.pxd"
+include "include/function/transformable.pxd"

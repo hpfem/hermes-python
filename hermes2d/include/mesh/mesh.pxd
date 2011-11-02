@@ -79,3 +79,6 @@ cdef extern from "mesh/mesh.h" namespace "Hermes::Hermes2D":
 cdef class PyMesh:
   cdef Mesh* thisptr
 
+cdef class PyElement:
+  cdef Element* thisptr
+
