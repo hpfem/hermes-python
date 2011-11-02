@@ -1,5 +1,5 @@
 cdef class PyNode:
-  def __cinit(self,init=True):
+  def __cinit__(self,init=True):
     if not init:
       return
     if (type(self)!=PyNode):
