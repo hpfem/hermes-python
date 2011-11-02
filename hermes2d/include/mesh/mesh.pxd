@@ -84,3 +84,6 @@ cdef class PyMesh:
 cdef class PyElement:
   cdef Element* thisptr
 
+cdef class PyNode:
+  cdef Node* thisptr
+
