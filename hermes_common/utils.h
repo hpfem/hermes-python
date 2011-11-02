@@ -3,6 +3,11 @@ inline void * newBuffer(size_t size){
   return new char[size];
 }
 
+template<typename T>
+inline void delBuffer(T * buffer){
+  delete buffer;
+}
+
 inline void delInts(int*buffer){
   delete[] buffer;
 }

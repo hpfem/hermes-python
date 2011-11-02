@@ -6,6 +6,9 @@ cdef class PyNode:
       return
     self.thisptr=<Node*> newBuffer(sizeof(Node))
 
+  def __dealloc__(self):
+    delBuffer[Node](self.thisptr)
+
   property id:
     def __set__(self, int value):
       self.thisptr.id = value
