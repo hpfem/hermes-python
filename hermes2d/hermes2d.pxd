@@ -8,7 +8,13 @@ from hermes_common cimport Vector
 from hermes_common cimport pcomplex
 from hermes_common cimport ccomplex
 from hermes_common cimport double2
+from hermes_common cimport double3
+from hermes_common cimport int3
+from hermes_common cimport int2
+from hermes_common cimport int4
 
+include "include/mesh/hash.pxd"
+include "include/mesh/curved.pxd"
 include "include/asmlist.pxd"
 include "include/shapeset/precalc.pxd"
 include "include/hermes2d_common_defs.pxd"

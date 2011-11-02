@@ -25,6 +25,8 @@ setup(
     "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/function/transformable.pxd",
     "src/function/transformable.pxi",
+    "include/mesh/hash.pxd",
+    "include/mesh/curved.pxd",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
