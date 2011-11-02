@@ -91,26 +91,106 @@ cdef class PyNode:
     else:
       self.thisptr.unref_element(ht.thisptr, NULL)
 
-#  cdef cppclass Element:
-#    Element()
-#    int id
-#    unsigned active
-#    unsigned used
-#    Element* parent
-#    bool visited
-#    int get_num_surf()
-#    double get_area()
-#    double get_diameter()
-#    
-#    Node* vn[4]
-#    Node* en[4]
-#    Element* sons[4]
-#
-#    int marker
-#    CurvMap* cm
-#
-#    int get_edge_orientation(int ie)
-#    int  get_mode()
+cdef class PyElement:
+  def __cinit__(self,init=True):
+    if not init:
+      return
+    if (type(self)!=PyElement):
+      return
+    self.thisptr=new Element()
+  property id:
+    def __set__(self, int value):
+      self.thisptr.id = value
+    def __get__(self):
+      return self.thisptr.id
+  property active:
+    def __set__(self, int value):
+      self.thisptr.active = value
+    def __get__(self):
+      return self.thisptr.active
+  property used:
+    def __set__(self, int value):
+      self.thisptr.used = value
+    def __get__(self):
+      return self.thisptr.used
+  property parent:
+    def __set__(self, PyElement value):
+      self.thisptr.parent = value.thisptr
+    def __get__(self):
+      cdef PyElement e = PyElement(init=False)
+      e.thisptr = self.thisptr.parent
+      return e
+
+  property visited:
+    def __set__(self, int value):
+      self.thisptr.visited = value
+    def __get__(self):
+      return self.thisptr.visited
+
+  def get_num_surf(self):
+    return self.thisptr.get_num_surf()
+  def get_area(self):
+    return self.thisptr.get_area()
+  def get_diameter(self):
+    return self.thisptr.get_diameter()
+  
+  property vn:
+    def __set__(self, value):
+      cdef int i
+      for i in range(4):
+        self.thisptr.vn[i]=(<PyNode> value[i]).thisptr
+    def __get__(self):
+      cdef int i
+      nn=range(4)
+      for i in range(4):
+        nn[i] = PyNode(init=False)
+        (<PyNode> nn[i]).thisptr=self.thisptr.vn[i]
+      return nn
+
+  property en:
+    def __set__(self, value):
+      cdef int i
+      for i in range(4):
+        self.thisptr.en[i]=(<PyNode> value[i]).thisptr
+    def __get__(self):
+      cdef int i
+      nn=range(4)
+      for i in range(4):
+        nn[i] = PyNode(init=False)
+        (<PyNode> nn[i]).thisptr=self.thisptr.en[i]
+      return nn
+
+  property sons:
+    def __set__(self, value):
+      cdef int i
+      for i in range(4):
+        self.thisptr.sons[i]=(<PyElement> value[i]).thisptr
+    def __get__(self):
+      cdef int i
+      nn=range(4)
+      for i in range(4):
+        nn[i] = PyElement(init=False)
+        (<PyElement> nn[i]).thisptr=self.thisptr.sons[i]
+      return nn
+
+  property marker:
+    def __set__(self, int value):
+      self.thisptr.marker = value
+    def __get__(self):
+      return self.thisptr.marker
+
+  property cm:
+    def __set__(self, PyCurvMap value):
+      self.thisptr.cm = value.thisptr
+    def __get__(self):
+      cdef PyCurvMap c = PyCurvMap(init=False)
+      c.thisptr = self.thisptr.cm
+      return c
+
+  def get_edge_orientation(self, int ie):
+    return self.thisptr.get_edge_orientation(ie)
+  def  get_mode(self):
+    return self.thisptr.get_mode()
 #
 #  cdef cppclass Mesh: 
 #    Mesh()
