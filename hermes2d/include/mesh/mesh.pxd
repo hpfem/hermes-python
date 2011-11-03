@@ -58,6 +58,7 @@ cdef extern from "mesh/mesh.h" namespace "Hermes::Hermes2D":
     void refine_element_id(int id, int refinement)
     void refine_element_id(int id)
     void refine_all_elements(int refinement, bool mark_as_initial)
+    void refine_all_elements(int refinement)
     void refine_all_elements()
     void refine_by_criterion(int (*criterion)(Element* e), int depth, bool mark_as_initial)
     void refine_by_criterion(int (*criterion)(Element* e), int depth)

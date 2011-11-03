@@ -194,41 +194,151 @@ cdef class PyElement:
     return self.thisptr.get_edge_orientation(ie)
   def  get_mode(self):
     return self.thisptr.get_mode()
-#
-#  cdef cppclass Mesh: 
-#    Mesh()
-#    bool rescale(double x_ref, double y_ref)
-#    void copy(Mesh* mesh)
-#    void copy_base(Mesh* mesh)
-#    void copy_converted(Mesh* mesh)
-#    void create(int nv, double2* verts, int nt, int3* tris, string* tri_markers,
-#                int nq, int4* quads, string* quad_markers, int nm, int2* mark, string* boundary_markers)
-#    void free()
-#    Element* get_element(int id)
-#    int get_num_elements()
-#    int get_num_base_elements()
-#    int get_num_active_elements()
-#    int get_max_element_id()
-#    void refine_element_id(int id, int refinement)
-#    void refine_element_id(int id)
-#    void refine_all_elements(int refinement, bool mark_as_initial)
-#    void refine_all_elements()
-#    void refine_by_criterion(int (*criterion)(Element* e), int depth, bool mark_as_initial)
-#    void refine_by_criterion(int (*criterion)(Element* e), int depth)
-#    void refine_towards_vertex(int vertex_id, int depth, bool mark_as_initial)
-#    void refine_towards_vertex(int vertex_id, int depth)
-#    void refine_towards_boundary(vector[string] markers, int depth, bool aniso, bool mark_as_initial)
-#    void refine_towards_boundary(vector[string] markers, int depth, bool aniso)
-#    void refine_towards_boundary(vector[string] markers, int depth)
-#    void refine_towards_boundary(string marker, int depth, bool aniso, bool mark_as_initial)
-#    void refine_towards_boundary(string marker, int depth, bool aniso)
-#    void refine_towards_boundary(string marker, int depth)
-#    int* regularize(int n)
-#    void unrefine_element_id(int id)
-#    void unrefine_all_elements(bool keep_initial_refinements)
-#    void unrefine_all_elements()
-#    Element* get_element_fast(int id)
-#    unsigned get_seq()
-#    void set_seq(unsigned seq)
-#    void convert_triangles_to_quads()
 
+cdef class PyMesh: 
+  def __cinit__(self,init=True):
+    if not init:
+      return
+    if (type(self)!=PyMesh):
+      return
+    self.thisptr=new Mesh()
+
+  def rescale(self, double x_ref, double y_ref):
+    return self.thisptr.rescale(x_ref, y_ref)
+  def copy(self, PyMesh mesh):
+    self.thisptr.copy(mesh.thisptr)
+  def copy_base(self, PyMesh mesh):
+    self.thisptr.copy_base(mesh.thisptr)
+  def copy_converted(self, PyMesh mesh):
+    self.thisptr.copy_converted(mesh.thisptr)
+  def create(self, int nv, verts, int nt, tris, tri_markers,
+      int nq, quads, quad_markers, int nm, mark, boundary_markers):
+    cdef double2 * cverts =<double2*> newBuffer(sizeof(double2)*len(verts))
+    cdef int3 * ctris = <int3*> newBuffer(sizeof(int3)*len(tris))
+    cdef string * ctri_markers = <string*> newBuffer(sizeof(string)*len(tri_markers))
+    cdef int4 * cquads = <int4*> newBuffer(sizeof(int4)*len(quads))
+    cdef string * cquad_markers = <string*> newBuffer(sizeof(string)*len(quad_markers))
+    cdef int2 * cmark = <int2*> newBuffer(sizeof(int2)*len(mark))
+    cdef string * cboundary_markers = <string*> newBuffer(sizeof(string)*len(boundary_markers))
+    cdef string cs
+    cdef int i
+
+    for i in range(len(verts)):
+      cverts[i][0]=verts[i][0]
+      cverts[i][1]=verts[i][1]
+    for i in range(len(tris)):
+      ctris[i][0]=tris[i][0]
+      ctris[i][1]=tris[i][1]
+      ctris[i][2]=tris[i][2]
+    for i in range(len(tri_markers)):
+      cs.assign(<char*>tri_markers[i])
+      ctri_markers[i]=cs
+    for i in range(len(quads)):
+      cquads[i][0]=quads[i][0]
+      cquads[i][1]=quads[i][1]
+      cquads[i][2]=quads[i][2]
+      cquads[i][3]=quads[i][3]
+    for i in range(len(quad_markers)):
+      cs.assign(<char*>quad_markers[i])
+      cquad_markers[i]=cs
+    for i in range(len(mark)):
+      cmark[i][0]=mark[i][0]
+      cmark[i][1]=mark[i][1]
+    for i in range(len(boundary_markers)):
+      cs.assign(<char*>boundary_markers[i])
+      cboundary_markers[i]=cs
+
+    self.thisptr.create(nv, cverts, nt, ctris, ctri_markers, nq, cquads, cquad_markers, nm, cmark, cboundary_markers)
+    delBuffer[double2](cverts)    
+    delBuffer[int3](ctris)    
+    delBuffer[string](ctri_markers)    
+    delBuffer[int4](cquads)    
+    delBuffer[string](cquad_markers)    
+    delBuffer[int2](cmark)    
+    delBuffer[string](cboundary_markers)    
+  def free(self):
+    self.thisptr.free()
+  def get_element(self, int id):
+    cdef PyElement e = PyElement(init=False)
+    e.thisptr = self.thisptr.get_element(id)
+    return e
+  def get_num_elements(self):
+    return self.thisptr.get_num_elements()
+  def get_num_base_elements(self):
+    return self.thisptr.get_num_base_elements()
+  def get_num_active_elements(self):
+    return self.thisptr.get_num_active_elements()
+  def get_max_element_id(self):
+    return self.thisptr.get_max_element_id()
+  def refine_element_id(self, int id, int refinement):
+    self.thisptr.refine_element_id(id, refinement)
+    self.thisptr.refine_element_id(id)
+  def refine_all_elements(self, int refinement, bool mark_as_initial):
+    self.thisptr.refine_all_elements(refinement, mark_as_initial)
+    self.thisptr.refine_all_elements(refinement)
+    self.thisptr.refine_all_elements()
+  def refine_by_criterion(self, criterion, int depth, mark_as_initial=None):
+  #def refine_by_criterion(self, int (*criterion)(Element* e), int depth, bool mark_as_initial):
+    criter_function=criterion
+    if (mark_as_initial!=None):
+      self.thisptr.refine_by_criterion(criter, depth, mark_as_initial)
+    else:
+      self.thisptr.refine_by_criterion(criter, depth)
+  def refine_towards_vertex(self, int vertex_id, int depth, mark_as_initial=None):
+    if (mark_as_initial!=None):
+      self.thisptr.refine_towards_vertex(vertex_id, depth, mark_as_initial)
+    else:
+      self.thisptr.refine_towards_vertex(vertex_id, depth)
+  def refine_towards_boundary(self, markers, int depth, aniso=None, mark_as_initial=None):
+    cdef vector[string] cmarkers
+    cdef string cm
+    if isinstance(markers,list):
+      for m in markers:
+        cm.assign(<char*>m)
+        cmarkers.push_back(cm)
+      if mark_as_initial!=None:
+        self.thisptr.refine_towards_boundary(cmarkers, depth, <bool> aniso, <bool> mark_as_initial)
+        return
+      if aniso!=None:
+        self.thisptr.refine_towards_boundary(cmarkers, depth, <bool> aniso)
+      self.thisptr.refine_towards_boundary(cmarkers, depth)
+    else:
+      cm.assign(<char*> markers)
+      if mark_as_initial!=None:
+        self.thisptr.refine_towards_boundary(cm, depth, <bool> aniso, <bool> mark_as_initial)
+        return
+      if aniso!=None:
+        self.thisptr.refine_towards_boundary(cm, depth, <bool> aniso)
+      self.thisptr.refine_towards_boundary(cm, depth)
+  def regularize(self, int n):
+    cdef int* ib = self.thisptr.regularize(n)
+    cdef int i
+    out=[]
+    for i in range(2*self.thisptr.get_max_element_id()):
+      out.append(ib[i])
+    delBuffer[int](ib)
+    return out
+
+  def unrefine_element_id(self, int id):
+    self.thisptr.unrefine_element_id(id)
+  def unrefine_all_elements(self, bool keep_initial_refinements):
+    self.thisptr.unrefine_all_elements(keep_initial_refinements)
+  def unrefine_all_elements(self):
+    self.thisptr.unrefine_all_elements()
+  def get_element_fast(self, id):
+    cdef PyElement e = PyElement(init=False)
+    e.thisptr = self.thisptr.get_element_fast(id)
+    return e
+  def get_seq(self):
+    return self.thisptr.get_seq()
+  def set_seq(self, seq):
+    self.thisptr.set_seq(seq)
+  def convert_triangles_to_quads(self):
+    self.thisptr.convert_triangles_to_quads()
+
+cdef int (*criter_function)(PyElement)
+
+cdef int criter(Element *e):
+  cdef PyElement pe= PyElement(init=False)
+  pe.thisptr = e
+  return criter_function(pe)
