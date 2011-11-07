@@ -52,3 +52,9 @@ cdef extern from "views/view.h" namespace "Hermes::Hermes2D::Views":
     void wait(ViewWaitEvent wait_event)
     void wait()
 
+cdef class PyWinGeom:
+  cdef WinGeom * thisptr
+
+cdef class PyView:
+  cdef View * thisptr
+
