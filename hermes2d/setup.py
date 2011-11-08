@@ -29,6 +29,7 @@ setup(
     "include/mesh/curved.pxd",
     "src/views/view.pxi",
     "include/views/view.pxd",
+    "include/views/mesh_view.pxd",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
