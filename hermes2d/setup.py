@@ -30,6 +30,7 @@ setup(
     "src/views/view.pxi",
     "include/views/view.pxd",
     "include/views/mesh_view.pxd",
+    "src/views/mesh_view.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
