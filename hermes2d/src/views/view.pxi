@@ -35,7 +35,7 @@ cdef class PyWinGeom:
 
 
 class PyViewPaletteType:
-  H2DV_PT_DEFAULT, H2DV_PT_HUESCALE, H2DV_PT_GRAYSCALE, H2DV_PT_INVGRAYSCALE, H2DV_PT_MAX_ID = range(-1,3)
+  H2DV_PT_DEFAULT, H2DV_PT_HUESCALE, H2DV_PT_GRAYSCALE, H2DV_PT_INVGRAYSCALE, H2DV_PT_MAX_ID = range(-1,4)
 
 cdef class PyView: #abstract
   def __dealloc__(self):
