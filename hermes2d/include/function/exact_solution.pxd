@@ -26,3 +26,6 @@ cdef extern from "function/exact_solution.h" namespace "Hermes::Hermes2D":
   cdef cppclass ZeroSolutionVector[Scalar]: #public ExactSolutionVector[double]
     ZeroSolutionVector(Mesh* mesh)
 
+#cdef class PyExactSolutionReal(PySolutionReal):
+#  pass
+

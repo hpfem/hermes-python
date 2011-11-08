@@ -5,7 +5,6 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     HERMES_EXACT = 1
 
   cdef cppclass Solution[Scalar]:# public MeshFunction[Scalar]
-  #not implement function implemented in super class
     Solution()
     Solution(Mesh *mesh)
     Solution (Space[Scalar]* s, Vector[Scalar]* coeff_vec)
@@ -41,3 +40,8 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     #void vector_to_solution(Scalar* solution_vector, Space[Scalar]* space, Solution[Scalar]* solution,PrecalcShapeset* pss, bool add_dir_lift = true);
     bool own_mesh
 
+cdef class PySolutionReal:
+  cdef Solution[double]* thisptr
+
+cdef class PySolutionComplex:
+  cdef Solution[cComplex[double]]* thisptr

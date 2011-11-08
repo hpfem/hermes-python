@@ -1,8 +1,9 @@
 cdef extern from "calculation_continuity.h" namespace "Hermes::Hermes2D":
-  enum IdentificationMethod:
+  enum IdentificationMethod "Hermes::Hermes2D::Continuity<double>::IdentificationMethod":
     timeAndNumber
     onlyTime
     onlyNumber
+  ctypedef IdentificationMethod IdentificationMethodComplex "Hermes::Hermes2D::Continuity<std::complex<double> >::IdentificationMethod"
   cdef cppclass Continuity[Scalar]:
     Continuity(IdentificationMethod identification_method)
     cppclass Record:
@@ -20,13 +21,14 @@ cdef extern from "calculation_continuity.h" namespace "Hermes::Hermes2D":
       void load_meshes(vector[Mesh*] meshes)
       void load_mesh(Mesh* mesh)
       void load_spaces(vector[pSpace] spaces, vector[SpaceType] space_types, vector[Mesh*] meshes, vector[pEssentialBCs] essential_bcs, vector[Shapeset*] shapeset)
-      #void load_spaces(vector[pSpace] spaces, vector[SpaceType] space_types, vector[Mesh*] meshes, vector[pEssentialBCs] essential_bcs, vector[Shapeset*] shapeset = vector[Shapeset*]())
+      void load_spaces(vector[pSpace] spaces, vector[SpaceType] space_types, vector[Mesh*] meshes, vector[pEssentialBCs] essential_bcs)
       void load_spaces(vector[pSpace] spaces, vector[SpaceType] space_types, vector[Mesh*] meshes, vector[Shapeset*] shapeset) 
-#      void load_spaces(vector[pSpace] spaces, vector[SpaceType] space_types, vector[Mesh*] meshes, vector[Shapeset*] shapeset = vector[Shapeset*]()
+      void load_spaces(vector[pSpace] spaces, vector[SpaceType] space_types, vector[Mesh*] meshes)
       void load_space(Space[Scalar]* space, SpaceType space_type, Mesh* mesh, EssentialBCs[Scalar]* essential_bcs, Shapeset* shapeset)
-      #void load_space(Space[Scalar]* space, SpaceType space_type, Mesh* mesh, EssentialBCs[Scalar]* essential_bcs = NULL, Shapeset* shapeset = NULL)
-      void load_solutions(vector[pSolution] solutions, vector[Mesh*] meshes)
-      void load_solution(Solution[Scalar]* solution, Mesh* mesh)
+      void load_space(Space[Scalar]* space, SpaceType space_type, Mesh* mesh, EssentialBCs[Scalar]* essential_bcs)
+      void load_space(Space[Scalar]* space, SpaceType space_type, Mesh* mesh)
+      void load_solutions(vector[pSolution] solutions, vector[pSpace] spaces)
+      void load_solution(Solution[Scalar]* solution, Space[Scalar]* mesh)
       void load_time_step_length(double & time_step_length)
       void load_error(double & error)
       double get_time()
@@ -38,3 +40,12 @@ cdef extern from "calculation_continuity.h" namespace "Hermes::Hermes2D":
     bool have_record_available()
     Record* get_last_record()
     int get_num()
+
+cdef class PyContinuityReal:
+  cdef Continuity[double]* thisptr
+cdef class PyContinuityComplex:
+  cdef Continuity[cComplex[double]]* thisptr
+cdef class PyRecordReal:
+  cdef Continuity[double].Record* thisptr
+cdef class PyRecordComplex:
+  cdef Continuity[cComplex[double]].Record* thisptr

@@ -5,6 +5,9 @@ cdef extern from "utils.h":
   cdef void delDoublesPointer(double**buffer)
   cdef void delComplexes(cComplex[double] * buffer)
   cdef void delComplexesPointer(cComplex[double] ** buffer)
+  cdef void delComplexesPointer(cComplex[double] ** buffer)
+  cdef cppclass delBuffer[T]:
+    delBuffer(T*buffer)
 
 cdef int * intArray(a)
 cdef unsigned int * uintArray(a)

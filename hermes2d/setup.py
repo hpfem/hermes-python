@@ -15,6 +15,7 @@ setup(
     "include/mesh/traverse.pxd",
     "include/function/exact_solution.pxd",
     "include/calculation_continuity.pxd",
+    "src/calculation_continuity.pxi",
     "include/boundary_conditions/essential_boundary_conditions.pxd",
     "src/boundary_conditions/essential_boundary_conditions.pxi",
     "include/shapeset/shapeset.pxd",
@@ -22,6 +23,14 @@ setup(
     "include/mesh/mesh.pxd",
     "src/mesh/mesh.pxi",
     "src/mesh/mesh_reader_h2d_xml.pxi",
+    "include/function/transformable.pxd",
+    "src/function/transformable.pxi",
+    "include/mesh/hash.pxd",
+    "include/mesh/curved.pxd",
+    "src/views/view.pxi",
+    "include/views/view.pxd",
+    "include/views/mesh_view.pxd",
+    "src/views/mesh_view.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
