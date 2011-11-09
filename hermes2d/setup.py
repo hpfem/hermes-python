@@ -35,6 +35,8 @@ setup(
     "src/views/mesh_view.pxi",
     "include/views/order_view.pxd",
     "src/views/order_view.pxi",
+    "include/function/function.pxd",
+    "include/quadrature/quad.pxd",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
