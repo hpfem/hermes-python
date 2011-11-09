@@ -36,6 +36,7 @@ setup(
     "include/views/order_view.pxd",
     "src/views/order_view.pxi",
     "include/function/function.pxd",
+    "src/function/function.pxi",
     "include/quadrature/quad.pxd",
     "src/quadrature/quad.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
