@@ -16,6 +16,7 @@ from hermes_common cimport newBuffer
 from hermes_common cimport delBuffer
 from hermes_common cimport double2Array
 from hermes_common cimport int2Array
+from hermes_common cimport intArray
 
 include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
