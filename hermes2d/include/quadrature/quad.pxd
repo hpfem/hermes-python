@@ -29,3 +29,9 @@ cdef extern from "quadrature/quad.h" namespace "Hermes::Hermes2D" :
     int get_num_tables()
     double2* get_ref_vertex(int n)
 
+cdef class PyQuad1D:
+  cdef Quad1D * thisptr
+
+cdef class PyQuad2D:
+  cdef Quad2D * thisptr
+
