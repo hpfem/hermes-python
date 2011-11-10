@@ -41,6 +41,7 @@ setup(
     "src/quadrature/quad.pxi",
     "include/function/mesh_function.pxd",
     "include/mesh/refmap.pxd",
+    "src/mesh/refmap.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
