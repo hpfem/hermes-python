@@ -40,6 +40,7 @@ setup(
     "include/quadrature/quad.pxd",
     "src/quadrature/quad.pxi",
     "include/function/mesh_function.pxd",
+    "src/function/mesh_function.pxi",
     "include/mesh/refmap.pxd",
     "src/mesh/refmap.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
