@@ -1,0 +1,28 @@
+cdef extern from "views/scalar_view.h" namespace "Hermes::Hermes2D" :
+  cdef cppclass ScalarView : # public View
+    void init()
+    ScalarView(char* title, WinGeom* wg)
+    ScalarView(char* title)
+    ScalarView()
+    void show(MeshFunction[double]* sln, double eps, int item, MeshFunction[double]* xdisp, MeshFunction[double]* ydisp, double dmult)
+    void show(MeshFunction[double]* sln, double eps, int item, MeshFunction[double]* xdisp, MeshFunction[double]* ydisp)
+    void show(MeshFunction[double]* sln, double eps, int item, MeshFunction[double]* xdisp)
+    void show(MeshFunction[double]* sln, double eps, int item)
+    void show(MeshFunction[double]* sln, double eps)
+    void show(MeshFunction[double]* sln)
+    void show_linearizer_data(double eps, int item0)
+    void show_linearizer_data(double eps)
+    void show_linearizer_data()
+    inline void show_mesh(bool show)
+    inline void show_mesh()
+    inline void show_bounding_box(bool show)
+    inline void show_bounding_box()
+    void show_contours(double step, double orig)
+    void show_contours(double step)
+    inline void hide_contours()
+    inline void set_3d_mode(bool enable)
+    inline void set_3d_mode()
+    void set_vertical_scaling(double sc)
+    void set_min_max_range(double min, double max)
+    Linearizer* lin
+
