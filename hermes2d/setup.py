@@ -47,6 +47,7 @@ setup(
     "include/views/linearizer_base.pxd",
     "src/views/linearizer_base.pxi",
     "include/views/linearizer.pxd",
+    "src/views/linearizer.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )

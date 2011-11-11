@@ -29,6 +29,8 @@ cdef class PyQuad2DLin(PyQuad2D):
 LIN_MAX_LEVEL = 6;
 
 cdef class PyLinearizerBase:
+#  def __dealloc__(self): TODO uncomment when destructor won't be protected
+#    del self.thisptr
   def set_max_absolute_value(self, double max_abs):
     self.thisptr.set_max_absolute_value(max_abs)
   def get_min_value(self):
