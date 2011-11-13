@@ -17,6 +17,8 @@ from hermes_common cimport delBuffer
 from hermes_common cimport double2Array
 from hermes_common cimport int2Array
 from hermes_common cimport intArray
+from hermes_common cimport PyVectorReal
+from hermes_common cimport PyVectorComplex
 
 include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
