@@ -44,6 +44,7 @@ setup(
     "include/mesh/refmap.pxd",
     "src/mesh/refmap.pxi",
     "include/views/scalar_view.pxd",
+    "src/views/scalar_view.pxi",
     "include/views/linearizer_base.pxd",
     "src/views/linearizer_base.pxi",
     "include/views/linearizer.pxd",

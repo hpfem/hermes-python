@@ -1,4 +1,4 @@
-cdef extern from "views/scalar_view.h" namespace "Hermes::Hermes2D" :
+cdef extern from "views/scalar_view.h" namespace "Hermes::Hermes2D::Views" :
   cdef cppclass ScalarView : # public View
     void init()
     ScalarView(char* title, WinGeom* wg)
