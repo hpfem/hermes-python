@@ -16,6 +16,7 @@ from hermes_common cimport newBuffer
 from hermes_common cimport delBuffer
 from hermes_common cimport double2Array
 from hermes_common cimport int2Array
+from hermes_common cimport intArray
 
 include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
@@ -34,3 +35,11 @@ include "include/mesh/mesh_reader_h2d_xml.pxd"
 include "include/function/transformable.pxd"
 include "include/views/view.pxd"
 include "include/views/mesh_view.pxd"
+include "include/views/order_view.pxd"
+include "include/function/function.pxd"
+include "include/function/mesh_function.pxd"
+include "include/quadrature/quad.pxd"
+include "include/mesh/refmap.pxd"
+include "include/views/scalar_view.pxd"
+include "include/views/linearizer_base.pxd"
+include "include/views/linearizer.pxd"

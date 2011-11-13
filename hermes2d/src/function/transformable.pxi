@@ -5,8 +5,8 @@ H2D_TRF_IDENTITY = H2D_TRF_QUAD_NUM
 
 
 cdef class PyTransformable:
-#  def __dealloc__(self): #TODO uncomment when destructor will be public
-#    del self.thisptr
+  def __dealloc__(self): 
+    del self.thisptr
   def get_active_element(self):
     cdef PyElement e = PyElement()
     e.thisptr = self.thisptr.get_active_element()

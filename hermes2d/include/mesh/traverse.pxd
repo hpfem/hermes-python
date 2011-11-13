@@ -17,3 +17,6 @@ cdef extern from "mesh/traverse.h" namespace "Hermes::Hermes2D":
   cdef cppclass Traverse:
     pass
 
+cdef class PySurfPos:
+  cdef SurfPos * thisptr
+
