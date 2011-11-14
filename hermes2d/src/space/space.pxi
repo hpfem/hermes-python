@@ -34,7 +34,7 @@ cdef class PySpaceReal:
     else:
       self.thisptr.copy_orders(space.thisptr)
   def get_num_dofs(self, spaces=None):
-    cdef vector[pSpaceReal] cspaces
+    cdef vector[pcSpaceReal] cspaces
     cdef PySpaceReal sp
     if isinstance(spaces,list):
       for sp in spaces:
@@ -124,7 +124,7 @@ cdef class PySpaceComplex:
     else:
       self.thisptr.copy_orders(space.thisptr)
   def get_num_dofs(self, spaces=None):
-    cdef vector[pSpaceComplex] cspaces
+    cdef vector[pcSpaceComplex] cspaces
     cdef PySpaceComplex sp
     if isinstance(spaces,list):
       for sp in spaces:

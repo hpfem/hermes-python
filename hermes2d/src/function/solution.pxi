@@ -59,12 +59,12 @@ cdef class PySolutionReal(PyMeshFunctionReal):
     return (<Solution[double]*> self.thisptr).get_space_seq()
   def get_space(self):
     cdef PySpaceReal r = PySpaceReal(init = False)
-    r.thisptr = (<Solution[double]*> self.thisptr).get_space()
+    r.thisptr = <Space[double]*> (<Solution[double]*> self.thisptr).get_space()	#TODO const
     return r
   def get_sln_vector(self):
     cdef double * cr = (<Solution[double]*> self.thisptr).get_sln_vector()
     cdef int i 
-    cdef Space[double] * sp = (<Solution[double]*> self.thisptr).get_space()
+    cdef Space[double] * sp = <Space[double]*> (<Solution[double]*> self.thisptr).get_space()
     r = []
     for i in range(sp.get_num_dofs()):
       r.append(cr[i])
@@ -104,7 +104,7 @@ cdef class PySolutionReal(PyMeshFunctionReal):
 
   def vector_to_solutions(self, solution_vector, spaces, solutions, pss, add_dir_lift):
     cdef double * csolution_vector
-    cdef vector[pSpaceReal] cspaces
+    cdef vector[pcSpaceReal] cspaces
     cdef PySpaceReal sp
     cdef vector[pSolutionReal] csolutions 
     cdef PySolutionReal sl
