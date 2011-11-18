@@ -85,3 +85,74 @@ cdef class PyZeroSolutionVector(PyExactSolutionVectorReal):
       return
     self.thisptr = <Transformable*> new ZeroSolutionVector(mesh.thisptr)
 
+cdef class PyExactSolutionComplex(PySolutionComplex):
+  def get_dimension(self):
+    return (<ExactSolution[cComplex[double]]* > self.thisptr).get_dimension()
+
+cdef class PyExactSolutionScalarComplex(PyExactSolutionComplex): 
+  def value (self, double x, double y):
+    return pcomplex((<ExactSolutionScalar[cComplex[double]]*> self.thisptr).value(x, y))
+  def derivatives (self, double x, double y):
+    """ returns [dx, dy] """
+    cdef cComplex[double] dx
+    cdef cComplex[double] dy
+    (<ExactSolutionScalar[cComplex[double]]*> self.thisptr).derivatives (x, y, dx, dy)
+    return [pcomplex(dx), pcomplex(dy)]
+  def exact_function (self, double x, double y):
+    """ returns [value, dx, dy] """
+    cdef cComplex[double] dx
+    cdef cComplex[double] dy 
+    cdef cComplex[double] value = (<ExactSolutionScalar[cComplex[double]]*> self.thisptr).exact_function (x, y, dx, dy)
+    return [pcomplex(value), pcomplex(dx), pcomplex(dy)]
+  def ord(self, PyOrd x, PyOrd y):
+    cdef PyOrd r = PyOrd((<ExactSolutionScalar[cComplex[double]]*> self.thisptr).ord(x.thisptr[0], y.thisptr[0]).get_order())
+    return r
+
+cdef class PyExactSolutionVectorComplex(PyExactSolutionComplex):
+  def value(self,double x, double y):
+    cdef Scalar2[cComplex[double]] * r = new Scalar2[cComplex[double]](ccomplex(0),ccomplex(0))
+    r[0]= (<ExactSolutionVector[cComplex[double]]*> self.thisptr).value (x, y)
+    ret = [pcomplex(r[0][0]), pcomplex(r[0][1])]
+    del r
+    return ret
+  def derivatives (self, double x, double y):
+    """ returns [dx, dy] """
+    cdef Scalar2[cComplex[double]] * dx = new Scalar2[cComplex[double]](ccomplex(0),ccomplex(0))
+    cdef Scalar2[cComplex[double]] * dy =  new Scalar2[cComplex[double]](ccomplex(0),ccomplex(0))
+    (<ExactSolutionVector[cComplex[double]]*> self.thisptr).derivatives (x, y, dx[0], dy[0])
+    ret = [ [pcomplex(dx[0][0]), pcomplex(dx[0][1])], [pcomplex(dy[0][0]), pcomplex(dy[0][1])]]
+    del dx
+    del dy
+    return ret
+  def exact_function(self, double x, double y):
+    """ returns [value, dx, dy] """
+    cdef Scalar2[cComplex[double]] * dx = new Scalar2[cComplex[double]](ccomplex(0),ccomplex(0))
+    cdef Scalar2[cComplex[double]] * dy = new Scalar2[cComplex[double]](ccomplex(0),ccomplex(0))
+    cdef Scalar2[cComplex[double]] * value = new Scalar2[cComplex[double]](ccomplex(0),ccomplex(0))
+    value[0] = (<ExactSolutionVector[cComplex[double]]*> self.thisptr).exact_function(x, y, dx[0], dy[0])
+    ret = [ [pcomplex(value[0][0]), pcomplex(value[0][1])], [pcomplex(dx[0][0]), pcomplex(dx[0][1])], [pcomplex(dy[0][0]), pcomplex(dy[0][1])]] #TODO test
+    del dx
+    del dy
+    del value
+    return ret
+
+  def ord(self, PyOrd x, PyOrd y):
+    cdef PyOrd r = PyOrd((<ExactSolutionVector[cComplex[double]]*> self.thisptr).ord(x.thisptr[0], y.thisptr[0]).get_order())
+    return r
+
+cdef class PyConstantSolutionComplex(PyExactSolutionScalarComplex):
+  def __cinit__(self, PyMesh mesh, complex constant, init = True):
+    if not init:
+      return 
+    if type(self)!=PyConstantSolutionComplex:
+      return
+    self.thisptr = <Transformable*> new ConstantSolution[cComplex[double]](mesh.thisptr, ccomplex(constant))
+
+cdef class PyConstantSolutionVectorComplex(PyExactSolutionVectorComplex):
+  def __cinit__(self, PyMesh mesh, complex constantX, complex constantY, init = True):
+    if not init:
+      return 
+    if type(self)!=PyConstantSolutionVectorComplex:
+      return
+    self.thisptr = <Transformable*> new ConstantSolutionVector[cComplex[double]](mesh.thisptr, ccomplex(constantX), ccomplex(constantY))
+
