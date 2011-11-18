@@ -15,6 +15,8 @@ cdef extern from "mesh/curved.h" namespace "Hermes::Hermes2D":
   cdef cppclass CurvMap:
     pass
 
+cdef class PyNurbs:
+  cdef Nurbs * thisptr
 cdef class PyCurvMap:
   cdef CurvMap * thisptr
 

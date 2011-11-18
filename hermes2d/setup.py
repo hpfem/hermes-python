@@ -34,6 +34,7 @@ setup(
     "include/mesh/hash.pxd",
     "src/mesh/hash.pxi",
     "include/mesh/curved.pxd",
+    "src/mesh/curved.pxi",
     "include/views/view.pxd",
     "src/views/view.pxi",
     "include/views/mesh_view.pxd",
