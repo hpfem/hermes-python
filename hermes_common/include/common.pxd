@@ -1,8 +1,10 @@
 cdef extern from "common.h" :
   cdef cppclass Scalar2[Scalar]:
-    pass
+    Scalar2(Scalar v1, Scalar v2)
+    Scalar operator[](int idx)
   cdef cppclass Scalar3[Scalar]:
-    pass
+    Scalar3(Scalar v1, Scalar v2, Scalar v3)
+    Scalar operator[](int idx)
 
   ctypedef int int2[2]
   ctypedef int int3[3]

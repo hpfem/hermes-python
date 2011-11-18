@@ -17,6 +17,7 @@ setup(
     "src/function/solution.pxi",
     "include/mesh/traverse.pxd",
     "include/function/exact_solution.pxd",
+    "src/function/exact_solution.pxi",
     "include/calculation_continuity.pxd",
     "src/calculation_continuity.pxi",
     "include/boundary_conditions/essential_boundary_conditions.pxd",

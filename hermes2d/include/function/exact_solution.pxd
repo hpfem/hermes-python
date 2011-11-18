@@ -17,15 +17,12 @@ cdef extern from "function/exact_solution.h" namespace "Hermes::Hermes2D":
   cdef cppclass ConstantSolution[Scalar]:# public ExactSolutionScalar[Scalar]
     ConstantSolution(Mesh* mesh, Scalar constant)
 
-  cdef cppclass ZeroSolution[Scalar]: #public ExactSolutionScalar[double]
+  cdef cppclass ZeroSolution: #public ExactSolutionScalar[double]
     ZeroSolution(Mesh* mesh)
 
   cdef cppclass ConstantSolutionVector[Scalar]: #public ExactSolutionVector[Scalar]
     ConstantSolutionVector(Mesh* mesh, Scalar constantX, Scalar constantY)
 
-  cdef cppclass ZeroSolutionVector[Scalar]: #public ExactSolutionVector[double]
+  cdef cppclass ZeroSolutionVector: #public ExactSolutionVector[double]
     ZeroSolutionVector(Mesh* mesh)
-
-#cdef class PyExactSolutionReal(PySolutionReal):
-#  pass
 

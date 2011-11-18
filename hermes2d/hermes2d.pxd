@@ -19,6 +19,7 @@ from hermes_common cimport int2Array
 from hermes_common cimport intArray
 from hermes_common cimport PyVectorReal
 from hermes_common cimport PyVectorComplex
+from hermes_common cimport PyOrd
 
 include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
