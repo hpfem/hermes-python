@@ -102,7 +102,7 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
     return (<SparseMatrix[double] *> self.thisptr).get_num_row_entries(row)
 
   def extract_row_copy(self,unsigned int row, unsigned int l,n_entries, vals,idxs):
-  """n_entries doesn't work use len(vals) instead, vals must be a list"""
+    """n_entries doesn't work use len(vals) instead, vals must be a list"""
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
     cdef double * buff=<double*> newBuffer(sizeof(double)*l)
     cdef int i
@@ -116,7 +116,7 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
     return (<SparseMatrix[double] *> self.thisptr).get_num_col_entries(col)
 
   def extract_col_copy(self,unsigned int col, unsigned int l,n_entries, vals,idxs):
-  """n_entries doesn't work use len(vals) instead, vals must be a list""" 
+    """n_entries doesn't work use len(vals) instead, vals must be a list""" 
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
     cdef double * buff=<double*> newBuffer(sizeof(double)*l)
     cdef int i
@@ -174,7 +174,7 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
     return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_num_row_entries(row)
 
   def extract_row_copy(self,unsigned int row, unsigned int l,n_entries, vals,idxs):
-  """n_entries doesn't work use len(vals) instead, vals must be a list"""
+    """n_entries doesn't work use len(vals) instead, vals must be a list"""
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
     cdef double * buff=<double*> newBuffer(sizeof(double)*l)
     cdef int i
@@ -188,7 +188,7 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
     return (<SparseMatrix[cComplex[double]] *> self.thisptr).get_num_col_entries(col)
 
   def extract_col_copy(self,unsigned int col, unsigned int l,n_entries, vals,idxs):
-  """n_entries doesn't work use len(vals) instead, vals must be a list""" 
+    """n_entries doesn't work use len(vals) instead, vals must be a list""" 
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
     cdef double * buff=<double*> newBuffer(sizeof(double)*l)
     cdef int i
