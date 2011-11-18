@@ -24,6 +24,7 @@ setup(
     "include/boundary_conditions/essential_boundary_conditions.pxd",
     "src/boundary_conditions/essential_boundary_conditions.pxi",
     "include/shapeset/shapeset.pxd",
+    "src/shapeset/shapeset.pxi",
     "include/space/space.pxd",
     "src/space/space.pxi",
     "include/mesh/mesh.pxd",
