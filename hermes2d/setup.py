@@ -29,13 +29,13 @@ setup(
     "src/space/space.pxi",
     "include/mesh/mesh.pxd",
     "src/mesh/mesh.pxi",
-    "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/function/transformable.pxd",
     "src/function/transformable.pxi",
     "include/mesh/hash.pxd",
+    "src/mesh/hash.pxi",
     "include/mesh/curved.pxd",
-    "src/views/view.pxi",
     "include/views/view.pxd",
+    "src/views/view.pxi",
     "include/views/mesh_view.pxd",
     "src/views/mesh_view.pxi",
     "include/views/order_view.pxd",
@@ -54,6 +54,7 @@ setup(
     "src/views/linearizer_base.pxi",
     "include/views/linearizer.pxd",
     "src/views/linearizer.pxi",
-    "include/mesh/mesh_reader_h2d_xml.pxd"
+    "include/mesh/mesh_reader_h2d_xml.pxd",
+    "src/mesh/mesh_reader_h2d_xml.pxi"
     ],language="c++",libraries=["hermes2d"])]
 )
