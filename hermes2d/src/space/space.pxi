@@ -86,6 +86,51 @@ cdef class PySpaceReal:
     if first_dof is not None:
       return self.thisptr.assign_dofs(<int> first_dof)
     return self.thisptr.assign_dofs()
+  def get_type(self):
+    return self.thisptr.get_type()
+  def construct_refined_spaces(self, coarse, order_increase = None, refinement_type = None):
+    cdef vector[pSpaceReal] ccoarse
+    cdef PySpaceReal sp = PySpaceReal(init = False)
+    cdef vector[pSpaceReal] * cr
+    for sp in coarse:
+      ccoarse.push_back(sp.thisptr)
+    if refinement_type is not None:
+      cr = self.thisptr.construct_refined_spaces(ccoarse, order_increase, refinement_type)
+    else:
+      if order_increase is not None:
+        cr = self.thisptr.construct_refined_spaces(ccoarse, order_increase)
+      else:
+        cr = self.thisptr.construct_refined_spaces(ccoarse)
+    r = []
+    for i in range(cr.size()):
+      sp = PySpaceReal(init = False)
+      sp.thisptr = <Space[double]*> cr.at(i)
+      r.append(sp)
+    return r
+  def construct_refined_space(self, PySpaceReal coarse, order_increase, refinement_type):
+    cdef PySpaceReal r = PySpaceReal(init = False)
+    if order_increase is not None:
+      r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr, order_increase, refinement_type)
+      return r
+    if  order_increase is not None:
+      r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr, order_increase)
+      return r
+    r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr)
+    return r
+  def update_essential_bc_values(self, spaces, double time):
+    cdef vector[pSpaceReal] cspaces
+    if isinstance(spaces,list):
+      for sp in spaces:
+        cspaces.push_back((<PySpaceReal>sp).thisptr)
+      self.thisptr.update_essential_bc_values(cspaces, time)
+    else:
+      self.thisptr.update_essential_bc_values((<PySpaceReal> spaces).thisptr, time)
+  def save(self, char *filename):
+    return self.thisptr.save(filename)
+  def load(self, char *filename, essential_bcs = None):
+    if essential_bcs is not None:
+      self.thisptr.load(filename, (<PyEssentialBCsReal> essential_bcs).thisptr)
+    self.thisptr.load(filename)
 
 
 cdef class PySpaceComplex:
@@ -176,3 +221,48 @@ cdef class PySpaceComplex:
     if first_dof is not None:
       return self.thisptr.assign_dofs(<int> first_dof)
     return self.thisptr.assign_dofs()
+  def get_type(self):
+    return self.thisptr.get_type()
+  def construct_refined_spaces(self, coarse, order_increase = None, refinement_type = None):
+    cdef vector[pSpaceComplex] ccoarse
+    cdef PySpaceComplex sp = PySpaceComplex(init = False)
+    cdef vector[pSpaceComplex] * cr
+    for sp in coarse:
+      ccoarse.push_back(sp.thisptr)
+    if refinement_type is not None:
+      cr = self.thisptr.construct_refined_spaces(ccoarse, order_increase, refinement_type)
+    else:
+      if order_increase is not None:
+        cr = self.thisptr.construct_refined_spaces(ccoarse, order_increase)
+      else:
+        cr = self.thisptr.construct_refined_spaces(ccoarse)
+    r = []
+    for i in range(cr.size()):
+      sp = PySpaceComplex(init = False)
+      sp.thisptr = <Space[cComplex[double]]*> cr.at(i)
+      r.append(sp)
+    return r
+  def construct_refined_space(self, PySpaceComplex coarse, order_increase, refinement_type):
+    cdef PySpaceComplex r = PySpaceComplex(init = False)
+    if order_increase is not None:
+      r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr, order_increase, refinement_type)
+      return r
+    if  order_increase is not None:
+      r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr, order_increase)
+      return r
+    r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr)
+    return r
+  def update_essential_bc_values(self, spaces, double time):
+    cdef vector[pSpaceComplex] cspaces
+    if isinstance(spaces,list):
+      for sp in spaces:
+        cspaces.push_back((<PySpaceComplex>sp).thisptr)
+      self.thisptr.update_essential_bc_values(cspaces, time)
+    else:
+      self.thisptr.update_essential_bc_values((<PySpaceComplex> spaces).thisptr, time)
+  def save(self, char *filename):
+    return self.thisptr.save(filename)
+  def load(self, char *filename, essential_bcs = None):
+    if essential_bcs is not None:
+      self.thisptr.load(filename, (<PyEssentialBCsComplex> essential_bcs).thisptr)
+    self.thisptr.load(filename)
