@@ -4,3 +4,4 @@ cdef extern from "shapeset/precalc.h" namespace "Hermes::Hermes2D":
     PrecalcShapeset(Shapeset* shapeset)
     PrecalcShapeset(PrecalcShapeset* master_pss)
 
+

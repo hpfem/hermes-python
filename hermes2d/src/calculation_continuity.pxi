@@ -62,10 +62,10 @@ cdef class PyRecordReal:
     cdef vector[pSolutionReal] csolutions
     cdef PySolutionReal s
     for s in solutions:
-      csolutions.push_back(s.thisptr)
+      csolutions.push_back(<Solution[double]*> s.thisptr)
     self.thisptr.save_solutions(csolutions)
   def save_solution(self, PySolutionReal solution):
-    self.thisptr.save_solution(solution.thisptr)
+    self.thisptr.save_solution(<Solution[double]*> solution.thisptr)
   def save_time_step_length(self, double time_step_length_to_save):
     self.thisptr.save_time_step_length(time_step_length_to_save)
   def save_error(self, double error):
@@ -135,12 +135,12 @@ cdef class PyRecordReal:
     cdef vector[pSpaceReal] cspaces
     cdef PySpaceReal sp
     for s in solutions:
-      csolutions.push_back(s.thisptr)
+      csolutions.push_back(<Solution[double]*> s.thisptr)
     for sp in spaces:
       cspaces.push_back(sp.thisptr)
     self.thisptr.load_solutions(csolutions, cspaces)
   def load_solution(self, PySolutionReal solution, PySpaceReal space):
-    self.thisptr.load_solution(solution.thisptr, space.thisptr)
+    self.thisptr.load_solution(<Solution[double]*> solution.thisptr, space.thisptr)
   def load_time_step_length(self):
     """function returns value instead of setting refernce"""
     cdef double time_step_length=0
@@ -217,10 +217,10 @@ cdef class PyRecordComplex:
     cdef vector[pSolutionComplex] csolutions
     cdef PySolutionComplex s
     for s in solutions:
-      csolutions.push_back(s.thisptr)
+      csolutions.push_back(<Solution[cComplex[double]]*> s.thisptr)
     self.thisptr.save_solutions(csolutions)
   def save_solution(self, PySolutionComplex solution):
-    self.thisptr.save_solution(solution.thisptr)
+    self.thisptr.save_solution(<Solution[cComplex[double]]*> solution.thisptr)
   def save_time_step_length(self, double time_step_length_to_save):
     self.thisptr.save_time_step_length(time_step_length_to_save)
   def save_error(self, double error):
@@ -290,12 +290,12 @@ cdef class PyRecordComplex:
     cdef vector[pSpaceComplex] cspaces
     cdef PySpaceComplex sp
     for s in solutions:
-      csolutions.push_back(s.thisptr)
+      csolutions.push_back(<Solution[cComplex[double]]*> s.thisptr)
     for sp in spaces:
       cspaces.push_back(sp.thisptr)
     self.thisptr.load_solutions(csolutions, cspaces)
   def load_solution(self, PySolutionComplex solution, PySpaceComplex space):
-    self.thisptr.load_solution(solution.thisptr, space.thisptr)
+    self.thisptr.load_solution(<Solution[cComplex[double]]*> solution.thisptr, space.thisptr)
   def load_time_step_length(self):
     """function returns value instead of setting refernce"""
     cdef double time_step_length=0

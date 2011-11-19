@@ -1,6 +1,6 @@
 cdef class PyMeshView(PyView):
   def __cinit__(self, title=None, wg=None):
-    if type(self)!=PyView:
+    if type(self)!=PyMeshView:
       return
     if wg is not None:
       self.thisptr= <View*> new MeshView(<char*> title, (<PyWinGeom> wg).thisptr )
