@@ -19,6 +19,7 @@ from hermes_common cimport int2Array
 from hermes_common cimport intArray
 from hermes_common cimport PyVectorReal
 from hermes_common cimport PyVectorComplex
+from hermes_common cimport PyOrd
 
 include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
@@ -45,3 +46,7 @@ include "include/mesh/refmap.pxd"
 include "include/views/scalar_view.pxd"
 include "include/views/linearizer_base.pxd"
 include "include/views/linearizer.pxd"
+include "include/space/space_h1.pxd"
+include "include/space/space_l2.pxd"
+include "include/space/space_hcurl.pxd"
+include "include/space/space_hdiv.pxd"

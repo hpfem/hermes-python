@@ -35,6 +35,18 @@ cdef extern from "space/space.h" namespace "Hermes::Hermes2D":
     int assign_dofs(int first_dof)
     int assign_dofs()
     int assign_dofs(vector[pSpace] spaces)
+    SpaceType get_type()
+    vector[pSpace]* construct_refined_spaces(vector[pSpace]coarse, int order_increase, int refinement_type)
+    vector[pSpace]* construct_refined_spaces(vector[pSpace]coarse, int order_increase)
+    vector[pSpace]* construct_refined_spaces(vector[pSpace]coarse)
+    Space[Scalar]* construct_refined_space(Space[Scalar]* coarse, int order_increase, int refinement_type)
+    Space[Scalar]* construct_refined_space(Space[Scalar]* coarse, int order_increase)
+    Space[Scalar]* construct_refined_space(Space[Scalar]* coarse)
+    void update_essential_bc_values(vector[pSpace] spaces, double time)
+    void update_essential_bc_values(Space[Scalar]* s, double time)
+    bool save(char *filename)
+    void load(char *filename, EssentialBCs[Scalar]* essential_bcs)
+    void load(char *filename)
 
 cdef class PySpaceReal:
   cdef Space[double]* thisptr
