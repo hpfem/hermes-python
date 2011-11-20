@@ -6,6 +6,7 @@ cdef extern from "space/space_hcurl.h" namespace "Hermes::Hermes2D":
     HcurlSpace(Mesh* mesh, int p_init, Shapeset* shapeset)
     HcurlSpace(Mesh* mesh, int p_init)
     HcurlSpace(Mesh* mesh)
+
     void load(char *filename, Mesh* mesh, EssentialBCs[Scalar]* essential_bcs, Shapeset* shapeset)
     void load(char *filename, Mesh* mesh, EssentialBCs[Scalar]* essential_bcs)
     void load(char *filename, Mesh* mesh, Shapeset* shapeset)
