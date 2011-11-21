@@ -24,8 +24,8 @@ reader.load("subdomains.xml", meshes)
 for i in range(0,2):
   meshes[i].refine_all_elements()
 
-mloader.save("subdomains2.xml", meshes)
-mloader.load("subdomains2.xml", meshes)
+reader.save("subdomains2.xml", meshes)
+reader.load("subdomains2.xml", meshes)
 
 # Test of MeshView
 viewer.show(mesh)

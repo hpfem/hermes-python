@@ -273,7 +273,7 @@ cdef class PyMesh:
   def refine_element_id(self, int id, int refinement):
     self.thisptr.refine_element_id(id, refinement)
     self.thisptr.refine_element_id(id)
-  def refine_all_elements(self, int refinement, bool mark_as_initial):
+  def refine_all_elements(self, int refinement = 0, bool mark_as_initial = False):
     self.thisptr.refine_all_elements(refinement, mark_as_initial)
     self.thisptr.refine_all_elements(refinement)
     self.thisptr.refine_all_elements()
