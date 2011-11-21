@@ -1,4 +1,7 @@
 cdef extern from "function/mesh_function.h" namespace "Hermes::Hermes2D":
+  ctypedef void* pMeshFunction "MeshFunction<Scalar>*" #cython error override
+  ctypedef void* pMeshFunctionReal "Hermes::Hermes2D::MeshFunction<double>*" #cython error override
+  ctypedef void* pMeshFunctionComplex "Hermes::Hermes2D::MeshFunction<std::complex<double> >*" #cython error override
   cdef cppclass MeshFunction[Scalar]: # public Function<Scalar> Abstract
     MeshFunction()
     MeshFunction(Mesh *mesh)
