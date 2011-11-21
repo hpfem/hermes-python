@@ -8,7 +8,7 @@ viewer=hermes2d.PyScalarView()
 # Load the mesh.
 reader.load("domain.xml",mesh)
 
-sln = PyConstantSolutionReal(mesh, 1.0)
+sln = hermes2d.PyConstantSolutionReal(mesh, 1.0)
 
 # Test of ScalarView
 viewer.show(sln)
