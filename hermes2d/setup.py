@@ -68,6 +68,7 @@ setup(
     "src/space/space_hcurl.pxi",
     "include/space/space_hdiv.pxd",
     "src/space/space_hdiv.pxi",
+#    "include/projections/ogprojection.pxd",    
     "include/mesh/mesh_reader_h2d_xml.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi"
     ],language="c++",libraries=["hermes2d"])]
