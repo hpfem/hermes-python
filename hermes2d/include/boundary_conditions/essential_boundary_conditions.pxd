@@ -36,7 +36,7 @@ cdef extern from "boundary_conditions/essential_boundary_conditions.h" namespace
     EssentialBCs(EssentialBoundaryCondition[Scalar]* boundary_condition)
     void add_boundary_conditions(vector[pEssentialBoundaryCondition] essential_bcs)
     void add_boundary_condition(EssentialBoundaryCondition[Scalar]* essential_bc)
-    vector[pEssentialBoundaryCondition].const_iterator iterator
+    vector[pEssentialBoundaryCondition].const_iterator iterator #TODO iterator acces
     vector[pEssentialBoundaryCondition].const_iterator begin()
     vector[pEssentialBoundaryCondition].const_iterator end()
     EssentialBoundaryCondition[Scalar]* get_boundary_condition(string marker)
