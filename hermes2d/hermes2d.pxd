@@ -35,5 +35,6 @@ include "include/space/space_h1.pxd"
 include "include/space/space_l2.pxd"
 include "include/space/space_hcurl.pxd"
 include "include/space/space_hdiv.pxd"
+include "include/forms.pxd"
 #include "include/weakform/weakform.pxd" needs forms
 #include "include/projections/ogprojection.pxd" needs weakform
