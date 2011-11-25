@@ -1,5 +1,9 @@
 cdef extern from "forms.h" namespace "Hermes::Hermes2D":
   char* ERR_UNDEFINED_NEIGHBORING_ELEMENTS 
+  ctypedef void* pFunc "Func<Scalar>*" #cython error override
+  ctypedef void* pFuncReal "Hermes::Hermes2D::Func<double>*" #cython error override
+  ctypedef void* pFuncComplex "Hermes::Hermes2D::Func<std::complex<double> >*" #cython error override
+  ctypedef void* pFuncOrd "Hermes::Hermes2D::Func<Hermes::Ord >*" #cython error override
   cdef cppclass Func[T]:
     T *val
     T *dx, *dy
@@ -21,6 +25,7 @@ cdef extern from "forms.h" namespace "Hermes::Hermes2D":
     void free_fn()
     void subtract(Func[T]& func)
     void add(T* attribute, T* other_attribute)
+    int get_num_gip()
 
   cdef cppclass DiscontinuousFunc[T]: #public Func[T]
     DiscontinuousFunc(Func[T]* fn, bool support_on_neighbor, bool reverse)
@@ -34,7 +39,7 @@ cdef extern from "forms.h" namespace "Hermes::Hermes2D":
   cdef cppclass Geom[T]:
     T diam
     T area
-    T *x, *y
+    T *x, *y  #TODO getter and setter (elements count needed)
     T *nx, *ny
     T *tx, *ty
     int id
@@ -51,17 +56,43 @@ cdef extern from "forms.h" namespace "Hermes::Hermes2D":
     int neighb_id
     T   neighb_diam
 
-    Geom[Ord]* init_geom_ord()
-    Geom[double]* init_geom_vol(RefMap *rm, int order)
-    Geom[double]* init_geom_surf(RefMap *rm, SurfPos* surf_pos, int order)
-    Func[Ord]* init_fn_ord(int order)
-    Func[double]* init_fn(PrecalcShapeset *fu, RefMap *rm, int order)
-    Func[double]* init_fn(MeshFunction[double]*fu, int order)
-    Func[cComplex[double]]* init_fn(MeshFunction[cComplex[double]]*fu, int order)
-
-    Func[double]* init_fn(Solution[double]*fu, int order)
-    Func[cComplex[double]]* init_fn(Solution[cComplex[double]]*fu, int order)
+  Geom[Ord]* init_geom_ord()
+  Geom[double]* init_geom_vol(RefMap *rm, int order)
+  Geom[double]* init_geom_surf(RefMap *rm, SurfPos* surf_pos, int order)
+  Func[Ord]* init_fn_ord(int order)
+  Func[double]* init_fn(PrecalcShapeset *fu, RefMap *rm, int order)
+  Func[double]* init_fn(MeshFunction[double]*fu, int order)
+  Func[cComplex[double]]* init_fn(MeshFunction[cComplex[double]]*fu, int order)
+  Func[double]* init_fn(Solution[double]*fu, int order)
+  Func[cComplex[double]]* init_fn(Solution[cComplex[double]]*fu, int order)
 
   cdef cppclass ExtData[T]:
     Func[T]** fn
     int get_nf()
+
+cdef class PyFuncReal:
+  cdef Func[double]* thisptr
+
+cdef class PyGeomReal:
+  cdef Geom[double]* thisptr
+
+cdef class PyExtDataReal:
+  cdef ExtData[double]* thisptr
+
+cdef class PyFuncComplex:
+  cdef Func[cComplex[double]]* thisptr
+
+cdef class PyGeomComplex:
+  cdef Geom[cComplex[double]]* thisptr
+
+cdef class PyExtDataComplex:
+  cdef ExtData[cComplex[double]]* thisptr
+
+cdef class PyFuncOrd:
+  cdef Func[Ord]* thisptr
+
+cdef class PyGeomOrd:
+  cdef Geom[Ord]* thisptr
+
+cdef class PyExtDataOrd:
+  cdef ExtData[Ord]* thisptr
