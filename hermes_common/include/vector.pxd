@@ -8,3 +8,4 @@ cdef extern from "vector.h" namespace "Hermes":
     const_iterator end()
     int size()
     T at(int i)
+    void clear()

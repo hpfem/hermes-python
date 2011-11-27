@@ -1,4 +1,4 @@
-cdef extern from "weakform/weakfrom.h" namespace "Hermes::Hermes2D":
+cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
   enum SymFlag:
     HERMES_ANTISYM # -1,
     HERMES_NONSYM # 0,
@@ -35,6 +35,8 @@ cdef extern from "weakform/weakfrom.h" namespace "Hermes::Hermes2D":
   ctypedef void* pMultiComponentVectorFormSurf "MultiComponentVectorFormSurf<Scalar>*" #cython error override
   ctypedef void* pMultiComponentVectorFormSurfReal "Hermes::Hermes2D::MultiComponentVectorFormSurf<double>*" #cython error override
   ctypedef void* pMultiComponentVectorFormSurfComplex "Hermes::Hermes2D::MultiComponentVectorFormSurf<std::complex<double> >*" #cython error override
+
+  ctypedef void upair "pair<unsigned int, unsigned int>" #cython error override
 
   cdef cppclass MatrixFormVol[Scalar]: # public Form[Scalar]
     MatrixFormVol(unsigned int i, unsigned int j,string area, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
@@ -103,35 +105,35 @@ cdef extern from "weakform/weakfrom.h" namespace "Hermes::Hermes2D":
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass MultiComponentMatrixFormVol[Scalar]: # public Form[Scalar]
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, string area, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, string area, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, string area, SymFlag sym, vector[pMeshFunction] ext)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, string area, SymFlag sym)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, string area)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, SymFlag sym, vector[pMeshFunction] ext)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, SymFlag sym)
-    MultiComponentMatrixFormVol(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, string area, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, string area, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, string area, SymFlag sym, vector[pMeshFunction] ext)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, string area, SymFlag sym)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, string area)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, vector[string] areas, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, vector[string] areas, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, vector[string] areas, SymFlag sym, vector[pMeshFunction] ext)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, vector[string] areas, SymFlag sym)
+    MultiComponentMatrixFormVol(vector[upair ]coordinates, vector[string] areas)
     MultiComponentMatrixFormVol* clone()
-    vector[pair[unsigned, unsigned] ] coordinates
+    vector[upair ] coordinates
     int sym
     void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass MultiComponentMatrixFormSurf[Scalar]: #public Form[Scalar]
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, string area, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, string area, vector[pMeshFunction] ext, double scaling_factor)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, string area, vector[pMeshFunction] ext)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, string area)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, vector[pMeshFunction] ext, double scaling_factor)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas, vector[pMeshFunction] ext)
-    MultiComponentMatrixFormSurf(vector[pair[unsigned, unsigned] ]coordinates, vector[string] areas)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, string area, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, string area, vector[pMeshFunction] ext, double scaling_factor)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, string area, vector[pMeshFunction] ext)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, string area)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, vector[string] areas, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, vector[string] areas, vector[pMeshFunction] ext, double scaling_factor)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, vector[string] areas, vector[pMeshFunction] ext)
+    MultiComponentMatrixFormSurf(vector[upair ]coordinates, vector[string] areas)
     MultiComponentMatrixFormSurf* clone()
-    vector[pair[unsigned, unsigned] ] coordinates
+    vector[upair] coordinates
     void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
@@ -165,7 +167,7 @@ cdef extern from "weakform/weakfrom.h" namespace "Hermes::Hermes2D":
     void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
-  cdef cppclass Stagei[Scalar]:
+  cdef cppclass Stage[Scalar]:
     vector[int] idx
     vector[Mesh*] meshes
     vector[Transformable*] fns
@@ -224,6 +226,24 @@ cdef extern from "weakform/weakfrom.h" namespace "Hermes::Hermes2D":
     vector[pMeshFunction] ext
     double scaling_factor
     int u_ext_offset
+
+cdef class PyFormReal:
+  cdef Form[double] * thisptr
+
+cdef class PyFormComplex:
+  cdef Form[cComplex[double]] * thisptr
+
+cdef class PyWeakFormReal:
+  cdef WeakForm[double] * thisptr
+
+cdef class PyWeakFormComplex:
+  cdef WeakForm[cComplex[double]] * thisptr
+
+cdef class PyStageReal:
+  cdef Stage[double] * thisptr
+
+cdef class PyStageComplex:
+  cdef Stage[cComplex[double]] * thisptr
 
 
 

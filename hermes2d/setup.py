@@ -71,7 +71,8 @@ setup(
     "include/forms.pxd",
     "src/forms.pxi",
 #    "include/projections/ogprojection.pxd",    
-#    "include/weakform/weakform.pxd",
+    "include/weakform/weakform.pxd",
+    "src/weakform/weakform.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi"
     ],language="c++",libraries=["hermes2d"])]
