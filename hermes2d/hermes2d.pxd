@@ -1,6 +1,7 @@
 from libcpp cimport bool
 from libcpp.string cimport string 
 from libcpp.set cimport set as cSet
+from libcpp.pair cimport pair
 from ctypes cimport complex as cComplex
 from hermes_common cimport *
 
@@ -36,5 +37,5 @@ include "include/space/space_l2.pxd"
 include "include/space/space_hcurl.pxd"
 include "include/space/space_hdiv.pxd"
 include "include/forms.pxd"
-#include "include/weakform/weakform.pxd" needs forms
+include "include/weakform/weakform.pxd" 
 #include "include/projections/ogprojection.pxd" needs weakform
