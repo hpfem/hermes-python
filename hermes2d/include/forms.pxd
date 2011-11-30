@@ -62,7 +62,7 @@ cdef extern from "forms.h" namespace "Hermes::Hermes2D":
   Func[Ord]* init_fn_ord(int order)
   Func[double]* init_fn(PrecalcShapeset *fu, RefMap *rm, int order)
   Func[double]* init_fn(MeshFunction[double]*fu, int order)
-  Func[cComplex[double]]* init_fn(MeshFunction[cComplex[double]]*fu, int order)
+#  Func[cComplex[double]]* init_fn(MeshFunction[cComplex[double]]*fu, int order)
   Func[double]* init_fn(Solution[double]*fu, int order)
   Func[cComplex[double]]* init_fn(Solution[cComplex[double]]*fu, int order)
 
