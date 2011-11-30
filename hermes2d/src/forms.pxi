@@ -930,13 +930,40 @@ cdef class PyExtDataOrd:
     return self.thisptr.get_nf()
 
 
-#    Geom[Ord]* init_geom_ord()
-#    Geom[double]* init_geom_vol(RefMap *rm, int order)
-#    Geom[double]* init_geom_surf(RefMap *rm, SurfPos* surf_pos, int order)
-#    Func[Ord]* init_fn_ord(int order)
-#    Func[double]* init_fn(PrecalcShapeset *fu, RefMap *rm, int order)
-#    Func[double]* init_fn(MeshFunction[double]*fu, int order)
-#    Func[cComplex[double]]* init_fn(MeshFunction[cComplex[double]]*fu, int order)
-#    Func[double]* init_fn(Solution[double]*fu, int order)
-#    Func[cComplex[double]]* init_fn(Solution[cComplex[double]]*fu, int order)
+def Pyinit_geom_ord(self):
+  cdef PyGeomOrd r = PyGeomOrd(init = False)
+  r.thisptr = init_geom_ord()
+  return r
+def Pyinit_geom_vol(self, PyRefMap rm, int order):
+  cdef PyGeomReal r = PyGeomReal(init = False)
+  r.thisptr = init_geom_vol(<RefMap*> rm.thisptr, order)
+  return r
+def Pyinit_geom_surf(self, PyRefMap rm, PySurfPos surf_pos, int order):
+  cdef PyGeomReal r = PyGeomReal(init = False)
+  r.thisptr = init_geom_surf(<RefMap*> rm.thisptr, surf_pos.thisptr, order)
+  return r
+def Pyinit_fn_ord(self, int order):
+  cdef PyFuncOrd r = PyFuncOrd(init = False)
+  r.thisptr = init_fn_ord(order)
+  return r
+
+def Pyinit_fn(self, fu, rm, order = None):
+  cdef PyFuncReal rr = PyFuncReal(init = False)
+  cdef PyFuncComplex rc = PyFuncComplex(init = False)
+  if isinstance(rm,PyRefMap):
+    rr.thisptr = init_fn(<PrecalcShapeset*> (<PyPrecalcShapeset> fu).thisptr, <RefMap*> (<PyRefMap> rm).thisptr, order)
+    return rr
+  order = rm
+  if isinstance(fu,PyMeshFunctionReal):
+    rr.thisptr = init_fn(<MeshFunction[double]*> (<PyMeshFunctionReal> fu).thisptr, <int> order)
+    return rr
+  if isinstance(fu,PyMeshFunctionComplex):
+    rc.thisptr = init_fn(<MeshFunction[cComplex[double]]*> (<PyMeshFunctionComplex> fu).thisptr, <int> order)
+    return rc
+  if isinstance(fu,PySolutionReal):
+    rr.thisptr = init_fn(<Solution[double]*>(<PySolutionReal> fu).thisptr, <int> order)
+    return rr
+  if isinstance(fu,PySolutionComplex):
+    rc.thisptr = init_fn(<Solution[cComplex[double]]*> (<PySolutionComplex> fu).thisptr, <int> order)
+    return rc
 
