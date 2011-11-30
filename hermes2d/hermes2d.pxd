@@ -20,6 +20,7 @@ from hermes_common cimport intArray
 from hermes_common cimport PyVectorReal
 from hermes_common cimport PyVectorComplex
 from hermes_common cimport PyOrd
+from hermes_common cimport translateException
 
 include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
