@@ -39,3 +39,6 @@ cdef extern from "projections/ogprojection.h" namespace "Hermes::Hermes2D":
 
 cdef class PyOGProjectionReal:
   cdef OGProjection[double] * thisptr  
+
+cdef class PyOGProjectionComplex:
+  cdef OGProjection[cComplex[double]] * thisptr  
