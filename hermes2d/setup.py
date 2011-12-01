@@ -55,6 +55,8 @@ setup(
     "src/views/linearizer_base.pxi",
     "include/views/linearizer.pxd",
     "src/views/linearizer.pxi",
+    "include/views/base_view.pxd",
+    "src/views/base_view.pxi",
     "include/space/space_h1.pxd",
     "src/space/space_h1.pxi",
     "include/space/space_l2.pxd",
