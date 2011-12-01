@@ -38,4 +38,4 @@ include "include/space/space_hcurl.pxd"
 include "include/space/space_hdiv.pxd"
 include "include/forms.pxd"
 include "include/weakform/weakform.pxd" 
-#include "include/projections/ogprojection.pxd" needs weakform
+include "include/projections/ogprojection.pxd" 
