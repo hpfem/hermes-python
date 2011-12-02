@@ -1,16 +1,31 @@
 cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
+  ctypedef void* pSpace "Space<Scalar>*" #cython error override
+  ctypedef void* pSpaceReal "Hermes::Hermes2D::Space<double>*" #cython error override
+  ctypedef void* pSpaceComplex "Hermes::Hermes2D::Space<std::complex<double> >*" #cython error override
+
+  ctypedef void* pSolution "Hermes::Hermes2D::Solution<Scalar>*" #cython error override
+  ctypedef void* pSelector "Hermes::Hermes2D::RefinementSelectors::Selector<Scalar>*" #cython error override
+
+  ctypedef void* pFunc "Hermes::Hermes2D::Func<Scalar>*" #cython error overrides
+  ctypedef void* pFuncOrd "Hermes::Hermes2D::Func<Hermes::Ord>*" #cython error overrides
+  ctypedef void* pGeom "Hermes::Hermes2D::Geom<Scalar>*" #cython error overrides
+  ctypedef void* pGeomReal "Hermes::Hermes2D::Geom<double>*" #cython error overrides
+  ctypedef void* pGeomOrd "Hermes::Hermes2D::Geom<Hermes::Ord>*" #cython error overrides
+  ctypedef void* pExtData "Hermes::Hermes2D::ExtData<Scalar>*" #cython error overrides
+  ctypedef void* pExtDataOrd "Hermes::Hermes2D::ExtData<Hermes::Ord>*" #cython error overrides
+  
   cdef cppclass Adapt[Scalar]: 
     Adapt()
-    Adapt(vector[Space[Scalar]*]spaces, vector[ProjNormType] proj_norms)
-    Adapt(vector[Space[Scalar]*]spaces)
-    Adapt(Space[Scalar]* space, ProjNormType proj_norm)
-    Adapt(Space[Scalar]* space)
+    Adapt(vector[pSpace]spaces, vector[ProjNormType] proj_norms)
+    Adapt(vector[pSpace]spaces)
+    Adapt(pSpace space, ProjNormType proj_norm)
+    Adapt(pSpace space)
     
     cppclass MatrixFormVolError:
       MatrixFormVolError()
       MatrixFormVolError(ProjNormType type)
-      Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[Scalar] *u, Func[Scalar] *v, Geom<double> *e, ExtData[Scalar] *ext)
-      Hermes::Ord ord(int n, double *wt, Func<Hermes::Ord> *u_ext[], Func<Hermes::Ord> *u, Func<Hermes::Ord> *v, Geom<Hermes::Ord> *e, ExtData<Hermes::Ord> *ext)
+      Scalar value(int n, double *wt, pFunc u_ext[], pFunc u, pFunc v, pGeomReal *e, pExtData *ext)
+      Ord ord(int n, double *wt, pFuncOrd *u_ext[], pFuncOrd *u, pFuncOrd *v, pGeomOrd e, pExtDataOrd *ext)
 
     void set_error_form(int i, int j, MatrixFormVolError* form)
     void set_error_form(MatrixFormVolError* form)
@@ -18,33 +33,33 @@ cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
     void set_norm_form(int i, int j, MatrixFormVolError* form)
     void set_norm_form(MatrixFormVolError* form)
 
-    double calc_err_est(Solution[Scalar]*sln, Solution[Scalar]*rsln, bool solutions_for_adapt, unsigned int error_flags)
-    double calc_err_est(Solution[Scalar]*sln, Solution[Scalar]*rsln, bool solutions_for_adapt,)
-    double calc_err_est(Solution[Scalar]*sln, Solution[Scalar]*rsln)
+    double calc_err_est(pSolutionsln, pSolutionrsln, bool solutions_for_adapt, unsigned int error_flags)
+    double calc_err_est(pSolutionsln, pSolutionrsln, bool solutions_for_adapt,)
+    double calc_err_est(pSolutionsln, pSolutionrsln)
     
-    double calc_err_est(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns, vector[double>* component_errors, bool solutions_for_adapt, unsigned int error_flags)
-    double calc_err_est(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns, vector[double>* component_errors, bool solutions_for_adapt)
-    double calc_err_est(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns, vector[double>* component_errors)
-    double calc_err_est(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns)
+    double calc_err_est(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors, bool solutions_for_adapt, unsigned int error_flags)
+    double calc_err_est(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors, bool solutions_for_adapt)
+    double calc_err_est(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors)
+    double calc_err_est(vector[pSolution]slns, vector[pSolution]rslns)
     
-    double calc_err_exact(Solution[Scalar]*sln, Solution[Scalar]*rsln, bool solutions_for_adapt, unsigned int error_flags)
-    double calc_err_exact(Solution[Scalar]*sln, Solution[Scalar]*rsln, bool solutions_for_adapt)
-    double calc_err_exact(Solution[Scalar]*sln, Solution[Scalar]*rsln)
+    double calc_err_exact(pSolutionsln, pSolutionrsln, bool solutions_for_adapt, unsigned int error_flags)
+    double calc_err_exact(pSolutionsln, pSolutionrsln, bool solutions_for_adapt)
+    double calc_err_exact(pSolutionsln, pSolutionrsln)
     
-    double calc_err_exact(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns, vector[double>* component_errors, bool solutions_for_adapt, unsigned int error_flags)
-    double calc_err_exact(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns, vector[double>* component_errors, bool solutions_for_adapt)
-    double calc_err_exact(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns, vector[double>* component_errors)
-    double calc_err_exact(vector[Solution[Scalar]*]slns, vector[Solution[Scalar]*]rslns)
+    double calc_err_exact(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors, bool solutions_for_adapt, unsigned int error_flags)
+    double calc_err_exact(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors, bool solutions_for_adapt)
+    double calc_err_exact(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors)
+    double calc_err_exact(vector[pSolution]slns, vector[pSolution]rslns)
     
-    bool adapt(vector[RefinementSelectors::Selector[Scalar]*]refinement_selectors, double thr, int strat, int regularize, double to_be_processed)
-    bool adapt(vector[RefinementSelectors::Selector[Scalar]*]refinement_selectors, double thr, int strat, int regularize)
-    bool adapt(vector[RefinementSelectors::Selector[Scalar]*]refinement_selectors, double thr)
-    bool adapt(vector[RefinementSelectors::Selector[Scalar]*]refinement_selectors, double thr, int strat)
+    bool adapt(vector[pSelector]refinement_selectors, double thr, int strat, int regularize, double to_be_processed)
+    bool adapt(vector[pSelector]refinement_selectors, double thr, int strat, int regularize)
+    bool adapt(vector[pSelector]refinement_selectors, double thr)
+    bool adapt(vector[pSelector]refinement_selectors, double thr, int strat)
 
-    bool adapt(RefinementSelectors::Selector[Scalar]* refinement_selector, double thr, int strat, int regularize, double to_be_processed)
-    bool adapt(RefinementSelectors::Selector[Scalar]* refinement_selector, double thr, int strat, int regularize)
-    bool adapt(RefinementSelectors::Selector[Scalar]* refinement_selector, double thr, int strat)
-    bool adapt(RefinementSelectors::Selector[Scalar]* refinement_selector, double thr)
+    bool adapt(pSelector refinement_selector, double thr, int strat, int regularize, double to_be_processed)
+    bool adapt(pSelector refinement_selector, double thr, int strat, int regularize)
+    bool adapt(pSelector refinement_selector, double thr, int strat)
+    bool adapt(pSelector refinement_selector, double thr)
 
     void unrefine(double thr)
 
