@@ -39,9 +39,10 @@ reader=hermes2d.PyMeshReaderH2DXML()
 reader.load("domain-quad.xml",mesh)
 
 # Create a space with no boundary conditions.
-spaceHdiv=hermes2d.PyHdivSpaceReal(mesh, 5)
+spaceHcurl=hermes2d.PyHcurlSpaceReal(mesh, 8)
 baseView=hermes2d.PyBaseViewReal()
-baseView.show(spaceHdiv)
+baseView.show(spaceHcurl)
 baseView.wait_for_keypress()
 
 orderView.wait_for_close()
+
