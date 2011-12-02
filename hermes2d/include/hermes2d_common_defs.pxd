@@ -33,29 +33,26 @@ cdef extern from "hermes2d_common_defs.h" namespace "Hermes::Hermes2D":
     HERMES_HDIV_NORM
     HERMES_UNSET_NORM
 
-  ctypedef void* pSolution "Solution<Scalar>*" #cython error override
-  ctypedef void* pSolutionReal "Hermes::Hermes2D::Solution<double>*" #cython error override
-  ctypedef void* pSolutionComplex "Hermes::Hermes2D::Solution<std::complex<double> >*" #cython error override
-#  cdef cppclass Global[Scalar]:
-#    double calc_rel_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
-#    double calc_abs_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
-#    double calc_norm(MeshFunction[Scalar]* sln, int norm_type)
-#    double calc_norms(vector[pSolution] slns)
-#    double calc_abs_errors(vector[pSolution] slns1, vector[pSolution] slns2)
-#    double calc_rel_errors(vector[pSolution] slns1, vector[pSolution] slns2)
-#    double error_fn_l2(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_l2(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_h1(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_h1(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_hc(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_hc(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_hcl2(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_hcl2(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_hdiv(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_hdiv(MeshFunction[Scalar]* sln, RefMap* ru)
-#    string get_quad_order_str(int quad_order)
-#    int make_edge_order(int edge, int encoded_order, int mode)
-#    double get_l2_norm(Vector[Scalar]* vec)
+  cdef cppclass Global[Scalar]:
+    double calc_rel_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
+    double calc_abs_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
+    double calc_norm(MeshFunction[Scalar]* sln, int norm_type)
+    double calc_norms(vector[pSolution] slns)
+    double calc_abs_errors(vector[pSolution] slns1, vector[pSolution] slns2)
+    double calc_rel_errors(vector[pSolution] slns1, vector[pSolution] slns2)
+    double error_fn_l2(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
+    double norm_fn_l2(MeshFunction[Scalar]* sln, RefMap* ru)
+    double error_fn_h1(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
+    double norm_fn_h1(MeshFunction[Scalar]* sln, RefMap* ru)
+    double error_fn_hc(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
+    double norm_fn_hc(MeshFunction[Scalar]* sln, RefMap* ru)
+    double error_fn_hcl2(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
+    double norm_fn_hcl2(MeshFunction[Scalar]* sln, RefMap* ru)
+    double error_fn_hdiv(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
+    double norm_fn_hdiv(MeshFunction[Scalar]* sln, RefMap* ru)
+    string get_quad_order_str(int quad_order)
+    int make_edge_order(int edge, int encoded_order, int mode)
+    double get_l2_norm(Vector[Scalar]* vec)
 
 
 cdef class PyOrd2:
