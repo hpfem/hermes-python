@@ -115,3 +115,67 @@ cdef class PyGlobalReal:
   def get_l2_norm(self, PyVectorReal vec):
     return self.thisptr.get_l2_norm(vec.thisptr)
 
+cdef class PyGlobalComplex:
+  def __cinit__(self, init = True):
+    if not init:
+      return
+    if type(self)!=PyGlobalComplex:
+      return
+    self.thisptr = new Global[cComplex[double]]()
+
+  def __dealloc__(self):
+    del self.thisptr
+
+  def calc_rel_error(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, int norm_type):
+    return self.thisptr.calc_rel_error(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, norm_type)
+  def calc_abs_error(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, int norm_type):
+    return self.thisptr.calc_abs_error(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, norm_type)
+  def calc_norm(self, PyMeshFunctionComplex sln, int norm_type):
+    return self.thisptr.calc_norm(<MeshFunction[cComplex[double]]*> sln.thisptr , norm_type)
+  def calc_norms(self, list slns):
+    cdef vector[pSolutionComplex] cslns
+    for s in slns:
+      cslns.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
+    return self.thisptr.calc_norms(cslns)
+  def calc_abs_errors(self, list slns1, list slns2):
+    cdef vector[pSolutionComplex] cslns1
+    cdef vector[pSolutionComplex] cslns2
+    for s in slns1:
+      cslns1.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
+    for s in slns2:
+      cslns1.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
+    return self.thisptr.calc_abs_errors(cslns1, cslns2)
+  def calc_rel_errors(self, list slns1, list slns2):
+    cdef vector[pSolutionComplex] cslns1
+    cdef vector[pSolutionComplex] cslns2
+    for s in slns1:
+      cslns1.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
+    for s in slns2:
+      cslns1.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
+    return self.thisptr.calc_rel_errors(cslns1, cslns2)
+  def error_fn_l2(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_l2(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_l2(self, PyMeshFunctionComplex sln, PyRefMap ru):
+    return self.thisptr.norm_fn_l2(<MeshFunction[cComplex[double]]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_h1(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_h1(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_h1(self, PyMeshFunctionComplex sln, PyRefMap ru):
+    return self.thisptr.norm_fn_h1(<MeshFunction[cComplex[double]]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_hc(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_hc(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_hc(self, PyMeshFunctionComplex sln, PyRefMap ru):
+    return self.thisptr.norm_fn_hc(<MeshFunction[cComplex[double]]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_hcl2(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_hcl2(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_hcl2(self, PyMeshFunctionComplex sln, PyRefMap ru):
+    return self.thisptr.norm_fn_hcl2(<MeshFunction[cComplex[double]]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_hdiv(self, PyMeshFunctionComplex sln1, PyMeshFunctionComplex sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_hdiv(<MeshFunction[cComplex[double]]*> sln1.thisptr, <MeshFunction[cComplex[double]]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_hdiv(self, PyMeshFunctionComplex sln, PyRefMap ru):
+    return self.thisptr.norm_fn_hdiv(<MeshFunction[cComplex[double]]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def get_quad_order_str(self, int quad_order):
+    return self.thisptr.get_quad_order_str(quad_order).c_str()
+  def make_edge_order(self, int edge, int encoded_order, int mode):
+    return self.thisptr.make_edge_order(edge, encoded_order, mode)
+  def get_l2_norm(self, PyVectorComplex vec):
+    return self.thisptr.get_l2_norm(vec.thisptr)
