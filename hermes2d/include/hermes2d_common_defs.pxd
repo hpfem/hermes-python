@@ -58,3 +58,9 @@ cdef extern from "hermes2d_common_defs.h" namespace "Hermes::Hermes2D":
 cdef class PyOrd2:
   cdef Ord2 * thisptr
 
+cdef class PyGlobalReal:
+  cdef Global[double] * thisptr
+
+cdef class PyGlobalComplex:
+  cdef Global[cComplex[double]] * thisptr
+

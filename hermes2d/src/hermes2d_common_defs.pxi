@@ -50,25 +50,68 @@ class PyProjNormType:
   HERMES_HDIV_NORM,
   HERMES_UNSET_NORM = range(6)
 
-#TODO global
-#  cdef cppclass Global[Scalar]:
-#    double calc_rel_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
-#    double calc_abs_error(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, int norm_type)
-#    double calc_norm(MeshFunction[Scalar]* sln, int norm_type)
-#    double calc_norms(vector[pSolution] slns)
-#    double calc_abs_errors(vector[pSolution] slns1, vector[pSolution] slns2)
-#    double calc_rel_errors(vector[pSolution] slns1, vector[pSolution] slns2)
-#    double error_fn_l2(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_l2(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_h1(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_h1(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_hc(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_hc(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_hcl2(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_hcl2(MeshFunction[Scalar]* sln, RefMap* ru)
-#    double error_fn_hdiv(MeshFunction[Scalar]* sln1, MeshFunction[Scalar]* sln2, RefMap* ru, RefMap* rv)
-#    double norm_fn_hdiv(MeshFunction[Scalar]* sln, RefMap* ru)
-#    string get_quad_order_str(int quad_order)
-#    int make_edge_order(int edge, int encoded_order, int mode)
-#    double get_l2_norm(Vector[Scalar]* vec)
+cdef class PyGlobalReal:
+  def __cinit__(self, init = True):
+    if not init:
+      return
+    if type(self)!=PyGlobalReal:
+      return
+    self.thisptr = new Global[double]()
+
+  def __dealloc__(self):
+    del self.thisptr
+
+  def calc_rel_error(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, int norm_type):
+    return self.thisptr.calc_rel_error(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, norm_type)
+  def calc_abs_error(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, int norm_type):
+    return self.thisptr.calc_abs_error(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, norm_type)
+  def calc_norm(self, PyMeshFunctionReal sln, int norm_type):
+    return self.thisptr.calc_norm(<MeshFunction[double]*> sln.thisptr , norm_type)
+  def calc_norms(self, list slns):
+    cdef vector[pSolutionReal] cslns
+    for s in slns:
+      cslns.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
+    return self.thisptr.calc_norms(cslns)
+  def calc_abs_errors(self, list slns1, list slns2):
+    cdef vector[pSolutionReal] cslns1
+    cdef vector[pSolutionReal] cslns2
+    for s in slns1:
+      cslns1.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
+    for s in slns2:
+      cslns1.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
+    return self.thisptr.calc_abs_errors(cslns1, cslns2)
+  def calc_rel_errors(self, list slns1, list slns2):
+    cdef vector[pSolutionReal] cslns1
+    cdef vector[pSolutionReal] cslns2
+    for s in slns1:
+      cslns1.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
+    for s in slns2:
+      cslns1.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
+    return self.thisptr.calc_rel_errors(cslns1, cslns2)
+  def error_fn_l2(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_l2(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_l2(self, PyMeshFunctionReal sln, PyRefMap ru):
+    return self.thisptr.norm_fn_l2(<MeshFunction[double]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_h1(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_h1(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_h1(self, PyMeshFunctionReal sln, PyRefMap ru):
+    return self.thisptr.norm_fn_h1(<MeshFunction[double]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_hc(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_hc(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_hc(self, PyMeshFunctionReal sln, PyRefMap ru):
+    return self.thisptr.norm_fn_hc(<MeshFunction[double]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_hcl2(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_hcl2(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_hcl2(self, PyMeshFunctionReal sln, PyRefMap ru):
+    return self.thisptr.norm_fn_hcl2(<MeshFunction[double]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def error_fn_hdiv(self, PyMeshFunctionReal sln1, PyMeshFunctionReal sln2, PyRefMap ru, PyRefMap rv):
+    return self.thisptr.error_fn_hdiv(<MeshFunction[double]*> sln1.thisptr, <MeshFunction[double]*> sln2.thisptr, <RefMap*> ru.thisptr, <RefMap*> rv.thisptr)
+  def norm_fn_hdiv(self, PyMeshFunctionReal sln, PyRefMap ru):
+    return self.thisptr.norm_fn_hdiv(<MeshFunction[double]*> sln.thisptr, <RefMap*> ru.thisptr)
+  def get_quad_order_str(self, int quad_order):
+    return self.thisptr.get_quad_order_str(quad_order).c_str()
+  def make_edge_order(self, int edge, int encoded_order, int mode):
+    return self.thisptr.make_edge_order(edge, encoded_order, mode)
+  def get_l2_norm(self, PyVectorReal vec):
+    return self.thisptr.get_l2_norm(vec.thisptr)
 
