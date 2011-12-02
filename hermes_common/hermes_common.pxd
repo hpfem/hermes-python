@@ -3,6 +3,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libc.stdio cimport FILE
 
+include "../translate_exceptions/raise_exception.pxd"
 include "utils.pxd"
 include "include/common.pxd"
 include "include/ord.pxd"

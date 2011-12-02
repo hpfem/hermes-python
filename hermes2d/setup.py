@@ -7,6 +7,9 @@ setup(
     ext_modules = [Extension("hermes2d", [
     "hermes2d.pyx",
     "hermes2d.pxd",
+    "../translate_exceptions/translate_exception.cpp",
+    "../translate_exceptions/raise_exception.pxd",
+    "../translate_exceptions/raise_exception.pxi",
     "include/hermes2d_common_defs.pxd",
     "src/hermes2d_common_defs.pxi",
     "include/asmlist.pxd",
