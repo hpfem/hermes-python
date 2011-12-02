@@ -36,7 +36,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
   ctypedef void* pMultiComponentVectorFormSurfReal "Hermes::Hermes2D::MultiComponentVectorFormSurf<double>*" #cython error override
   ctypedef void* pMultiComponentVectorFormSurfComplex "Hermes::Hermes2D::MultiComponentVectorFormSurf<std::complex<double> >*" #cython error override
 
-  ctypedef void upair "pair<unsigned int, unsigned int>" #cython error override
+  ctypedef void upair "std::pair<unsigned int, unsigned int>" #cython error override
 
   cdef cppclass MatrixFormVol[Scalar]: # public Form[Scalar]
     MatrixFormVol(unsigned int i, unsigned int j,string area, SymFlag sym, vector[pMeshFunction] ext, double scaling_factor, int u_ext_offset)
