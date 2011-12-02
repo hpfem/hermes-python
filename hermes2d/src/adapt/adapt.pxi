@@ -1,10 +1,10 @@
-cdef class PyAdaptReal:
+cdef class PyAdaptComplex:
   def __cinit__(self, spaces, proj_norms = None):
-    if type(self)!=PyAdaptReal:
+    if type(self)!=PyAdaptComplex:
       return
 
-    cdef vector[pSpaceReal]ss
-    cdef PySpaceReal s
+    cdef vector[pSpaceComplex]ss
+    cdef PySpaceComplex s
     cdef vector[ProjNormType] pp
     cdef ProjNormType p
     
@@ -25,45 +25,60 @@ cdef class PyAdaptReal:
     del self.thisptr
     
   def set_error_form(self, i, j, form):
-    self.thisptr.set_error_form(i,j,form)
+    self.thisptr.set_error_form(i,j, (<PyMatrixFormVolErrorComplex>form).thisptr)
   def  set_error_form(self, form):
-    self.thisptr.set_error_form(form)
+    self.thisptr.set_error_form((<PyMatrixFormVolErrorComplex>form).thisptr)
   def  set_norm_form(self, i, j, form):
-    self.thisptr.set_norm_form(i,j,form)
+    self.thisptr.set_norm_form(i,j,(<PyMatrixFormVolErrorComplex>form).thisptr)
   def  set_norm_form(self, form):
-    self.thisptr.set_norm_form(form)
+    self.thisptr.set_norm_form((<PyMatrixFormVolErrorComplex>form).thisptr)
     
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_est(sln, rsln, solutions_for_adapt,  error_flags)
+    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,):
-    self.thisptr.calc_err_est(sln, rsln, solutions_for_adapt)
+    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_est(self, sln, rsln):
-    self.thisptr.calc_err_est(sln, rsln)
+    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr)
     
-  def  calc_err_est(self, slns, rslns,  component_errors, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_est(slns, rslns,  component_errors, solutions_for_adapt,  error_flags)
-  def  calc_err_est(self, slns, rslns,  component_errors, solutions_for_adapt):
-    self.thisptr.calc_err_est(slns, rslns,  component_errors, solutions_for_adapt)
-  def  calc_err_est(self, slns, rslns,  component_errors):
-    self.thisptr.calc_err_est(slns, rslns,  component_errors)
-  def  calc_err_est(self, slns, rslns):
-    self.thisptr.calc_err_est(slns, rslns)
-    
-  def  calc_err_exact(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_exact(sln, rsln, solutions_for_adapt,  error_flags)
-  def  calc_err_exact(self, sln, rsln, solutions_for_adapt):
-    self.thisptr.calc_err_exact(sln, rsln, solutions_for_adapt)
-  def  calc_err_exact(self, sln, rsln):
-    self.thisptr.calc_err_exact(sln, rsln)
 
-  def  calc_err_exact(slns, rslns, component_errors, solutions_for_adapt, error_flags):
-    self.thisptr.calc_err_exact(slns, rslns, component_errors, solutions_for_adapt, error_flags)
-  def  calc_err_exact(slns, rslns, component_errors, solutions_for_adapt):
-    self.thisptr.calc_err_exact(slns, rslns, component_errors, solutions_for_adapt)
-  def  calc_err_exact(slns, rslns, component_errors):
-    self.thisptr.calc_err_exact(slns, rslns, component_errors)
-  def  calc_err_exact(slns, rslns):
-    self.thisptr.calc_err_exact(slns, rslns)
+  def  calc_err_est(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
+    cdef vector[pSolutionComplex] vector_csol_coarse
+    cdef PySolutionComplex sol_coarse = PySolutionComplex(init = False)
+    cdef vector[pSolutionComplex] vector_csol_fine
+    cdef PySolutionComplex sol_fine = PySolutionComplex(init = False)
+    
+    for sol_coarse in slns:
+      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      
+    for sol_fine in slns:
+      vector_csol_fine.push_back(sol_fine.thisptr)
+      
+    if component_errors is not None:
+      return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors_solutions_for_adapt, error_flags)
+  
+  
+  def  calc_err_exact(self, sln, rsln, solutions_for_adapt,  error_flags):
+    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
+  def  calc_err_exact(self, sln, rsln, solutions_for_adapt):
+    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
+  def  calc_err_exact(self, sln, rsln):
+    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr)
+
+  def  calc_err_exact(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
+    cdef vector[pSolutionComplex] vector_csol_coarse
+    cdef PySolutionComplex sol_coarse = PySolutionComplex(init = False)
+    cdef vector[pSolutionComplex] vector_csol_fine
+    cdef PySolutionComplex sol_fine = PySolutionComplex(init = False)
+    
+    for sol_coarse in slns:
+      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      
+    for sol_fine in slns:
+      vector_csol_fine.push_back(sol_fine.thisptr)
+      
+    if component_errors is not None:
+      return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors_solutions_for_adapt, error_flags)
+
     
   def  adapt(self, refinement_selectors, thr, strat, regularize, to_be_processed):
     self.thisptr.adapt(refinement_selectors, thr, strat, regularize, to_be_processed)
@@ -89,9 +104,9 @@ cdef class PyAdaptReal:
   def  get_element_error_squared(self, component, id):
     self.thisptr.get_element_error_squared(component, id)
     
-cdef class PyMatrixFormVolErrorReal:
+cdef class PyMatrixFormVolErrorComplex:
   def __cinit__(self, type):
-    if (type(self)!=PyMatrixFormVolErrorReal):
+    if (type(self)!=PyMatrixFormVolErrorComplex):
       return 
     if type:
       self.thisptr=new Adapt[double].MatrixFormVolError(type)
@@ -137,45 +152,59 @@ cdef class PyAdaptComplex:
     del self.thisptr
     
   def set_error_form(self, i, j, form):
-    self.thisptr.set_error_form(i,j,form)
+    self.thisptr.set_error_form(i,j,(<PyMatrixFormVolErrorComplex>form).thisptr)
   def  set_error_form(self, form):
-    self.thisptr.set_error_form(form)
+    self.thisptr.set_error_form((<PyMatrixFormVolErrorComplex>form).thisptr)
   def  set_norm_form(self, i, j, form):
-    self.thisptr.set_norm_form(i,j,form)
+    self.thisptr.set_norm_form(i,j,(<PyMatrixFormVolErrorComplex>form).thisptr)
   def  set_norm_form(self, form):
-    self.thisptr.set_norm_form(form)
+    self.thisptr.set_norm_form((<PyMatrixFormVolErrorComplex>form).thisptr)
     
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_est(sln, rsln, solutions_for_adapt,  error_flags)
+    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr.thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,):
-    self.thisptr.calc_err_est(sln, rsln, solutions_for_adapt)
+    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr.thisptr, <bool>solutions_for_adapt)
   def  calc_err_est(self, sln, rsln):
-    self.thisptr.calc_err_est(sln, rsln)
+    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr.thisptr)
+
+  def  calc_err_est(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
+    cdef vector[pSolutionComplex] vector_csol_coarse
+    cdef PySolutionComplex sol_coarse = PySolutionComplex(init = False)
+    cdef vector[pSolutionComplex] vector_csol_fine
+    cdef PySolutionComplex sol_fine = PySolutionComplex(init = False)
     
-  def  calc_err_est(self, slns, rslns,  component_errors, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_est(slns, rslns,  component_errors, solutions_for_adapt,  error_flags)
-  def  calc_err_est(self, slns, rslns,  component_errors, solutions_for_adapt):
-    self.thisptr.calc_err_est(slns, rslns,  component_errors, solutions_for_adapt)
-  def  calc_err_est(self, slns, rslns,  component_errors):
-    self.thisptr.calc_err_est(slns, rslns,  component_errors)
-  def  calc_err_est(self, slns, rslns):
-    self.thisptr.calc_err_est(slns, rslns)
+    for sol_coarse in slns:
+      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      
+    for sol_fine in slns:
+      vector_csol_fine.push_back(sol_fine.thisptr)
+      
+    if component_errors is not None:
+      return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors_solutions_for_adapt, error_flags)
+  
     
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_exact(sln, rsln, solutions_for_adapt,  error_flags)
+    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt):
-    self.thisptr.calc_err_exact(sln, rsln, solutions_for_adapt)
+    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_exact(self, sln, rsln):
-    self.thisptr.calc_err_exact(sln, rsln)
+    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr)
 
-  def  calc_err_exact(self, slns, rslns, component_errors, solutions_for_adapt, error_flags):
-    self.thisptr.calc_err_exact(slns, rslns, component_errors, solutions_for_adapt, error_flags)
-  def  calc_err_exact(self, slns, rslns, component_errors, solutions_for_adapt):
-    self.thisptr.calc_err_exact(slns, rslns, component_errors, solutions_for_adapt)
-  def  calc_err_exact(self, slns, rslns, component_errors):
-    self.thisptr.calc_err_exact(slns, rslns, component_errors)
-  def  calc_err_exact(self, slns, rslns):
-    self.thisptr.calc_err_exact(slns, rslns)
+  def  calc_err_exact(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
+    cdef vector[pSolutionComplex] vector_csol_coarse
+    cdef PySolutionComplex sol_coarse = PySolutionComplex(init = False)
+    cdef vector[pSolutionComplex] vector_csol_fine
+    cdef PySolutionComplex sol_fine = PySolutionComplex(init = False)
+    
+    for sol_coarse in slns:
+      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      
+    for sol_fine in slns:
+      vector_csol_fine.push_back(sol_fine.thisptr)
+      
+    if component_errors is not None:
+      return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors_solutions_for_adapt, error_flags)
+
     
   def  adapt(self, refinement_selectors, thr, strat, regularize, to_be_processed):
     self.thisptr.adapt(refinement_selectors, thr, strat, regularize, to_be_processed)
