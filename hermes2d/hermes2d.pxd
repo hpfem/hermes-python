@@ -7,6 +7,7 @@ from hermes_common cimport *
 
 include "../translate_exceptions/raise_exception.pxd"
 include "include/mesh/hash.pxd"
+include "include/adapt/adapt.pxd"
 include "include/mesh/curved.pxd"
 include "include/asmlist.pxd"
 include "include/shapeset/precalc.pxd"

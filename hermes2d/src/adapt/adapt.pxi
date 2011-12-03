@@ -41,30 +41,31 @@ cdef class PyAdaptReal:
     self.thisptr.calc_err_est((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr)
     
 
-  def  calc_err_est(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
+  def calc_err_est(self, slns, rslns, component_errors = None, solutions_for_adapt = None, error_flags = None):
     cdef vector[pSolutionReal] vector_csol_coarse
     cdef PySolutionReal sol_coarse = PySolutionReal(init = False)
     cdef vector[pSolutionReal] vector_csol_fine
     cdef PySolutionReal sol_fine = PySolutionReal(init = False)
-    cdef vector[double] * ccomponent_errors = new vector[double]()
-    cdef vector[double] e
+    cdef vector[double]* ccomponent_errors = <vector[double]*> newBuffer[vector[double]](len(slns))
       
     for sol_coarse in slns:
       vector_csol_coarse.push_back(sol_coarse.thisptr)
       
     for sol_fine in slns:
       vector_csol_fine.push_back(sol_fine.thisptr)
-      
+
     if component_errors is not None:
-      for e in component_errors:
-        ccomponent_errors.push_back(e)
+      for i in range(len(component_errors)):
+        for j in range(len(component_errors[i])):
+          ccomponent_errors[i].push_back(component_errors[(i, j)])
+          
       if solutions_for_adapt is not None:
         if error_flags is not None:
-          return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors, solutions_for_adapt, error_flags)
+          return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, ccomponent_errors, <bool>solutions_for_adapt, error_flags)
         else:
-          return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors, solutions_for_adapt)
+          return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, ccomponent_errors, <bool>solutions_for_adapt)
       else:
-        return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors)
+        return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, ccomponent_errors)
       del ccomponent_errors
     else:
       return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine)
@@ -81,6 +82,7 @@ cdef class PyAdaptReal:
     cdef PySolutionReal sol_coarse = PySolutionReal(init = False)
     cdef vector[pSolutionReal] vector_csol_fine
     cdef PySolutionReal sol_fine = PySolutionReal(init = False)
+    cdef vector[double]* ccomponent_errors = <vector[double]*> newBuffer[vector[double]](len(sol_coarse))
     
     for sol_coarse in slns:
       vector_csol_coarse.push_back(sol_coarse.thisptr)
@@ -89,33 +91,39 @@ cdef class PyAdaptReal:
       vector_csol_fine.push_back(sol_fine.thisptr)
       
     if component_errors is not None:
+      for i in range(len(component_errors)):
+        for j in range(len(component_errors[i])):
+          ccomponent_errors[i].push_back(component_errors[(i, j)])
+          
       if solutions_for_adapt is not None:
         if error_flags is not None:
-          return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors, solutions_for_adapt, error_flags)
+          return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, ccomponent_errors, <bool>solutions_for_adapt, error_flags)
         else:
-          return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors, solutions_for_adapt)
+          return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, ccomponent_errors, <bool>solutions_for_adapt)
       else:
-        return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors)
+        return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, ccomponent_errors)
+      del ccomponent_errors
     else:
       return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine)
-    
-  def  adapt(self, refinement_selectors, thr, strat, regularize, to_be_processed):
-    self.thisptr.adapt(refinement_selectors, thr, strat, regularize, to_be_processed)
-  def  adapt(self, refinement_selectors, thr, strat, regularize):
-    self.thisptr.adapt(refinement_selectors, thr, strat, regularize)
-  def  adapt(self, refinement_selectors, thr):
-    self.thisptr.adapt(refinement_selectors, thr)
-  def  adapt(self, refinement_selectors, thr, strat):
-    self.thisptr.adapt(refinement_selectors, thr, strat)
 
-  def  adapt(self, refinement_selector, thr, strat, regularize, to_be_processed):
-    self.thisptr.adapt(refinement_selector, thr, strat, regularize, to_be_processed)
-  def  adapt(self, refinement_selector, thr, strat, regularize):
-    self.thisptr.adapt(refinement_selector, thr, strat, regularize)
-  def  adapt(self, refinement_selector, thr, strat):
-    self.thisptr.adapt(refinement_selector, thr, strat)
-  def  adapt(self, refinement_selector, thr):
-    self.thisptr.adapt(refinement_selector, thr)
+  ### Waiting for selectors.    
+  #def  adapt(self, refinement_selectors, thr, strat, regularize, to_be_processed):
+  #  self.thisptr.adapt(refinement_selectors, thr, strat, regularize, to_be_processed)
+  #def  adapt(self, refinement_selectors, thr, strat, regularize):
+  #  self.thisptr.adapt(refinement_selectors, thr, strat, regularize)
+  #def  adapt(self, refinement_selectors, thr):
+  #  self.thisptr.adapt(refinement_selectors, thr)
+  #def  adapt(self, refinement_selectors, thr, strat):
+  #  self.thisptr.adapt(refinement_selectors, thr, strat)
+
+  #def  adapt(self, refinement_selector, thr, strat, regularize, to_be_processed):
+  #  self.thisptr.adapt(refinement_selector, thr, strat, regularize, to_be_processed)
+  #def  adapt(self, refinement_selector, thr, strat, regularize):
+  #  self.thisptr.adapt(refinement_selector, thr, strat, regularize)
+  #def  adapt(self, refinement_selector, thr, strat):
+  #  self.thisptr.adapt(refinement_selector, thr, strat)
+  #def  adapt(self, refinement_selector, thr):
+  #  self.thisptr.adapt(refinement_selector, thr)
 
   def  unrefine(self, thr):
     self.thisptr.unrefine(thr)
@@ -132,9 +140,25 @@ cdef class PyMatrixFormVolErrorReal:
     else:
       self.thisptr=new Adapt[double].MatrixFormVolError()
   def value(self, n, wt, u_ext, u, v, e, ext):
-    return self.thisptr.value(n, wt, u_ext, u, v, e, ext)
+    cdef double* cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
+    
+    for i in range(len(wt)):
+      cwt[i] = wt[i]
+    for i in range(len(u_ext)):
+      cu_ext[i] = (<PyFuncReal>u_ext[i]).thisptr
+      
+    return self.thisptr.value(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
   def ord(self, n, wt, u_ext, u, v, e, ext):
-    return self.thisptr.ord(n, wt, u_ext, u, v, e, ext)    
+    cdef double* cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
+    
+    for i in range(len(wt)):
+      cwt[i] = wt[i]
+    for i in range(len(u_ext)):
+      cu_ext[i] = (u_ext[i].thisptr)
+  
+    return self.thisptr.ord(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
 
 cdef class PyAdaptComplex:
   def __cinit__(self, spaces, proj_norms = None):
@@ -199,10 +223,9 @@ cdef class PyAdaptComplex:
       vector_csol_fine.push_back(sol_fine.thisptr)
       
     if component_errors is not None:
-      return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors_solutions_for_adapt, error_flags)
-  
-    
-  def  calc_err_exact(self, sln, rsln, solutions_for_adapt,  error_flags):
+      return self.thisptr.calc_err_est(vector_csol_coarse, vector_csol_fine, component_errors, solutions_for_adapt, error_flags)
+
+  def  calc_err_exact(self, sln, rsln, solutions_for_adapt, error_flags):
     self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt):
     self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
@@ -222,42 +245,58 @@ cdef class PyAdaptComplex:
       vector_csol_fine.push_back(sol_fine.thisptr)
       
     if component_errors is not None:
-      return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors_solutions_for_adapt, error_flags)
-
+      return self.thisptr.calc_err_exact(vector_csol_coarse, vector_csol_fine, component_errors, solutions_for_adapt, error_flags)
     
-  def  adapt(self, refinement_selectors, thr, strat, regularize, to_be_processed):
-    self.thisptr.adapt(refinement_selectors, thr, strat, regularize, to_be_processed)
-  def  adapt(self, refinement_selectors, thr, strat, regularize):
-    self.thisptr.adapt(refinement_selectors, thr, strat, regularize)
-  def  adapt(self, efinement_selectors, thr):
-    self.thisptr.adapt(refinement_selectors, thr)
-  def  adapt(self, refinement_selectors, thr, strat):
-    self.thisptr.adapt(refinement_selectors, thr, strat)
+  ### Waiting for selectors.
+  #def  adapt(self, refinement_selectors, thr, strat, regularize, to_be_processed):
+  #  self.thisptr.adapt(refinement_selectors, thr, strat, regularize, to_be_processed)
+  #def  adapt(self, refinement_selectors, thr, strat, regularize):
+  #  self.thisptr.adapt(refinement_selectors, thr, strat, regularize)
+  #def  adapt(self, refinement_selectors, thr):
+  #  self.thisptr.adapt(refinement_selectors, thr)
+  #def  adapt(self, refinement_selectors, thr, strat):
+  #  self.thisptr.adapt(refinement_selectors, thr, strat)
 
-  def  adapt(self, refinement_selector, thr, strat, regularize, to_be_processed):
-    self.thisptr.adapt(refinement_selector, thr, strat, regularize, to_be_processed)
-  def  adapt(self, refinement_selector, thr, strat, regularize):
-    self.thisptr.adapt(refinement_selector, thr, strat, regularize)
-  def  adapt(self, refinement_selector, thr, strat):
-    self.thisptr.adapt(refinement_selector, thr, strat)
-  def  adapt(self, refinement_selector, thr):
-    self.thisptr.adapt(refinement_selector, thr)
+  #def  adapt(self, refinement_selector, thr, strat, regularize, to_be_processed):
+  #  self.thisptr.adapt(refinement_selector, thr, strat, regularize, to_be_processed)
+  #def  adapt(self, refinement_selector, thr, strat, regularize):
+  #  self.thisptr.adapt(refinement_selector, thr, strat, regularize)
+  #def  adapt(self, refinement_selector, thr, strat):
+  #  self.thisptr.adapt(refinement_selector, thr, strat)
+  #def  adapt(self, refinement_selector, thr):
+  #  self.thisptr.adapt(refinement_selector, thr)
 
   def  unrefine(self, thr):
     self.thisptr.unrefine(thr)
 
   def  get_element_error_squared(self, component, id):
     self.thisptr.get_element_error_squared(component, id)
-    
+
 cdef class PyMatrixFormVolErrorComplex:
   def __cinit__(self, type):
     if (type(self)!=PyMatrixFormVolErrorComplex):
       return 
     if type:
-      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError(type)
+      self.thisptr=new Adapt[double].MatrixFormVolError(type)
     else:
-      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError()
+      self.thisptr=new Adapt[double].MatrixFormVolError()
   def value(self, n, wt, u_ext, u, v, e, ext):
-    return self.thisptr.value(n, wt, u_ext, u, v, e, ext)
+    cdef double* cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex] ** cu_ext = <Func[cComplex]**> newBuffer[pFuncComplex](len(u_ext))
+    
+    for i in range(len(wt)):
+      cwt[i] = wt[i]
+    for i in range(len(u_ext)):
+      cu_ext[i] = (u_ext[i].thisptr)
+      
+    return self.thisptr.value(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
   def ord(self, n, wt, u_ext, u, v, e, ext):
-    return self.thisptr.ord(n, wt, u_ext, u, v, e, ext)    
+    cdef double* cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
+    
+    for i in range(len(wt)):
+      cwt[i] = wt[i]
+    for i in range(len(u_ext)):
+      cu_ext[i] = (u_ext[i].thisptr)
+  
+    return self.thisptr.ord(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)

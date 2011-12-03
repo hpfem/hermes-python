@@ -24,8 +24,8 @@ cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
     cppclass MatrixFormVolError:
       MatrixFormVolError()
       MatrixFormVolError(ProjNormType type)
-      Scalar value(int n, double *wt, pFunc u_ext[], pFunc u, pFunc v, pGeomReal *e, pExtData *ext)
-      Ord ord(int n, double *wt, pFuncOrd *u_ext[], pFuncOrd *u, pFuncOrd *v, pGeomOrd e, pExtDataOrd *ext)
+      Scalar value(int n, double *wt, Func[double] u_ext[], pFunc u, pFunc v, pGeomReal e, pExtData ext)
+      Ord ord(int n, double *wt, Func[Ord] u_ext[], pFuncOrd u, pFuncOrd v, pGeomOrd e, pExtDataOrd ext)
 
     void set_error_form(int i, int j, MatrixFormVolError* form)
     void set_error_form(MatrixFormVolError* form)
@@ -34,7 +34,7 @@ cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
     void set_norm_form(MatrixFormVolError* form)
 
     double calc_err_est(pSolution sln, pSolution rsln, bool solutions_for_adapt, unsigned int error_flags)
-    double calc_err_est(pSolution sln, pSolution rsln, bool solutions_for_adapt,)
+    double calc_err_est(pSolution sln, pSolution rsln, bool solutions_for_adapt)
     double calc_err_est(pSolution sln, pSolution rsln)
     
     double calc_err_est(vector[pSolution]slns, vector[pSolution]rslns, vector[double]* component_errors, bool solutions_for_adapt, unsigned int error_flags)

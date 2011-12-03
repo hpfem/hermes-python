@@ -1,5 +1,6 @@
 include "../translate_exceptions/raise_exception.pxi"
 include "src/asmlist.pxi"
+include "src/adapt/adapt.pxi"
 include "src/mesh/mesh.pxi"
 include "src/mesh/mesh_reader_h2d_xml.pxi"
 include "src/boundary_conditions/essential_boundary_conditions.pxi"
