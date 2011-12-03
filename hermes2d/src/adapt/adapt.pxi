@@ -149,6 +149,8 @@ cdef class PyMatrixFormVolErrorReal:
       cu_ext[i] = (<PyFuncReal>u_ext[i]).thisptr
       
     return self.thisptr.value(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
+    del cu_ext
+    del cwt
   def ord(self, n, wt, u_ext, u, v, e, ext):
     cdef double* cwt = <double*> newBuffer[double](len(wt))
     cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
@@ -159,6 +161,8 @@ cdef class PyMatrixFormVolErrorReal:
       cu_ext[i] = (u_ext[i].thisptr)
   
     return self.thisptr.ord(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
+    del cu_ext
+    del cwt
 
 cdef class PyAdaptComplex:
   def __cinit__(self, spaces, proj_norms = None):
@@ -290,6 +294,8 @@ cdef class PyMatrixFormVolErrorComplex:
       cu_ext[i] = (u_ext[i].thisptr)
       
     return self.thisptr.value(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
+    del cu_ext
+    del cwt
   def ord(self, n, wt, u_ext, u, v, e, ext):
     cdef double* cwt = <double*> newBuffer[double](len(wt))
     cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
@@ -300,3 +306,5 @@ cdef class PyMatrixFormVolErrorComplex:
       cu_ext[i] = (u_ext[i].thisptr)
   
     return self.thisptr.ord(n, cwt, cu_ext, u.thisptr, v.thisptr, e.thisptr, ext.thisptr)
+    del cu_ext
+    del cwt
