@@ -6,7 +6,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.val!=NULL:
         delBuffer[double](self.thisptr.val)
-      self.thisptr.val = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.val = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val[i] = value[i]
     def __get__(self):
@@ -19,7 +19,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.dx!=NULL:
         delBuffer[double](self.thisptr.dx)
-      self.thisptr.dx = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.dx = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx[i] = value[i]
     def __get__(self):
@@ -32,7 +32,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.dy!=NULL:
         delBuffer[double](self.thisptr.dy)
-      self.thisptr.dy = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.dy = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy[i] = value[i]
     def __get__(self):
@@ -45,7 +45,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.laplace!=NULL:
         delBuffer[double](self.thisptr.laplace)
-      self.thisptr.laplace = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.laplace = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.laplace[i] = value[i]
     def __get__(self):
@@ -58,7 +58,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.val0!=NULL:
         delBuffer[double](self.thisptr.val0)
-      self.thisptr.val0 = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.val0 = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val0[i] = value[i]
     def __get__(self):
@@ -71,7 +71,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.val1!=NULL:
         delBuffer[double](self.thisptr.val1)
-      self.thisptr.val1 = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.val1 = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val1[i] = value[i]
     def __get__(self):
@@ -84,7 +84,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.dx0!=NULL:
         delBuffer[double](self.thisptr.dx0)
-      self.thisptr.dx0 = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.dx0 = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx0[i] = value[i]
     def __get__(self):
@@ -97,7 +97,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.dx1!=NULL:
         delBuffer[double](self.thisptr.dx1)
-      self.thisptr.dx1 = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.dx1 = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx1[i] = value[i]
     def __get__(self):
@@ -110,7 +110,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.dy0!=NULL:
         delBuffer[double](self.thisptr.dy0)
-      self.thisptr.dy0 = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.dy0 = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy0[i] = value[i]
     def __get__(self):
@@ -123,7 +123,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.dy1!=NULL:
         delBuffer[double](self.thisptr.dy1)
-      self.thisptr.dy1 = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.dy1 = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy1[i] = value[i]
     def __get__(self):
@@ -136,7 +136,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.curl!=NULL:
         delBuffer[double](self.thisptr.curl)
-      self.thisptr.curl = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.curl = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.curl[i] = value[i]
     def __get__(self):
@@ -149,7 +149,7 @@ cdef class PyFuncReal:
     def __set__(self, value):
       if self.thisptr.div!=NULL:
         delBuffer[double](self.thisptr.div)
-      self.thisptr.div = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+      self.thisptr.div = <double*> newBuffer[double](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.div[i] = value[i]
     def __get__(self):
@@ -181,8 +181,8 @@ cdef class PyFuncReal:
   def subtract(self, PyFuncReal func):
     self.thisptr.subtract(func.thisptr[0])
   def add(self,  attribute, other_attribute):
-    cdef double * cattribute = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
-    cdef double * cother_attribute = <double*> newBuffer(sizeof(double)*self.thisptr.get_num_gip())
+    cdef double * cattribute = <double*> newBuffer[double](self.thisptr.get_num_gip())
+    cdef double * cother_attribute = <double*> newBuffer[double](self.thisptr.get_num_gip())
     for i in range(self.thisptr.get_num_gip()):
       cattribute[i] = attribute[i]
       cother_attribute[i] = other_attribute[i]
@@ -293,7 +293,7 @@ cdef class PyExtDataReal:
     def __set__(self, value):
       if self.thisptr.fn !=NULL:
         delBuffer[pFuncReal](<pFuncReal*>self.thisptr.fn)
-      self.thisptr.fn = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(value))
+      self.thisptr.fn = <Func[double]**> newBuffer[pFuncReal](len(value))
       for i in range(len(value)):
         self.thisptr.fn[i] = (<PyFuncReal> value[i]).thisptr
     def __get__(self):
@@ -315,7 +315,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.val!=NULL:
         delBuffer[cComplex[double]](self.thisptr.val)
-      self.thisptr.val = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.val = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val[i] = ccomplex(value[i])
     def __get__(self):
@@ -328,7 +328,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.dx!=NULL:
         delBuffer[cComplex[double]](self.thisptr.dx)
-      self.thisptr.dx = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.dx = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx[i] = ccomplex(value[i])
     def __get__(self):
@@ -341,7 +341,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.dy!=NULL:
         delBuffer[cComplex[double]](self.thisptr.dy)
-      self.thisptr.dy = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.dy = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy[i] = ccomplex(value[i])
     def __get__(self):
@@ -354,7 +354,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.laplace!=NULL:
         delBuffer[cComplex[double]](self.thisptr.laplace)
-      self.thisptr.laplace = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.laplace = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.laplace[i] = ccomplex(value[i])
     def __get__(self):
@@ -367,7 +367,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.val0!=NULL:
         delBuffer[cComplex[double]](self.thisptr.val0)
-      self.thisptr.val0 = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.val0 = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val0[i] = ccomplex(value[i])
     def __get__(self):
@@ -380,7 +380,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.val1!=NULL:
         delBuffer[cComplex[double]](self.thisptr.val1)
-      self.thisptr.val1 = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.val1 = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val1[i] = ccomplex(value[i])
     def __get__(self):
@@ -393,7 +393,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.dx0!=NULL:
         delBuffer[cComplex[double]](self.thisptr.dx0)
-      self.thisptr.dx0 = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.dx0 = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx0[i] = ccomplex(value[i])
     def __get__(self):
@@ -406,7 +406,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.dx1!=NULL:
         delBuffer[cComplex[double]](self.thisptr.dx1)
-      self.thisptr.dx1 = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.dx1 = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx1[i] = ccomplex(value[i])
     def __get__(self):
@@ -419,7 +419,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.dy0!=NULL:
         delBuffer[cComplex[double]](self.thisptr.dy0)
-      self.thisptr.dy0 = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.dy0 = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy0[i] = ccomplex(value[i])
     def __get__(self):
@@ -432,7 +432,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.dy1!=NULL:
         delBuffer[cComplex[double]](self.thisptr.dy1)
-      self.thisptr.dy1 = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.dy1 = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy1[i] = ccomplex(value[i])
     def __get__(self):
@@ -445,7 +445,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.curl!=NULL:
         delBuffer[cComplex[double]](self.thisptr.curl)
-      self.thisptr.curl = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.curl = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.curl[i] = ccomplex(value[i])
     def __get__(self):
@@ -458,7 +458,7 @@ cdef class PyFuncComplex:
     def __set__(self, value):
       if self.thisptr.div!=NULL:
         delBuffer[cComplex[double]](self.thisptr.div)
-      self.thisptr.div = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+      self.thisptr.div = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.div[i] = ccomplex(value[i])
     def __get__(self):
@@ -490,8 +490,8 @@ cdef class PyFuncComplex:
   def subtract(self, PyFuncComplex func):
     self.thisptr.subtract(func.thisptr[0])
   def add(self,  attribute, other_attribute):
-    cdef cComplex[double] * cattribute = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
-    cdef cComplex[double] * cother_attribute = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*self.thisptr.get_num_gip())
+    cdef cComplex[double] * cattribute = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
+    cdef cComplex[double] * cother_attribute = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
     for i in range(self.thisptr.get_num_gip()):
       cattribute[i] = ccomplex(attribute[i])
       cother_attribute[i] = ccomplex(other_attribute[i])
@@ -602,7 +602,7 @@ cdef class PyExtDataComplex:
     def __set__(self, value):
       if self.thisptr.fn !=NULL:
         delBuffer[pFuncComplex](<pFuncComplex*>self.thisptr.fn)
-      self.thisptr.fn = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(value))
+      self.thisptr.fn = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(value))
       for i in range(len(value)):
         self.thisptr.fn[i] = (<PyFuncComplex> value[i]).thisptr
     def __get__(self):
@@ -624,7 +624,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.val!=NULL:
         delBuffer[Ord](self.thisptr.val)
-      self.thisptr.val = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.val = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -637,7 +637,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.dx!=NULL:
         delBuffer[Ord](self.thisptr.dx)
-      self.thisptr.dx = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.dx = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -650,7 +650,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.dy!=NULL:
         delBuffer[Ord](self.thisptr.dy)
-      self.thisptr.dy = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.dy = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -663,7 +663,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.laplace!=NULL:
         delBuffer[Ord](self.thisptr.laplace)
-      self.thisptr.laplace = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.laplace = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.laplace[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -676,7 +676,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.val0!=NULL:
         delBuffer[Ord](self.thisptr.val0)
-      self.thisptr.val0 = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.val0 = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val0[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -689,7 +689,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.val1!=NULL:
         delBuffer[Ord](self.thisptr.val1)
-      self.thisptr.val1 = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.val1 = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.val1[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -702,7 +702,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.dx0!=NULL:
         delBuffer[Ord](self.thisptr.dx0)
-      self.thisptr.dx0 = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.dx0 = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx0[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -715,7 +715,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.dx1!=NULL:
         delBuffer[Ord](self.thisptr.dx1)
-      self.thisptr.dx1 = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.dx1 = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dx1[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -728,7 +728,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.dy0!=NULL:
         delBuffer[Ord](self.thisptr.dy0)
-      self.thisptr.dy0 = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.dy0 = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy0[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -741,7 +741,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.dy1!=NULL:
         delBuffer[Ord](self.thisptr.dy1)
-      self.thisptr.dy1 = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.dy1 = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.dy1[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -754,7 +754,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.curl!=NULL:
         delBuffer[Ord](self.thisptr.curl)
-      self.thisptr.curl = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.curl = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.curl[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -767,7 +767,7 @@ cdef class PyFuncOrd:
     def __set__(self, value):
       if self.thisptr.div!=NULL:
         delBuffer[Ord](self.thisptr.div)
-      self.thisptr.div = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+      self.thisptr.div = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
       for i in range(len(value)):
         self.thisptr.div[i] = (<PyOrd> value[i]).thisptr[0]
     def __get__(self):
@@ -799,8 +799,8 @@ cdef class PyFuncOrd:
   def subtract(self, PyFuncOrd func):
     self.thisptr.subtract(func.thisptr[0])
   def add(self,  attribute, other_attribute):
-    cdef Ord * cattribute = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
-    cdef Ord * cother_attribute = <Ord*> newBuffer(sizeof(Ord)*self.thisptr.get_num_gip())
+    cdef Ord * cattribute = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
+    cdef Ord * cother_attribute = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
     for i in range(self.thisptr.get_num_gip()):
       cattribute[i] = (<PyOrd> attribute[i]).thisptr[0]
       cother_attribute[i] = (<PyOrd> other_attribute[i]).thisptr[0]
@@ -915,7 +915,7 @@ cdef class PyExtDataOrd:
     def __set__(self, value):
       if self.thisptr.fn !=NULL:
         delBuffer[pFuncOrd](<pFuncOrd*>self.thisptr.fn)
-      self.thisptr.fn = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(value))
+      self.thisptr.fn = <Func[Ord]**> newBuffer[pFuncOrd](len(value))
       for i in range(len(value)):
         self.thisptr.fn[i] = (<PyFuncOrd> value[i]).thisptr
     def __get__(self):

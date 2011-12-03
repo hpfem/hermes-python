@@ -5,13 +5,13 @@ cdef class PyWinGeom:
   def __cinit__(self, int x, int y, int width, int height):
     if (type(self)!=PyWinGeom):
       return
-    self.thisptr = <WinGeom*> newBuffer(sizeof(WinGeom))
+    self.thisptr = new WinGeom(x,y,width,height)
     self.thisptr.x = x
     self.thisptr.y = y
     self.thisptr.width = width
     self.thisptr.height = height
   def __dealloc__(self):
-    delBuffer[WinGeom](self.thisptr)
+    del self.thisptr
   property x:
     def __set__(self, value):
       self.thisptr.x=value

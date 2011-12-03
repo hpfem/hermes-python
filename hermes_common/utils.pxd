@@ -1,5 +1,7 @@
 cdef extern from "utils.h":
-  cdef void * newBuffer(size_t size)
+  ctypedef void* complexPointer "std::complex<double>*"
+  cdef cppclass newBuffer[T]:
+    newBuffer(size_t size)
   cdef void delInts(int*buffer)
   cdef void delDoubles(double*buffer)
   cdef void delDoublesPointer(double**buffer)
