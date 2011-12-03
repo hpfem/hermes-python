@@ -4,6 +4,9 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     HERMES_SLN # 0
     HERMES_EXACT # 1
 
+  ctypedef void* pSolution "Solution<Scalar>*" #cython error override
+  ctypedef void* pSolutionReal "Hermes::Hermes2D::Solution<double>*" #cython error override
+  ctypedef void* pSolutionComplex "Hermes::Hermes2D::Solution<std::complex<double> >*" #cython error override
   cdef cppclass Solution[Scalar]:# public MeshFunction[Scalar]
     Solution()
     Solution(Mesh *mesh)
