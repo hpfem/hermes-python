@@ -27,24 +27,24 @@ cdef class PyOGProjectionReal:
         if isinstance(target_vec[0],PySolutionReal):
           for s in source:
             ctarget_slns.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
-            if proj_norms is not None:
-              for s in proj_norms:
-                cproj_norms.push_back(s)
-              if newton_max_iter is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol, <int> newton_max_iter)
-                return
-              if newton_tol is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol)
-                return
-              if delete_old_mesh is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh)
-                return
-              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms)
+          if proj_norms is not None:
+            for s in proj_norms:
+              cproj_norms.push_back(s)
+            if newton_max_iter is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol, <int> newton_max_iter)
+              return
+            if newton_tol is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol)
+              return
+            if delete_old_mesh is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh)
+              return
+            self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms)
+          else:
+            if matrix_solver is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver)
             else:
-              if matrix_solver is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver)
-              else:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns)
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns)
         else:
           ctarget_vec = <double*> newBuffer[double](dofs)
           if newton_max_iter is not None:
@@ -123,9 +123,7 @@ cdef class PyOGProjectionReal:
           raise TypeError('when target vector is list, function takes only 7 arguments (8 given)')
         newton_max_iter = newton_tol
         newton_tol = delete_old_mesh
-        if isinstance(source,PyMeshFunctionReal):
-          for s in source:
-            csource_meshfns.push_back(<MeshFunction[double]*> (<PyMeshFunctionReal> s).thisptr)
+        if isinstance(target_vec,list):
           ctarget_vec = <double*> newBuffer[double](dofs)
           if newton_max_iter is not None:
             self.thisptr.project_global((<PySpaceReal> space).thisptr, <MeshFunction[double]*> (<PyMeshFunctionReal> source).thisptr, ctarget_vec, <MatrixSolverType> matrix_solver, <ProjNormType> proj_norms, <double> newton_tol, <int> newton_max_iter)
@@ -188,24 +186,24 @@ cdef class PyOGProjectionComplex:
         if isinstance(target_vec[0],PySolutionComplex):
           for s in source:
             ctarget_slns.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
-            if proj_norms is not None:
-              for s in proj_norms:
-                cproj_norms.push_back(s)
-              if newton_max_iter is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol, <int> newton_max_iter)
-                return
-              if newton_tol is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol)
-                return
-              if delete_old_mesh is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh)
-                return
-              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms)
+          if proj_norms is not None:
+            for s in proj_norms:
+              cproj_norms.push_back(s)
+            if newton_max_iter is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol, <int> newton_max_iter)
+              return
+            if newton_tol is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh, <double> newton_tol)
+              return
+            if delete_old_mesh is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms, <bool> delete_old_mesh)
+              return
+            self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver, cproj_norms)
+          else:
+            if matrix_solver is not None:
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver)
             else:
-              if matrix_solver is not None:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns, <MatrixSolverType> matrix_solver)
-              else:
-                self.thisptr.project_global(cspaces, csource_slns, ctarget_slns)
+              self.thisptr.project_global(cspaces, csource_slns, ctarget_slns)
         else:
           ctarget_vec = <cComplex[double]*> newBuffer[cComplex[double]](dofs)
           if newton_max_iter is not None:
@@ -284,9 +282,7 @@ cdef class PyOGProjectionComplex:
           raise TypeError('when target vector is list, function takes only 7 arguments (8 given)')
         newton_max_iter = newton_tol
         newton_tol = delete_old_mesh
-        if isinstance(source,PyMeshFunctionComplex):
-          for s in source:
-            csource_meshfns.push_back(<MeshFunction[cComplex[double]]*> (<PyMeshFunctionComplex> s).thisptr)
+        if isinstance(target_vec,list):
           ctarget_vec = <cComplex[double]*> newBuffer[cComplex[double]](dofs)
           if newton_max_iter is not None:
             self.thisptr.project_global((<PySpaceComplex> space).thisptr, <MeshFunction[cComplex[double]]*> (<PyMeshFunctionComplex> source).thisptr, ctarget_vec, <MatrixSolverType> matrix_solver, <ProjNormType> proj_norms, <double> newton_tol, <int> newton_max_iter)
