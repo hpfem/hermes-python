@@ -104,7 +104,7 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
   def extract_row_copy(self,unsigned int row, unsigned int l,n_entries, vals,idxs):
     """n_entries doesn't work use len(vals) instead, vals must be a list"""
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
-    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef double * buff=<double*> newBuffer[double](l)
     cdef int i
     (<SparseMatrix[double] *> self.thisptr).extract_row_copy(row, l, n_entries, buff,cidxs)
     for i in range(n_entries):
@@ -118,7 +118,7 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
   def extract_col_copy(self,unsigned int col, unsigned int l,n_entries, vals,idxs):
     """n_entries doesn't work use len(vals) instead, vals must be a list""" 
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
-    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef double * buff=<double*> newBuffer[double](l)
     cdef int i
     (<SparseMatrix[double] *> self.thisptr).extract_col_copy(col, l, n_entries, buff,cidxs)
     for i in range(n_entries):
@@ -128,7 +128,7 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
 
   def multiply_with_vector(self, vector_in, vector_out):
     cdef double * cvectorin = doubleArray(vector_in)
-    cdef double * cvectorout = <double*> newBuffer(sizeof(double)*len(vector_in))
+    cdef double * cvectorout = <double*> newBuffer[double](len(vector_in))
     cdef int i
     (<SparseMatrix[double] *> self.thisptr).multiply_with_vector(cvectorin, cvectorout)
     for i in range(len(vector_in)):
@@ -176,7 +176,7 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
   def extract_row_copy(self,unsigned int row, unsigned int l,n_entries, vals,idxs):
     """n_entries doesn't work use len(vals) instead, vals must be a list"""
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
-    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef double * buff=<double*> newBuffer[double](l)
     cdef int i
     (<SparseMatrix[cComplex[double]] *> self.thisptr).extract_row_copy(row, l, n_entries, buff,cidxs)
     for i in range(n_entries):
@@ -190,7 +190,7 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
   def extract_col_copy(self,unsigned int col, unsigned int l,n_entries, vals,idxs):
     """n_entries doesn't work use len(vals) instead, vals must be a list""" 
     cdef unsigned int * cidxs=<unsigned int*> intArray(idxs)
-    cdef double * buff=<double*> newBuffer(sizeof(double)*l)
+    cdef double * buff=<double*> newBuffer[double](l)
     cdef int i
     (<SparseMatrix[cComplex[double]] *> self.thisptr).extract_col_copy(col, l, n_entries, buff,cidxs)
     for i in range(n_entries):
@@ -200,7 +200,7 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
 
   def multiply_with_vector(self, vector_in, vector_out):
     cdef cComplex[double] * cvectorin = complexArray(vector_in)
-    cdef cComplex[double] * cvectorout = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*len(vector_in))
+    cdef cComplex[double] * cvectorout = <cComplex[double]*> newBuffer[cComplex[double]](len(vector_in))
     cdef int i
     (<SparseMatrix[cComplex[double]] *> self.thisptr).multiply_with_vector(cvectorin, cvectorout)
     for i in range(len(vector_in)):
@@ -243,7 +243,7 @@ cdef class PyVectorReal: #abstract
     return self.thisptr.get(idx)
   def extract(self,v):
     cdef n=self.thisptr.length()
-    cdef double * cv=<double*>newBuffer(sizeof(double)*n)
+    cdef double * cv=<double*>newBuffer[double](n)
     cdef int i
     self.thisptr.extract(cv)
     for i in range(n):
@@ -292,7 +292,7 @@ cdef class PyVectorComplex: #abstract
     return complex(c.real(),c.imag())
   def extract(self,v):
     cdef n=self.thisptr.length()
-    cdef cComplex[double] * cv=<cComplex[double]*>newBuffer(sizeof(cComplex[double])*n)
+    cdef cComplex[double] * cv=<cComplex[double]*>newBuffer[cComplex[double]](n)
     cdef int i
     self.thisptr.extract(cv)
     for i in range(n):

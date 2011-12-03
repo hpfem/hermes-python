@@ -1,6 +1,7 @@
 
-inline void * newBuffer(size_t size){
-  return new char[size];
+template<typename T>
+inline T * newBuffer(size_t size){
+  return new T[size];
 }
 
 template<typename T>

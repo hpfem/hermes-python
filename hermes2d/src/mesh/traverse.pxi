@@ -4,7 +4,7 @@ cdef class PySurfPos:
       return
     if type(self)!= PySurfPos:
       return
-    self.thisptr = <SurfPos*> newBuffer(sizeof(SurfPos))
+    self.thisptr = <SurfPos*> newBuffer[SurfPos](1)
   def __dealloc__(self):
     delBuffer[SurfPos](self.thisptr)
 
@@ -57,7 +57,7 @@ cdef class PyUniData:
       return
     if type(self)!= PyUniData:
       return
-    self.thisptr = <UniData*> newBuffer(sizeof(UniData))
+    self.thisptr = <UniData*> newBuffer[UniData](1)
   def __dealloc__(self):
     delBuffer[UniData](self.thisptr)
   property e:

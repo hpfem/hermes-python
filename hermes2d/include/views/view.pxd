@@ -3,7 +3,7 @@ cdef extern from "views/view.h" namespace "Hermes::Hermes2D::Views":
     HERMES_WAIT_CLOSE
     HERMES_WAIT_KEYPRESS
 
-  struct WinGeom:
+  cdef cppclass WinGeom "struct Hermes::Hermes2D::Views::WinGeom":
     int x
     int y
     int width

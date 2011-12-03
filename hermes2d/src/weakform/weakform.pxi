@@ -74,8 +74,8 @@ cdef class PyMatrixFormVolReal(PyFormReal):
       return (<MatrixFormVol[double]*> self.thisptr).sym
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataReal ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(void*)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -85,8 +85,8 @@ cdef class PyMatrixFormVolReal(PyFormReal):
     delBuffer[pFuncReal](<pFuncReal*>cu_ext)
     return r
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -157,8 +157,8 @@ cdef class PyMatrixFormSurfReal(PyFormReal):
       return (<MatrixFormSurf[double]*> self.thisptr).j
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataReal ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal*)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -168,8 +168,8 @@ cdef class PyMatrixFormSurfReal(PyFormReal):
     delBuffer[pFuncReal](<pFuncReal*>cu_ext)
     return r
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -235,8 +235,8 @@ cdef class PyVectorFormVolReal(PyFormReal):
       return (<VectorFormVol[double]*> self.thisptr).i
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -246,8 +246,8 @@ cdef class PyVectorFormVolReal(PyFormReal):
     delBuffer[pFuncReal](<pFuncReal*>cu_ext)
     return r
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -313,8 +313,8 @@ cdef class PyVectorFormSurfReal(PyFormReal):
       return (<VectorFormSurf[double]* > self.thisptr).i
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -324,8 +324,8 @@ cdef class PyVectorFormSurfReal(PyFormReal):
     delBuffer[pFuncReal](<pFuncReal*>cu_ext)
     return r
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -350,8 +350,8 @@ cdef class PyMultiComponentMatrixFormVolReal(PyFormReal):
       return (<MultiComponentMatrixFormVol[double]*> self.thisptr).sym
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     cdef vector[double] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -363,8 +363,8 @@ cdef class PyMultiComponentMatrixFormVolReal(PyFormReal):
     for i in range(cresult.size()):
       result.append(cresult.at(i))
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -399,8 +399,8 @@ cdef class PyMultiComponentMatrixFormSurfReal(PyFormReal):
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     cdef vector[double] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -412,8 +412,8 @@ cdef class PyMultiComponentMatrixFormSurfReal(PyFormReal):
     for i in range(cresult.size()):
       result.append(cresult.at(i))
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -447,8 +447,8 @@ cdef class PyMultiComponentVectorFormVolReal(PyFormReal):
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     cdef vector[double] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -460,8 +460,8 @@ cdef class PyMultiComponentVectorFormVolReal(PyFormReal):
     for i in range(cresult.size()):
       result.append(cresult.at(i))
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -491,8 +491,8 @@ cdef class PyMultiComponentVectorFormSurfReal(PyFormReal):
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer(sizeof(pFuncReal)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[double] ** cu_ext = <Func[double]**> newBuffer[pFuncReal](len(u_ext))
     cdef vector[double] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -504,8 +504,8 @@ cdef class PyMultiComponentVectorFormSurfReal(PyFormReal):
     for i in range(cresult.size()):
       result.apend(cresult.at(i))
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1004,8 +1004,8 @@ cdef class PyMatrixFormVolComplex(PyFormComplex):
       return (<MatrixFormVol[cComplex[double]]*> self.thisptr).sym
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(void*)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[complexPointer](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -1015,8 +1015,8 @@ cdef class PyMatrixFormVolComplex(PyFormComplex):
     delBuffer[pFuncComplex](<pFuncComplex*>cu_ext)
     return pcomplex(r)
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1087,8 +1087,8 @@ cdef class PyMatrixFormSurfComplex(PyFormComplex):
       return (<MatrixFormSurf[cComplex[double]]*> self.thisptr).j
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex*)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -1098,8 +1098,8 @@ cdef class PyMatrixFormSurfComplex(PyFormComplex):
     delBuffer[pFuncComplex](<pFuncComplex*>cu_ext)
     return pcomplex(r)
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1165,8 +1165,8 @@ cdef class PyVectorFormVolComplex(PyFormComplex):
       return (<VectorFormVol[cComplex[double]]*> self.thisptr).i
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -1176,8 +1176,8 @@ cdef class PyVectorFormVolComplex(PyFormComplex):
     delBuffer[pFuncComplex](<pFuncComplex*>cu_ext)
     return pcomplex(r)
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1243,8 +1243,8 @@ cdef class PyVectorFormSurfComplex(PyFormComplex):
       return (<VectorFormSurf[cComplex[double]]* > self.thisptr).i
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     for i in range(len(wt)):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
@@ -1254,8 +1254,8 @@ cdef class PyVectorFormSurfComplex(PyFormComplex):
     delBuffer[pFuncComplex](<pFuncComplex*>cu_ext)
     return pcomplex(r)
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1280,8 +1280,8 @@ cdef class PyMultiComponentMatrixFormVolComplex(PyFormComplex):
       return (<MultiComponentMatrixFormVol[cComplex[double]]*> self.thisptr).sym
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     cdef vector[cComplex[double]] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1293,8 +1293,8 @@ cdef class PyMultiComponentMatrixFormVolComplex(PyFormComplex):
     for i in range(cresult.size()):
       result.append(pcomplex(cresult.at(i)))
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1329,8 +1329,8 @@ cdef class PyMultiComponentMatrixFormSurfComplex(PyFormComplex):
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     cdef vector[cComplex[double]] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1342,8 +1342,8 @@ cdef class PyMultiComponentMatrixFormSurfComplex(PyFormComplex):
     for i in range(cresult.size()):
       result.append(pcomplex(cresult.at(i)))
   def ord(self, int n, wt, u_ext, PyFuncOrd u, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1377,8 +1377,8 @@ cdef class PyMultiComponentVectorFormVolComplex(PyFormComplex):
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     cdef vector[cComplex[double]] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1390,8 +1390,8 @@ cdef class PyMultiComponentVectorFormVolComplex(PyFormComplex):
     for i in range(cresult.size()):
       result.append(pcomplex(cresult.at(i)))
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1421,8 +1421,8 @@ cdef class PyMultiComponentVectorFormSurfComplex(PyFormComplex):
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer(sizeof(pFuncComplex)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
     cdef vector[cComplex[double]] cresult
     for i in range(len(wt)):
       cwt[i] = wt[i]
@@ -1434,8 +1434,8 @@ cdef class PyMultiComponentVectorFormSurfComplex(PyFormComplex):
     for i in range(cresult.size()):
       result.apend(pcomplex(cresult.at(i)))
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
-    cdef double * cwt = <double*> newBuffer(sizeof(double)*len(wt))
-    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer(sizeof(pFuncOrd)*len(u_ext))
+    cdef double * cwt = <double*> newBuffer[double](len(wt))
+    cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
     cdef PyFuncOrd r = PyFuncOrd(init = False)
     for i in range(len(wt)):
       cwt[i] = wt[i]

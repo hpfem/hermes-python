@@ -4,7 +4,7 @@ cdef class PyNode:
       return
     if (type(self)!=PyNode):
       return
-    self.thisptr=<Node*> newBuffer(sizeof(Node))
+    self.thisptr=<Node*> newBuffer[Node](1)
 
   def __dealloc__(self):
     delBuffer[Node](self.thisptr)
@@ -213,13 +213,13 @@ cdef class PyMesh:
     self.thisptr.copy_converted(mesh.thisptr)
   def create(self, int nv, verts, int nt, tris, tri_markers,
       int nq, quads, quad_markers, int nm, mark, boundary_markers):
-    cdef double2 * cverts =<double2*> newBuffer(sizeof(double2)*len(verts))
-    cdef int3 * ctris = <int3*> newBuffer(sizeof(int3)*len(tris))
-    cdef string * ctri_markers = <string*> newBuffer(sizeof(string)*len(tri_markers))
-    cdef int4 * cquads = <int4*> newBuffer(sizeof(int4)*len(quads))
-    cdef string * cquad_markers = <string*> newBuffer(sizeof(string)*len(quad_markers))
-    cdef int2 * cmark = <int2*> newBuffer(sizeof(int2)*len(mark))
-    cdef string * cboundary_markers = <string*> newBuffer(sizeof(string)*len(boundary_markers))
+    cdef double2 * cverts =<double2*> newBuffer[double2](len(verts))
+    cdef int3 * ctris = <int3*> newBuffer[int3](len(tris))
+    cdef string * ctri_markers = <string*> newBuffer[string](len(tri_markers))
+    cdef int4 * cquads = <int4*> newBuffer[int4](len(quads))
+    cdef string * cquad_markers = <string*> newBuffer[string](len(quad_markers))
+    cdef int2 * cmark = <int2*> newBuffer[int2](len(mark))
+    cdef string * cboundary_markers = <string*> newBuffer[string](len(boundary_markers))
     cdef string cs
     cdef int i
 

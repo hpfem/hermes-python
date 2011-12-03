@@ -4,7 +4,7 @@ cdef class PyNurbs:
       return
     if type(self)!=PyNurbs:
       return
-    self.thisptr = <Nurbs*> newBuffer(sizeof(Nurbs))
+    self.thisptr = <Nurbs*> newBuffer[Nurbs](1)
     self.thisptr.ref = 0
     self.thisptr.twin = False
     self.thisptr.pt = NULL
@@ -29,7 +29,7 @@ cdef class PyNurbs:
       if self.thisptr.pt != NULL:
         delBuffer[double3](self.thisptr.pt)
       self.thisptr.np = len(value)
-      self.thisptr.pt = <double3*> newBuffer(sizeof(double3)*self.thisptr.np)
+      self.thisptr.pt = <double3*> newBuffer[double3](self.thisptr.np)
       for i in range(self.thisptr.np):
         self.thisptr.pt[i][0] = value[i][0]
         self.thisptr.pt[i][1] = value[i][1]
@@ -51,7 +51,7 @@ cdef class PyNurbs:
       if self.thisptr.kv != NULL:
         delBuffer[double](self.thisptr.kv)
       self.thisptr.nk = len(value)
-      self.thisptr.kv = <double*> newBuffer(sizeof(double)*self.thisptr.nk)
+      self.thisptr.kv = <double*> newBuffer[double](self.thisptr.nk)
       for i in range(self.thisptr.nk):
         self.thisptr.kv[i] = value[i]
     def __get__(self):

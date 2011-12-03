@@ -17,7 +17,7 @@ cdef class PySolutionReal(PyMeshFunctionReal):
         self.thisptr = <Transformable*> new Solution[double]((<PySpaceReal> s).thisptr, (<PyVectorReal> coeff_vec).thisptr)
       else:
         ndofs = (<PySpaceReal> s).thisptr.get_num_dofs()
-        ccoeff_vec = <double*> newBuffer(sizeof(double)*ndofs)
+        ccoeff_vec = <double*> newBuffer[double](ndofs)
         for i in range(ndofs):
           ccoeff_vec[i] = coeff_vec[i]
         self.thisptr = <Transformable*> new Solution[double]((<PySpaceReal> s).thisptr, ccoeff_vec)
@@ -84,7 +84,7 @@ cdef class PySolutionReal(PyMeshFunctionReal):
         (<Solution[double]*> self.thisptr).vector_to_solution((<PyVectorReal> solution_vector).thisptr, space.thisptr, <Solution[double]*> solution.thisptr)
     else:
       ndofs = space.thisptr.get_num_dofs()
-      csolution_vector = <double*> newBuffer(sizeof(double)*ndofs)
+      csolution_vector = <double*> newBuffer[double](ndofs)
       for i in range(ndofs):
         csolution_vector[i] = solution_vector[i]
 
@@ -136,7 +136,7 @@ cdef class PySolutionReal(PyMeshFunctionReal):
       else:
         (<Solution[double]*> self.thisptr).vector_to_solutions((<PyVectorReal> solution_vector).thisptr, cspaces, csolutions)
     else:
-      csolution_vector = <double*> newBuffer(sizeof(double)*ndofs)
+      csolution_vector = <double*> newBuffer[double](ndofs)
       for i in range(ndofs):
         csolution_vector[i] = solution_vector[i]
 
@@ -172,7 +172,7 @@ cdef class PySolutionComplex(PyMeshFunctionComplex):
         self.thisptr = <Transformable*> new Solution[cComplex[double]]((<PySpaceComplex> s).thisptr, (<PyVectorComplex> coeff_vec).thisptr)
       else:
         ndofs = (<PySpaceComplex> s).thisptr.get_num_dofs()
-        ccoeff_vec = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*ndofs)
+        ccoeff_vec = <cComplex[double]*> newBuffer[cComplex[double]](ndofs)
         for i in range(ndofs):
           ccoeff_vec[i] = ccomplex(coeff_vec[i])
         self.thisptr = <Transformable*> new Solution[cComplex[double]]((<PySpaceComplex> s).thisptr, ccoeff_vec)
@@ -239,7 +239,7 @@ cdef class PySolutionComplex(PyMeshFunctionComplex):
         (<Solution[cComplex[double]]*> self.thisptr).vector_to_solution((<PyVectorComplex> solution_vector).thisptr, space.thisptr, <Solution[cComplex[double]]*> solution.thisptr)
     else:
       ndofs = space.thisptr.get_num_dofs()
-      csolution_vector = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*ndofs)
+      csolution_vector = <cComplex[double]*> newBuffer[cComplex[double]](ndofs)
       for i in range(ndofs):
         csolution_vector[i] = ccomplex(solution_vector[i])
 
@@ -291,7 +291,7 @@ cdef class PySolutionComplex(PyMeshFunctionComplex):
       else:
         (<Solution[cComplex[double]]*> self.thisptr).vector_to_solutions((<PyVectorComplex> solution_vector).thisptr, cspaces, csolutions)
     else:
-      csolution_vector = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*ndofs)
+      csolution_vector = <cComplex[double]*> newBuffer[cComplex[double]](ndofs)
       for i in range(ndofs):
         csolution_vector[i] = ccomplex(solution_vector[i])
 

@@ -46,7 +46,7 @@ cdef class PyOGProjectionReal:
               else:
                 self.thisptr.project_global(cspaces, csource_slns, ctarget_slns)
         else:
-          ctarget_vec = <double*> newBuffer(sizeof(double)*dofs)
+          ctarget_vec = <double*> newBuffer[double](dofs)
           if newton_max_iter is not None:
             raise TypeError('when target vector is list, function takes only 7 arguments (8 given)')
           newton_max_iter = newton_tol
@@ -73,7 +73,7 @@ cdef class PyOGProjectionReal:
       else:
         for s in source:
           csource_meshfns.push_back(<MeshFunction[double]*> (<PyMeshFunctionReal> s).thisptr)
-        ctarget_vec = <double*> newBuffer(sizeof(double)*dofs)
+        ctarget_vec = <double*> newBuffer[double](dofs)
         if newton_max_iter is not None:
           raise TypeError('when target vector is list, function takes only 7 arguments (8 given)')
         newton_max_iter = newton_tol
@@ -98,7 +98,7 @@ cdef class PyOGProjectionReal:
       if isinstance(source,PyMatrixFormVolReal):
         if newton_tol is not None:
           raise TypeError('custom_projection is provided, function takes only 7 arguments')
-        ctarget_vec = <double*> newBuffer(sizeof(double)*dofs)
+        ctarget_vec = <double*> newBuffer[double](dofs)
         custom_projection_jacobian = source
         custom_projection_residual = target_vec        
         target_vec = matrix_solver
@@ -126,7 +126,7 @@ cdef class PyOGProjectionReal:
         if isinstance(source,PyMeshFunctionReal):
           for s in source:
             csource_meshfns.push_back(<MeshFunction[double]*> (<PyMeshFunctionReal> s).thisptr)
-          ctarget_vec = <double*> newBuffer(sizeof(double)*dofs)
+          ctarget_vec = <double*> newBuffer[double](dofs)
           if newton_max_iter is not None:
             self.thisptr.project_global((<PySpaceReal> space).thisptr, <MeshFunction[double]*> (<PyMeshFunctionReal> source).thisptr, ctarget_vec, <MatrixSolverType> matrix_solver, <ProjNormType> proj_norms, <double> newton_tol, <int> newton_max_iter)
           else:
@@ -207,7 +207,7 @@ cdef class PyOGProjectionComplex:
               else:
                 self.thisptr.project_global(cspaces, csource_slns, ctarget_slns)
         else:
-          ctarget_vec = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*dofs)
+          ctarget_vec = <cComplex[double]*> newBuffer[cComplex[double]](dofs)
           if newton_max_iter is not None:
             raise TypeError('when target vector is list, function takes only 7 arguments (8 given)')
           newton_max_iter = newton_tol
@@ -234,7 +234,7 @@ cdef class PyOGProjectionComplex:
       else:
         for s in source:
           csource_meshfns.push_back(<MeshFunction[cComplex[double]]*> (<PyMeshFunctionComplex> s).thisptr)
-        ctarget_vec = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*dofs)
+        ctarget_vec = <cComplex[double]*> newBuffer[cComplex[double]](dofs)
         if newton_max_iter is not None:
           raise TypeError('when target vector is list, function takes only 7 arguments (8 given)')
         newton_max_iter = newton_tol
@@ -259,7 +259,7 @@ cdef class PyOGProjectionComplex:
       if isinstance(source,PyMatrixFormVolComplex):
         if newton_tol is not None:
           raise TypeError('custom_projection is provided, function takes only 7 arguments')
-        ctarget_vec = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*dofs)
+        ctarget_vec = <cComplex[double]*> newBuffer[cComplex[double]](dofs)
         custom_projection_jacobian = source
         custom_projection_residual = target_vec        
         target_vec = matrix_solver
@@ -287,7 +287,7 @@ cdef class PyOGProjectionComplex:
         if isinstance(source,PyMeshFunctionComplex):
           for s in source:
             csource_meshfns.push_back(<MeshFunction[cComplex[double]]*> (<PyMeshFunctionComplex> s).thisptr)
-          ctarget_vec = <cComplex[double]*> newBuffer(sizeof(cComplex[double])*dofs)
+          ctarget_vec = <cComplex[double]*> newBuffer[cComplex[double]](dofs)
           if newton_max_iter is not None:
             self.thisptr.project_global((<PySpaceComplex> space).thisptr, <MeshFunction[cComplex[double]]*> (<PyMeshFunctionComplex> source).thisptr, ctarget_vec, <MatrixSolverType> matrix_solver, <ProjNormType> proj_norms, <double> newton_tol, <int> newton_max_iter)
           else:
