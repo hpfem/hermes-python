@@ -70,9 +70,9 @@ cdef class PyAdaptReal:
 
 cdef class PyAdaptComplex:
   cdef Adapt[cComplex]* thisptr
-  
+
 cdef class PyMatrixFormVolErrorReal:
   cdef Adapt[double].MatrixFormVolError* thisptr
-  
+
 cdef class PyMatrixFormVolErrorComplex:
   cdef Adapt[cComplex[double]].MatrixFormVolError* thisptr
