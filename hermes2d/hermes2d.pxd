@@ -1,5 +1,7 @@
 from libcpp cimport bool
 from libcpp.string cimport string 
+from libcpp.set cimport set as cSet
+from libcpp.pair cimport pair
 from ctypes cimport complex as cComplex
 from hermes_common cimport *
 
@@ -8,7 +10,6 @@ include "include/mesh/hash.pxd"
 include "include/mesh/curved.pxd"
 include "include/asmlist.pxd"
 include "include/shapeset/precalc.pxd"
-include "include/hermes2d_common_defs.pxd"
 include "include/function/exact_solution.pxd"
 include "include/boundary_conditions/essential_boundary_conditions.pxd"
 include "include/shapeset/shapeset.pxd"
@@ -25,6 +26,7 @@ include "include/views/order_view.pxd"
 include "include/views/base_view.pxd"
 include "include/function/function.pxd"
 include "include/function/mesh_function.pxd"
+include "include/hermes2d_common_defs.pxd"
 include "include/quadrature/quad.pxd"
 include "include/mesh/refmap.pxd"
 include "include/views/scalar_view.pxd"
@@ -34,3 +36,6 @@ include "include/space/space_h1.pxd"
 include "include/space/space_l2.pxd"
 include "include/space/space_hcurl.pxd"
 include "include/space/space_hdiv.pxd"
+include "include/forms.pxd"
+include "include/weakform/weakform.pxd" 
+include "include/projections/ogprojection.pxd" 

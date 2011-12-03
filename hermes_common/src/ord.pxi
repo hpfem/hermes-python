@@ -1,5 +1,7 @@
 cdef class PyOrd:
-  def __cinit__(self,o=None):
+  def __cinit__(self,o=None,init=True):
+    if not init:
+      return
     if (type(self)!=PyOrd):
       return
     if o:
