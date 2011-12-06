@@ -12,7 +12,7 @@ cdef class PyAsmListReal:
     cdef int * idx = self.thisptr.get_idx()
     r = []
     for i in range(self.thisptr.get_cnt()):
-      r.append(idx[i]) #TODO diret memory acces
+      r.append(idx[i]) #TODO direct memory acces
     return r
 
   def get_dof(self):

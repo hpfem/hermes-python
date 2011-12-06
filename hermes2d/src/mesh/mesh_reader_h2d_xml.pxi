@@ -23,5 +23,3 @@ cdef class PyMeshReaderH2DXML:
       return self.thisptr.save(filename,v)
     else:
       return self.thisptr.save(filename,(<PyMesh>mesh).thisptr)
-
-

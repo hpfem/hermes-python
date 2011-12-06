@@ -1,12 +1,10 @@
 cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
-  ctypedef void* pSpace "Space<Scalar>*" #cython error override
-  ctypedef void* pSpaceReal "Hermes::Hermes2D::Space<double>*" #cython error override
-  ctypedef void* pSpaceComplex "Hermes::Hermes2D::Space<std::complex<double> >*" #cython error override
-
   ctypedef void* pSolution "Hermes::Hermes2D::Solution<Scalar>*" #cython error override
   ctypedef void* pSelector "Hermes::Hermes2D::RefinementSelectors::Selector<Scalar>*" #cython error override
 
   ctypedef void* pFunc "Hermes::Hermes2D::Func<Scalar>*" #cython error overrides
+  ctypedef void* pFuncReal "Hermes::Hermes2D::Func<double>*" #cython error overrides
+  ctypedef void* pFuncComplex "Hermes::Hermes2D::Func<std::complex<double> >*" #cython error overrides
   ctypedef void* pFuncOrd "Hermes::Hermes2D::Func<Hermes::Ord>*" #cython error overrides
   ctypedef void* pGeom "Hermes::Hermes2D::Geom<Scalar>*" #cython error overrides
   ctypedef void* pGeomReal "Hermes::Hermes2D::Geom<double>*" #cython error overrides
@@ -24,8 +22,8 @@ cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
     cppclass MatrixFormVolError:
       MatrixFormVolError()
       MatrixFormVolError(ProjNormType type)
-      Scalar value(int n, double *wt, Func[double] u_ext[], pFunc u, pFunc v, pGeomReal e, pExtData ext)
-      Ord ord(int n, double *wt, Func[Ord] u_ext[], pFuncOrd u, pFuncOrd v, pGeomOrd e, pExtDataOrd ext)
+      Scalar value(int n, double *wt, Func[Scalar]** u_ext, pFunc u, pFunc v, pGeomReal e, pExtData ext)
+      Ord ord(int n, double *wt, Func[Ord]** u_ext, pFuncOrd u, pFuncOrd v, pGeomOrd e, pExtDataOrd ext)
 
     void set_error_form(int i, int j, MatrixFormVolError* form)
     void set_error_form(MatrixFormVolError* form)
@@ -69,7 +67,7 @@ cdef class PyAdaptReal:
   cdef Adapt[double]* thisptr
 
 cdef class PyAdaptComplex:
-  cdef Adapt[cComplex]* thisptr
+  cdef Adapt[cComplex[double]]* thisptr
 
 cdef class PyMatrixFormVolErrorReal:
   cdef Adapt[double].MatrixFormVolError* thisptr

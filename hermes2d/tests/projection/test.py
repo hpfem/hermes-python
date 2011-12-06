@@ -46,7 +46,7 @@ solutionsProjected.append(solutionH1)
 #solutionsProjected.append(solutionHcurl)
 
 # One space
-ogProjection.project_global(spaceHcurl, slnVector, solutionHcurl)
+#ogProjection.project_global(spaceHcurl, slnVector, solutionHcurl)
 
 # More spaces
 ogProjection.project_global(spaces, solutionsExact, solutionsProjected)
