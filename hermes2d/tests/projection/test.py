@@ -46,7 +46,24 @@ solutionsProjected.append(solutionH1)
 #solutionsProjected.append(solutionHcurl)
 
 # One space
-#ogProjection.project_global(spaceHcurl, slnVector, solutionHcurl)
+ogProjection.project_global(spaceHcurl, slnVector, solutionHcurl)
+
+sview = hermes2d.PyScalarView()
+sview.set_title("exact solution")
+sview.show(slnVector)
+sview.wait_for_keypress()
+sview.set_title("projected solution")
+sview.show(solutionHcurl)
+sview.wait_for_keypress()
 
 # More spaces
 ogProjection.project_global(spaces, solutionsExact, solutionsProjected)
+
+for i in range(1):
+  sview.set_title("exact solution")
+  sview.show(solutionsExact[i])
+  sview.wait_for_keypress()
+  sview.set_title("projected solution")
+  sview.show(solutionsProjected[i])
+  sview.wait_for_keypress()
+sview.wait_for_close()
