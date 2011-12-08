@@ -20,7 +20,7 @@ cdef class PyDiscreteProblemReal:
       return
     self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double]()
 
-  def assemble(self,PySparseMatrixReal mat, coeff_vec = None, PyVectorReal rhs = None, bool force_diagonal_blocks = True, bool add_dir_lift = True, PyTable block_weights = None):
+  def assemble(self,PyMatrixReal mat, coeff_vec = None, PyVectorReal rhs = None, bool force_diagonal_blocks = True, bool add_dir_lift = True, PyTable block_weights = None):
     cdef double * c_coeff_vec
     if coeff_vec is not None:
       c_coeff_vec = <double*> newBuffer[double](len(coeff_vec))
@@ -28,21 +28,21 @@ cdef class PyDiscreteProblemReal:
         c_coeff_vec[i]=coeff_vec[i]
       if rhs is not None:
         if block_weights is not None:
-          self.thisptr.assemble(c_coeff_vec, mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+          self.thisptr.assemble(c_coeff_vec, <SparseMatrix[double]*>mat.thisptr, <Vector[double]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
         else:
-          self.thisptr.assemble(c_coeff_vec, mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+          self.thisptr.assemble(c_coeff_vec, <SparseMatrix[double]*>mat.thisptr, <Vector[double]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift)
       else:
-        self.thisptr.assemble(c_coeff_vec, mat.thisptr, <Vector[double]*>(0), force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(c_coeff_vec, <SparseMatrix[double]*>mat.thisptr, <Vector[double]*>(0), force_diagonal_blocks, add_dir_lift)
       for i in range(len(coeff_vec)):
         delDoubles(c_coeff_vec)
     else:
       if rhs is not None:
         if block_weights is not None:
-          self.thisptr.assemble(mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+          self.thisptr.assemble(<SparseMatrix[double]*>mat.thisptr, <Vector[double]*>rhs.thisptr, force_diagonal_blocks, block_weights.thisptr)
         else:
-          self.thisptr.assemble(mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+          self.thisptr.assemble(<SparseMatrix[double]*>mat.thisptr, <Vector[double]*>rhs.thisptr, force_diagonal_blocks)
       else:
-        self.thisptr.assemble(mat.thisptr, <Vector[double]*>(0), force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(<SparseMatrix[double]*>mat.thisptr, <Vector[double]*>(0), force_diagonal_blocks)
     return
     
   def assemble(self, PyVectorReal rhs, coeff_vec = None, bool force_diagonal_blocks = True, bool add_dir_lift = True, PyTable block_weights = None):
@@ -52,16 +52,16 @@ cdef class PyDiscreteProblemReal:
       for i in range(len(coeff_vec)):
         c_coeff_vec[i]=coeff_vec[i]
       if block_weights is not None:
-        self.thisptr.assemble(c_coeff_vec, rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+        self.thisptr.assemble(c_coeff_vec, <Vector[double]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
       else:
-        self.thisptr.assemble(c_coeff_vec, rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(c_coeff_vec, <Vector[double]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift)
       for i in range(len(coeff_vec)):
         delDoubles(c_coeff_vec)
     else:
       if block_weights is not None:
-        self.thisptr.assemble(rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+        self.thisptr.assemble(<Vector[double]*>rhs.thisptr, force_diagonal_blocks, block_weights.thisptr)
       else:
-        self.thisptr.assemble(rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(<Vector[double]*>rhs.thisptr, force_diagonal_blocks)
     return
     
     
@@ -87,7 +87,7 @@ cdef class PyDiscreteProblemComplex:
       return
     self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]]()
     
-  def assemble(self,PySparseMatrixComplex mat, coeff_vec = None, PyVectorComplex rhs = None, bool force_diagonal_blocks = True, bool add_dir_lift = True, PyTable block_weights = None):
+  def assemble(self,PyMatrixComplex mat, coeff_vec = None, PyVectorComplex rhs = None, bool force_diagonal_blocks = True, bool add_dir_lift = True, PyTable block_weights = None):
     cdef cComplex[double] * c_coeff_vec
     if coeff_vec is not None:
       c_coeff_vec = <cComplex[double]*> newBuffer[cComplex[double]](len(coeff_vec))
@@ -95,21 +95,21 @@ cdef class PyDiscreteProblemComplex:
         c_coeff_vec[i]=cComplex[double](coeff_vec[i].real,coeff_vec[i].imag)
       if rhs is not None:
         if block_weights is not None:
-          self.thisptr.assemble(c_coeff_vec, mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+          self.thisptr.assemble(c_coeff_vec, <SparseMatrix[cComplex[double]]*>mat.thisptr, <Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
         else:
-          self.thisptr.assemble(c_coeff_vec, mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+          self.thisptr.assemble(c_coeff_vec, <SparseMatrix[cComplex[double]]*>mat.thisptr, <Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift)
       else:
-        self.thisptr.assemble(c_coeff_vec, mat.thisptr, <Vector[cComplex[double]]*>(0), force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(c_coeff_vec, <SparseMatrix[cComplex[double]]*>mat.thisptr, <Vector[cComplex[double]]*>(0), force_diagonal_blocks, add_dir_lift)
       for i in range(len(coeff_vec)):
         delComplexes(c_coeff_vec)
     else:
       if rhs is not None:
         if block_weights is not None:
-          self.thisptr.assemble(mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+          self.thisptr.assemble(<SparseMatrix[cComplex[double]]*>mat.thisptr, <Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks, block_weights.thisptr)
         else:
-          self.thisptr.assemble(mat.thisptr, rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+          self.thisptr.assemble(<SparseMatrix[cComplex[double]]*>mat.thisptr, <Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks)
       else:
-        self.thisptr.assemble(mat.thisptr, <Vector[cComplex[double]]*>(0), force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(<SparseMatrix[cComplex[double]]*>mat.thisptr, <Vector[cComplex[double]]*>(0), force_diagonal_blocks)
     return
     
   def assemble(self,PyVectorComplex rhs, coeff_vec = None, bool force_diagonal_blocks = True, bool add_dir_lift = True, PyTable block_weights = None):
@@ -119,14 +119,14 @@ cdef class PyDiscreteProblemComplex:
       for i in range(len(coeff_vec)):
         c_coeff_vec[i]=cComplex[double](coeff_vec[i].real,coeff_vec[i].imag)
       if block_weights is not None:
-        self.thisptr.assemble(c_coeff_vec, rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+        self.thisptr.assemble(c_coeff_vec, <Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
       else:
-        self.thisptr.assemble(c_coeff_vec, rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(c_coeff_vec, <Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks, add_dir_lift)
       for i in range(len(coeff_vec)):
         delComplexes(c_coeff_vec)
     else:
       if block_weights is not None:
-        self.thisptr.assemble(rhs.thisptr, force_diagonal_blocks, add_dir_lift, block_weights.thisptr)
+        self.thisptr.assemble(<Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks, block_weights.thisptr)
       else:
-        self.thisptr.assemble(rhs.thisptr, force_diagonal_blocks, add_dir_lift)
+        self.thisptr.assemble(<Vector[cComplex[double]]*>rhs.thisptr, force_diagonal_blocks)
     return
