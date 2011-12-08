@@ -36,9 +36,9 @@ cdef class PyAdaptReal:
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,  error_flags):
     self.thisptr.calc_err_est(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,):
-    self.thisptr.calc_err_est((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt)
+    self.thisptr.calc_err_est(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_est(self, sln, rsln):
-    self.thisptr.calc_err_est((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr)
+    self.thisptr.calc_err_est(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr)
     
 
   def calc_err_est(self, slns, rslns, component_errors = None, solutions_for_adapt = None, error_flags = None):
@@ -50,10 +50,10 @@ cdef class PyAdaptReal:
     cdef vector[double]* ccomponent_errors = <vector[double]*> newBuffer[vector[double]](len(slns))
       
     for sol_coarse in slns:
-      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      vector_csol_coarse.push_back(<Solution[double]*>sol_coarse.thisptr)
       
     for sol_fine in slns:
-      vector_csol_fine.push_back(sol_fine.thisptr)
+      vector_csol_fine.push_back(<Solution[double]*>sol_fine.thisptr)
 
     if component_errors is not None:
       for i in range(len(component_errors)):
@@ -74,11 +74,11 @@ cdef class PyAdaptReal:
     return result
   
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_exact((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
+    self.thisptr.calc_err_exact(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt):
-    self.thisptr.calc_err_exact((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt)
+    self.thisptr.calc_err_exact(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_exact(self, sln, rsln):
-    self.thisptr.calc_err_exact((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr)
+    self.thisptr.calc_err_exact(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr)
 
   def  calc_err_exact(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
     cdef double result
@@ -89,10 +89,10 @@ cdef class PyAdaptReal:
     cdef vector[double]* ccomponent_errors = <vector[double]*> newBuffer[vector[double]](len(sol_coarse))
     
     for sol_coarse in slns:
-      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      vector_csol_coarse.push_back(<Solution[double]*>sol_coarse.thisptr)
       
     for sol_fine in slns:
-      vector_csol_fine.push_back(sol_fine.thisptr)
+      vector_csol_fine.push_back(<Solution[double]*>sol_fine.thisptr)
       
     if component_errors is not None:
       for i in range(len(component_errors)):
@@ -213,11 +213,11 @@ cdef class PyAdaptComplex:
     self.thisptr.set_norm_form((<PyMatrixFormVolErrorComplex>form).thisptr)
     
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
+    self.thisptr.calc_err_est(<Solution[cComplex[double]]*> (<PySolutionComplex>sln).thisptr, <Solution[cComplex[double]]*> (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,):
-    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
+    self.thisptr.calc_err_est(<Solution[cComplex[double]]*> (<PySolutionComplex>sln).thisptr, <Solution[cComplex[double]]*> (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_est(self, sln, rsln):
-    self.thisptr.calc_err_est((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr)
+    self.thisptr.calc_err_est(<Solution[cComplex[double]]*> (<PySolutionComplex>sln).thisptr, <Solution[cComplex[double]]*> (<PySolutionComplex>rsln).thisptr)
     
 
   def calc_err_est(self, slns, rslns, component_errors = None, solutions_for_adapt = None, error_flags = None):
@@ -229,10 +229,10 @@ cdef class PyAdaptComplex:
     cdef vector[double]* ccomponent_errors = <vector[double]*> newBuffer[vector[double]](len(slns))
       
     for sol_coarse in slns:
-      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      vector_csol_coarse.push_back(<Solution[cComplex[double]]*>sol_coarse.thisptr)
       
     for sol_fine in slns:
-      vector_csol_fine.push_back(sol_fine.thisptr)
+      vector_csol_fine.push_back(<Solution[cComplex[double]]*>sol_fine.thisptr)
 
     if component_errors is not None:
       for i in range(len(component_errors)):
@@ -253,11 +253,11 @@ cdef class PyAdaptComplex:
     return result
   
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
+    self.thisptr.calc_err_exact(<Solution[cComplex[double]]*> (<PySolutionComplex>sln).thisptr, <Solution[cComplex[double]]*> (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_exact(self, sln, rsln, solutions_for_adapt):
-    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
+    self.thisptr.calc_err_exact(<Solution[cComplex[double]]*> (<PySolutionComplex>sln).thisptr, <Solution[cComplex[double]]*> (<PySolutionComplex>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_exact(self, sln, rsln):
-    self.thisptr.calc_err_exact((<PySolutionComplex>sln).thisptr, (<PySolutionComplex>rsln).thisptr)
+    self.thisptr.calc_err_exact(<Solution[cComplex[double]]*> (<PySolutionComplex>sln).thisptr, <Solution[cComplex[double]]*> (<PySolutionComplex>rsln).thisptr)
 
   def  calc_err_exact(self, slns, rslns,  component_errors = None, solutions_for_adapt = None,  error_flags = None):
     cdef double result
@@ -268,10 +268,10 @@ cdef class PyAdaptComplex:
     cdef vector[double]* ccomponent_errors = <vector[double]*> newBuffer[vector[double]](len(sol_coarse))
     
     for sol_coarse in slns:
-      vector_csol_coarse.push_back(sol_coarse.thisptr)
+      vector_csol_coarse.push_back(<Solution[cComplex[double]]*>sol_coarse.thisptr)
       
     for sol_fine in slns:
-      vector_csol_fine.push_back(sol_fine.thisptr)
+      vector_csol_fine.push_back(<Solution[cComplex[double]]*>sol_fine.thisptr)
       
     if component_errors is not None:
       for i in range(len(component_errors)):
