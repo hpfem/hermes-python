@@ -34,7 +34,7 @@ cdef class PyAdaptReal:
     self.thisptr.set_norm_form((<PyMatrixFormVolErrorReal>form).thisptr)
     
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,  error_flags):
-    self.thisptr.calc_err_est((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
+    self.thisptr.calc_err_est(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
   def  calc_err_est(self, sln, rsln, solutions_for_adapt,):
     self.thisptr.calc_err_est((<PySolutionReal>sln).thisptr, (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt)
   def  calc_err_est(self, sln, rsln):
