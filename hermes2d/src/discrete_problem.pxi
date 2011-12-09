@@ -4,14 +4,19 @@ cdef class PyDiscreteProblemReal:
       return
     if type(self)!=PyDiscreteProblemReal:
       return
-    self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double]()
+    cdef vector[pcSpaceReal] cspaces
+    if isinstance(spaces,list):
+      for s in spaces:
+        cspaces.push_back((<PySpaceReal> s).thisptr)
+        
+    self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double](wf.thisptr, cspaces)
   
   def __cinit__(self, PyWeakFormReal wf, PySpaceReal space, init = True):
     if not init:
       return
     if type(self)!=PyDiscreteProblemReal:
       return
-    self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double]()
+    self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double](wf.thisptr, (<PySpaceReal> space).thisptr)
   
   def __cinit__(self, init = True):
     if not init:
@@ -71,14 +76,19 @@ cdef class PyDiscreteProblemComplex:
       return
     if type(self)!=PyDiscreteProblemComplex:
       return
-    self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]]()
+    cdef vector[pcSpaceComplex] cspaces
+    if isinstance(spaces,list):
+      for s in spaces:
+        cspaces.push_back((<PySpaceComplex> s).thisptr)
+        
+    self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]](wf.thisptr, cspaces)
   
   def __cinit__(self, PyWeakFormComplex wf, PySpaceComplex space, init = True):
     if not init:
       return
-    if type(self)!=PyDiscreteProblemComplex:
+    if type(self)!=PyDiscreteProblemReal:
       return
-    self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]]()
+    self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]](wf.thisptr, (<PySpaceComplex> space).thisptr)
   
   def __cinit__(self, init = True):
     if not init:
