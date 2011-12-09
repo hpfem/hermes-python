@@ -75,6 +75,12 @@ setup(
     "include/weakform/weakform.pxd",
     "src/weakform/weakform.pxi",
     "include/mesh/mesh_reader_h2d_xml.pxd",
-    "src/mesh/mesh_reader_h2d_xml.pxi"
+    "src/mesh/mesh_reader_h2d_xml.pxi",
+    "include/discrete_problem.pxd",
+    "src/discrete_problem.pxi",
+    #"include/adapt/adapt.pxd",
+    #"src/adapt/adapt.pxi",
+    "include/views/vector_view.pxd",
+    "src/views/vector_view.pxi"
     ],language="c++",libraries=["hermes2d"])]
 )
