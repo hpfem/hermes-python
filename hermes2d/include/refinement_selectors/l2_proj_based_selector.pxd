@@ -9,9 +9,3 @@ cdef extern from "refinement_selectors/l2_proj_based_selector.h" namespace "Herm
     L2ProjBasedSelector(CandList cand_list, double conv_exp, int max_order)
     L2ProjBasedSelector(CandList cand_list, double conv_exp)
     L2ProjBasedSelector(CandList cand_list)
-    
-cdef class PyL2ProjBasedSelectorReal:
-  cdef L2ProjBasedSelector[double]* thisptr
-
-cdef class PyL2ProjBasedSelectorComplex:
-  cdef L2ProjBasedSelector[cComplex[double]]* thisptr

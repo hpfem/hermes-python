@@ -8,9 +8,3 @@ cdef extern from "refinement_selectors/h1_proj_based_selector.h" namespace "Herm
     H1ProjBasedSelector(CandList cand_list, double conv_exp, int max_order)
     H1ProjBasedSelector(CandList cand_list, double conv_exp)
     H1ProjBasedSelector(CandList cand_list)
-    
-cdef class PyH1ProjBasedSelectorReal:
-  cdef H1ProjBasedSelector[double]* thisptr
-
-cdef class PyH1ProjBasedSelectorComplex:
-  cdef H1ProjBasedSelector[cComplex[double]]* thisptr
