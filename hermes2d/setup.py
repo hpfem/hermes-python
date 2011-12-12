@@ -86,5 +86,7 @@ setup(
     "src/refinement_selectors/optimum_selector.pxi",
     "include/views/vector_view.pxd",
     "src/views/vector_view.pxi"
+    "include/newton_solver.pxd",
+    "src/newton_solver.pxi",
     ],language="c++",libraries=["hermes2d"])]
 )
