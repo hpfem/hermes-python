@@ -114,13 +114,12 @@ cdef class PyAdaptReal:
 
   def  adapt(self, selectors, double thr, int strat = 0, int regularize = -1, double to_be_processed = 0.0):
     cdef vector[pSelectorReal] cselectors
-    if isinstance(spaces,list):
+    if isinstance(selectors, list):
       for s in selectors:
         cselectors.push_back((<PySelectorReal> s).thisptr)
-    self.thisptr.adapt(cselectors, thr, strat, regularize, to_be_processed)
-
-  def  adapt(self, PySelectorReal selector, double thr, int strat = 0, int regularize = -1, double to_be_processed = 0.0):
-    self.thisptr.adapt(selector.thisptr, thr, strat, regularize, to_be_processed)
+      self.thisptr.adapt(cselectors, thr, strat, regularize, to_be_processed)
+    else:
+      self.thisptr.adapt((<PySelectorReal> selectors).thisptr, thr, strat, regularize, to_be_processed)
 
   def  unrefine(self, thr):
     self.thisptr.unrefine(thr)
@@ -284,13 +283,12 @@ cdef class PyAdaptComplex:
 
   def  adapt(self, selectors, double thr, int strat = 0, int regularize = -1, double to_be_processed = 0.0):
     cdef vector[pSelectorComplex] cselectors
-    if isinstance(spaces,list):
+    if isinstance(selectors,list):
       for s in selectors:
         cselectors.push_back((<PySelectorComplex> s).thisptr)
-    self.thisptr.adapt(cselectors, thr, strat, regularize, to_be_processed)
-
-  def  adapt(self, PySelectorComplex selector, double thr, int strat = 0, int regularize = -1, double to_be_processed = 0.0):
-    self.thisptr.adapt(selector.thisptr, thr, strat, regularize, to_be_processed)
+      self.thisptr.adapt(cselectors, thr, strat, regularize, to_be_processed)
+    else:
+      self.thisptr.adapt((<PySelectorComplex> selectors).thisptr, thr, strat, regularize, to_be_processed)
 
   def  unrefine(self, thr):
     self.thisptr.unrefine(thr)
@@ -303,9 +301,9 @@ cdef class PyMatrixFormVolErrorComplex:
     if (type(self)!=PyMatrixFormVolErrorComplex):
       return 
     if type:
-      self.thisptr=new Adapt[double].MatrixFormVolError(type)
+      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError(type)
     else:
-      self.thisptr=new Adapt[double].MatrixFormVolError()
+      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError()
   def value(self, n, wt, u_ext, u, v, e, ext):
     cdef double* cwt = <double*> newBuffer[double](len(wt))
     cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
@@ -315,7 +313,7 @@ cdef class PyMatrixFormVolErrorComplex:
     for i in range(len(u_ext)):
       cu_ext[i] = (<PyFuncComplex>u_ext[i]).thisptr
 
-    cdef cComplex[double] result = self.thisptr.value(n, cwt, cu_ext, (<PyFuncReal> u).thisptr, (<PyFuncReal> v).thisptr, (<PyGeomComplex> e).thisptr, (<PyExtDataComplex> ext).thisptr)
+    cdef cComplex[double] result = self.thisptr.value(n, cwt, cu_ext, (<PyFuncComplex> u).thisptr, (<PyFuncComplex> v).thisptr, (<PyGeomReal> e).thisptr, (<PyExtDataComplex> ext).thisptr)
      
     for i in range(len(u_ext)):
       del cu_ext[i]

@@ -1,7 +1,7 @@
 cdef extern from "refinement_selectors/optimum_selector.h" namespace "Hermes::Hermes2D::RefinementSelectors":
   ctypedef void* pSelector "Selector<Scalar>*" #cython error override
-  ctypedef void* pSelectorReal "Hermes::Hermes2D::Selector<double>*" #cython error override
-  ctypedef void* pSelectorComplex "Hermes::Hermes2D::Selector<std::complex<double> >*" #cython error override
+  ctypedef void* pSelectorReal "Hermes::Hermes2D::RefinementSelectors::Selector<double>*" #cython error override
+  ctypedef void* pSelectorComplex "Hermes::Hermes2D::RefinementSelectors::Selector<std::complex<double> >*" #cython error override
   cdef cppclass Selector[Scalar]:
     Selector()
     
