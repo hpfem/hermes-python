@@ -52,7 +52,7 @@ namespace Hermes
     template<typename Scalar>
     CustomMatrixFormSurf<Scalar>::CustomMatrixFormSurf(PyObject*self, unsigned int i, unsigned int j, Hermes::vector<std::string> areas,
         Hermes::vector<MeshFunction<Scalar>*> ext,
-        double scaling_factor, int u_ext_offset):CustomMatrixFormSurf<Scalar>(i, j, areas, ext, scaling_factor, u_ext_offset),self(self){};
+        double scaling_factor, int u_ext_offset):MatrixFormSurf<Scalar>(i, j, areas, ext, scaling_factor, u_ext_offset),self(self){};
 
     template<>
     double CustomMatrixFormSurf<double>::value(int n, double *wt, Func<double> *u_ext[], Func<double> *u, Func<double> *v,
@@ -323,6 +323,21 @@ namespace Hermes
     }
 
     template class CustomMatrixFormVol<double>;
+    template class CustomMatrixFormSurf<double>;
+    template class CustomVectorFormVol<double>;
+    template class CustomVectorFormSurf<double>;
+    template class CustomMultiComponentMatrixFormVol<double>;
+    template class CustomMultiComponentMatrixFormSurf<double>;
+    template class CustomMultiComponentVectorFormVol<double>;
+    template class CustomMultiComponentVectorFormSurf<double>;
+    template class CustomMatrixFormVol<std::complex<double> >;
+    template class CustomMatrixFormSurf<std::complex<double> >;
+    template class CustomVectorFormVol<std::complex<double> >;
+    template class CustomVectorFormSurf<std::complex<double> >;
+    template class CustomMultiComponentMatrixFormVol<std::complex<double> >;
+    template class CustomMultiComponentMatrixFormSurf<std::complex<double> >;
+    template class CustomMultiComponentVectorFormVol<std::complex<double> >;
+    template class CustomMultiComponentVectorFormSurf<std::complex<double> >;
   }
 }
 
