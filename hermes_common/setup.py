@@ -29,6 +29,9 @@ setup(
     "include/solvers/linear_solver.pxd",
     "include/solvers/precond.pxd",
     "src/solvers/linear_solver.pxi",
+    "include/solvers/dp_interface.pxd",
+    "include/solvers/nonlinear_solver.pxd",
+    "src/solvers/nonlinear_solver.pxi",
     "src/hermes_function.pxi"
     ],language="c++",libraries=["hermes_common"])]
 )
