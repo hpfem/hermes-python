@@ -6,6 +6,10 @@ cdef class PyNonlinearSolverReal:
       self.thisptr=new NonlinearSolver[double]((<PyDiscreteProblemInterfaceReal>dp).thisptr, matrix_solver_type)
     else:
       self.thisptr=new NonlinearSolver[double]((<PyDiscreteProblemInterfaceReal>dp).thisptr)
+
+  def __dealloc__(self):
+    del self.thisptr
+
   def solve(self, coeff_vec):
     cdef double * c_coeff_vec
     c_coeff_vec = <double*> newBuffer[double](len(coeff_vec))
