@@ -18,9 +18,387 @@ cdef class PyCustomWeakFormComplex(PyWeakFormComplex):
       return
     self.thisptr = new WeakForm[cComplex[double]]()
 
-
+########################
 cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
-  pass
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionReal] cext
+    cdef PyMeshFunctionReal mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[double]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,careas, <SymFlag> sym, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,careas, <SymFlag> sym, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,careas, <SymFlag> sym, cext)
+        return
+      if sym is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,careas, <SymFlag> sym)
+        return
+      self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,carea, <SymFlag> sym, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,carea, <SymFlag> sym, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,carea, <SymFlag> sym, cext)
+        return
+      if sym is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,carea, <SymFlag> sym)
+        return
+      if area is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j,carea)
+        return
+      self.thisptr = <Form[double]*> new CustomMatrixFormVol[double](self, i, j)
+
+
+cdef class PyCustomMatrixFormSurfReal(PyMatrixFormSurfReal):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionReal] cext
+    cdef PyMeshFunctionReal mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[double]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,careas, cext)
+        return
+      self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j,carea)
+        return
+      self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j)
+
+cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
+  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionReal] cext
+    cdef PyMeshFunctionReal mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[double]*> mf.thisptr)
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,careas, cext)
+        return
+      self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j,carea)
+        return
+      self.thisptr = <Form[double]*> new CustomVectorFormVol[double](self, j)
+
+
+cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
+  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionReal] cext
+    cdef PyMeshFunctionReal mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[double]*> mf.thisptr)
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas, cext)
+        return
+      self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea)
+        return
+      self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j)
+
+cdef class PyCustomMultiComponentMatrixFormVolReal(PyMultiComponentMatrixFormVolReal):
+  pass #? TODO
+
+
+cdef class PyCustomMultiComponentMatrixFormSurfReal(PyMultiComponentMatrixFormSurfReal):
+  pass #? TODO
+
+cdef class PyCustomMultiComponentVectorFormVolReal(PyMultiComponentVectorFormVolReal):
+  pass #? TODO
+cdef class PyCustomMultiComponentVectorFormSurfReal(PyMultiComponentVectorFormSurfReal):
+  pass #? TODO
+
+cdef class PyCustomMatrixFormVolComplex(PyMatrixFormVolComplex):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,careas, <SymFlag> sym, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,careas, <SymFlag> sym, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,careas, <SymFlag> sym, cext)
+        return
+      if sym is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,careas, <SymFlag> sym)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,carea, <SymFlag> sym, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,carea, <SymFlag> sym, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,carea, <SymFlag> sym, cext)
+        return
+      if sym is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,carea, <SymFlag> sym)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormVol[cComplex[double]](self, i, j)
+
+
+cdef class PyCustomMatrixFormSurfComplex(PyMatrixFormSurfComplex):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,careas, cext)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMatrixFormSurf[cComplex[double]](self, i, j)
+
+
+cdef class PyCustomVectorFormVolComplex(PyVectorFormVolComplex):
+  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr)
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,careas, cext)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j)
+
+cdef class PyCustomVectorFormSurfComplex(PyVectorFormSurfComplex):
+  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr)
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,careas, cext)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormSurf[cComplex[double]](self, j)
+
+
+cdef class PyCustomMultiComponentMatrixFormVolComplex(PyMultiComponentMatrixFormVolComplex):
+  pass #? TODO
+
+
+cdef class PyCustomMultiComponentMatrixFormSurfComplex(PyMultiComponentMatrixFormSurfComplex):
+  pass #? TODO
+
+cdef class PyCustomMultiComponentVectorFormVolComplex(PyMultiComponentVectorFormVolComplex):
+  pass #? TODO
+
+cdef class PyCustomMultiComponentVectorFormSurfComplex(PyMultiComponentVectorFormSurfComplex):
+  pass #? TODO
+
+
+########################
 
 cdef public double pyMatrixFormReal_value(object self, int n, double *wt, Func[double] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[double] *ext):
   cdef PyFuncReal f = PyFuncReal(init=False)
