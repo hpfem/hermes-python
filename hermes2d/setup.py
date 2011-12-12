@@ -75,6 +75,7 @@ setup(
     "include/weakform/weakform.pxd",
     "src/weakform/weakform.pxi",
     "customclasses/weakform.pxi",
+    "customclasses/weakform.cpp",
     "include/mesh/mesh_reader_h2d_xml.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/discrete_problem.pxd",
