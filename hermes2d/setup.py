@@ -74,12 +74,16 @@ setup(
     "src/projections/ogprojection.pxi",    
     "include/weakform/weakform.pxd",
     "src/weakform/weakform.pxi",
+    "customclasses/weakform.pxi",
+    "customclasses/weakform.cpp",
     "include/mesh/mesh_reader_h2d_xml.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/discrete_problem.pxd",
     "src/discrete_problem.pxi",
-    #"include/adapt/adapt.pxd",
-    #"src/adapt/adapt.pxi",
+    "include/adapt/adapt.pxd",
+    "src/adapt/adapt.pxi",
+    "include/refinement_selectors/optimum_selector.pxd",
+    "src/refinement_selectors/optimum_selector.pxi",
     "include/views/vector_view.pxd",
     "src/views/vector_view.pxi"
     ],language="c++",libraries=["hermes2d"])]
