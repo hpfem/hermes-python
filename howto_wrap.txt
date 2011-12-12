@@ -113,6 +113,12 @@ cdef class PyTimePeriod:
 
 ==Type conversions==
 
+C-pointers to derived C-structures corresponding to derived Python-structures have to be obtained from thisptr in the following way in case of sln, rsln parameters:
+
+  def  calc_err_est(self, sln, rsln, solutions_for_adapt,  error_flags):
+    self.thisptr.calc_err_est(<Solution[double]*> (<PySolutionReal>sln).thisptr, <Solution[double]*> (<PySolutionReal>rsln).thisptr, <bool>solutions_for_adapt,  <unsigned> error_flags)
+
+
 ``std::complex<double>`` is included as ``cComplex[double]`` and can be created from python complex ``c=cComplex[double](p.real,p.imag)``. Analogicaly in 
 the oposite direction ``p=complex(c.real(),c.imag())``
 
