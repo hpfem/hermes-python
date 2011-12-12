@@ -565,17 +565,196 @@ cdef class PyCustomVectorFormSurfComplex(PyVectorFormSurfComplex):
 
 
 cdef class PyCustomMultiComponentMatrixFormVolComplex(PyMultiComponentMatrixFormVolComplex):
-  pass #? TODO
+  def __cinit__(self, list coordinates, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef pair[unsigned int, unsigned int] v
+    cdef vector[upair] ccoordinates
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    for c in coordinates:
+      v.first = c[0]
+      v.second = c[1]
+      ccoordinates.push_back(<upair> v)
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,careas, <SymFlag> sym, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,careas, <SymFlag> sym, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,careas, <SymFlag> sym, cext)
+        return
+      if sym is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,careas, <SymFlag> sym)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,carea, <SymFlag> sym, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,carea, <SymFlag> sym, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,carea, <SymFlag> sym, cext)
+        return
+      if sym is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,carea, <SymFlag> sym)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormVol[cComplex[double]](self, ccoordinates)
 
 
 cdef class PyCustomMultiComponentMatrixFormSurfComplex(PyMultiComponentMatrixFormSurfComplex):
-  pass #? TODO
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef pair[unsigned int, unsigned int] v
+    cdef vector[upair] ccoordinates
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    for c in coordinates:
+      v.first = c[0]
+      v.second = c[1]
+      ccoordinates.push_back(<upair> v)
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,careas, cext)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates)
 
 cdef class PyCustomMultiComponentVectorFormVolComplex(PyMultiComponentVectorFormVolComplex):
-  pass #? TODO
-
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[unsigned] ccoordinates
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    for c in coordinates:
+      ccoordinates.push_back(c)
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,careas, cext)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates)
 cdef class PyCustomMultiComponentVectorFormSurfComplex(PyMultiComponentVectorFormSurfComplex):
-  pass #? TODO
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    cdef vector[unsigned] ccoordinates
+    cdef vector[string] careas
+    cdef string carea 
+    cdef vector[pMeshFunctionComplex] cext
+    cdef PyMeshFunctionComplex mf
+    if not init:
+      return
+    for c in coordinates:
+      ccoordinates.push_back(c)
+    if ext is not None:
+      for mf in ext:
+        cext.push_back(<MeshFunction[cComplex[double]]*> mf.thisptr) 
+    if isinstance(area,list):
+      for s in area:
+        carea.assign(<char*> s)
+        careas.push_back(carea)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,careas, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,careas, cext)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,careas)
+    else:
+      if area is not None:
+        carea.assign(<char*> area)
+      if u_ext_offset is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        return
+      if scaling_factor is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,carea, cext, <double> scaling_factor)
+        return
+      if ext is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,carea, cext)
+        return
+      if area is not None:
+        self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates,carea)
+        return
+      self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormSurf[cComplex[double]](self, ccoordinates)
 
 
 ########################
