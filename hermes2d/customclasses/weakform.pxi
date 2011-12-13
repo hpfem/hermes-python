@@ -1,5 +1,5 @@
 cdef class PyCustomWeakFormReal(PyWeakFormReal):
-  def __cinit__(self, neq = None, mat_free = None, *args):
+  def super(self, neq = None, mat_free = None, *args):
     if mat_free is not None:
       self.thisptr = new WeakForm[double](neq,mat_free)
       return
@@ -9,7 +9,7 @@ cdef class PyCustomWeakFormReal(PyWeakFormReal):
     self.thisptr = new WeakForm[double]()
 
 cdef class PyCustomWeakFormComplex(PyWeakFormComplex):
-  def __cinit__(self, neq = None, mat_free = None, *args):
+  def super(self, neq = None, mat_free = None, *args):
     if mat_free is not None:
       self.thisptr = new WeakForm[cComplex[double]](neq,mat_free)
       return
