@@ -112,14 +112,32 @@ cdef class PyAdaptReal:
     del ccomponent_errors
     return result
 
-  def  adapt(self, selectors, double thr, int strat = 0, int regularize = -1, double to_be_processed = 0.0):
+  def  adapt(self, selectors, double thr, strat = None, regularize = None, to_be_processed = None):
     cdef vector[pSelectorReal] cselectors
     if isinstance(selectors, list):
       for s in selectors:
         cselectors.push_back((<PySelectorReal> s).thisptr)
-      self.thisptr.adapt(cselectors, thr, strat, regularize, to_be_processed)
+      if strat:
+        if regularize:
+          if to_be_processed:
+            self.thisptr.adapt(cselectors, thr, <int> strat, <int> regularize, <double> to_be_processed)
+          else:
+            self.thisptr.adapt(cselectors, thr, <int> strat, <int> regularize)
+        else:
+          self.thisptr.adapt(cselectors, thr, <int> strat)
+      else:
+        self.thisptr.adapt(cselectors, thr)
     else:
-      self.thisptr.adapt((<PySelectorReal> selectors).thisptr, thr, strat, regularize, to_be_processed)
+      if strat:
+        if regularize:
+          if to_be_processed:
+            self.thisptr.adapt((<PySelectorReal> selectors).thisptr, thr, <int> strat, <int> regularize, <double> to_be_processed)
+          else:
+            self.thisptr.adapt((<PySelectorReal> selectors).thisptr, thr, <int> strat, <int> regularize)
+        else:
+          self.thisptr.adapt((<PySelectorReal> selectors).thisptr, thr, <int> strat)
+      else:
+        self.thisptr.adapt((<PySelectorReal> selectors).thisptr, thr)
 
   def  unrefine(self, thr):
     self.thisptr.unrefine(thr)
@@ -281,14 +299,32 @@ cdef class PyAdaptComplex:
     del ccomponent_errors
     return result
 
-  def  adapt(self, selectors, double thr, int strat = 0, int regularize = -1, double to_be_processed = 0.0):
+  def  adapt(self, selectors, double thr, strat = None, regularize = None, to_be_processed = None):
     cdef vector[pSelectorComplex] cselectors
-    if isinstance(selectors,list):
+    if isinstance(selectors, list):
       for s in selectors:
         cselectors.push_back((<PySelectorComplex> s).thisptr)
-      self.thisptr.adapt(cselectors, thr, strat, regularize, to_be_processed)
+      if strat:
+        if regularize:
+          if to_be_processed:
+            self.thisptr.adapt(cselectors, thr, <int> strat, <int> regularize, <double> to_be_processed)
+          else:
+            self.thisptr.adapt(cselectors, thr, <int> strat, <int> regularize)
+        else:
+          self.thisptr.adapt(cselectors, thr, <int> strat)
+      else:
+        self.thisptr.adapt(cselectors, thr)
     else:
-      self.thisptr.adapt((<PySelectorComplex> selectors).thisptr, thr, strat, regularize, to_be_processed)
+      if strat:
+        if regularize:
+          if to_be_processed:
+            self.thisptr.adapt((<PySelectorComplex> selectors).thisptr, thr, <int> strat, <int> regularize, <double> to_be_processed)
+          else:
+            self.thisptr.adapt((<PySelectorComplex> selectors).thisptr, thr, <int> strat, <int> regularize)
+        else:
+          self.thisptr.adapt((<PySelectorComplex> selectors).thisptr, thr, <int> strat)
+      else:
+        self.thisptr.adapt((<PySelectorComplex> selectors).thisptr, thr)
 
   def  unrefine(self, thr):
     self.thisptr.unrefine(thr)
