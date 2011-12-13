@@ -89,6 +89,10 @@ setup(
     "include/newton_solver.pxd",
     "src/newton_solver.pxi",
     "include/picard_solver.pxd",
-    "src/picard_solver.pxi"
+    "src/picard_solver.pxi",
+    "include/function/filter.pxd",
+    "src/function/filter.pxi",
+    "include/runge_kutta.pxd",
+    "src/runge_kutta.pxi"
     ],language="c++",libraries=["hermes2d"])]
 )

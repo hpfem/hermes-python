@@ -66,8 +66,14 @@ cdef extern from "matrix.h" namespace "Hermes::Algebra":
 cdef class PyMatrixReal:
   cdef Matrix[double] * thisptr
 
+cdef class PySparseMatrixReal(PyMatrixReal): #abstract
+  pass
+
 cdef class PyMatrixComplex:
   cdef Matrix[cComplex[double]] * thisptr
+  
+cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
+  pass
 
 cdef class PyVectorReal:
   cdef Vector[double] * thisptr

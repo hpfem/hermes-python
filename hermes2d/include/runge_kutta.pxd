@@ -19,18 +19,97 @@ cdef extern from "runge_kutta.h" namespace "Hermes::Hermes2D":
     void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
                       vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian, bool block_diagonal_jacobian,
                       bool verbose, double newton_tol,int newton_max_iter, double newton_damping_coeff, double newton_max_allowed_residual_norm)
-                      
-                      
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter, double newton_damping_coeff)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian, bool block_diagonal_jacobian)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns, bool freeze_jacobian)                      
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, vector[pSolution] error_fns)
+                                        
     void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
                       Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian, bool block_diagonal_jacobian,
                       bool verbose, double newton_tol, int newton_max_iter, double newton_damping_coeff, double newton_max_allowed_residual_norm)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter, double newton_damping_coeff)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian, bool block_diagonal_jacobian)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn, bool freeze_jacobian)                      
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, Solution[Scalar]* error_fn)
+                      
     
     void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
-                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian, 
+                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter, double newton_damping_coeff, double newton_max_allowed_residual_norm)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter, double newton_damping_coeff)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian)
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new, bool freeze_jacobian)                      
+    void rk_time_step_newton(double current_time, double time_step, vector[pSolution] slns_time_prev,
+                      vector[pSolution] slns_time_new)
+                                        
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
                       bool verbose, double newton_tol, int newton_max_iter, double newton_damping_coeff, double newton_max_allowed_residual_norm)
-                      
-    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* sln_time_prev,
-                      Solution[Scalar]* sln_time_new, bool freeze_jacobian,bool block_diagonal_jacobian, 
-                      bool verbose, double newton_tol, int newton_max_iter, double newton_damping_coeff, double newton_max_allowed_residual_norm)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter, double newton_damping_coeff)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol,int newton_max_iter)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose, double newton_tol)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian,
+                      bool verbose)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian, bool block_diagonal_jacobian)
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new, bool freeze_jacobian)                      
+    void rk_time_step_newton(double current_time, double time_step, Solution[Scalar]* slns_time_prev,
+                      Solution[Scalar]* slns_time_new)
                       
     void set_filters_to_reinit(vector[pFilter] filters_to_reinit)
+    
+cdef class PyRungeKuttaReal:
+  cdef RungeKutta[double] * thisptr
+
+cdef class PyRungeKuttaComplex:
+  cdef RungeKutta[cComplex[double]] * thisptr
+  

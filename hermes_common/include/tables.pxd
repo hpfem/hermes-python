@@ -57,4 +57,7 @@ cdef extern from "tables.h" namespace "Hermes":
 
 cdef class PyTable:
   cdef Table * thisptr
+  
+cdef class PyButcherTable(PyTable):
+  pass
 
