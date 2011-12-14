@@ -1,7 +1,7 @@
 import hermes_common
 import hermes2d
 import os
-import definitions.pxi
+from definitions import PyCustomWeakFormPoisson
 
 mesh=hermes2d.PyMesh()
 reader=hermes2d.PyMeshReaderH2DXML()
@@ -11,7 +11,13 @@ viewer=hermes2d.PyScalarView()
 reader.load("domain.xml",mesh)
 
 # Create a boundary condition
-markers = list("Bottom", "Inner", "Outer", "Left")
+markers = []
+markers.append("Bottom")
+markers.append("Inner")
+markers.append("Outer")
+markers.append("Left")
+
+
 bc = hermes2d.PyDefaultEssentialBCConstReal(markers, 20.0)
 
 # Create the structure for the BCs to be passed
@@ -19,7 +25,7 @@ bcs = hermes2d.PyEssentialBCsReal(bc)
 
 space=hermes2d.PyH1SpaceReal(mesh, bcs, 3)
  
-wf=PyCustomWeakFormPoisson("Aluminum", "Copper") 
+wf= PyCustomWeakFormPoisson("Aluminum", "Copper") 
 
 dp = hermes2d.PyDiscreteProblemReal(wf)
 
