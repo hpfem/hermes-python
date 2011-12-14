@@ -2,7 +2,7 @@ cdef class PyNewtonSolverReal(PyNonlinearSolverReal):
   def __cinit__(self, dp, matrix_solver_type=None):
     if (type(self)!=PyNewtonSolverReal):
       return
-    if matrix_solver_type:
+    if matrix_solver_type is not None:
       self.thisptr=new NewtonSolver[double]((<PyDiscreteProblemReal>dp).thisptr, matrix_solver_type)
     else:
       self.thisptr=new NewtonSolver[double]((<PyDiscreteProblemReal>dp).thisptr)
