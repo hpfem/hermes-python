@@ -1,5 +1,6 @@
 cdef extern from "common.h" :
   cdef cppclass Scalar2[Scalar]:
+    Scalar2()
     Scalar2(Scalar v1, Scalar v2)
     Scalar operator[](int idx)
   cdef cppclass Scalar3[Scalar]:
@@ -53,3 +54,8 @@ cdef extern from "common.h" namespace "Hermes::Helpers":
     int& get_argc()
     char**& get_argv()
 
+cdef class PyScalar2Real:
+  cdef Scalar2[double] * thisptr
+
+cdef class PyScalar2Complex:
+  cdef Scalar2[cComplex[double]] * thisptr

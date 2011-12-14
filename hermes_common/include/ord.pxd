@@ -24,7 +24,6 @@ cdef extern from "ord.h" namespace "Hermes":
     bool operator<(Ord &o)
     bool operator>(Ord &o)
 
-
   cdef Ord operator/(double &a, Ord &b)
   cdef Ord operator*(double &a, Ord &b)
   cdef Ord operator + (double &a, Ord &b)
