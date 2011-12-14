@@ -229,6 +229,9 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
 
 cdef class PyFormReal:
   cdef Form[double] * thisptr
+  
+cdef class PyMatrixFormVolReal(PyFormReal):
+  pass
 
 cdef class PyFormComplex:
   cdef Form[cComplex[double]] * thisptr

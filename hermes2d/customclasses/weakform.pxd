@@ -92,3 +92,6 @@ cdef extern from "customclasses/weakform.h" namespace "Hermes::Hermes2D":
     CustomMultiComponentVectorFormSurf(object self, vector[unsigned int] coordinates, vector[string] areas, vector[pMeshFunction] ext, double scaling_factor)
     CustomMultiComponentVectorFormSurf(object self, vector[unsigned int] coordinates, vector[string] areas, vector[pMeshFunction] ext)
     CustomMultiComponentVectorFormSurf(object self, vector[unsigned int] coordinates, vector[string] areas)
+
+cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
+  pass

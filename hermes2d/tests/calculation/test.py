@@ -1,6 +1,7 @@
 import hermes_common
 import hermes2d
 import os
+import definitions.pxi
 
 mesh=hermes2d.PyMesh()
 reader=hermes2d.PyMeshReaderH2DXML()
@@ -18,18 +19,14 @@ bcs = hermes2d.PyEssentialBCsReal(bc)
 
 space=hermes2d.PyH1SpaceReal(mesh, bcs, 3)
  
-dp = hermes2d.PyDiscreteProblemReal()
+wf=PyCustomWeakFormPoisson("Aluminum", "Copper") 
+
+dp = hermes2d.PyDiscreteProblemReal(wf)
 
 solution = hermes2d.PySolutionReal()
 
-newton = hermes2d.PyNewtonSolverReal(dp)
+newton = hermes2d.PyNewtonSolverReal(dp, wf)
 
 hermes2d.vector_to_solution(newton.get_sln_vector(), space, solution)
 
 viewer.show(solution)
-
-
-### So far waits for this main ingredience: 
-
-# CustomWeakFormPoisson wf("Aluminum", new Hermes::Hermes1DFunction<double>(LAMBDA_AL), "Copper",
-#     new Hermes::Hermes1DFunction<double>(LAMBDA_CU), new Hermes::Hermes2DFunction<double>(-VOLUME_HEAT_SRC));
