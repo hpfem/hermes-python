@@ -847,7 +847,7 @@ cdef class PyWeakFormReal:
     return f
 
 cdef class PyFormReal:
-  def __cinit__(self, area, ext, scaling_factor, u_ext_offset,init = True):
+  def __cinit__(self, area, ext, scaling_factor = None, u_ext_offset = None ,init = True):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
