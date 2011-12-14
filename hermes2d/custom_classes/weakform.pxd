@@ -1,4 +1,4 @@
-cdef extern from "customclasses/weakform.h" namespace "Hermes::Hermes2D":
+cdef extern from "custom_classes/weakform.h" namespace "Hermes::Hermes2D":
   #ctypedef void upair "std::pair<unsigned int, unsigned int>" #cython error override
 
   cdef cppclass CustomMatrixFormVol[Scalar]: # public Form[Scalar]

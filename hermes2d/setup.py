@@ -74,8 +74,10 @@ setup(
     "src/projections/ogprojection.pxi",    
     "include/weakform/weakform.pxd",
     "src/weakform/weakform.pxi",
-    "customclasses/weakform.pxi",
-    "customclasses/weakform.cpp",
+    "custom_classes/exact_solution.pxi",
+    "custom_classes/exact_solution.cpp",
+    "custom_classes/weakform.pxi",
+    "custom_classes/weakform.cpp",
     "include/mesh/mesh_reader_h2d_xml.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi",
     "include/discrete_problem.pxd",
@@ -93,6 +95,8 @@ setup(
     "include/function/filter.pxd",
     "src/function/filter.pxi",
     "include/runge_kutta.pxd",
-    "src/runge_kutta.pxi"
+    "src/runge_kutta.pxi",
+    "include/weakform_library/weakforms_h1.pxd",
+    "src/weakform_library/weakforms_h1.pxi"
     ],language="c++",libraries=["hermes2d"])]
 )
