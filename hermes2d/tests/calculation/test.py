@@ -27,12 +27,18 @@ space=hermes2d.PyH1SpaceReal(mesh, bcs, 3)
  
 wf= PyCustomWeakFormPoisson("Aluminum", "Copper") 
 
-dp = hermes2d.PyDiscreteProblemReal(wf)
+dp = hermes2d.PyDiscreteProblemReal(wf,space)
 
 solution = hermes2d.PySolutionReal()
 
-newton = hermes2d.PyNewtonSolverReal(dp, wf)
+newton = hermes2d.PyNewtonSolverReal(dp)
 
-hermes2d.vector_to_solution(newton.get_sln_vector(), space, solution)
+coef=[]
+for i in range(space.get_num_dofs()):
+  coef.append(0)
+
+newton.solve(coef)
+
+hermes2d.PySolutionReal.vector_to_solution(newton.get_sln_vector(), space, solution)
 
 viewer.show(solution)

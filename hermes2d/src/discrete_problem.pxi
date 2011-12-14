@@ -1,5 +1,5 @@
 cdef class PyDiscreteProblemReal:
-  def __cinit__(self, PyWeakFormReal wf, spaces, init = True):
+  def __cinit__(self, wf = None, spaces = None, init = True):
     if not init:
       return
     if type(self)!=PyDiscreteProblemReal:
@@ -8,21 +8,13 @@ cdef class PyDiscreteProblemReal:
     if isinstance(spaces,list):
       for s in spaces:
         cspaces.push_back((<PySpaceReal> s).thisptr)
-        
-    self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double](wf.thisptr, cspaces)
-  
-  def __cinit__(self, PyWeakFormReal wf, PySpaceReal space, init = True):
-    if not init:
+      self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double]((<PyWeakFormReal> wf).thisptr, cspaces)
       return
-    if type(self)!=PyDiscreteProblemReal:
+    if spaces is not None:
+      self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double]((<PyWeakFormReal> wf).thisptr, (<PySpaceReal> spaces).thisptr)
       return
-    self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double](wf.thisptr, (<PySpaceReal> space).thisptr)
-  
-  def __cinit__(self, init = True):
-    if not init:
-      return
-    if type(self)!=PyDiscreteProblemReal:
-      return
+    if wf is not None:
+      raise PyNullException(2)
     self.thisptr = <DiscreteProblem[double]*> new DiscreteProblem[double]()
 
   def assemble(self,PyMatrixReal mat, coeff_vec = None, PyVectorReal rhs = None, force_diagonal_blocks = None, add_dir_lift = None, block_weights = None):
@@ -105,7 +97,7 @@ cdef class PyDiscreteProblemReal:
     return
 
 cdef class PyDiscreteProblemComplex:
-  def __cinit__(self, PyWeakFormComplex wf, spaces, init = True):
+  def __cinit__(self, wf = None, spaces = None, init = True):
     if not init:
       return
     if type(self)!=PyDiscreteProblemComplex:
@@ -114,21 +106,13 @@ cdef class PyDiscreteProblemComplex:
     if isinstance(spaces,list):
       for s in spaces:
         cspaces.push_back((<PySpaceComplex> s).thisptr)
-        
-    self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]](wf.thisptr, cspaces)
-  
-  def __cinit__(self, PyWeakFormComplex wf, PySpaceComplex space, init = True):
-    if not init:
+      self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]]((<PyWeakFormComplex> wf).thisptr, cspaces)
       return
-    if type(self)!=PyDiscreteProblemComplex:
+    if spaces is not None:
+      self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]]((<PyWeakFormComplex> wf).thisptr, (<PySpaceComplex> spaces).thisptr)
       return
-    self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]](wf.thisptr, (<PySpaceComplex> space).thisptr)
-  
-  def __cinit__(self, init = True):
-    if not init:
-      return
-    if type(self)!=PyDiscreteProblemComplex:
-      return
+    if wf is not None:
+      raise PyNullException(2)
     self.thisptr = <DiscreteProblem[cComplex[double]]*> new DiscreteProblem[cComplex[double]]()
 
   def assemble(self,PyMatrixComplex mat, coeff_vec = None, PyVectorComplex rhs = None, force_diagonal_blocks = None, add_dir_lift = None, block_weights = None):
