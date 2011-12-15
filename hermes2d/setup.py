@@ -96,7 +96,7 @@ setup(
     "src/function/filter.pxi",
     "include/runge_kutta.pxd",
     "src/runge_kutta.pxi",
-    "include/weakform_library/weakforms_h1.pxd",
-    "src/weakform_library/weakforms_h1.pxi"
+    "src/weakform_library/weakforms_h1.pxi",
+    "include/weakform_library/weakforms_h1.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )
