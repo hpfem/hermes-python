@@ -1,6 +1,12 @@
 cdef class PyFuncReal:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Func doesn't have public constructor")
+
   def __dealloc__(self):
-    del self.thisptr 
+    if self.dealloc:
+      del self.thisptr 
 
   property val:
     def __set__(self, value):
@@ -234,8 +240,13 @@ cdef class PyDiscontinuousFuncReal(PyFuncReal):
       return r
 
 cdef class PyGeomReal:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Geaom doesn't have public constructor")
   def __dealloc__(self):
-    del self.thisptr
+    if self.dealloc:
+      del self.thisptr
 
   property area:
     def __set__(self,double value):
@@ -289,6 +300,13 @@ cdef class PyInterfaceGeomReal(PyGeomReal):
 
 
 cdef class PyExtDataReal:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Func doesn't have public constructor")
+  def __dealloc__(self):
+    if self.dealloc:
+      del self.thisptr
   property fn:
     def __set__(self, value):
       if self.thisptr.fn !=NULL:
@@ -308,8 +326,13 @@ cdef class PyExtDataReal:
     return self.thisptr.get_nf()
 
 cdef class PyFuncComplex:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Func doesn't have public constructor")
   def __dealloc__(self):
-    del self.thisptr 
+    if self.dealloc:
+      del self.thisptr 
 
   property val:
     def __set__(self, value):
@@ -543,8 +566,13 @@ cdef class PyDiscontinuousFuncComplex(PyFuncComplex):
       return r
 
 cdef class PyGeomComplex:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Func doesn't have public constructor")
   def __dealloc__(self):
-    del self.thisptr
+    if self.dealloc:
+      del self.thisptr
 
   property area:
     def __set__(self,complex value):
@@ -598,6 +626,13 @@ cdef class PyInterfaceGeomComplex(PyGeomComplex):
 
 
 cdef class PyExtDataComplex:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("ExtData doesn't have public constructor")
+  def __dealloc__(self):
+    if self.dealloc:
+      del self.thisptr
   property fn:
     def __set__(self, value):
       if self.thisptr.fn !=NULL:
@@ -617,8 +652,13 @@ cdef class PyExtDataComplex:
     return self.thisptr.get_nf()
 
 cdef class PyFuncOrd:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Func doesn't have public constructor")
   def __dealloc__(self):
-    del self.thisptr 
+    if self.dealloc:
+      del self.thisptr 
 
   property val:
     def __set__(self, value):
@@ -852,8 +892,13 @@ cdef class PyDiscontinuousFuncOrd(PyFuncOrd):
       return r
 
 cdef class PyGeomOrd:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("Geom doesn't have public constructor")
   def __dealloc__(self):
-    del self.thisptr
+    if self.dealloc:
+      del self.thisptr
 
   property area:
     def __set__(self,PyOrd value):
@@ -911,6 +956,13 @@ cdef class PyInterfaceGeomOrd(PyGeomOrd):
 
 
 cdef class PyExtDataOrd:
+  def __init__(self,init = True, dealloc = True):
+    self.dealloc = dealloc
+    if init:
+      raise RuntimeError("ExtData doesn't have public constructor")
+  def __dealloc__(self):
+    if self.dealloc:
+      del self.thisptr
   property fn:
     def __set__(self, value):
       if self.thisptr.fn !=NULL:

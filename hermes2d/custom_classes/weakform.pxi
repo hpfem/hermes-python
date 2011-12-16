@@ -760,11 +760,12 @@ cdef class PyCustomMultiComponentVectorFormSurfComplex(PyMultiComponentVectorFor
 ########################
 
 cdef public double pyMatrixFormReal_value(object self, int n, double *wt, Func[double] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[double] *ext):
-  cdef PyFuncReal f = PyFuncReal(init=False)
-  cdef PyFuncReal pu = PyFuncReal(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataReal pext = PyExtDataReal(init=False)
+  cdef PyFuncReal f = PyFuncReal(init=False, dealloc=False)
+  cdef PyFuncReal pu = PyFuncReal(init=False, dealloc=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataReal pext = PyExtDataReal(init=False, dealloc=False)
+  print "value funkce"
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
@@ -772,18 +773,19 @@ cdef public double pyMatrixFormReal_value(object self, int n, double *wt, Func[d
   pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncReal(init=False)
+    f = PyFuncReal(init=False, dealloc=False)
     f.thisptr = u_ext[i]
     pu_ext.append(f)
     pwt.append(wt[i])
   return self.value(n, pwt, pu_ext, pu, pv, pe, pext)
 
 cdef public Ord pyMatrixFormReal_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pu = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd f = PyFuncOrd(init=False, dealloc=False)
+  cdef PyFuncOrd pu = PyFuncOrd(init=False, dealloc=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef Ord ret
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
@@ -791,7 +793,7 @@ cdef public Ord pyMatrixFormReal_ord(object self, int n, double *wt, Func[Ord] *
   pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
+    f = PyFuncOrd(init=False, dealloc=False)
     f.thisptr = u_ext[i]
     pu_ext.append(f)
     pwt.append(wt[i])

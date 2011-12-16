@@ -71,28 +71,37 @@ cdef extern from "forms.h" namespace "Hermes::Hermes2D":
     int get_nf()
 
 cdef class PyFuncReal:
+  cdef bool dealloc
   cdef Func[double]* thisptr
 
 cdef class PyGeomReal:
+  cdef bool dealloc
   cdef Geom[double]* thisptr
 
 cdef class PyExtDataReal:
+  cdef bool dealloc
   cdef ExtData[double]* thisptr
 
 cdef class PyFuncComplex:
+  cdef bool dealloc
   cdef Func[cComplex[double]]* thisptr
 
 cdef class PyGeomComplex:
+  cdef bool dealloc
   cdef Geom[cComplex[double]]* thisptr
 
 cdef class PyExtDataComplex:
+  cdef bool dealloc
   cdef ExtData[cComplex[double]]* thisptr
 
 cdef class PyFuncOrd:
+  cdef bool dealloc
   cdef Func[Ord]* thisptr
 
 cdef class PyGeomOrd:
+  cdef bool dealloc
   cdef Geom[Ord]* thisptr
 
 cdef class PyExtDataOrd:
+  cdef bool dealloc
   cdef ExtData[Ord]* thisptr
