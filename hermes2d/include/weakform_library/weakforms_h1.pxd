@@ -1,2 +1,2 @@
 cdef class PyDefaultJacobianDiffusion(PyCustomMatrixFormVolReal):
-  pass
+  cdef unsigned int idx_j

@@ -1,9 +1,6 @@
 cdef class PyDefaultJacobianDiffusion(PyCustomMatrixFormVolReal):
-  property idx_j:
-    def __get__(self):
-      return self.idx_j
-    def __set__(self,idx_j):
-      self.idx_j = idx_j
+  def __init__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    self.idx_j = j
       
   def value(self, int n, pwt, pu_ext, PyFuncReal pu, PyFuncReal pv, PyGeomReal pe, PyExtDataReal pext):
     result = 0
