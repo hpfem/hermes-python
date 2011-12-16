@@ -95,3 +95,18 @@ cdef extern from "custom_classes/weakform.h" namespace "Hermes::Hermes2D":
 
 cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
   pass
+cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
+  pass
+cdef class PyCustomMatrixFormSurfReal(PyMatrixFormSurfReal):
+  pass
+cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
+  pass
+  
+cdef class PyCustomMatrixFormVolComplex(PyMatrixFormVolComplex):
+  pass
+cdef class PyCustomVectorFormVolComplex(PyVectorFormVolComplex):
+  pass
+cdef class PyCustomMatrixFormSurfComplex(PyMatrixFormSurfComplex):
+  pass
+cdef class PyCustomVectorFormSurfComplex(PyVectorFormSurfComplex):
+  pass
