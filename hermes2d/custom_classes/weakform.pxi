@@ -764,7 +764,6 @@ cdef public double pyMatrixFormReal_value(object self, int n, double *wt, Func[d
   cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
   cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
   cdef PyExtDataReal pext = PyExtDataReal(init=False, dealloc=False)
-  print "value funkce"
   cdef PyFuncRealArray pu_ext = PyFuncRealArray()
   pu_ext.thisptr = u_ext
   pu.thisptr = u
