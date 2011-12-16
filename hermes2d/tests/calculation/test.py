@@ -39,6 +39,7 @@ for i in range(space.get_num_dofs()):
 
 newton.solve(coef)
 
-hermes2d.PySolutionReal.vector_to_solution(newton.get_sln_vector(), space, solution)
+hermes2d.PySolutionReal().vector_to_solution(newton.get_sln_vector(), space, solution)
 
 viewer.show(solution)
+
