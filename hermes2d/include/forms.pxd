@@ -105,3 +105,11 @@ cdef class PyGeomOrd:
 cdef class PyExtDataOrd:
   cdef bool dealloc
   cdef ExtData[Ord]* thisptr
+
+cdef class PyFuncRealArray:
+  cdef Func[double] ** thisptr
+cdef class PyFuncComplexArray:
+  cdef Func[cComplex[double]] ** thisptr
+cdef class PyFuncOrdArray:
+  cdef Func[Ord] ** thisptr
+

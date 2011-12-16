@@ -30,7 +30,7 @@ cdef class PyFuncReal:
         self.thisptr.dx[i] = value[i]
     def __get__(self):
       r = []
-      for i in range(self.thisptr.get_num_gip()):
+      for i in range(self.thisptr.get_num_gip()): #TODO optimize (direct acces)
         r.append(self.thisptr.dx[i])
       return r
 
@@ -1018,4 +1018,25 @@ def Pyinit_fn(self, fu, rm, order = None):
   if isinstance(fu,PySolutionComplex):
     rc.thisptr = init_fn(<Solution[cComplex[double]]*> (<PySolutionComplex> fu).thisptr, <int> order)
     return rc
+
+cdef class PyFuncRealArray:
+  def __getitem__(self, idx):
+    cdef PyFuncReal f = PyFuncReal(init=False, dealloc=False)
+    f.thisptr = self.thisptr[idx]
+    return f
+
+cdef class PyFuncComplexArray:
+  def __getitem__(self, idx):
+    cdef PyFuncComplex f = PyFuncComplex(init=False, dealloc=False)
+    f.thisptr = self.thisptr[idx]
+    return f
+
+cdef class PyFuncOrdArray:
+  def __getitem__(self, idx):
+    cdef PyFuncOrd f = PyFuncOrd(init=False, dealloc=False)
+    f.thisptr = self.thisptr[idx]
+    return f
+
+
+
 

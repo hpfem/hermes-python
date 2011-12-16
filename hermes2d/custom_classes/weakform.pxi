@@ -760,95 +760,80 @@ cdef class PyCustomMultiComponentVectorFormSurfComplex(PyMultiComponentVectorFor
 ########################
 
 cdef public double pyMatrixFormReal_value(object self, int n, double *wt, Func[double] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[double] *ext):
-  cdef PyFuncReal f = PyFuncReal(init=False, dealloc=False)
   cdef PyFuncReal pu = PyFuncReal(init=False, dealloc=False)
   cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
   cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
   cdef PyExtDataReal pext = PyExtDataReal(init=False, dealloc=False)
   print "value funkce"
+  cdef PyFuncRealArray pu_ext = PyFuncRealArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncReal(init=False, dealloc=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return self.value(n, pwt, pu_ext, pu, pv, pe, pext)
 
 cdef public Ord pyMatrixFormReal_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False, dealloc=False)
   cdef PyFuncOrd pu = PyFuncOrd(init=False, dealloc=False)
   cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
   cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
   cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
   cdef Ord ret
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False, dealloc=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pu, pv, pe, pext)).thisptr[0]
 
 cdef public double pyVectorFormReal_value(object self, int n, double *wt, Func[double] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[double] *ext):
-  cdef PyFuncReal f = PyFuncReal(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataReal pext = PyExtDataReal(init=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataReal pext = PyExtDataReal(init=False, dealloc=False)
+  cdef PyFuncRealArray pu_ext = PyFuncRealArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncReal(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return self.value(n, pwt, pu_ext, pv, pe, pext)
 
 cdef public Ord pyVectorFormReal_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pv, pe, pext)).thisptr[0]
 
 cdef public double pyMultiMatrixFormReal_value(object self, int n, double *wt, Func[double] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[double] *ext, vector[double]& result):
-  cdef PyFuncReal f = PyFuncReal(init=False)
-  cdef PyFuncReal pu = PyFuncReal(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataReal pext = PyExtDataReal(init=False)
+  cdef PyFuncReal pu = PyFuncReal(init=False, dealloc=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataReal pext = PyExtDataReal(init=False, dealloc=False)
+  cdef PyFuncRealArray pu_ext = PyFuncRealArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncReal(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   presult = []
   self.value(n, pwt, pu_ext, pu, pv, pe, pext, presult)
@@ -857,38 +842,32 @@ cdef public double pyMultiMatrixFormReal_value(object self, int n, double *wt, F
     result.push_back(p)
 
 cdef public Ord pyMultiMatrixFormReal_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pu = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pu = PyFuncOrd(init=False, dealloc=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pu, pv, pe, pext)).thisptr[0]
 
 cdef public double pyMultiVectorFormReal_value(object self, int n, double *wt, Func[double] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[double] *ext, vector[double]& result):
-  cdef PyFuncReal f = PyFuncReal(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataReal pext = PyExtDataReal(init=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataReal pext = PyExtDataReal(init=False, dealloc=False)
+  cdef PyFuncRealArray pu_ext = PyFuncRealArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncReal(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   presult = []
   self.value(n, pwt, pu_ext, pv, pe, pext, presult)
@@ -897,110 +876,92 @@ cdef public double pyMultiVectorFormReal_value(object self, int n, double *wt, F
     result.push_back(p)
 
 cdef public Ord pyMultiVectorFormReal_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pv, pe, pext)).thisptr[0]
 
 cdef public cComplex[double] pyMatrixFormComplex_value(object self, int n, double *wt, Func[cComplex[double]] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[cComplex[double]] *ext):
-  cdef PyFuncComplex f = PyFuncComplex(init=False)
-  cdef PyFuncReal pu = PyFuncReal(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataComplex pext = PyExtDataComplex(init=False)
+  cdef PyFuncReal pu = PyFuncReal(init=False, dealloc=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataComplex pext = PyExtDataComplex(init=False, dealloc=False)
+  cdef PyFuncComplexArray pu_ext = PyFuncComplexArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncComplex(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return ccomplex(self.value(n, pwt, pu_ext, pu, pv, pe, pext))
 
 cdef public Ord pyMatrixFormComplex_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pu = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pu = PyFuncOrd(init=False, dealloc=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pu, pv, pe, pext)).thisptr[0]
 
 cdef public cComplex[double] pyVectorFormComplex_value(object self, int n, double *wt, Func[cComplex[double]] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[cComplex[double]] *ext):
-  cdef PyFuncComplex f = PyFuncComplex(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataComplex pext = PyExtDataComplex(init=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataComplex pext = PyExtDataComplex(init=False, dealloc=False)
+  cdef PyFuncComplexArray pu_ext = PyFuncComplexArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncComplex(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return ccomplex(self.value(n, pwt, pu_ext, pv, pe, pext))
 
 cdef public Ord pyVectorFormComplex_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pv, pe, pext)).thisptr[0]
 
 cdef public cComplex[double] pyMultiMatrixFormComplex_value(object self, int n, double *wt, Func[cComplex[double]] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[cComplex[double]] *ext, vector[cComplex[double]]& result):
-  cdef PyFuncComplex f = PyFuncComplex(init=False)
-  cdef PyFuncReal pu = PyFuncReal(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataComplex pext = PyExtDataComplex(init=False)
+  cdef PyFuncReal pu = PyFuncReal(init=False, dealloc=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataComplex pext = PyExtDataComplex(init=False, dealloc=False)
+  cdef PyFuncComplexArray pu_ext = PyFuncComplexArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncComplex(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   presult = []
   self.value(n, pwt, pu_ext, pu, pv, pe, pext, presult)
@@ -1009,38 +970,32 @@ cdef public cComplex[double] pyMultiMatrixFormComplex_value(object self, int n, 
     result.push_back(ccomplex(p))
 
 cdef public Ord pyMultiMatrixFormComplex_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pu = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pu = PyFuncOrd(init=False, dealloc=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pu.thisptr = u
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pu, pv, pe, pext)).thisptr[0]
 
 cdef public cComplex[double] pyMultiVectorFormComplex_value(object self, int n, double *wt, Func[cComplex[double]] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[cComplex[double]] *ext, vector[cComplex[double]]& result):
-  cdef PyFuncComplex f = PyFuncComplex(init=False)
-  cdef PyFuncReal pv = PyFuncReal(init=False)
-  cdef PyGeomReal pe = PyGeomReal(init=False)
-  cdef PyExtDataComplex pext = PyExtDataComplex(init=False)
+  cdef PyFuncReal pv = PyFuncReal(init=False, dealloc=False)
+  cdef PyGeomReal pe = PyGeomReal(init=False, dealloc=False)
+  cdef PyExtDataComplex pext = PyExtDataComplex(init=False, dealloc=False)
+  cdef PyFuncComplexArray pu_ext = PyFuncComplexArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncComplex(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   presult = []
   self.value(n, pwt, pu_ext, pv, pe, pext, presult)
@@ -1049,18 +1004,15 @@ cdef public cComplex[double] pyMultiVectorFormComplex_value(object self, int n, 
     result.push_back(ccomplex(p))
 
 cdef public Ord pyMultiVectorFormComplex_ord(object self, int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext):
-  cdef PyFuncOrd f = PyFuncOrd(init=False)
-  cdef PyFuncOrd pv = PyFuncOrd(init=False)
-  cdef PyGeomOrd pe = PyGeomOrd(init=False)
-  cdef PyExtDataOrd pext = PyExtDataOrd(init=False)
+  cdef PyFuncOrd pv = PyFuncOrd(init=False, dealloc=False)
+  cdef PyGeomOrd pe = PyGeomOrd(init=False, dealloc=False)
+  cdef PyExtDataOrd pext = PyExtDataOrd(init=False, dealloc=False)
+  cdef PyFuncOrdArray pu_ext = PyFuncOrdArray()
+  pu_ext.thisptr = u_ext
   pv.thisptr = v
   pe.thisptr = e
   pext.thisptr = ext
-  pu_ext = []
   pwt = []
   for i in range(n):
-    f = PyFuncOrd(init=False)
-    f.thisptr = u_ext[i]
-    pu_ext.append(f)
     pwt.append(wt[i])
   return (<PyOrd> self.ord(n, pwt, pu_ext, pv, pe, pext)).thisptr[0]
