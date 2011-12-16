@@ -735,6 +735,7 @@ cdef class PyStageReal:
 
 cdef class PyWeakFormReal:
   def __cinit__(self, neq = None, mat_free = None, init = True):
+    self.matrices=[]
     if not init:
       return
     if type(self)!=PyWeakFormReal:
@@ -749,20 +750,28 @@ cdef class PyWeakFormReal:
   def __dealloc__(self):
     del self.thisptr
   def add_matrix_form(self, PyMatrixFormVolReal mfv):
+    self.matrices.append(mfv)
     self.thisptr.add_matrix_form(<MatrixFormVol[double]*> mfv.thisptr)
   def add_matrix_form_surf(self, PyMatrixFormSurfReal mfs):
+    self.matrices.append(mfs)
     self.thisptr.add_matrix_form_surf(<MatrixFormSurf[double]*> mfs.thisptr)
   def add_vector_form(self, PyVectorFormVolReal vfv):
+    self.matrices.append(vfv)
     self.thisptr.add_vector_form(<VectorFormVol[double]*> vfv.thisptr)
   def add_vector_form_surf(self, PyVectorFormSurfReal vfs):
+    self.matrices.append(vfs)
     self.thisptr.add_vector_form_surf(<VectorFormSurf[double]*> vfs.thisptr)
   def add_multicomponent_matrix_form(self, PyMultiComponentMatrixFormVolReal mfv):
+    self.matrices.append(mfv)
     self.thisptr.add_multicomponent_matrix_form(<MultiComponentMatrixFormVol[double]*> mfv.thisptr)
   def add_multicomponent_matrix_form_surf(self, PyMultiComponentMatrixFormSurfReal mfs):
+    self.matrices.append(mfs)
     self.thisptr.add_multicomponent_matrix_form_surf(<MultiComponentMatrixFormSurf[double]*> mfs.thisptr)
   def add_multicomponent_vector_form(self, PyMultiComponentVectorFormVolReal vfv):
+    self.matrices.append(vfv)
     self.thisptr.add_multicomponent_vector_form(<MultiComponentVectorFormVol[double]*> vfv.thisptr)
   def add_multicomponent_vector_form_surf(self, PyMultiComponentVectorFormSurfReal vfs):
+    self.matrices.append(vfs)
     self.thisptr.add_multicomponent_vector_form_surf(<MultiComponentVectorFormSurf[double]*> vfs.thisptr)
   def get_neq(self):
     return self.thisptr.get_neq()
@@ -1665,6 +1674,7 @@ cdef class PyStageComplex:
 
 cdef class PyWeakFormComplex:
   def __cinit__(self, neq = None, mat_free = None, init = True):
+    self.matrices=[]
     if not init:
       return
     if type(self)!=PyWeakFormComplex:
@@ -1679,20 +1689,28 @@ cdef class PyWeakFormComplex:
   def __dealloc__(self):
     del self.thisptr
   def add_matrix_form(self, PyMatrixFormVolComplex mfv):
+    self.matrices.append(mfv)
     self.thisptr.add_matrix_form(<MatrixFormVol[cComplex[double]]*> mfv.thisptr)
   def add_matrix_form_surf(self, PyMatrixFormSurfComplex mfs):
+    self.matrices.append(mfs)
     self.thisptr.add_matrix_form_surf(<MatrixFormSurf[cComplex[double]]*> mfs.thisptr)
   def add_vector_form(self, PyVectorFormVolComplex vfv):
+    self.matrices.append(vfv)
     self.thisptr.add_vector_form(<VectorFormVol[cComplex[double]]*> vfv.thisptr)
   def add_vector_form_surf(self, PyVectorFormSurfComplex vfs):
+    self.matrices.append(vfs)
     self.thisptr.add_vector_form_surf(<VectorFormSurf[cComplex[double]]*> vfs.thisptr)
   def add_multicomponent_matrix_form(self, PyMultiComponentMatrixFormVolComplex mfv):
+    self.matrices.append(mfv)
     self.thisptr.add_multicomponent_matrix_form(<MultiComponentMatrixFormVol[cComplex[double]]*> mfv.thisptr)
   def add_multicomponent_matrix_form_surf(self, PyMultiComponentMatrixFormSurfComplex mfs):
+    self.matrices.append(mfs)
     self.thisptr.add_multicomponent_matrix_form_surf(<MultiComponentMatrixFormSurf[cComplex[double]]*> mfs.thisptr)
   def add_multicomponent_vector_form(self, PyMultiComponentVectorFormVolComplex vfv):
+    self.matrices.append(vfv)
     self.thisptr.add_multicomponent_vector_form(<MultiComponentVectorFormVol[cComplex[double]]*> vfv.thisptr)
   def add_multicomponent_vector_form_surf(self, PyMultiComponentVectorFormSurfComplex vfs):
+    self.matrices.append(vfs)
     self.thisptr.add_multicomponent_vector_form_surf(<MultiComponentVectorFormSurf[cComplex[double]]*> vfs.thisptr)
   def get_neq(self):
     return self.thisptr.get_neq()

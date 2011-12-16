@@ -6,7 +6,7 @@ inline T * newBuffer(size_t size){
 
 template<typename T>
 inline void delBuffer(T * buffer){
-  delete buffer;
+  delete[] buffer;
 }
 
 inline void delInts(int*buffer){

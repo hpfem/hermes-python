@@ -88,5 +88,10 @@ namespace Hermes
     {
       return pyExactSolutionVectorComplex_ord(self, x, y);
     }
+    template class CustomExactSolutionScalar<double>;
+    template class CustomExactSolutionScalar<std::complex<double> >;
+
+    template class CustomExactSolutionVector<double>;
+    template class CustomExactSolutionVector<std::complex<double> >;
   }
 }

@@ -22,8 +22,7 @@ cdef class PyNewtonSolverReal(PyNonlinearSolverReal):
           (<NewtonSolver[double]*>self.thisptr).solve(c_coeff_vec, newton_tol)
       else:
         (<NewtonSolver[double]*>self.thisptr).solve(c_coeff_vec)
-      for i in range(len(coeff_vec)):
-        delDoubles(c_coeff_vec)
+      delBuffer[double](c_coeff_vec)
     else:
       (<NewtonSolver[double]*>self.thisptr).solve()
   
@@ -43,8 +42,7 @@ cdef class PyNewtonSolverReal(PyNonlinearSolverReal):
           (<NewtonSolver[double]*>self.thisptr).solve_keep_jacobian(c_coeff_vec, newton_tol)
       else:
         (<NewtonSolver[double]*>self.thisptr).solve_keep_jacobian(c_coeff_vec)
-      for i in range(len(coeff_vec)):
-        delDoubles(c_coeff_vec)
+      delBuffer[double](c_coeff_vec)
     else:
       (<NewtonSolver[double]*>self.thisptr).solve_keep_jacobian()        
 

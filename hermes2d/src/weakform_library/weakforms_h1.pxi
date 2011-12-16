@@ -1,17 +1,14 @@
 cdef class PyDefaultJacobianDiffusion(PyCustomMatrixFormVolReal):
-  property idx_j:
-    def __get__(self):
-      return self.idx_j
-    def __set__(self,idx_j):
-      self.idx_j = idx_j
+  def __init__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    self.idx_j = j
       
-  cdef value(self, int n, pwt, pu_ext, PyFuncReal pu, PyFuncReal pv, PyGeomReal pe, PyExtDataReal pext):
+  def value(self, int n, pwt, pu_ext, PyFuncReal pu, PyFuncReal pv, PyGeomReal pe, PyExtDataReal pext):
     result = 0
     for i in range(n):
       result += pwt[i] * pu.val[i] * (pu_ext[self.idx_j].dx[i] * pv.dx[i] + pu_ext[self.idx_j].dy[i] * pv.dy[i]) * (pu.dx[i] * pv.dx[i] + pu.dy[i] * pv.dy[i])
     return result
     
-  cdef ord(self, int n, pwt, pu_ext, PyFuncReal pu, PyFuncReal pv, PyGeomReal pe, PyExtDataReal pext):
+  def ord(self, int n, pwt, pu_ext, PyFuncOrd pu, PyFuncOrd pv, PyGeomOrd pe, PyExtDataOrd pext):
     result = PyOrd(0)
     for i in range(n):
       result += pwt[i] * pu.val[i] * (pu_ext[self.idx_j].dx[i] * pv.dx[i] + pu_ext[self.idx_j].dy[i] * pv.dy[i]) * (pu.dx[i] * pv.dx[i] + pu.dy[i] * pv.dy[i])

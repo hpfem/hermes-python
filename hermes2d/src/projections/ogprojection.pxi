@@ -25,7 +25,7 @@ cdef class PyOGProjectionReal:
         for s in source:
           csource_slns.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
         if isinstance(target_vec[0],PySolutionReal):
-          for s in source:
+          for s in target_vec:
             ctarget_slns.push_back(<Solution[double]*> (<PySolutionReal> s).thisptr)
           if proj_norms is not None:
             for s in proj_norms:
@@ -184,7 +184,7 @@ cdef class PyOGProjectionComplex:
         for s in source:
           csource_slns.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
         if isinstance(target_vec[0],PySolutionComplex):
-          for s in source:
+          for s in target_vec:
             ctarget_slns.push_back(<Solution[cComplex[double]]*> (<PySolutionComplex> s).thisptr)
           if proj_norms is not None:
             for s in proj_norms:

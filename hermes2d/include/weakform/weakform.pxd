@@ -238,9 +238,11 @@ cdef class PyFormComplex:
 
 cdef class PyWeakFormReal:
   cdef WeakForm[double] * thisptr
+  cdef list matrices #python object of matrices must be referenced
 
 cdef class PyWeakFormComplex:
   cdef WeakForm[cComplex[double]] * thisptr
+  cdef list matrices #python object of matrices must be referenced
 
 cdef class PyStageReal:
   cdef Stage[double] * thisptr
