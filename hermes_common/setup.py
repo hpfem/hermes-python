@@ -32,6 +32,8 @@ setup(
     "include/solvers/dp_interface.pxd",
     "include/solvers/nonlinear_solver.pxd",
     "src/solvers/nonlinear_solver.pxi",
-    "src/hermes_function.pxi"
+    "src/hermes_function.pxi",
+    "custom_classes/hermes_function.pxi",
+    "custom_classes/hermes_function.cpp"
     ],language="c++",libraries=["hermes_common"])]
 )
