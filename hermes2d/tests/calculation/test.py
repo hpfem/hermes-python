@@ -9,6 +9,7 @@ viewer=hermes2d.PyScalarView()
 
 # Load the mesh.
 reader.load("domain.xml",mesh)
+mesh.refine_all_elements()
 
 # Create a boundary condition
 markers = []
