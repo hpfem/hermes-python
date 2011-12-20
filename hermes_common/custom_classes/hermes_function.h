@@ -5,6 +5,8 @@
 #include "exceptions.h"
 #include "hermes_function.h"
 #include "common.h"
+#include "ord.h"
+#include "../hermes_common.h"
 
 
 namespace Hermes

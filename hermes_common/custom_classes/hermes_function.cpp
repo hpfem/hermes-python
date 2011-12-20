@@ -32,13 +32,13 @@ namespace Hermes
   }
   
   template<>
-  std::complex<double> CustomHermes1DFunction<std::complex<double> >::value (double x) const
+  std::complex<double> CustomHermes1DFunction<std::complex<double> >::value (std::complex<double> x) const
   {
     return pyHermes1DFunctionComplex_value(self, x);
   }
 
   template<>
-  std::complex<double> CustomHermes1DFunction<std::complex<double> >::derivative (double x) const
+  std::complex<double> CustomHermes1DFunction<std::complex<double> >::derivative (std::complex<double> x) const
   {
     return pyHermes1DFunctionComplex_derivative(self, x);
   }
@@ -76,13 +76,13 @@ namespace Hermes
   }
   
   template<>
-  std::complex<double> CustomHermes2DFunction<std::complex<double> >::value (double x, double y) const
+  std::complex<double> CustomHermes2DFunction<std::complex<double> >::value (std::complex<double> x, std::complex<double> y) const
   {
     return pyHermes2DFunctionComplex_value(self, x, y);
   }
 
   template<>
-  std::complex<double> CustomHermes2DFunction<std::complex<double> >::derivative (double x, double y) const
+  std::complex<double> CustomHermes2DFunction<std::complex<double> >::derivative (std::complex<double> x, std::complex<double> y) const
   {
     return pyHermes2DFunctionComplex_derivative(self, x, y);
   }
@@ -120,15 +120,20 @@ namespace Hermes
   }
   
   template<>
-  std::complex<double> CustomHermes3DFunction<std::complex<double> >::value (double x, double y, double z) const
+  std::complex<double> CustomHermes3DFunction<std::complex<double> >::value (std::complex<double> x, std::complex<double> y, std::complex<double> z) const
   {
     return pyHermes3DFunctionComplex_value(self, x, y, z);
   }
 
   template<>
-  std::complex<double> CustomHermes3DFunction<std::complex<double> >::derivative (double x, double y, double z) const
+  std::complex<double> CustomHermes3DFunction<std::complex<double> >::derivative (std::complex<double> x, std::complex<double> y, std::complex<double> z) const
   {
     return pyHermes3DFunctionComplex_derivative(self, x, y, z);
   }
-  
+  template class CustomHermes1DFunction<double>;
+  template class CustomHermes1DFunction<std::complex<double> >;
+  template class CustomHermes2DFunction<double>;
+  template class CustomHermes2DFunction<std::complex<double> >;
+  template class CustomHermes3DFunction<double>;
+  template class CustomHermes3DFunction<std::complex<double> >;
 }

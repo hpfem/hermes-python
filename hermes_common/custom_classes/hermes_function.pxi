@@ -9,11 +9,11 @@ cdef public double pyHermes1DFunctionReal_value(object self, double x):
 cdef public double pyHermes1DFunctionReal_derivative(object self, double x):
   return self.derivative(x)
   
-cdef public double pyHermes1DFunctionComplex_value(object self, double x):
-  return self.value(x)
+cdef public cComplex[double] pyHermes1DFunctionComplex_value(object self, cComplex[double] x):
+  return ccomplex(self.value(pcomplex(x)))
   
-cdef public double pyHermes1DFunctionComplex_derivative(object self, double x):
-  return self.derivative(x)
+cdef public cComplex[double] pyHermes1DFunctionComplex_derivative(object self, cComplex[double] x):
+  return ccomplex(self.derivative(pcomplex(x)))
 
 cdef public Ord pyHermes1DFunction_value(object self, Ord x):
   cdef PyOrd px = PyOrd(x.get_order())
@@ -22,8 +22,6 @@ cdef public Ord pyHermes1DFunction_value(object self, Ord x):
 cdef public Ord pyHermes1DFunction_derivative(object self, Ord x):
   cdef PyOrd px = PyOrd(x.get_order())
   return (<PyOrd> self.derivative(px)).thisptr[0]
-
-
 
 
 cdef class PyCustomHermes2DFunctionReal(PyHermes2DFunctionReal):
@@ -37,11 +35,11 @@ cdef public double pyHermes2DFunctionReal_value(object self, double x, double y)
 cdef public double pyHermes2DFunctionReal_derivative(object self, double x, double y):
   return self.derivative(x, y)
   
-cdef public double pyHermes2DFunctionComplex_value(object self, double x, double y):
-  return self.self.value(x, y)
+cdef public cComplex[double] pyHermes2DFunctionComplex_value(object self, cComplex[double] x, cComplex[double] y):
+  return ccomplex(self.value(pcomplex(x), pcomplex(y)))
   
-cdef public double pyHermes2DFunctionComplex_derivative(object self, double x, double y):
-  return self.derivative(x, y)
+cdef public cComplex[double] pyHermes2DFunctionComplex_derivative(object self, cComplex[double] x, cComplex[double] y):
+  return ccomplex(self.derivative(pcomplex(x), pcomplex(y)))
 
 cdef public Ord pyHermes2DFunction_value(object self, Ord x, Ord y):
   cdef PyOrd px = PyOrd(x.get_order())
@@ -52,8 +50,6 @@ cdef public Ord pyHermes2DFunction_derivative(object self, Ord x, Ord y):
   cdef PyOrd px = PyOrd(x.get_order())
   cdef PyOrd py = PyOrd(y.get_order())
   return (<PyOrd> self.derivative(px, py)).thisptr[0]
-  
-  
   
   
   
@@ -68,11 +64,11 @@ cdef public double pyHermes3DFunctionReal_value(object self, double x, double y,
 cdef public double pyHermes3DFunctionReal_derivative(object self, double x, double y, double z):
   return self.derivative(x, y, z)
   
-cdef public double pyHermes3DFunctionComplex_value(object self, double x, double y, double z):
-  return self.value(x, y, z)
+cdef public cComplex[double] pyHermes3DFunctionComplex_value(object self, cComplex[double] x, cComplex[double] y, cComplex[double] z):
+  return ccomplex(self.value(pcomplex(x), pcomplex(y), pcomplex(z)))
   
-cdef public double pyHermes3DFunctionComplex_derivative(object self, double x, double y, double z):
-  return self.derivative(x, y, z)
+cdef public cComplex[double] pyHermes3DFunctionComplex_derivative(object self, cComplex[double] x, cComplex[double] y, cComplex[double] z):
+  return ccomplex(self.derivative(pcomplex(x), pcomplex(y), pcomplex(z)))
 
 cdef public Ord pyHermes3DFunction_value(object self, Ord x, Ord y, Ord z):
   cdef PyOrd px = PyOrd(x.get_order())
