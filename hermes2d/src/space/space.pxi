@@ -107,7 +107,7 @@ cdef class PySpaceReal:
       sp.thisptr = <Space[double]*> cr.at(i)
       r.append(sp)
     return r
-  def construct_refined_space(self, PySpaceReal coarse, order_increase, refinement_type):
+  def construct_refined_space(self, PySpaceReal coarse, order_increase = None, refinement_type = None):
     cdef PySpaceReal r = PySpaceReal(init = False)
     if order_increase is not None:
       r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr, order_increase, refinement_type)
@@ -242,7 +242,7 @@ cdef class PySpaceComplex:
       sp.thisptr = <Space[cComplex[double]]*> cr.at(i)
       r.append(sp)
     return r
-  def construct_refined_space(self, PySpaceComplex coarse, order_increase, refinement_type):
+  def construct_refined_space(self, PySpaceComplex coarse, order_increase = None, refinement_type = None):
     cdef PySpaceComplex r = PySpaceComplex(init = False)
     if order_increase is not None:
       r.thisptr = self.thisptr.construct_refined_space(coarse.thisptr, order_increase, refinement_type)
