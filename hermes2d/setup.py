@@ -80,6 +80,8 @@ setup(
     "custom_classes/weakform.cpp",
     "include/mesh/mesh_reader_h2d_xml.pxd",
     "src/mesh/mesh_reader_h2d_xml.pxi",
+    "include/mesh/mesh_reader_h1d_xml.pxd",
+    "src/mesh/mesh_reader_h1d_xml.pxi",
     "include/discrete_problem.pxd",
     "src/discrete_problem.pxi",
     "include/adapt/adapt.pxd",
