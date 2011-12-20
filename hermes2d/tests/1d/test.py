@@ -13,9 +13,7 @@ mesh.refine_all_elements()
 
 # Create a boundary condition
 markers = []
-markers.append("Bottom")
-markers.append("Inner")
-markers.append("Outer")
+markers.append("Right")
 markers.append("Left")
 
 
@@ -26,7 +24,7 @@ bcs = hermes2d.PyEssentialBCsReal(bc)
 
 space=hermes2d.PyH1SpaceReal(mesh, bcs, 3)
  
-wf= PyCustomWeakFormPoisson("Aluminum", "Copper") 
+wf= PyCustomWeakFormPoisson("Al", "Cu") 
 
 dp = hermes2d.PyDiscreteProblemReal(wf,space)
 
