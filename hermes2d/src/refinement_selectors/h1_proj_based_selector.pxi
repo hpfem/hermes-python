@@ -1,5 +1,5 @@
 cdef class PyH1ProjBasedSelectorReal(PySelectorReal):
-  def __cinit__(self,cand_list, double conv_exp = 1.0, int max_order = -1, PyH1Shapeset user_shapeset = None, init = True):
+  def __cinit__(self,cand_list, conv_exp = None, max_order = None, user_shapeset = None, init = True):
     if not init:
       return
     if type(self)!=PyH1ProjBasedSelectorReal:
@@ -7,15 +7,20 @@ cdef class PyH1ProjBasedSelectorReal(PySelectorReal):
     if isinstance(user_shapeset,PyH1Shapeset):
       shapeset = user_shapeset
         
-    if shapeset is not None:
-      self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order, (<PyH1Shapeset> shapeset).thisptr)
-      return
+    if conv_exp is not None:
+      if max_order is not None:
+        if user_shapeset is not None:
+          self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order, (<PyH1Shapeset> user_shapeset).thisptr)
+        else:
+          self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order)
+      else:
+        self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp)
     else:
-      self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order)
-      return
+      self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list)
+    return
       
 cdef class PyH1ProjBasedSelectorComplex(PySelectorComplex):
-  def __cinit__(self,cand_list, double conv_exp = 1.0, int max_order = -1, PyH1Shapeset user_shapeset = None, init = True):
+  def __cinit__(self,cand_list, conv_exp = None, max_order = None, user_shapeset = None, init = True):
     if not init:
       return
     if type(self)!=PyH1ProjBasedSelectorComplex:
@@ -23,9 +28,14 @@ cdef class PyH1ProjBasedSelectorComplex(PySelectorComplex):
     if isinstance(user_shapeset,PyH1Shapeset):
       shapeset = user_shapeset
         
-    if shapeset is not None:
-      self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order, (<PyH1Shapeset> shapeset).thisptr)
-      return
+    if conv_exp is not None:
+      if max_order is not None:
+        if user_shapeset is not None:
+          self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order, (<PyH1Shapeset> user_shapeset).thisptr)
+        else:
+          self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order)
+      else:
+        self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp)
     else:
-      self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order)
-      return
+      self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list)
+    return
