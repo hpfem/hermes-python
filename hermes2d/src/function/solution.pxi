@@ -39,18 +39,20 @@ cdef class PySolutionReal(PyMeshFunctionReal):
       (<Solution[double]*> self.thisptr).set_dirichlet_lift(space.thisptr)
   def save(self, filename):
     (<Solution[double]*> self.thisptr).save(filename)
-  def save1D(self, x, y, num_points, filename):
+  def save1D(self, x, y, num_points, filename = None):
     cdef double * cx
     cdef double * cy
     cx = <double*> newBuffer[double](num_points)
     cy = <double*> newBuffer[double](num_points)
-    for i in range(num_points):
-      cx[i] = x[i]
-      cy[i] = y[i]
     if filename is not None:
       (<Solution[double]*> self.thisptr).save1D(cx, cy, num_points, filename)
     else:
       (<Solution[double]*> self.thisptr).save1D(cx, cy, num_points)
+    del x[:]
+    del y[:]
+    for i in range(num_points):
+      x.append(cx[i])
+      y.append(cy[i])
   def load(self, filename, PyMesh mesh):
     (<Solution[double]*> self.thisptr).load(filename, mesh.thisptr)
   def get_ref_value(self, PyElement e, double xi1, double xi2, component = None, item = None):
@@ -206,18 +208,20 @@ cdef class PySolutionComplex(PyMeshFunctionComplex):
       (<Solution[cComplex[double]]*> self.thisptr).set_dirichlet_lift(space.thisptr)
   def save(self, filename):
     (<Solution[cComplex[double]]*> self.thisptr).save(filename)
-  def save1D(self, x, y, num_points, filename):
+  def save1D(self, x, y, num_points, filename = None):
     cdef double* cx
     cdef cComplex[double]* cy
     cx = <double*> newBuffer[double](num_points)
     cy = <cComplex[double]*> newBuffer[cComplex[double]](num_points)
-    for i in range(num_points):
-      cx[i] = x[i]
-      cy[i] = ccomplex(y[i])
     if filename is not None:
       (<Solution[cComplex[double]]*> self.thisptr).save1D(cx, cy, num_points, filename)
     else:
       (<Solution[cComplex[double]]*> self.thisptr).save1D(cx, cy, num_points)
+    del x[:]
+    del y[:]
+    for i in range(num_points):
+      x.append(cx[i])
+      y.append(pcomplex(cy[i]))
   def load(self, filename, PyMesh mesh):
     (<Solution[cComplex[double]]*> self.thisptr).load(filename, mesh.thisptr)
   def get_ref_value(self, PyElement e, double xi1, double xi2, component = None, item = None):

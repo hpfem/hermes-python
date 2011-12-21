@@ -2,6 +2,7 @@ import hermes_common
 import hermes2d
 import os
 from definitions import PyCustomWeakFormPoisson
+import pylab
 
 mesh=hermes2d.PyMesh()
 reader=hermes2d.PyMeshReaderH1DXML()
@@ -39,6 +40,13 @@ for i in range(space.get_num_dofs()):
 newton.solve(coef)
 
 hermes2d.PySolutionReal().vector_to_solution(newton.get_sln_vector(), space, solution)
+
+x=list()
+y=list()
+solution.save1D(x, y, 100)
+
+pylab.plot(x, y, "b")
+pylab.show()
 
 viewer.show(solution)
 viewer.wait_for_close()
