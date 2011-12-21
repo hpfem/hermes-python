@@ -17,6 +17,8 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     void set_dirichlet_lift(Space[Scalar]* space, PrecalcShapeset* pss)
     void set_dirichlet_lift(Space[Scalar]* space)
     void save(char* filename)
+    void save1D(double* x, Scalar* y, int num_points, char* filename)
+    void save1D(double* x, Scalar* y, int num_points)
     void load(char* filename, Mesh* mesh)
     Scalar get_ref_value(Element* e, double xi1, double xi2, int component, int item)
     Scalar get_ref_value(Element* e, double xi1, double xi2, int component)
