@@ -1,0 +1,17 @@
+#! /bin/sh
+
+set -e
+
+if [ "$FEMHUB_LOCAL" = "" ]; then
+   echo "FEMHUB_LOCAL undefined ... exiting";
+   exit 1
+fi
+
+HERMES_DIR=$FEMHUB_LOCAL
+cd hermes_common
+python setup.py build_ext --inplace --include-dirs="$HERMES_DIR/include/hermes_common/:$HERMES_DIR/include/hermes2d" --library-dirs="$HERMES_DIR/lib"
+cd ../hermes2d
+python setup.py build_ext --inplace --include-dirs="$HERMES_DIR/include/hermes_common/:$HERMES_DIR/include/hermes2d/:../hermes_common" --library-dirs="$HERMES_DIR/lib" --pyrex-include-dirs="../hermes_common/"
+
+cp hermes2d/hermes2d.so $FEMHUB_LOCAL/lib/python2.7/site-packages
+cp hermes_common/hermes_common.so $FEMHUB_LOCAL/lib/python2.7/site-packages
