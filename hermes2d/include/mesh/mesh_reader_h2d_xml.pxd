@@ -3,7 +3,7 @@ cdef extern from "mesh/mesh_reader_h2d_xml.h" namespace "Hermes::Hermes2D":
     bool load(char *filename, Mesh *mesh)
     bool load_stream(char *stream, Mesh *mesh)
     bool save(char *filename, Mesh *mesh)
-    char* save_stream(Mesh *mesh)
+    string save_stream(Mesh *mesh)
     bool load(char *filename, vector[Mesh *] meshes)
     bool save(char *filename, vector[Mesh *] meshes)
 

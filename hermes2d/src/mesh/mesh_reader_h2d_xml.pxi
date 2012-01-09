@@ -28,4 +28,4 @@ cdef class PyMeshReaderH2DXML:
       return self.thisptr.save(filename,(<PyMesh>mesh).thisptr)
       
   def save_stream(self, mesh):
-    return self.thisptr.save_stream((<PyMesh>mesh).thisptr)
+    return (string)(self.thisptr.save_stream((<PyMesh>mesh).thisptr)).c_str()
