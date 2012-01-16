@@ -24,6 +24,14 @@ cdef class PyLinearizer(PyLinearizerBase):
       (<Linearizer*> self.thisptr).save_solution_vtk(<MeshFunction[double]*> sln.thisptr, filename, quantity_name, mode_3D)
       return
     (<Linearizer*> self.thisptr).save_solution_vtk(<MeshFunction[double]*> sln.thisptr, filename, quantity_name)
+  def save_solution_vtk_to_stream(self, PyMeshFunctionReal sln, char* quantity_name, mode_3D = None, item = None, eps = None):
+    if eps is not None:
+      return (<Linearizer*> self.thisptr).save_solution_vtk_to_stream(<MeshFunction[double]*> sln.thisptr, quantity_name, mode_3D, item, eps).c_str()
+    if item is not None:
+      return (<Linearizer*> self.thisptr).save_solution_vtk_to_stream(<MeshFunction[double]*> sln.thisptr, quantity_name, mode_3D, item).c_str()
+    if mode_3D is not None:
+      return (<Linearizer*> self.thisptr).save_solution_vtk_to_stream(<MeshFunction[double]*> sln.thisptr, quantity_name, mode_3D).c_str()
+    return (<Linearizer*> self.thisptr).save_solution_vtk_to_stream(<MeshFunction[double]*> sln.thisptr, quantity_name).c_str()
   def set_displacement(self, PyMeshFunctionReal xdisp, PyMeshFunctionReal ydisp, dmult = None):
     if dmult is not None:
       (<Linearizer*> self.thisptr).set_displacement(<MeshFunction[double]*> xdisp.thisptr, <MeshFunction[double]*> ydisp.thisptr, dmult)
