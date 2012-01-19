@@ -3,17 +3,17 @@ cdef extern from "newton_solver.h" namespace "Hermes::Hermes2D":
     NewtonSolver(DiscreteProblem[Scalar]* dp, MatrixSolverType matrix_solver_type)
     NewtonSolver(DiscreteProblem[Scalar]* dp)
     
-    void solve(Scalar* coeff_vec, double newton_tol, int newton_max_iter, bool residual_as_function)
-    void solve(Scalar* coeff_vec, double newton_tol, int newton_max_iter)
-    void solve(Scalar* coeff_vec, double newton_tol)
-    void solve(Scalar* coeff_vec)
-    void solve()
+    void solve(Scalar* coeff_vec, double newton_tol, int newton_max_iter, bool residual_as_function) except +translateException
+    void solve(Scalar* coeff_vec, double newton_tol, int newton_max_iter) except +translateException
+    void solve(Scalar* coeff_vec, double newton_tol) except +translateException
+    void solve(Scalar* coeff_vec) except +translateException
+    void solve() except +translateException
     
-    void solve_keep_jacobian(Scalar* coeff_vec, double newton_tol, int newton_max_iter, bool residual_as_function)
-    void solve_keep_jacobian(Scalar* coeff_vec, double newton_tol, int newton_max_iter)
-    void solve_keep_jacobian(Scalar* coeff_vec, double newton_tol)
-    void solve_keep_jacobian(Scalar* coeff_vec)
-    void solve_keep_jacobian()
+    void solve_keep_jacobian(Scalar* coeff_vec, double newton_tol, int newton_max_iter, bool residual_as_function) except +translateException
+    void solve_keep_jacobian(Scalar* coeff_vec, double newton_tol, int newton_max_iter) except +translateException
+    void solve_keep_jacobian(Scalar* coeff_vec, double newton_tol) except +translateException
+    void solve_keep_jacobian(Scalar* coeff_vec) except +translateException
+    void solve_keep_jacobian() except +translateException
     
     void set_max_allowed_residual_norm(double max_allowed_residual_norm_to_set)
     void set_iterative_method(char* iterative_method_name)
