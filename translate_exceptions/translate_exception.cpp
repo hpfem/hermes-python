@@ -10,22 +10,22 @@ void translateException()
   }
   catch(Hermes::Exceptions::NullException &e)
   {
-    raiseNullException(&e);
+    raiseNullException(new Hermes::Exceptions::NullException(e));
   }
   catch(Hermes::Exceptions::LengthException &e)
   {
-    raiseLengthException(&e);
+    raiseLengthException(new Hermes::Exceptions::LengthException(e));
   }
   catch(Hermes::Exceptions::LinearSolverException &e)
   {
-    raiseLinearSolverException(&e);
+    raiseLinearSolverException(new Hermes::Exceptions::LinearSolverException(e));
   }
   catch(Hermes::Exceptions::ValueException &e)
   {
-    raiseValueException(&e);
+    raiseValueException(new Hermes::Exceptions::ValueException(e));
   }
   catch(Hermes::Exceptions::Exception &e)
   {
-    raiseException(&e);
+    raiseException(new Hermes::Exceptions::Exception(e));
   }
 }

@@ -1,6 +1,8 @@
 cdef class PyException:
-  def __cinit__(self, msg = None, *args):
+  def __cinit__(self, msg = None,*args, init = True):
     if type(self) != PyException:
+      return
+    if not init:
       return
     if (msg is None):
       self.thisptr = new cException()
@@ -17,8 +19,10 @@ cdef class PyException:
     return self.thisptr.getFuncName()
 
 cdef class PyNullException(PyException):
-  def __cinit__(self,int paramIdx, itemIdx = None):
+  def __cinit__(self,int paramIdx, itemIdx = None, init = True):
     if type(self) != PyNullException:
+      return
+    if not init:
       return
     if (itemIdx is None ):
       self.thisptr=<cException *> new NullException(paramIdx)
@@ -30,8 +34,10 @@ cdef class PyNullException(PyException):
     return (<NullException *>self.thisptr).getItemIdx()
 
 cdef class PyLengthException(PyException):
-  def __cinit__(self, int fstParamIdx, int a, int b, c=None):
+  def __cinit__(self, int fstParamIdx, int a, int b, c=None, init = True):
     if type(self) != PyLengthException:
+      return
+    if not init:
       return
     if (c is None):
       self.thisptr=<cException *> new LengthException(fstParamIdx, a, b)
@@ -47,8 +53,10 @@ cdef class PyLengthException(PyException):
     return (<LengthException *>self.thisptr).getExpectedLength()
 
 cdef class PyLinearSolverException(PyException):
-  def __cinit__(self, reason = None):
+  def __cinit__(self, reason = None, init = True):
     if type(self) != PyLinearSolverException:
+      return
+    if not init:
       return
     if (reason is None):
       self.thisptr=<cException *> new LinearSolverException()
@@ -56,8 +64,10 @@ cdef class PyLinearSolverException(PyException):
       self.thisptr=<cException *> new LinearSolverException(reason)
 
 cdef class PyValueException(PyException):
-  def __cinit__(self, char * name, double value, double allowed1, allowed2=None):
+  def __cinit__(self,char * name , double value, double allowed1 , allowed2=None, init = True):
     if type(self) != PyValueException:
+      return
+    if not init:
       return
     if (allowed2 is None):
       self.thisptr=<cException *> new ValueException( name, value, allowed1)
