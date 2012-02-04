@@ -3,20 +3,25 @@
 #TODO preserve name of function with error (use init)
 
 cdef public raiseException(cException*e):
-  raise PyException(e.getMsg())
+  cdef PyException pe = PyException(init = False)
+  pe.thisptr  = e
+  raise pe
 
 cdef public raiseNullException(NullException*e):
   raise PyNullException(e.getParamIdx(),e.getItemIdx())
 
 cdef public raiseLengthException(LengthException*e):
-  if (e.getSecondParamIdx()>-1):
-    raise PyLengthException(e.getFirstParamIdx(),e.getSecondParamIdx(),e.getFirstLength(),e.getExpectedLength())
-  else:
-    raise PyLengthException(e.getFirstParamIdx(),e.getFirstLength(),e.getExpectedLength())
+  cdef PyLengthException pe = PyLengthException(init = False)
+  pe.thisptr = <cException*> e
+  raise pe
 
 cdef public raiseLinearSolverException(LinearSolverException*e):
-  raise PyLinearSolverException((<cException*>e).getMsg()) #TODO better message (this is recursive we need original mesage)
+  cdef PyLinearSolverException pe = PyLinearSolverException(init = False)
+  pe.thisptr = <cException*> e
+  raise pe 
 
 cdef public raiseValueException(ValueException*e):
-  raise PyValueException("TODO value name",e.getValue(),e.getAllowed())
+  cdef PyValueException pe = PyValueException('',0,0,0, False)
+  pe.thisptr = <cException*> e
+  raise pe
 
