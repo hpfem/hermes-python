@@ -59,7 +59,7 @@ cdef class PyConstantSolutionReal(PyExactSolutionScalarReal):
       return 
     if type(self)!=PyConstantSolutionReal:
       return
-    self.thisptr = <Transformable*> new ConstantSolution[double](mesh.thisptr, constant)
+    self.thisptr = <Solution[double]*> new ConstantSolution[double](mesh.thisptr, constant)
 
 cdef class PyZeroSolution(PyExactSolutionScalarReal):
   def __cinit__(self, PyMesh mesh, init = True):
@@ -67,7 +67,7 @@ cdef class PyZeroSolution(PyExactSolutionScalarReal):
       return 
     if type(self)!=PyZeroSolution:
       return
-    self.thisptr = <Transformable*> new ZeroSolution(mesh.thisptr)
+    self.thisptr = <Solution[double]*> new ZeroSolution(mesh.thisptr)
 
 cdef class PyConstantSolutionVectorReal(PyExactSolutionVectorReal):
   def __cinit__(self, PyMesh mesh, double constantX, double constantY, init = True):
@@ -75,7 +75,7 @@ cdef class PyConstantSolutionVectorReal(PyExactSolutionVectorReal):
       return 
     if type(self)!=PyConstantSolutionVectorReal:
       return
-    self.thisptr = <Transformable*> new ConstantSolutionVector[double](mesh.thisptr, constantX, constantY)
+    self.thisptr = <Solution[double]*> new ConstantSolutionVector[double](mesh.thisptr, constantX, constantY)
 
 cdef class PyZeroSolutionVector(PyExactSolutionVectorReal):
   def __cinit__(self, PyMesh mesh, init = True):
@@ -83,7 +83,7 @@ cdef class PyZeroSolutionVector(PyExactSolutionVectorReal):
       return 
     if type(self)!=PyZeroSolutionVector:
       return
-    self.thisptr = <Transformable*> new ZeroSolutionVector(mesh.thisptr)
+    self.thisptr = <Solution[double]*> new ZeroSolutionVector(mesh.thisptr)
 
 cdef class PyExactSolutionComplex(PySolutionComplex):
   def get_dimension(self):
@@ -146,7 +146,7 @@ cdef class PyConstantSolutionComplex(PyExactSolutionScalarComplex):
       return 
     if type(self)!=PyConstantSolutionComplex:
       return
-    self.thisptr = <Transformable*> new ConstantSolution[cComplex[double]](mesh.thisptr, ccomplex(constant))
+    self.thisptr = <Solution[cComplex[double]]*> new ConstantSolution[cComplex[double]](mesh.thisptr, ccomplex(constant))
 
 cdef class PyConstantSolutionVectorComplex(PyExactSolutionVectorComplex):
   def __cinit__(self, PyMesh mesh, complex constantX, complex constantY, init = True):
@@ -154,5 +154,5 @@ cdef class PyConstantSolutionVectorComplex(PyExactSolutionVectorComplex):
       return 
     if type(self)!=PyConstantSolutionVectorComplex:
       return
-    self.thisptr = <Transformable*> new ConstantSolutionVector[cComplex[double]](mesh.thisptr, ccomplex(constantX), ccomplex(constantY))
+    self.thisptr = <Solution[cComplex[double]]*> new ConstantSolutionVector[cComplex[double]](mesh.thisptr, ccomplex(constantX), ccomplex(constantY))
 
