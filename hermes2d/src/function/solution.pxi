@@ -3,7 +3,7 @@ class PySolutionType:
     HERMES_SLN = 0
     HERMES_EXACT = 1
 
-cdef class PySolutionReal:
+cdef class PySolutionReal(PyMeshFunctionReal):
   def __cinit__(self, s = None, coeff_vec = None, init = True):
     cdef double * ccoeff_vec
     cdef int i
@@ -14,19 +14,19 @@ cdef class PySolutionReal:
       return
     if coeff_vec is not None:
       if isinstance(coeff_vec, PyVectorReal):
-        self.thisptr = new Solution[double]((<PySpaceReal> s).thisptr, (<PyVectorReal> coeff_vec).thisptr)
+        self.thisptr = <Transformable*> new Solution[double]((<PySpaceReal> s).thisptr, (<PyVectorReal> coeff_vec).thisptr)
       else:
         ndofs = (<PySpaceReal> s).thisptr.get_num_dofs()
         ccoeff_vec = <double*> newBuffer[double](ndofs)
         for i in range(ndofs):
           ccoeff_vec[i] = coeff_vec[i]
-        self.thisptr = new Solution[double]((<PySpaceReal> s).thisptr, ccoeff_vec)
+        self.thisptr = <Transformable*> new Solution[double]((<PySpaceReal> s).thisptr, ccoeff_vec)
         delBuffer[double](ccoeff_vec)
     else:
       if s is not None:
-        self.thisptr = new Solution[double]((<PyMesh> s).thisptr)
+        self.thisptr = <Transformable*> new Solution[double]((<PyMesh> s).thisptr)
       else:
-        self.thisptr = new Solution[double]()
+        self.thisptr = <Transformable*> new Solution[double]()
 
   def assign(self, PySolutionReal sln):
     (<Solution[double]*> self.thisptr).assign(<Solution[double]*> sln.thisptr)
@@ -172,7 +172,7 @@ cdef class PySolutionReal:
     def __get__(self):
       return (<Solution[double]*> self.thisptr).own_mesh
 
-cdef class PySolutionComplex:
+cdef class PySolutionComplex(PyMeshFunctionComplex):
   def __cinit__(self, s = None, coeff_vec = None, init = True):
     cdef cComplex[double] * ccoeff_vec
     cdef int i
@@ -183,19 +183,19 @@ cdef class PySolutionComplex:
       return
     if coeff_vec is not None:
       if isinstance(coeff_vec, PyVectorComplex):
-        self.thisptr = new Solution[cComplex[double]]((<PySpaceComplex> s).thisptr, (<PyVectorComplex> coeff_vec).thisptr)
+        self.thisptr = <Transformable*> new Solution[cComplex[double]]((<PySpaceComplex> s).thisptr, (<PyVectorComplex> coeff_vec).thisptr)
       else:
         ndofs = (<PySpaceComplex> s).thisptr.get_num_dofs()
         ccoeff_vec = <cComplex[double]*> newBuffer[cComplex[double]](ndofs)
         for i in range(ndofs):
           ccoeff_vec[i] = ccomplex(coeff_vec[i])
-        self.thisptr = new Solution[cComplex[double]]((<PySpaceComplex> s).thisptr, ccoeff_vec)
+        self.thisptr = <Transformable*> new Solution[cComplex[double]]((<PySpaceComplex> s).thisptr, ccoeff_vec)
         delBuffer[cComplex[double]](ccoeff_vec)
     else:
       if s is not None:
-        self.thisptr = new Solution[cComplex[double]]((<PyMesh> s).thisptr)
+        self.thisptr = <Transformable*> new Solution[cComplex[double]]((<PyMesh> s).thisptr)
       else:
-        self.thisptr = new Solution[cComplex[double]]()
+        self.thisptr = <Transformable*> new Solution[cComplex[double]]()
 
   def assign(self, PySolutionComplex sln):
     (<Solution[cComplex[double]]*> self.thisptr).assign(<Solution[cComplex[double]]*> sln.thisptr)

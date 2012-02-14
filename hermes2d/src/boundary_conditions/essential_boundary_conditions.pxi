@@ -92,7 +92,7 @@ cdef class PyDefaultEssentialBCNonConstReal(PyEssentialBoundaryConditionReal):
   property exact_solution:
     def __get__(self):
       cdef PyExactSolutionScalarReal r = PyExactSolutionScalarReal(init = False)
-      r.thisptr = <Solution[double]*> (<DefaultEssentialBCNonConst[double]*> self.thisptr).exact_solution
+      r.thisptr = <Transformable*> (<DefaultEssentialBCNonConst[double]*> self.thisptr).exact_solution
       return r
     def __set__(self,PyExactSolutionScalarReal value):
       (<DefaultEssentialBCNonConst[double]*> self.thisptr).exact_solution = <ExactSolutionScalar[double]*> value.thisptr
@@ -117,7 +117,7 @@ cdef class PyDefaultEssentialBCNonConstHcurlReal(PyEssentialBoundaryConditionRea
   property exact_solution2:
     def __get__(self):
       cdef PyExactSolutionVectorReal r = PyExactSolutionVectorReal(init = False)
-      r.thisptr = <Solution[double]*> (<DefaultEssentialBCNonConstHcurl[double]*> self.thisptr).exact_solution2
+      r.thisptr = <Transformable*> (<DefaultEssentialBCNonConstHcurl[double]*> self.thisptr).exact_solution2
       return r
     def __set__(self,PyExactSolutionVectorReal value):
       (<DefaultEssentialBCNonConstHcurl[double]*> self.thisptr).exact_solution2 = <ExactSolutionVector[double]*> value.thisptr
@@ -177,7 +177,7 @@ cdef class PyDefaultEssentialBCNonConstComplex(PyEssentialBoundaryConditionCompl
   property exact_solution:
     def __get__(self):
       cdef PyExactSolutionScalarComplex r = PyExactSolutionScalarComplex(init = False)
-      r.thisptr = <Solution[cComplex[double]]*> (<DefaultEssentialBCNonConst[cComplex[double]]*> self.thisptr).exact_solution
+      r.thisptr = <Transformable*> (<DefaultEssentialBCNonConst[cComplex[double]]*> self.thisptr).exact_solution
       return r
     def __set__(self,PyExactSolutionScalarComplex value):
       (<DefaultEssentialBCNonConst[cComplex[double]]*> self.thisptr).exact_solution = <ExactSolutionScalar[cComplex[double]]*> value.thisptr
@@ -202,7 +202,7 @@ cdef class PyDefaultEssentialBCNonConstHcurlComplex(PyEssentialBoundaryCondition
   property exact_solution2:
     def __get__(self):
       cdef PyExactSolutionVectorComplex r = PyExactSolutionVectorComplex(init = False)
-      r.thisptr = <Solution[cComplex[double]]*> (<DefaultEssentialBCNonConstHcurl[cComplex[double]]*> self.thisptr).exact_solution2
+      r.thisptr = <Transformable*> (<DefaultEssentialBCNonConstHcurl[cComplex[double]]*> self.thisptr).exact_solution2
       return r
     def __set__(self,PyExactSolutionVectorComplex value):
       (<DefaultEssentialBCNonConstHcurl[cComplex[double]]*> self.thisptr).exact_solution2 = <ExactSolutionVector[cComplex[double]]*> value.thisptr
