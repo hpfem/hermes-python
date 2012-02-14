@@ -46,3 +46,5 @@ cdef extern from "function/function.h" namespace "Hermes::Hermes2D" :
       Scalar* get_values(int a, int b)
       int get_fn_order()
 
+cdef class PyFunctionReal(PyTransformable):
+  pass

@@ -18,3 +18,7 @@ cdef extern from "function/mesh_function.h" namespace "Hermes::Hermes2D":
     void push_transform(int son)
     void pop_transform()
     void update_refmap()
+
+cdef class PyMeshFunctionReal(PyFunctionReal):
+  pass
+

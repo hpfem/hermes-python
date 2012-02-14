@@ -45,3 +45,5 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     void vector_to_solutions(Scalar* solution_vector, vector[pSpace] spaces,vector[pSolution] solutions, vector[PrecalcShapeset*] pss)
     bool own_mesh
 
+cdef class PySolutionReal(PyMeshFunctionReal):
+  pass
