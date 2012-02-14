@@ -1,6 +1,6 @@
 cdef class PyCustomExactSolutionScalarReal(PyExactSolutionScalarReal):
   def __cinit__(self, mesh):
-    self.thisptr = < Transformable* > new CustomExactSolutionScalar[double](self, (<PyMesh> mesh).thisptr)
+    self.thisptr = < Solution[double]* > new CustomExactSolutionScalar[double](self, (<PyMesh> mesh).thisptr)
     return
 
 cdef public double pyExactSolutionScalarReal_value(object self, double x, double y):
@@ -16,7 +16,7 @@ cdef public Ord pyExactSolutionScalarReal_ord(object self, Ord x, Ord y):
   
 cdef class PyCustomExactSolutionScalarComplex(PyExactSolutionScalarComplex):
   def __cinit__(self, mesh):
-    self.thisptr = < Transformable* > new CustomExactSolutionScalar[double](self, (<PyMesh> mesh).thisptr)
+    self.thisptr = < Solution[cComplex[double]]* > new CustomExactSolutionScalar[cComplex[double]](self, (<PyMesh> mesh).thisptr)
     return
 
 cdef public cComplex[double] pyExactSolutionScalarComplex_value(object self, double x, double y):
@@ -33,7 +33,7 @@ cdef public Ord pyExactSolutionScalarComplex_ord(object self, Ord x, Ord y):
   
 cdef class PyCustomExactSolutionVectorReal(PyExactSolutionVectorReal):
   def __cinit__(self, mesh):
-    self.thisptr = < Transformable* > new CustomExactSolutionVector[double](self, (<PyMesh> mesh).thisptr)
+    self.thisptr = < Solution[double]* > new CustomExactSolutionVector[double](self, (<PyMesh> mesh).thisptr)
     return
 
 cdef public Scalar2[double] pyExactSolutionVectorReal_value(object self, double x, double y):
@@ -51,7 +51,7 @@ cdef public Ord pyExactSolutionVectorReal_ord(object self, Ord x, Ord y):
   
 cdef class PyCustomExactSolutionVectorComplex(PyExactSolutionVectorComplex):
   def __cinit__(self, mesh):
-    self.thisptr = < Transformable* > new CustomExactSolutionVector[double](self, (<PyMesh> mesh).thisptr)
+    self.thisptr = < Solution[cComplex[double]]* > new CustomExactSolutionVector[cComplex[double]](self, (<PyMesh> mesh).thisptr)
     return
 
 cdef public Scalar2[cComplex[double]] pyExactSolutionVectorComplex_value(object self, double x, double y):

@@ -7,7 +7,7 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
   ctypedef void* pSolution "Solution<Scalar>*" #cython error override
   ctypedef void* pSolutionReal "Hermes::Hermes2D::Solution<double>*" #cython error override
   ctypedef void* pSolutionComplex "Hermes::Hermes2D::Solution<std::complex<double> >*" #cython error override
-  cdef cppclass Solution[Scalar]:# public MeshFunction[Scalar]
+  cdef cppclass Solution[Scalar]:
     Solution()
     Solution(Mesh *mesh)
     Solution (Space[Scalar]* s, Vector[Scalar]* coeff_vec)
@@ -45,3 +45,8 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     void vector_to_solutions(Scalar* solution_vector, vector[pSpace] spaces,vector[pSolution] solutions, vector[PrecalcShapeset*] pss)
     bool own_mesh
 
+cdef class PySolutionReal:
+  cdef Solution[double]* thisptr
+  
+cdef class PySolutionComplex:
+  cdef Solution[cComplex[double]]* thisptr
