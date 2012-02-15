@@ -17,6 +17,10 @@ cdef class PyException:
     return self.thisptr.getMsg()
   def getFuncName(self):
     return self.thisptr.getFuncName()
+  def __repr__(self):
+    return self.getMsg();
+  def __str__(self):
+    return self.getMsg();
 
 cdef class PyNullException(PyException):
   def __cinit__(self,int paramIdx, itemIdx = None, init = True):
