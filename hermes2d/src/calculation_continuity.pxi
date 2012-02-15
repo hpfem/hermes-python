@@ -1,11 +1,11 @@
 class PyIdentificationMethod:
     timeAndNumber,onlyTime,onlyNumber=range(3)
 
-cdef class PyContinuityReal:
+cdef class PyCalculationContinuityReal:
   def  __cinit__(self, identification_method):
-    if (type(self)!=PyContinuityReal):
+    if (type(self)!=PyCalculationContinuityReal):
       return
-    self.thisptr= new Continuity[double](identification_method)
+    self.thisptr= new CalculationContinuity[double](identification_method)
 
   def add_record(self, time=None, number=None):
     if (type(time)==int):
@@ -36,11 +36,11 @@ cdef class PyRecordReal:
     if (type(self)!=PyRecordReal):
       return 
     if number:
-      self.thisptr=new Continuity[double].Record(time, number)
+      self.thisptr=new CalculationContinuity[double].Record(time, number)
     if (type(time)==int):
-      self.thisptr=new Continuity[double].Record(<unsigned int>time)
+      self.thisptr=new CalculationContinuity[double].Record(<unsigned int>time)
     else:
-      self.thisptr=new Continuity[double].Record(<double>time) 
+      self.thisptr=new CalculationContinuity[double].Record(<double>time) 
 
   def save_meshes(self, meshes):
     cdef vector[Mesh *] cmeshes
@@ -156,11 +156,11 @@ cdef class PyRecordReal:
   def get_number(self):
     return self.thisptr.get_number()
 
-cdef class PyContinuityComplex:
+cdef class PyCalculationContinuityComplex:
   def  __cinit__(self, identification_method):
-    if (type(self)!=PyContinuityComplex):
+    if (type(self)!=PyCalculationContinuityComplex):
       return
-    self.thisptr= new Continuity[cComplex[double]](<IdentificationMethodComplex>identification_method)
+    self.thisptr= new CalculationContinuity[cComplex[double]](<IdentificationMethodComplex>identification_method)
 
   def add_record(self, time=None, number=None):
     if (type(time)==int):
@@ -191,11 +191,11 @@ cdef class PyRecordComplex:
     if (type(self)!=PyRecordComplex):
       return 
     if number:
-      self.thisptr=new Continuity[cComplex[double]].Record(time, number)
+      self.thisptr=new CalculationContinuity[cComplex[double]].Record(time, number)
     if (type(time)==int):
-      self.thisptr=new Continuity[cComplex[double]].Record(<unsigned int>time)
+      self.thisptr=new CalculationContinuity[cComplex[double]].Record(<unsigned int>time)
     else:
-      self.thisptr=new Continuity[cComplex[double]].Record(<double>time) 
+      self.thisptr=new CalculationContinuity[cComplex[double]].Record(<double>time) 
 
   def save_meshes(self, meshes):
     cdef vector[Mesh *] cmeshes

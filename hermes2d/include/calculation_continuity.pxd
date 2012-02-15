@@ -1,11 +1,11 @@
 cdef extern from "calculation_continuity.h" namespace "Hermes::Hermes2D":
-  enum IdentificationMethod "Hermes::Hermes2D::Continuity<double>::IdentificationMethod":
+  enum IdentificationMethod "Hermes::Hermes2D::CalculationContinuity<double>::IdentificationMethod":
     timeAndNumber
     onlyTime
     onlyNumber
-  ctypedef IdentificationMethod IdentificationMethodComplex "Hermes::Hermes2D::Continuity<std::complex<double> >::IdentificationMethod"
-  cdef cppclass Continuity[Scalar]:
-    Continuity(IdentificationMethod identification_method)
+  ctypedef IdentificationMethod IdentificationMethodComplex "Hermes::Hermes2D::CalculationContinuity<std::complex<double> >::IdentificationMethod"
+  cdef cppclass CalculationContinuity[Scalar]:
+    CalculationContinuity(IdentificationMethod identification_method)
     cppclass Record:
       Record(double time, unsigned int number)
       Record(double time)
@@ -41,11 +41,11 @@ cdef extern from "calculation_continuity.h" namespace "Hermes::Hermes2D":
     Record* get_last_record()
     int get_num()
 
-cdef class PyContinuityReal:
-  cdef Continuity[double]* thisptr
-cdef class PyContinuityComplex:
-  cdef Continuity[cComplex[double]]* thisptr
+cdef class PyCalculationContinuityReal:
+  cdef CalculationContinuity[double]* thisptr
+cdef class PyCalculationContinuityComplex:
+  cdef CalculationContinuity[cComplex[double]]* thisptr
 cdef class PyRecordReal:
-  cdef Continuity[double].Record* thisptr
+  cdef CalculationContinuity[double].Record* thisptr
 cdef class PyRecordComplex:
-  cdef Continuity[cComplex[double]].Record* thisptr
+  cdef CalculationContinuity[cComplex[double]].Record* thisptr

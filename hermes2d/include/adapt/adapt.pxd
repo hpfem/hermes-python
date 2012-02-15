@@ -20,8 +20,8 @@ cdef extern from "adapt/adapt.h" namespace "Hermes::Hermes2D":
     Adapt(pSpace space)
     
     cppclass MatrixFormVolError:
-      MatrixFormVolError()
-      MatrixFormVolError(ProjNormType type)
+      MatrixFormVolError(int i, int j)
+      MatrixFormVolError(int i, int j, ProjNormType type)
       Scalar value(int n, double *wt, Func[Scalar]** u_ext, pFunc u, pFunc v, pGeomReal e, pExtData ext)
       Ord ord(int n, double *wt, Func[Ord]** u_ext, pFuncOrd u, pFuncOrd v, pGeomOrd e, pExtDataOrd ext)
 

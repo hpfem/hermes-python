@@ -158,13 +158,13 @@ cdef class PyAdaptReal:
     self.thisptr.get_element_error_squared(component, id)
     
 cdef class PyMatrixFormVolErrorReal:
-  def __cinit__(self, type):
+  def __cinit__(self, i, j, type):
     if (type(self)!=PyMatrixFormVolErrorReal):
       return 
     if type:
-      self.thisptr=new Adapt[double].MatrixFormVolError(type)
+      self.thisptr=new Adapt[double].MatrixFormVolError(i, j, type)
     else:
-      self.thisptr=new Adapt[double].MatrixFormVolError()
+      self.thisptr=new Adapt[double].MatrixFormVolError(i, j)
   def value(self, n, wt, u_ext, u, v, e, ext):
     cdef double result = 0
     cdef double* cwt = <double*> newBuffer[double](len(wt))
@@ -356,13 +356,13 @@ cdef class PyAdaptComplex:
     self.thisptr.get_element_error_squared(component, id)
     
 cdef class PyMatrixFormVolErrorComplex:
-  def __cinit__(self, type):
+  def __cinit__(self, i, j, type):
     if (type(self)!=PyMatrixFormVolErrorComplex):
       return 
     if type:
-      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError(type)
+      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError(i, j, type)
     else:
-      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError()
+      self.thisptr=new Adapt[cComplex[double]].MatrixFormVolError(i, j)
   def value(self, n, wt, u_ext, u, v, e, ext):
     cdef double* cwt = <double*> newBuffer[double](len(wt))
     cdef Func[cComplex[double]] ** cu_ext = <Func[cComplex[double]]**> newBuffer[pFuncComplex](len(u_ext))
