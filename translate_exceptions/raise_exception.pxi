@@ -3,7 +3,7 @@
 #TODO preserve name of function with error (use init)
 
 cdef public raiseException(cException*e):
-  cdef PyException pe = PyException(init = False)
+  cdef PyException pe = PyException(None,False)
   pe.thisptr  = e
   raise pe
 

@@ -5,7 +5,7 @@ cdef extern from "space/space.h" namespace "Hermes::Hermes2D":
   ctypedef void* pSpaceComplex "Hermes::Hermes2D::Space<std::complex<double> >*" #cython error override
   ctypedef void* pcSpaceComplex "const Hermes::Hermes2D::Space<std::complex<double> >*" #cython error override
   cdef cppclass Space[Scalar]:
-    Space(Mesh* mesh, Shapeset* shapeset, EssentialBCs[Scalar]* essential_bcs, Ord2 p_init)
+    Space(Mesh* mesh, Shapeset* shapeset, EssentialBCs[Scalar]* essential_bcs, Ord2 p_init) except +translateException
     void set_element_order(int id, int order)
     void set_element_orders(int* elem_orders)
     int get_element_order(int id)
@@ -45,8 +45,8 @@ cdef extern from "space/space.h" namespace "Hermes::Hermes2D":
     void update_essential_bc_values(vector[pSpace] spaces, double time)
     void update_essential_bc_values(Space[Scalar]* s, double time)
     bool save(char *filename)
-    void load(char *filename, EssentialBCs[Scalar]* essential_bcs)
-    void load(char *filename)
+    void load(char *filename, EssentialBCs[Scalar]* essential_bcs) except +translateException
+    void load(char *filename) except +translateException
 
 cdef class PySpaceReal:
   cdef Space[double]* thisptr
