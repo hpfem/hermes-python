@@ -1,5 +1,5 @@
 cdef class PyException:
-  def __cinit__(self, msg = None,init = True,*):
+  def __cinit__(self, msg = None,init = True,*args):
     if type(self) != PyException:
       return
     if not init:
