@@ -734,7 +734,7 @@ cdef class PyStageReal:
       return r
 
 cdef class PyWeakFormReal:
-  def __cinit__(self, neq = None, mat_free = None, init = True):
+  def __cinit__(self, neq = None, mat_free = None, init = True, *args):
     self.matrices=[]
     if not init:
       return
@@ -1673,7 +1673,7 @@ cdef class PyStageComplex:
       return r
 
 cdef class PyWeakFormComplex:
-  def __cinit__(self, neq = None, mat_free = None, init = True):
+  def __cinit__(self, neq = None, mat_free = None, init = True, *args):
     self.matrices=[]
     if not init:
       return

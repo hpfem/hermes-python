@@ -20,11 +20,13 @@ cdef class PyCustomWeakFormComplex(PyWeakFormComplex):
 
 ########################
 cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
     cdef PyMeshFunctionReal mf
+    if type(self)!=PyCustomMatrixFormVolReal:
+      return
     if not init:
       return
     if ext is not None:
@@ -69,7 +71,7 @@ cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
 
 
 cdef class PyCustomMatrixFormSurfReal(PyMatrixFormSurfReal):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -111,7 +113,7 @@ cdef class PyCustomMatrixFormSurfReal(PyMatrixFormSurfReal):
       self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j)
 
 cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
-  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -154,7 +156,7 @@ cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
 
 
 cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
-  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -388,7 +390,7 @@ cdef class PyCustomMultiComponentVectorFormSurfReal(PyMultiComponentVectorFormSu
       self.thisptr = <Form[double]*> new CustomMultiComponentVectorFormSurf[double](self, ccoordinates)
 
 cdef class PyCustomMatrixFormVolComplex(PyMatrixFormVolComplex):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -437,7 +439,7 @@ cdef class PyCustomMatrixFormVolComplex(PyMatrixFormVolComplex):
 
 
 cdef class PyCustomMatrixFormSurfComplex(PyMatrixFormSurfComplex):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -480,7 +482,7 @@ cdef class PyCustomMatrixFormSurfComplex(PyMatrixFormSurfComplex):
 
 
 cdef class PyCustomVectorFormVolComplex(PyVectorFormVolComplex):
-  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -522,7 +524,7 @@ cdef class PyCustomVectorFormVolComplex(PyVectorFormVolComplex):
       self.thisptr = <Form[cComplex[double]]*> new CustomVectorFormVol[cComplex[double]](self, j)
 
 cdef class PyCustomVectorFormSurfComplex(PyVectorFormSurfComplex):
-  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
