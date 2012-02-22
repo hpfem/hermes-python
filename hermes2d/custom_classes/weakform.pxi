@@ -76,6 +76,8 @@ cdef class PyCustomMatrixFormSurfReal(PyMatrixFormSurfReal):
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
     cdef PyMeshFunctionReal mf
+    if type(self)!=PyCustomMatrixFormSurfReal:
+      return
     if not init:
       return
     if ext is not None:
@@ -118,6 +120,8 @@ cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
     cdef PyMeshFunctionReal mf
+    if type(self)!=PyCustomVectorFormVolReal:
+      return
     if not init:
       return
     if ext is not None:
@@ -161,6 +165,8 @@ cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
     cdef PyMeshFunctionReal mf
+    if type(self)!=PyCustomVectorFormSurfReal:
+      return
     if not init:
       return
     if ext is not None:
@@ -198,13 +204,15 @@ cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
       self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j)
 
 cdef class PyCustomMultiComponentMatrixFormVolReal(PyMultiComponentMatrixFormVolReal):
-  def __cinit__(self, list coordinates, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef pair[unsigned int, unsigned int] v
     cdef vector[upair] ccoordinates
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
     cdef PyMeshFunctionReal mf
+    if type(self)!=PyCustomMultiComponentMatrixFormVolReal:
+      return
     if not init:
       return
     for c in coordinates:
@@ -253,7 +261,7 @@ cdef class PyCustomMultiComponentMatrixFormVolReal(PyMultiComponentMatrixFormVol
 
 
 cdef class PyCustomMultiComponentMatrixFormSurfReal(PyMultiComponentMatrixFormSurfReal):
-  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef pair[unsigned int, unsigned int] v
     cdef vector[upair] ccoordinates
     cdef vector[string] careas
@@ -261,6 +269,8 @@ cdef class PyCustomMultiComponentMatrixFormSurfReal(PyMultiComponentMatrixFormSu
     cdef vector[pMeshFunctionReal] cext
     cdef PyMeshFunctionReal mf
     if not init:
+      return
+    if type(self)!=PyCustomMultiComponentMatrixFormSurfReal:
       return
     for c in coordinates:
       v.first = c[0]
@@ -301,7 +311,7 @@ cdef class PyCustomMultiComponentMatrixFormSurfReal(PyMultiComponentMatrixFormSu
       self.thisptr = <Form[double]*> new CustomMultiComponentMatrixFormSurf[double](self, ccoordinates)
 
 cdef class PyCustomMultiComponentVectorFormVolReal(PyMultiComponentVectorFormVolReal):
-  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[unsigned] ccoordinates
     cdef vector[string] careas
     cdef string carea 
@@ -345,7 +355,7 @@ cdef class PyCustomMultiComponentVectorFormVolReal(PyMultiComponentVectorFormVol
         return
       self.thisptr = <Form[double]*> new CustomMultiComponentVectorFormVol[double](self, ccoordinates)
 cdef class PyCustomMultiComponentVectorFormSurfReal(PyMultiComponentVectorFormSurfReal):
-  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[unsigned] ccoordinates
     cdef vector[string] careas
     cdef string carea 
@@ -395,6 +405,8 @@ cdef class PyCustomMatrixFormVolComplex(PyMatrixFormVolComplex):
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
     cdef PyMeshFunctionComplex mf
+    if type(self)!=PyCustomMatrixFormVolComplex:
+      return
     if not init:
       return
     if ext is not None:
@@ -444,6 +456,8 @@ cdef class PyCustomMatrixFormSurfComplex(PyMatrixFormSurfComplex):
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
     cdef PyMeshFunctionComplex mf
+    if type(self)!=PyCustomMatrixFormSurfComplex:
+      return
     if not init:
       return
     if ext is not None:
@@ -487,6 +501,8 @@ cdef class PyCustomVectorFormVolComplex(PyVectorFormVolComplex):
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
     cdef PyMeshFunctionComplex mf
+    if type(self)!=PyCustomVectorFormVolComplex:
+      return
     if not init:
       return
     if ext is not None:
@@ -529,6 +545,8 @@ cdef class PyCustomVectorFormSurfComplex(PyVectorFormSurfComplex):
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
     cdef PyMeshFunctionComplex mf
+    if type(self)!=PyCustomVectorFormSurfComplex:
+      return
     if not init:
       return
     if ext is not None:
@@ -567,13 +585,15 @@ cdef class PyCustomVectorFormSurfComplex(PyVectorFormSurfComplex):
 
 
 cdef class PyCustomMultiComponentMatrixFormVolComplex(PyMultiComponentMatrixFormVolComplex):
-  def __cinit__(self, list coordinates, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef pair[unsigned int, unsigned int] v
     cdef vector[upair] ccoordinates
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
     cdef PyMeshFunctionComplex mf
+    if type(self)!=PyCustomMultiComponentMatrixFormVolComplex:
+      return
     if not init:
       return
     for c in coordinates:
@@ -622,7 +642,7 @@ cdef class PyCustomMultiComponentMatrixFormVolComplex(PyMultiComponentMatrixForm
 
 
 cdef class PyCustomMultiComponentMatrixFormSurfComplex(PyMultiComponentMatrixFormSurfComplex):
-  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef pair[unsigned int, unsigned int] v
     cdef vector[upair] ccoordinates
     cdef vector[string] careas
@@ -670,7 +690,7 @@ cdef class PyCustomMultiComponentMatrixFormSurfComplex(PyMultiComponentMatrixFor
       self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentMatrixFormSurf[cComplex[double]](self, ccoordinates)
 
 cdef class PyCustomMultiComponentVectorFormVolComplex(PyMultiComponentVectorFormVolComplex):
-  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[unsigned] ccoordinates
     cdef vector[string] careas
     cdef string carea 
@@ -714,7 +734,7 @@ cdef class PyCustomMultiComponentVectorFormVolComplex(PyMultiComponentVectorForm
         return
       self.thisptr = <Form[cComplex[double]]*> new CustomMultiComponentVectorFormVol[cComplex[double]](self, ccoordinates)
 cdef class PyCustomMultiComponentVectorFormSurfComplex(PyMultiComponentVectorFormSurfComplex):
-  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, list coordinates, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[unsigned] ccoordinates
     cdef vector[string] careas
     cdef string carea 

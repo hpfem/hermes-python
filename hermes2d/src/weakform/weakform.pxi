@@ -4,7 +4,7 @@ class PySymFlag:
   HERMES_SYM = 1
 
 cdef class PyMatrixFormVolReal(PyFormReal):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -98,7 +98,7 @@ cdef class PyMatrixFormVolReal(PyFormReal):
     return r
 
 cdef class PyMatrixFormSurfReal(PyFormReal):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -181,7 +181,7 @@ cdef class PyMatrixFormSurfReal(PyFormReal):
     return r
 
 cdef class PyVectorFormVolReal(PyFormReal):
-  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -259,7 +259,7 @@ cdef class PyVectorFormVolReal(PyFormReal):
     return r
 
 cdef class PyVectorFormSurfReal(PyFormReal):
-  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -856,7 +856,7 @@ cdef class PyWeakFormReal:
     return f
 
 cdef class PyFormReal:
-  def __cinit__(self, area = None, ext = None, scaling_factor = None, u_ext_offset = None ,init = True):
+  def __cinit__(self, area = None, ext = None, scaling_factor = None, u_ext_offset = None ,init = True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -943,7 +943,7 @@ cdef class PyFormReal:
       return self.thisptr.u_ext_offset
 
 cdef class PyMatrixFormVolComplex(PyFormComplex):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -1037,7 +1037,7 @@ cdef class PyMatrixFormVolComplex(PyFormComplex):
     return r
 
 cdef class PyMatrixFormSurfComplex(PyFormComplex):
-  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -1120,7 +1120,7 @@ cdef class PyMatrixFormSurfComplex(PyFormComplex):
     return r
 
 cdef class PyVectorFormVolComplex(PyFormComplex):
-  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -1198,7 +1198,7 @@ cdef class PyVectorFormVolComplex(PyFormComplex):
     return r
 
 cdef class PyVectorFormSurfComplex(PyFormComplex):
-  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
@@ -1795,7 +1795,7 @@ cdef class PyWeakFormComplex:
     return f
 
 cdef class PyFormComplex:
-  def __cinit__(self, area = None, ext = None, scaling_factor = None, u_ext_offset = None,init = True):
+  def __cinit__(self, area = None, ext = None, scaling_factor = None, u_ext_offset = None,init = True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
