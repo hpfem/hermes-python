@@ -259,7 +259,7 @@ cdef class PyVectorFormVolReal(PyFormReal):
     return r
 
 cdef class PyVectorFormSurfReal(PyFormReal):
-  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
+  def __cinit__(self, unsigned int i, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -270,47 +270,47 @@ cdef class PyVectorFormSurfReal(PyFormReal):
       return
     if ext is not None:
       for mf in ext:
-        cext.push_back(<MeshFunction[double]*> mf.thisptr)
+        cext.push_back(<MeshFunction[double]*> mf.thisptr) 
     if isinstance(area,list):
       for s in area:
         carea.assign(<char*> s)
         careas.push_back(carea)
       if u_ext_offset is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, careas, cext, <double> scaling_factor, <int> u_ext_offset)
         return
       if scaling_factor is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,careas, cext, <double> scaling_factor)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, careas, cext, <double> scaling_factor)
         return
       if ext is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,careas, cext)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, careas, cext)
         return
-      self.thisptr = <Form[double]*> new VectorFormSurf[double](j,careas)
+      self.thisptr = <Form[double]*> new VectorFormSurf[double](i, careas)
     else:
       if area is not None:
         carea.assign(<char*> area)
       if u_ext_offset is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, carea, cext, <double> scaling_factor, <int> u_ext_offset)
         return
       if scaling_factor is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,carea, cext, <double> scaling_factor)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, carea, cext, <double> scaling_factor)
         return
       if ext is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,carea, cext)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, carea, cext)
         return
       if area is not None:
-        self.thisptr = <Form[double]*> new VectorFormSurf[double](j,carea)
+        self.thisptr = <Form[double]*> new VectorFormSurf[double](i, carea)
         return
-      self.thisptr = <Form[double]*> new VectorFormSurf[double](j)
+      self.thisptr = <Form[double]*> new VectorFormSurf[double](i)
 
   def clone(self):
-    cdef PyVectorFormSurfReal r = PyVectorFormSurfReal(0,0,init = False)
-    r.thisptr = (<VectorFormSurf[double]* > self.thisptr).clone() 
+    cdef PyVectorFormSurfReal r = PyVectorFormSurfReal(0,init = False)
+    r.thisptr = (<VectorFormSurf[double]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
-      (<VectorFormSurf[double]* > self.thisptr).i = value
+      (<VectorFormSurf[double]*> self.thisptr).i = value
     def __get__(self):
-      return (<VectorFormSurf[double]* > self.thisptr).i
+      return (<VectorFormSurf[double]*> self.thisptr).i
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext):
     cdef double * cwt = <double*> newBuffer[double](len(wt))
@@ -319,10 +319,11 @@ cdef class PyVectorFormSurfReal(PyFormReal):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
       cu_ext[i] = (<PyFuncReal> u_ext[i]).thisptr
-    r = (<VectorFormSurf[double]* > self.thisptr).value(n, cwt, cu_ext, v.thisptr, e.thisptr, ext.thisptr)
+    r = (<VectorFormSurf[double]*> self.thisptr).value(n, cwt, cu_ext, v.thisptr, e.thisptr, ext.thisptr)
     delBuffer[double](cwt)
     delBuffer[pFuncReal](<pFuncReal*>cu_ext)
     return r
+
   def ord(self, int n, wt, u_ext, PyFuncOrd v, PyGeomOrd e, PyExtDataOrd ext):
     cdef double * cwt = <double*> newBuffer[double](len(wt))
     cdef Func[Ord] ** cu_ext = <Func[Ord]**> newBuffer[pFuncOrd](len(u_ext))
@@ -331,7 +332,7 @@ cdef class PyVectorFormSurfReal(PyFormReal):
       cwt[i] = wt[i]
     for i in range(len(u_ext)):
       cu_ext[i] = (<PyFuncOrd> u_ext[i]).thisptr
-    r = PyFuncOrd((<VectorFormSurf[double]* > self.thisptr).ord(n, cwt, cu_ext, v.thisptr, e.thisptr, ext.thisptr).get_order())
+    r = PyFuncOrd((<VectorFormSurf[double]*> self.thisptr).ord(n, cwt, cu_ext, v.thisptr, e.thisptr, ext.thisptr).get_order())
     delBuffer[double](cwt)
     delBuffer[pFuncOrd](<pFuncOrd*> cu_ext)
     return r

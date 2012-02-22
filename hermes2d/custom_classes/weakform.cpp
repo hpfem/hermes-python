@@ -138,7 +138,7 @@ namespace Hermes
     double CustomVectorFormSurf<double>::value(int n, double *wt, Func<double> *u_ext[], Func<double> *v,
         Geom<double> *e, ExtData<double> *ext) const
     {
-      pyVectorFormReal_value(self, n, wt, u_ext, v, e, ext);
+      return pyVectorFormReal_value(self, n, wt, u_ext, v, e, ext);
     }
 
     template<>

@@ -160,7 +160,7 @@ cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
 
 
 cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
-  def __cinit__(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
+  def __cinit__(self, unsigned int i, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -171,37 +171,38 @@ cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
       return
     if ext is not None:
       for mf in ext:
-        cext.push_back(<MeshFunction[double]*> mf.thisptr)
+        cext.push_back(<MeshFunction[double]*> mf.thisptr) 
     if isinstance(area,list):
       for s in area:
         carea.assign(<char*> s)
         careas.push_back(carea)
       if u_ext_offset is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas, cext, <double> scaling_factor, <int> u_ext_offset)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i,careas, cext, <double> scaling_factor, <int> u_ext_offset)
         return
       if scaling_factor is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas, cext, <double> scaling_factor)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i,careas, cext, <double> scaling_factor)
         return
       if ext is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas, cext)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i,careas, cext)
         return
-      self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,careas)
+      self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i, careas)
     else:
       if area is not None:
         carea.assign(<char*> area)
       if u_ext_offset is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea, cext, <double> scaling_factor, <int> u_ext_offset)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i, carea, cext, <double> scaling_factor, <int> u_ext_offset)
         return
       if scaling_factor is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea, cext, <double> scaling_factor)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i, carea, cext, <double> scaling_factor)
         return
       if ext is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea, cext)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i, carea, cext)
         return
       if area is not None:
-        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j,carea)
+        self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i, carea)
         return
-      self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, j)
+      self.thisptr = <Form[double]*> new CustomVectorFormSurf[double](self, i)
+
 
 cdef class PyCustomMultiComponentMatrixFormVolReal(PyMultiComponentMatrixFormVolReal):
   def __cinit__(self, list coordinates, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
