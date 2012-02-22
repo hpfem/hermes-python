@@ -781,7 +781,6 @@ cdef class PyWeakFormReal:
     self.thisptr.set_current_time(time)
   def get_current_time(self):
     return self.thisptr.get_current_time()
-
   def get_mfvol(self):
     cdef vector[pMatrixFormVolReal] cr = self.thisptr.get_mfvol()
     cdef PyMatrixFormVolReal f = PyMatrixFormVolReal(init = False)

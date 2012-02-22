@@ -31,7 +31,7 @@ cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
       return
     if ext is not None:
       for mf in ext:
-        cext.push_back(<MeshFunction[double]*> mf.thisptr) 
+        cext.push_back(<MeshFunction[double]*> mf.thisptr)
     if isinstance(area,list):
       for s in area:
         carea.assign(<char*> s)
