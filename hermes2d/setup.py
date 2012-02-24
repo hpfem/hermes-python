@@ -100,6 +100,8 @@ setup(
     "include/runge_kutta.pxd",
     "src/runge_kutta.pxi",
     "src/weakform_library/weakforms_h1.pxi",
-    "include/weakform_library/weakforms_h1.pxd"
+    "include/weakform_library/weakforms_h1.pxd",
+    "src/weakform_library/weakforms_elasticity.pxi",
+    "include/weakform_library/weakforms_elasticity.pxd"
     ],language="c++",libraries=["hermes2d"])]
 )

@@ -18,7 +18,6 @@ cdef class PyCustomWeakFormComplex(PyWeakFormComplex):
       return
     self.thisptr = new WeakForm[cComplex[double]]()
 
-########################
 cdef class PyCustomMatrixFormVolReal(PyMatrixFormVolReal):
   def __cinit__(self, unsigned int i, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas

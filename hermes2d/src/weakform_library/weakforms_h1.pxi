@@ -1,5 +1,3 @@
-import inspect
-
 cdef class PyDefaultJacobianDiffusion(PyCustomMatrixFormVolReal):
   def __init__(self, unsigned int i, unsigned int j, conductivity=None, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
     if conductivity is not None:
