@@ -53,9 +53,17 @@ cdef class PyEssentialBoundaryConditionReal:
 cdef class PyEssentialBoundaryConditionComplex:
   cdef EssentialBoundaryCondition[cComplex[double]] * thisptr
  
+cdef class PyDefaultEssentialBCNonConstReal(PyEssentialBoundaryConditionReal):
+  pass
+cdef class PyDefaultEssentialBCNonConstComplex(PyEssentialBoundaryConditionComplex):
+  pass
+cdef class PyDefaultEssentialBCNonConstHcurlReal(PyEssentialBoundaryConditionReal):
+  pass
+cdef class PyDefaultEssentialBCNonConstHcurlComplex(PyEssentialBoundaryConditionComplex):
+  pass
+  
 cdef class PyEssentialBCsReal:
   cdef EssentialBCs[double] * thisptr
 
 cdef class PyEssentialBCsComplex:
   cdef EssentialBCs[cComplex[double]] * thisptr
-

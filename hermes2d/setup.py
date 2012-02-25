@@ -102,6 +102,8 @@ setup(
     "src/weakform_library/weakforms_h1.pxi",
     "include/weakform_library/weakforms_h1.pxd",
     "src/weakform_library/weakforms_elasticity.pxi",
-    "include/weakform_library/weakforms_elasticity.pxd"
+    "include/weakform_library/weakforms_elasticity.pxd",
+    "custom_classes/essential_boundary_conditions.pxi",
+    "custom_classes/essential_boundary_conditions.cpp"
     ],language="c++",libraries=["hermes2d"])]
 )
