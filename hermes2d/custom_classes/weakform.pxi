@@ -110,7 +110,7 @@ cdef class PyCustomMatrixFormSurfReal(PyMatrixFormSurfReal):
       self.thisptr = <Form[double]*> new CustomMatrixFormSurf[double](self, i, j)
 
 cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
-  def super(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
+  def super(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -153,7 +153,7 @@ cdef class PyCustomVectorFormVolReal(PyVectorFormVolReal):
 
 
 cdef class PyCustomVectorFormSurfReal(PyVectorFormSurfReal):
-  def super(self, unsigned int i, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
+  def super(self, unsigned int i, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionReal] cext
@@ -484,7 +484,7 @@ cdef class PyCustomMatrixFormSurfComplex(PyMatrixFormSurfComplex):
 
 
 cdef class PyCustomVectorFormVolComplex(PyVectorFormVolComplex):
-  def super(self, unsigned int j, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
+  def super(self, unsigned int j, area=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True, *args):
     cdef vector[string] careas
     cdef string carea 
     cdef vector[pMeshFunctionComplex] cext
