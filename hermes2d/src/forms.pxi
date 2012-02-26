@@ -264,6 +264,32 @@ cdef class PyGeomReal:
     def __get__(self):
       return self.thisptr.id
 
+  property x:
+    def __set__(self, value):
+      if self.thisptr.x!=NULL:
+        delBuffer[double](self.thisptr.x)
+      self.thisptr.x = <double*> newBuffer[double](self.thisptr.get_num_gip())
+      for i in range(len(value)):
+        self.thisptr.x[i] = value[i]
+    def __get__(self):
+      r = []
+      for i in range(self.thisptr.get_num_gip()): #TODO optimize (direct acces)
+        r.append(self.thisptr.x[i])
+      return r
+
+  property y:
+    def __set__(self, value):
+      if self.thisptr.y!=NULL:
+        delBuffer[double](self.thisptr.y)
+      self.thisptr.y = <double*> newBuffer[double](self.thisptr.get_num_gip())
+      for i in range(len(value)):
+        self.thisptr.y[i] = value[i]
+    def __get__(self):
+      r = []
+      for i in range(self.thisptr.get_num_gip()):
+        r.append(self.thisptr.y[i])
+      return r
+      
   def get_neighbor_marker(self):
     return self.thisptr.get_neighbor_marker()
   def get_neighbor_id(self):
@@ -590,6 +616,32 @@ cdef class PyGeomComplex:
     def __get__(self):
       return self.thisptr.id
 
+  property x:
+    def __set__(self, value):
+      if self.thisptr.x!=NULL:
+        delBuffer[cComplex[double]](self.thisptr.x)
+      self.thisptr.x = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
+      for i in range(len(value)):
+        self.thisptr.x[i] = ccomplex(value[i])
+    def __get__(self):
+      r = []
+      for i in range(self.thisptr.get_num_gip()): #TODO optimize (direct acces)
+        r.append(pcomplex(self.thisptr.x[i]))
+      return r
+
+  property y:
+    def __set__(self, value):
+      if self.thisptr.y!=NULL:
+        delBuffer[cComplex[double]](self.thisptr.y)
+      self.thisptr.y = <cComplex[double]*> newBuffer[cComplex[double]](self.thisptr.get_num_gip())
+      for i in range(len(value)):
+        self.thisptr.y[i] = ccomplex(value[i])
+    def __get__(self):
+      r = []
+      for i in range(self.thisptr.get_num_gip()):
+        r.append(pcomplex(self.thisptr.y[i]))
+      return r
+      
   def get_neighbor_marker(self):
     return self.thisptr.get_neighbor_marker()
   def get_neighbor_id(self):
@@ -930,6 +982,32 @@ cdef class PyGeomOrd:
   def free_ord(self):
     self.thisptr.free_ord()
 
+  property x:
+    def __set__(self, value):
+      if self.thisptr.x!=NULL:
+        delBuffer[Ord](self.thisptr.x)
+      self.thisptr.x = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
+      for i in range(len(value)):
+        self.thisptr.x[i] = (<PyOrd> value[i]).thisptr[0]
+    def __get__(self):
+      r = []
+      for i in range(self.thisptr.get_num_gip()): #TODO optimize (direct acces)
+        r.append(PyOrd(self.thisptr.x[i].get_order()))
+      return r
+
+  property y:
+    def __set__(self, value):
+      if self.thisptr.y!=NULL:
+        delBuffer[Ord](self.thisptr.y)
+      self.thisptr.y = <Ord*> newBuffer[Ord](self.thisptr.get_num_gip())
+      for i in range(len(value)):
+        self.thisptr.y[i] = (<PyOrd> value[i]).thisptr[0]
+    def __get__(self):
+      r = []
+      for i in range(self.thisptr.get_num_gip()): #TODO optimize (direct acces)
+        r.append(PyOrd(self.thisptr.y[i].get_order()))
+      return r
+      
   property elem_marker:
     def __set__(self,int value):
       self.thisptr.elem_marker = value

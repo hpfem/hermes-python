@@ -45,6 +45,7 @@ cdef extern from "forms.h" namespace "Hermes::Hermes2D":
     int id
     int get_neighbor_marker()
     int get_neighbor_id()
+    int get_num_gip()
     T   get_neighbor_diam()
     
     void free()
