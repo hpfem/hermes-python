@@ -75,7 +75,7 @@ cdef class PyDefaultEssentialBCConstComplex(PyEssentialBoundaryConditionComplex)
 
 
 cdef class PyDefaultEssentialBCNonConstReal(PyEssentialBoundaryConditionReal):
-  def __cinit__(self,markers, PyExactSolutionScalarReal exact_solution):
+  def __cinit__(self,markers,  exact_solution, *args):
     cdef vector[string] cmarkers
     cdef string cm
     if (type(self)!=PyDefaultEssentialBCNonConstReal):
@@ -84,10 +84,10 @@ cdef class PyDefaultEssentialBCNonConstReal(PyEssentialBoundaryConditionReal):
       for m in markers:
         cm.assign(<char*>m)
         cmarkers.push_back(cm)
-      self.thisptr=<EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConst[double](cmarkers, <ExactSolutionScalar[double]*> exact_solution.thisptr) 
+      self.thisptr=<EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConst[double](cmarkers, <ExactSolutionScalar[double]*> (<PyExactSolutionScalarReal> exact_solution).thisptr) 
     else:
       cm.assign(<char*> markers)
-      self.thisptr=<EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConst[double](cm, <ExactSolutionScalar[double]*> exact_solution.thisptr) 
+      self.thisptr=<EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConst[double](cm, <ExactSolutionScalar[double]*> (<PyExactSolutionScalarReal> exact_solution).thisptr) 
 
   property exact_solution:
     def __get__(self):
@@ -99,7 +99,7 @@ cdef class PyDefaultEssentialBCNonConstReal(PyEssentialBoundaryConditionReal):
 
 
 cdef class PyDefaultEssentialBCNonConstHcurlReal(PyEssentialBoundaryConditionReal):
-  def __cinit__(self, markers, PyExactSolutionVectorReal exact_solution2, init = True):
+  def __cinit__(self, markers, exact_solution2, init = True, *args):
     cdef vector[string] cmarkers
     cdef string cm
     if not init:
@@ -110,10 +110,10 @@ cdef class PyDefaultEssentialBCNonConstHcurlReal(PyEssentialBoundaryConditionRea
       for m in markers:
         cm.assign(<char*>m)
         cmarkers.push_back(cm)
-      self.thisptr = <EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConstHcurl[double](cmarkers,<ExactSolutionVector[double]*> exact_solution2.thisptr) 
+      self.thisptr = <EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConstHcurl[double](cmarkers,<ExactSolutionVector[double]*> (<PyExactSolutionVectorReal> exact_solution2).thisptr) 
     else:
       cm.assign(<char*>markers)
-      self.thisptr = <EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConstHcurl[double](cm,<ExactSolutionVector[double]*> exact_solution2.thisptr) 
+      self.thisptr = <EssentialBoundaryCondition[double]*> new DefaultEssentialBCNonConstHcurl[double](cm,<ExactSolutionVector[double]*> (<PyExactSolutionVectorReal> exact_solution2).thisptr) 
   property exact_solution2:
     def __get__(self):
       cdef PyExactSolutionVectorReal r = PyExactSolutionVectorReal(init = False)
@@ -160,7 +160,7 @@ cdef class PyEssentialBCsReal:
     self.thisptr.set_current_time(time)
 
 cdef class PyDefaultEssentialBCNonConstComplex(PyEssentialBoundaryConditionComplex):
-  def __cinit__(self,markers, PyExactSolutionScalarComplex exact_solution):
+  def __cinit__(self,markers, exact_solution, *args):
     cdef vector[string] cmarkers
     cdef string cm
     if (type(self)!=PyDefaultEssentialBCNonConstComplex):
@@ -169,10 +169,10 @@ cdef class PyDefaultEssentialBCNonConstComplex(PyEssentialBoundaryConditionCompl
       for m in markers:
         cm.assign(<char*>m)
         cmarkers.push_back(cm)
-      self.thisptr=<EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConst[cComplex[double]](cmarkers, <ExactSolutionScalar[cComplex[double]]*> exact_solution.thisptr) 
+      self.thisptr=<EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConst[cComplex[double]](cmarkers, <ExactSolutionScalar[cComplex[double]]*> (<PyExactSolutionScalarComplex> exact_solution).thisptr) 
     else:
       cm.assign(<char*> markers)
-      self.thisptr=<EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConst[cComplex[double]](cm, <ExactSolutionScalar[cComplex[double]]*> exact_solution.thisptr) 
+      self.thisptr=<EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConst[cComplex[double]](cm, <ExactSolutionScalar[cComplex[double]]*> (<PyExactSolutionScalarComplex> exact_solution).thisptr) 
 
   property exact_solution:
     def __get__(self):
@@ -184,7 +184,7 @@ cdef class PyDefaultEssentialBCNonConstComplex(PyEssentialBoundaryConditionCompl
 
 
 cdef class PyDefaultEssentialBCNonConstHcurlComplex(PyEssentialBoundaryConditionComplex):
-  def __cinit__(self, markers, PyExactSolutionVectorComplex exact_solution2, init = True):
+  def __cinit__(self, markers, exact_solution2, init = True, *args):
     cdef vector[string] cmarkers
     cdef string cm
     if not init:
@@ -195,10 +195,10 @@ cdef class PyDefaultEssentialBCNonConstHcurlComplex(PyEssentialBoundaryCondition
       for m in markers:
         cm.assign(<char*>m)
         cmarkers.push_back(cm)
-      self.thisptr = <EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConstHcurl[cComplex[double]](cmarkers,<ExactSolutionVector[cComplex[double]]*> exact_solution2.thisptr) 
+      self.thisptr = <EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConstHcurl[cComplex[double]](cmarkers,<ExactSolutionVector[cComplex[double]]*> (<PyExactSolutionVectorComplex> exact_solution2).thisptr) 
     else:
       cm.assign(<char*>markers)
-      self.thisptr = <EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConstHcurl[cComplex[double]](cm,<ExactSolutionVector[cComplex[double]]*> exact_solution2.thisptr) 
+      self.thisptr = <EssentialBoundaryCondition[cComplex[double]]*> new DefaultEssentialBCNonConstHcurl[cComplex[double]](cm,<ExactSolutionVector[cComplex[double]]*> (<PyExactSolutionVectorComplex> exact_solution2).thisptr) 
   property exact_solution2:
     def __get__(self):
       cdef PyExactSolutionVectorComplex r = PyExactSolutionVectorComplex(init = False)

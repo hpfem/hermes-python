@@ -20,10 +20,10 @@ namespace Hermes
     public:
       /// One area constructor.
       CustomDefaultEssentialBCNonConst(PyObject*self, Hermes::vector<std::string> markers_, 
-        ExactSolutionScalar<Scalar>* exact_solution);
+        ExactSolutionScalar<Scalar>* exact_solution = NULL);
 
       /// Multiple areas constructor..
-      CustomDefaultEssentialBCNonConst(PyObject*self, std::string marker, ExactSolutionScalar<Scalar>* exact_solution);
+      CustomDefaultEssentialBCNonConst(PyObject*self, std::string marker, ExactSolutionScalar<Scalar>* exact_solution = NULL);
 
       virtual Scalar value(double x, double y, double n_x, double n_y, double t_x, double t_y) const;
     private:
@@ -36,10 +36,10 @@ namespace Hermes
     public:
       /// One area constructor.
       CustomDefaultEssentialBCNonConstHcurl(PyObject*self, Hermes::vector<std::string> markers_, 
-        ExactSolutionVector<Scalar>* exact_solution);
+        ExactSolutionVector<Scalar>* exact_solution = NULL);
 
       /// Multiple areas constructor..
-      CustomDefaultEssentialBCNonConstHcurl(PyObject*self, std::string marker, ExactSolutionVector<Scalar>* exact_solution);
+      CustomDefaultEssentialBCNonConstHcurl(PyObject*self, std::string marker, ExactSolutionVector<Scalar>* exact_solution = NULL);
 
       virtual Scalar value(double x, double y, double n_x, double n_y, double t_x, double t_y) const;
     private:
