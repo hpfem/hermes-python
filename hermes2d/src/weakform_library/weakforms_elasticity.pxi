@@ -1,5 +1,6 @@
 cdef class PyDefaultJacobianElasticity_0_0(PyCustomMatrixFormVolReal):
   def __init__(self, unsigned int i, unsigned int j, conductivity=None, mu=None, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    self.super(i, j, area, sym, ext, scaling_factor, u_ext_offset, init)
     if conductivity is not None:
       self.conductivity = conductivity
     else:
@@ -76,6 +77,7 @@ cdef class PyDefaultJacobianElasticity_0_0(PyCustomMatrixFormVolReal):
 
 cdef class PyDefaultJacobianElasticity_0_1(PyCustomMatrixFormVolReal):
   def __init__(self, unsigned int i, unsigned int j, conductivity=None, mu=None, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    self.super(i, j, area, sym, ext, scaling_factor, u_ext_offset, init)
     if conductivity is not None:
       self.conductivity = conductivity
     else:
@@ -152,6 +154,7 @@ cdef class PyDefaultJacobianElasticity_0_1(PyCustomMatrixFormVolReal):
 
 cdef class PyDefaultJacobianElasticity_1_0(PyCustomMatrixFormVolReal):
   def __init__(self, unsigned int i, unsigned int j, conductivity=None, mu=None, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    self.super(i, j, area, sym, ext, scaling_factor, u_ext_offset, init)
     if conductivity is not None:
       self.conductivity = conductivity
     else:
@@ -228,6 +231,7 @@ cdef class PyDefaultJacobianElasticity_1_0(PyCustomMatrixFormVolReal):
 
 cdef class PyDefaultJacobianElasticity_1_1(PyCustomMatrixFormVolReal):
   def __init__(self, unsigned int i, unsigned int j, conductivity=None, mu=None, area=None, sym=None, ext=None, scaling_factor=None, u_ext_offset=None, init=True):
+    self.super(i, j, area, sym, ext, scaling_factor, u_ext_offset, init)
     if conductivity is not None:
       self.conductivity = conductivity
     else:
