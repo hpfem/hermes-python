@@ -18,13 +18,17 @@ cdef extern from "boundary_conditions/essential_boundary_conditions.h" namespace
 
   cdef cppclass DefaultEssentialBCNonConst[Scalar]:#(EssentialBoundaryCondition[Scalar])
     DefaultEssentialBCNonConst(vector[string] markers_, ExactSolutionScalar[Scalar]* exact_solution) 
-    DefaultEssentialBCNonConst(string marker, ExactSolutionScalar[Scalar]* exact_solution) 
+    DefaultEssentialBCNonConst(string marker, ExactSolutionScalar[Scalar]* exact_solution)
+    DefaultEssentialBCNonConst(vector[string] markers_) 
+    DefaultEssentialBCNonConst(string marker)
     ExactSolutionScalar[Scalar]* exact_solution
 
   cdef cppclass DefaultEssentialBCNonConstHcurl[Scalar]:#(EssentialBoundaryCondition[Scalar]):
-    DefaultEssentialBCNonConstHcurl(vector[string] markers_, ExactSolutionVector[Scalar]* exact_solution2) 
-    DefaultEssentialBCNonConstHcurl(string marker, ExactSolutionVector[Scalar]* exact_solution2) 
-    ExactSolutionVector[Scalar]* exact_solution2
+    DefaultEssentialBCNonConstHcurl(vector[string] markers_, ExactSolutionVector[Scalar]* exact_solution) 
+    DefaultEssentialBCNonConstHcurl(string marker, ExactSolutionVector[Scalar]* exact_solution)
+    DefaultEssentialBCNonConstHcurl(vector[string] markers_) 
+    DefaultEssentialBCNonConstHcurl(string marker) 
+    ExactSolutionVector[Scalar]* exact_solution
 
   ctypedef void* pEssentialBoundaryCondition "EssentialBoundaryCondition<Scalar>*" #cython error override
   ctypedef void* pEssentialBoundaryConditionReal "Hermes::Hermes2D::EssentialBoundaryCondition<double>*" #cython error override
