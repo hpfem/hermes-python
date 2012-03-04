@@ -7,6 +7,10 @@ if [ "$FEMHUB_LOCAL" = "" ]; then
    exit 1
 fi
 
+rm config.pxi
+
+echo 'DEF GUI = False' > config.pxi
+
 HERMES_DIR=$FEMHUB_LOCAL
 cd hermes_common
 python setup.py build_ext --inplace --include-dirs="$HERMES_DIR/include/hermes_common/:$HERMES_DIR/include/hermes2d" --library-dirs="$HERMES_DIR/lib"
