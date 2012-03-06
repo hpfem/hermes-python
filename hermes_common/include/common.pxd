@@ -34,7 +34,7 @@ cdef extern from "common.h" namespace "Hermes":
     double c
     double d
 
-  cdef string HERMES_ANY
+  cdef string HERMES_ANY = "-1234"
   cdef int HERMES_ANY_INT = -1234
   cdef string H2D_DG_BOUNDARY_EDGE = "-12345"
   cdef string H2D_DG_INNER_EDGE = "-1234567"
