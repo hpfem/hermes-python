@@ -7,23 +7,23 @@ cdef extern from "discrete_problem.h" namespace "Hermes::Hermes2D":
     DiscreteProblem(WeakForm[Scalar]* wf, Space[Scalar]* space)
     DiscreteProblem()
       
-    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift, Table* block_weights)
-    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift)
-    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks)
-    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs)
-    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat)
-    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift, Table* block_weights)
-    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift)
-    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs, bool force_diagonal_blocks)
-    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs)
+    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift, Table* block_weights) except +translateException
+    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift) except +translateException
+    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks) except +translateException
+    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs) except +translateException
+    void assemble(Scalar* coeff_vec, SparseMatrix[Scalar]* mat) except +translateException
+    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift, Table* block_weights) except +translateException
+    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs, bool force_diagonal_blocks, bool add_dir_lift) except +translateException
+    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs, bool force_diagonal_blocks) except +translateException
+    void assemble(Scalar* coeff_vec, Vector[Scalar]* rhs) except +translateException
     
-    void assemble(SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks, Table* block_weights)
-    void assemble(SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks)
-    void assemble(SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs)
-    void assemble(SparseMatrix[Scalar]* mat)
-    void assemble(Vector[Scalar]* rhs, bool force_diagonal_blocks, Table* block_weights)
-    void assemble(Vector[Scalar]* rhs, bool force_diagonal_blocks)
-    void assemble(Vector[Scalar]* rhs)
+    void assemble(SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks, Table* block_weights) except +translateException
+    void assemble(SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs, bool force_diagonal_blocks) except +translateException
+    void assemble(SparseMatrix[Scalar]* mat, Vector[Scalar]* rhs) except +translateException
+    void assemble(SparseMatrix[Scalar]* mat) except +translateException
+    void assemble(Vector[Scalar]* rhs, bool force_diagonal_blocks, Table* block_weights) except +translateException
+    void assemble(Vector[Scalar]* rhs, bool force_diagonal_blocks) except +translateException
+    void assemble(Vector[Scalar]* rhs) except +translateException
 
     void invalidate_matrix()
 

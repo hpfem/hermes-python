@@ -24,6 +24,9 @@ cdef extern from "exceptions.h" namespace "Hermes::Exceptions":
     LinearSolverException()
     LinearSolverException( char * reason)
 
+  cdef cppclass FunctionNotOverridenException:
+    FunctionNotOverridenException( char * function_name)
+
   cdef cppclass ValueException:
     ValueException( char * name, double value, double allowed)
     ValueException( char * name, double value, double min, double max)
@@ -44,6 +47,8 @@ cdef class PyNullException(PyException):
 cdef class PyLengthException(PyException):
   pass
 cdef class PyLinearSolverException(PyException):
+  pass
+cdef class PyFunctionNotOverridenException(PyException):
   pass
 cdef class PyValueException(PyException):
   pass

@@ -54,7 +54,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     unsigned int i
     unsigned int j
     int sym
-    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext)
+    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v,
       Geom[Ord] *e, ExtData[Ord] *ext)
 
@@ -71,7 +71,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     MatrixFormSurf* clone()
     unsigned int i
     unsigned int j
-    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext)
+    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass VectorFormVol[Scalar]: #public Form[Scalar]
@@ -86,7 +86,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     VectorFormVol(unsigned int i, vector[string] areas)
     VectorFormVol* clone()
     unsigned int i
-    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext)
+    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass VectorFormSurf[Scalar]: #public Form[Scalar]
@@ -101,7 +101,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     VectorFormSurf(unsigned int i, vector[string] areas)
     VectorFormSurf* clone()
     unsigned int i
-    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext)
+    Scalar value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass MultiComponentMatrixFormVol[Scalar]: # public Form[Scalar]
@@ -119,7 +119,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     MultiComponentMatrixFormVol* clone()
     vector[upair ] coordinates
     int sym
-    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
+    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass MultiComponentMatrixFormSurf[Scalar]: #public Form[Scalar]
@@ -134,7 +134,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     MultiComponentMatrixFormSurf(vector[upair ]coordinates, vector[string] areas)
     MultiComponentMatrixFormSurf* clone()
     vector[upair] coordinates
-    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
+    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *u, Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *u, Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass MultiComponentVectorFormVol[Scalar]: #public Form[Scalar]
@@ -149,7 +149,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     MultiComponentVectorFormVol(vector[unsigned] coordinates, vector[string] areas)
     MultiComponentVectorFormVol* clone()
     vector[unsigned int] coordinates
-    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
+    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass MultiComponentVectorFormSurf[Scalar]: # public Form[Scalar]
@@ -164,7 +164,7 @@ cdef extern from "weakform/weakform.h" namespace "Hermes::Hermes2D":
     MultiComponentVectorFormSurf(vector[unsigned int] coordinates, vector[string] areas)
     MultiComponentVectorFormSurf* clone()
     vector[unsigned int] coordinates
-    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result)
+    void value(int n, double *wt, Func[Scalar] *u_ext[], Func[double] *v, Geom[double] *e, ExtData[Scalar] *ext, vector[Scalar]& result) except +translateException
     Ord ord(int n, double *wt, Func[Ord] *u_ext[], Func[Ord] *v, Geom[Ord] *e, ExtData[Ord] *ext)
 
   cdef cppclass Stage[Scalar]:

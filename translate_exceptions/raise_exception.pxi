@@ -20,6 +20,11 @@ cdef public raiseLinearSolverException(LinearSolverException*e):
   pe.thisptr = <cException*> e
   raise pe 
 
+cdef public raiseFunctionNotOverridenException(FunctionNotOverridenException*e):
+  cdef PyFunctionNotOverridenException pe = PyFunctionNotOverridenException(init = False)
+  pe.thisptr = <cException*> e
+  raise pe 
+
 cdef public raiseValueException(ValueException*e):
   cdef PyValueException pe = PyValueException('',0,0,0, False)
   pe.thisptr = <cException*> e

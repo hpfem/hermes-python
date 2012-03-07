@@ -67,6 +67,14 @@ cdef class PyLinearSolverException(PyException):
     else:
       self.thisptr=<cException *> new LinearSolverException(reason)
 
+cdef class PyFunctionNotOverridenException(PyException):
+  def __cinit__(self, function_name, init = True):
+    if type(self) != PyFunctionNotOverridenException:
+      return
+    if not init:
+      return
+    self.thisptr=<cException *> new FunctionNotOverridenException(function_name)
+
 cdef class PyValueException(PyException):
   def __cinit__(self,char * name , double value, double allowed1 , allowed2=None, init = True):
     if type(self) != PyValueException:

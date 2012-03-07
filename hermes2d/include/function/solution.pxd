@@ -26,9 +26,9 @@ cdef extern from "function/solution.h" namespace "Hermes::Hermes2D":
     Scalar get_ref_value_transformed(Element* e, double xi1, double xi2, int a, int b)
     void multiply(Scalar coef)
     inline SolutionType get_type() 
-    inline SpaceType get_space_type()
-    int get_space_seq()
-    Space[Scalar]* get_space()
+    inline SpaceType get_space_type() except +translateException
+    int get_space_seq() except +translateException
+    Space[Scalar]* get_space() except +translateException
     Scalar* get_sln_vector()
     void vector_to_solution(Scalar* solution_vector, Space[Scalar]* space, Solution[Scalar]* solution,bool add_dir_lift)
     void vector_to_solution(Scalar* solution_vector, Space[Scalar]* space, Solution[Scalar]* solution)
