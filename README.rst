@@ -31,14 +31,18 @@ Installation instructions for Linux, Mac OS X, Windows Cygwin,
 and Windows MSVC are part of User Documentation (Library part).
 
 
+Install custom Cython
+=====================
+
+git clone git@github.com:hpfem/cython.git
+sudo python setup.py install
+
 Download and Installation of these wrappers
 ===========================================
 
 -	Install the Hermes library.
 -	Clone this repository (these wrappers) to your local hard drive.
 -	Adjust the first line in "wrappers_generate.sh" (on a Linux box), or "wrappers_generate.bat" (on a Windows box) with your Hermes installation directory: HERMES_DIR="path-to-the-directory"
--	That should be enough for the wrappers to work
-
 
 Further documentation
 =====================
