@@ -72,10 +72,14 @@ cdef class PyHermes2DFunctionReal:
   def value(self,PyOrd x,PyOrd y):
     o=PyOrd(self.thisptr.value(x.thisptr[0],y.thisptr[0]).get_order())
     return o
-  def derivative(self,double x,double y):
-    return self.thisptr.derivative(x,y)
-  def derivative(self,PyOrd x,PyOrd y):
-    o=PyOrd(self.thisptr.derivative(x.thisptr[0],y.thisptr[0]).get_order())
+  def derivativeX(self,double x,double y):
+    return self.thisptr.derivativeX(x,y)
+  def derivativeY(self,double x,double y):
+    return self.thisptr.derivativeY(x,y)
+  def derivativeX(self,PyOrd x,PyOrd y):
+    o=PyOrd(self.thisptr.derivativeX(x.thisptr[0],y.thisptr[0]).get_order())
+  def derivativeY(self,PyOrd x,PyOrd y):
+    o=PyOrd(self.thisptr.derivativeY(x.thisptr[0],y.thisptr[0]).get_order())
     return o
   def is_constant(self):
     return self.thisptr.is_constant()
@@ -101,12 +105,19 @@ cdef class PyHermes2DFunctionComplex:
   def value(self,PyOrd x,PyOrd y):
     o=PyOrd(self.thisptr.value(x.thisptr[0],y.thisptr[0]).get_order())
     return o
-  def derivative(self,x,y):
+  def derivativeX(self,x,y):
     cdef cComplex[double] z
-    z=self.thisptr.derivative(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag))
+    z=self.thisptr.derivativeX(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag))
     return complex(z.real(),z.imag())
-  def derivative(self,PyOrd x,PyOrd y):
-    o=PyOrd(self.thisptr.derivative(x.thisptr[0],y.thisptr[0]).get_order())
+  def derivativeY(self,x,y):
+    cdef cComplex[double] z
+    z=self.thisptr.derivativeY(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag))
+    return complex(z.real(),z.imag())
+  def derivativeX(self,PyOrd x,PyOrd y):
+    o=PyOrd(self.thisptr.derivativeX(x.thisptr[0],y.thisptr[0]).get_order())
+    return o
+  def derivativeY(self,PyOrd x,PyOrd y):
+    o=PyOrd(self.thisptr.derivativeY(x.thisptr[0],y.thisptr[0]).get_order())
     return o
   def is_constant(self):
     return self.thisptr.is_constant()
@@ -129,10 +140,20 @@ cdef class PyHermes3DFunctionReal:
   def value(self,PyOrd x,PyOrd y, PyOrd z):
     o=PyOrd(self.thisptr.value(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
     return o
-  def derivative(self,double x,double y,double z):
-    return self.thisptr.derivative(x,y,z)
-  def derivative(self,PyOrd x,PyOrd y, PyOrd z):
-    o=PyOrd(self.thisptr.derivative(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
+  def derivativeX(self,double x,double y,double z):
+    return self.thisptr.derivativeX(x,y,z)
+  def derivativeY(self,double x,double y,double z):
+    return self.thisptr.derivativeY(x,y,z)
+  def derivativeZ(self,double x,double y,double z):
+    return self.thisptr.derivativeZ(x,y,z)
+  def derivativeX(self,PyOrd x,PyOrd y, PyOrd z):
+    o=PyOrd(self.thisptr.derivativeX(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
+    return o
+  def derivativeY(self,PyOrd x,PyOrd y, PyOrd z):
+    o=PyOrd(self.thisptr.derivativeY(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
+    return o
+  def derivativeZ(self,PyOrd x,PyOrd y, PyOrd z):
+    o=PyOrd(self.thisptr.derivativeZ(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
     return o
   def is_constant(self):
     return self.thisptr.is_constant()
@@ -156,12 +177,26 @@ cdef class PyHermes3DFunctionComplex:
   def value(self,PyOrd x,PyOrd y, PyOrd z):
     o=PyOrd(self.thisptr.value(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
     return o
-  def derivative(self,x,y,z):
+  def derivativeX(self,x,y,z):
     cdef cComplex[double] a
-    a=self.thisptr.derivative(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag),cComplex[double](z.real,z.imag))
+    a=self.thisptr.derivativeX(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag),cComplex[double](z.real,z.imag))
     return complex(z.real(),z.imag())
-  def derivative(self,PyOrd x,PyOrd y, PyOrd z):
-    o=PyOrd(self.thisptr.derivative(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
+  def derivativeY(self,x,y,z):
+    cdef cComplex[double] a
+    a=self.thisptr.derivativeY(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag),cComplex[double](z.real,z.imag))
+    return complex(z.real(),z.imag())
+  def derivativeZ(self,x,y,z):
+    cdef cComplex[double] a
+    a=self.thisptr.derivativeZ(cComplex[double](x.real,x.imag),cComplex[double](y.real,y.imag),cComplex[double](z.real,z.imag))
+    return complex(z.real(),z.imag())
+  def derivativeX(self,PyOrd x,PyOrd y, PyOrd z):
+    o=PyOrd(self.thisptr.derivativeX(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
+    return o
+  def derivativeY(self,PyOrd x,PyOrd y, PyOrd z):
+    o=PyOrd(self.thisptr.derivativeY(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
+    return o
+  def derivativeZ(self,PyOrd x,PyOrd y, PyOrd z):
+    o=PyOrd(self.thisptr.derivativeZ(x.thisptr[0],y.thisptr[0], z.thisptr[0]).get_order())
     return o
   def is_constant(self):
     return self.thisptr.is_constant()

@@ -13,8 +13,10 @@ cdef extern from "hermes_function.h" namespace "Hermes":
     Hermes2DFunction(Scalar value)
     Scalar value(Scalar x, Scalar y)
     Ord value(Ord x, Ord y)
-    Scalar derivative(Scalar x, Scalar y)
-    Ord derivative(Ord x, Ord y)
+    Scalar derivativeX(Scalar x, Scalar y)
+    Scalar derivativeY(Scalar x, Scalar y)
+    Ord derivativeX(Ord x, Ord y)
+    Ord derivativeY(Ord x, Ord y)
     bool is_constant()
 
   cdef cppclass Hermes3DFunction[Scalar]:
@@ -22,8 +24,12 @@ cdef extern from "hermes_function.h" namespace "Hermes":
     Hermes3DFunction(Scalar value)
     Scalar value(Scalar x, Scalar y, Scalar z)
     Ord value(Ord x, Ord y, Ord z)
-    Scalar derivative(Scalar x, Scalar y, Scalar z)
-    Ord derivative(Ord x, Ord y, Ord z)
+    Scalar derivativeX(Scalar x, Scalar y, Scalar z)
+    Scalar derivativeY(Scalar x, Scalar y, Scalar z)
+    Scalar derivativeZ(Scalar x, Scalar y, Scalar z)
+    Ord derivativeX(Ord x, Ord y, Ord z)
+    Ord derivativeY(Ord x, Ord y, Ord z)
+    Ord derivativeZ(Ord x, Ord y, Ord z)
     bool is_constant()
 
 cdef class PyHermes1DFunctionReal:
