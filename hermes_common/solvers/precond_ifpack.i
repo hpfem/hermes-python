@@ -1,4 +1,4 @@
-%module precond_ifpack.i
+%module precond_ifpack
 %{
 #include "/home/pavel/repos/hermes/hermes_common/include/solvers/precond_ifpack.h"
 %}

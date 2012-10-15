@@ -1,4 +1,4 @@
-%module aztecoo_solver.i
+%module aztecoo_solver
 %{
 #include "/home/pavel/repos/hermes/hermes_common/include/solvers/aztecoo_solver.h"
 %}

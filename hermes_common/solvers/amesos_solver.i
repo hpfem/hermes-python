@@ -1,4 +1,4 @@
-%module amesos_solver.i
+%module amesos_solver
 %{
 #include "/home/pavel/repos/hermes/hermes_common/include/solvers/amesos_solver.h"
 %}
