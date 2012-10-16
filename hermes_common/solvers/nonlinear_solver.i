@@ -1,9 +1,9 @@
 %module nonlinear_solver
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/solvers/nonlinear_solver.h"
+#include "/usr/local/include/hermes_common/solvers/nonlinear_solver.h"
 %}
 
 %import precond.i
 %import dp_interface.i
 %import ../mixins.i
-%include "/home/pavel/repos/hermes/hermes_common/include/solvers/nonlinear_solver.h"
+%include "/usr/local/include/hermes_common/solvers/nonlinear_solver.h"

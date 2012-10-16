@@ -1,7 +1,7 @@
 %module api
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/api.h"
+#include "/usr/local/include/hermes_common/api.h"
 %}
 
 %import compat.i
-%include "/home/pavel/repos/hermes/hermes_common/include/api.h"
+%include "/usr/local/include/hermes_common/api.h"

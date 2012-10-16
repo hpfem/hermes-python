@@ -1,7 +1,7 @@
 %module tables
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/tables.h"
+#include "/usr/local/include/hermes_common/tables.h"
 %}
 
 %import compat.i
-%include "/home/pavel/repos/hermes/hermes_common/include/tables.h"
+%include "/usr/local/include/hermes_common/tables.h"

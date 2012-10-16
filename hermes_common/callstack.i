@@ -1,8 +1,8 @@
 %module callstack
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/callstack.h"
+#include "/usr/local/include/hermes_common/callstack.h"
 %}
 
 %import compat.i
 %import common.i
-%include "/home/pavel/repos/hermes/hermes_common/include/callstack.h"
+%include "/usr/local/include/hermes_common/callstack.h"

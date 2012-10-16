@@ -1,6 +1,6 @@
 %module hermes_common
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/hermes_common.h"
+#include "/usr/local/include/hermes_common/hermes_common.h"
 %}
 
 %import common.i
@@ -28,4 +28,4 @@
 %import ord.i
 %import mixins.i
 %import api.i
-%include "/home/pavel/repos/hermes/hermes_common/include/hermes_common.h"
+%include "/usr/local/include/hermes_common/hermes_common.h"

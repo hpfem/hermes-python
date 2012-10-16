@@ -1,6 +1,6 @@
 %module array
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/array.h"
+#include "/usr/local/include/hermes_common/array.h"
 %}
 
-%include "/home/pavel/repos/hermes/hermes_common/include/array.h"
+%include "/usr/local/include/hermes_common/array.h"

@@ -1,6 +1,6 @@
 %module precond_ml
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/solvers/precond_ml.h"
+#include "/usr/local/include/hermes_common/solvers/precond_ml.h"
 %}
 
 %import ../config.i
@@ -8,4 +8,4 @@
 %import precond.i
 %import epetra.i
 # endif
-%include "/home/pavel/repos/hermes/hermes_common/include/solvers/precond_ml.h"
+%include "/usr/local/include/hermes_common/solvers/precond_ml.h"

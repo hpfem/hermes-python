@@ -1,6 +1,6 @@
 %module superlu_solver
 %{
-#include "/home/pavel/repos/hermes/hermes_common/include/solvers/superlu_solver.h"
+#include "/usr/local/include/hermes_common/solvers/superlu_solver.h"
 %}
 
 %import ../config.i
@@ -8,4 +8,4 @@
 %import matrix.i
 %import linear_matrix_solver.i
 #endif
-%include "/home/pavel/repos/hermes/hermes_common/include/solvers/superlu_solver.h"
+%include "/usr/local/include/hermes_common/solvers/superlu_solver.h"
