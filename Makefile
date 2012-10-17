@@ -4,7 +4,7 @@ PATH_COMMON_SRC		= ~/hermes/hermes_common/src
 
 all:: 
 	swig -c++ -python $(PATH_COMMON)/api.i
-	@#swig -c++ -python $(PATH_COMMON)/array.i
+	swig -c++ -python $(PATH_COMMON)/array.i
 	@#swig -c++ -python $(PATH_COMMON)/c99_functions.i
 	@#swig -c++ -python $(PATH_COMMON)/callstack.i
 	@#swig -c++ -python $(PATH_COMMON)/common.i
@@ -21,8 +21,9 @@ all::
 	@#swig -c++ -python $(PATH_COMMON)/vector.i
 	@#swig -c++ -python $(PATH_SOLVERS)/umfpack_solver.i
 	
-	gcc -fPIC -c $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx -I/usr/include/python2.7/
-
+	@#gcc -fPIC -c $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx -I/usr/include/python2.7/
+	@#gcc -fPIC -c $(PATH_COMMON_SRC)/array.cpp $(PATH_COMMON)/array_wrap.cxx -I/usr/include/python2.7/
+	
 	@#g++ -shared example.o example_wrap.o -o _example.so
 
 clean::
