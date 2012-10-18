@@ -1,5 +1,8 @@
 *.py
+*.pyc
 *.cxx
 *.*~
 Makefile~
 *.o
+*.so
+
