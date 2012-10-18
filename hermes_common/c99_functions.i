@@ -4,4 +4,4 @@
 %}
 
 %import compat.i
-%include "/usr/local/include/hermes_common/c99_functions.h"
+%include "c99_functions.h"

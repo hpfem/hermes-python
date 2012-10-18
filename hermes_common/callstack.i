@@ -5,4 +5,4 @@
 
 %import compat.i
 %import common.i
-%include "/usr/local/include/hermes_common/callstack.h"
+%include "callstack.h"
