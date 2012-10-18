@@ -4,4 +4,4 @@
 %}
 
 %import compat.i
-%include "/usr/local/include/hermes_common/api.h"
+%include "api.h"
