@@ -21,15 +21,19 @@ all::
 	@#swig -c++ -python $(PATH_COMMON)/vector.i
 	@#swig -c++ -python $(PATH_SOLVERS)/umfpack_solver.i
 	
-	gcc -fPIC -c $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx -I/usr/include/python2.7/
+	gcc -fPIC -c -I/usr/local/include/hermes_common/ $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx -I/usr/include/python2.7/
 	@#gcc -fPIC -c $(PATH_COMMON_SRC)/array.cpp $(PATH_COMMON)/array_wrap.cxx -I/usr/include/python2.7/
 	
-	@#g++ -shared example.o example_wrap.o -o _example.so
+	g++ -shared -fPIC api.o api_wrap.o -o _api.so
 
 clean::
 	@rm -f $(PATH_COMMON)/*.py
+	@rm -f $(PATH_COMMON)/*.pyc
 	@rm -f $(PATH_COMMON)/*.cxx
+	@rm -f $(PATH_COMMON)/*.so
+	@rm -f $(PATH_COMMON)/*.o
 	@rm -f $(PATH_COMMON)/*.*~
+
 	@rm -f $(PATH_SOLVERS)/*.py
 	@rm -f $(PATH_SOLVERS)/*.cxx
 	@rm -f $(PATH_SOLVERS)/*.*~
