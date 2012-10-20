@@ -1,7 +1,7 @@
-% module global
+%module global
 
 %{
-#include "/usr/local/include/hermes2d/global.h"
+#include "global.h"
 %}
 
 %import ../hermes_common/hermes_common.i

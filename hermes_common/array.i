@@ -1,7 +1,7 @@
 %module array
 
 %{
-#include "/usr/local/include/hermes_common/array.h"
+#include "array.h"
 
 #include <vector>
 #include <limits.h>

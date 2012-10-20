@@ -1,7 +1,7 @@
 %module common
 
 %{
-#include "/usr/local/include/hermes_common/common.h"
+#include "common.h"
 
 #include <complex>
 
@@ -42,7 +42,7 @@
 %}
 
 
-%include "/usr/local/include/hermes_common/common.h"
+%include "common.h"
 %import config.i
 
 %rename (val) *::operator[] (int idx);

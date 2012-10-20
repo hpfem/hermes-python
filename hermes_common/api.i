@@ -1,7 +1,7 @@
 %module api
 
 %{
-#include "/usr/local/include/hermes_common/api.h"
+#include "api.h"
 
 #include "compat.h"
 #include <map>

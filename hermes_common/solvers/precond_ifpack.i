@@ -1,6 +1,6 @@
 %module precond_ifpack
 %{
-#include "/usr/local/include/hermes_common/solvers/precond_ifpack.h"
+#include "solvers/precond_ifpack.h"
 %}
 
 %import ../config.i
@@ -8,4 +8,4 @@
 %import ../precond.i
 %import ../epetra.i
 # endif
-%include "/usr/local/include/hermes_common/solvers/precond_ifpack.h"
+%include "solvers/precond_ifpack.h"

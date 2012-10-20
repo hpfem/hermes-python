@@ -1,7 +1,7 @@
 %module hermes_common
 
 %{
-#include "/usr/local/include/hermes_common/hermes_common.h"
+#include "hermes_common.h"
 
 #include "common.h"
 #include "solvers/linear_matrix_solver.h"
@@ -55,4 +55,4 @@
 %import ord.i
 %import mixins.i
 %import api.i
-%include "/usr/local/include/hermes_common/hermes_common.h"
+%include "hermes_common.h"

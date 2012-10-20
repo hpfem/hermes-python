@@ -1,6 +1,6 @@
 %module config
 %{
-#include "/usr/local/include/hermes_common/config.h"
+#include "config.h"
 %}
 
-%include "/usr/local/include/hermes_common/config.h"
+%include "config.h"
