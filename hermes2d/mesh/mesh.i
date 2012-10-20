@@ -4,7 +4,7 @@
 #include "/usr/local/include/hermes2d/mesh/mesh.h"
 %}
 
-%import ../global.h
-%import curved.h
-%import hash.h
+%import ../global.i
+%import curved.i
+%import hash.i
 %include "/usr/local/include/hermes2d/mesh/mesh.h"
