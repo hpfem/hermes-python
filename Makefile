@@ -71,7 +71,7 @@ common::
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/superlu_solver.i
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/umfpack_solver.i
 
-	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/api.cpp		$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
 	@#gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/c99_functions.cpp	$(PATH_COMMON)/c99_functions_wrap.cxx 	-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/callstack.cpp		$(PATH_COMMON)/callstack_wrap.cxx 	-I/usr/include/python2.7/
@@ -83,7 +83,7 @@ common::
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/hermes_function.cpp	$(PATH_COMMON)/hermes_function_wrap.cxx -I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/matrix.cpp		$(PATH_COMMON)/matrix_wrap.cxx 		-I/usr/include/python2.7/
 	@#gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/ord.cpp			$(PATH_COMMON)/ord_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/ord.cpp		$(PATH_COMMON)/ord_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/vector_wrap.cxx 		-I/usr/include/python2.7/
@@ -108,15 +108,22 @@ common::
 	g++ -shared 			 		hermes_common/vector_wrap.o 		-o hermes_common/_vector.so
 
 clean::
+	@rm -f $(PATH_H2D)/*.py
+	@rm -f $(PATH_H2D)/*.pyc
+	@rm -f $(PATH_H2D)/*.cxx
+	@rm -f $(PATH_H2D)/*.so
+	@rm -f $(PATH_H2D)/*.o
 	@rm -f $(PATH_COMMON)/*.py
 	@rm -f $(PATH_COMMON)/*.pyc
 	@rm -f $(PATH_COMMON)/*.cxx
 	@rm -f $(PATH_COMMON)/*.so
 	@rm -f $(PATH_COMMON)/*.o
-	@rm -f $(PATH_COMMON)/*.*~
+	@rm -f $(PATH_COMMON)/solvers/*.py
+	@rm -f $(PATH_COMMON)/solvers/*.pyc
+	@rm -f $(PATH_COMMON)/solvers/*.cxx
+	@rm -f $(PATH_COMMON)/solvers/*.so
+	@rm -f $(PATH_COMMON)/solvers/*.o
+
 	@rm -f ~/hermes-python/*.o
 
-	@rm -f $(PATH_SOLVERS)/*.py
-	@rm -f $(PATH_SOLVERS)/*.cxx
-	@rm -f $(PATH_SOLVERS)/*.*~
 
