@@ -19,8 +19,8 @@ all::
 	echo "Please type \"make common\" or \"make h2d\"."
 
 h2d::  
-	swig $(SWIG_OPT) $(INCL_H2D) $(PATH_H2D)/mesh/curved.i
-	swig $(SWIG_OPT) $(INCL_H2D) $(PATH_H2D)/mesh/mesh.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(INCL_H2D) $(PATH_H2D)/mesh/curved.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(INCL_H2D) $(PATH_H2D)/mesh/mesh.i
 
 common:: 
 	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/api.i
