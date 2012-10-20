@@ -1,15 +1,16 @@
-SWIG_OPT		= -c++ -Wall -python
+SWIG_OPT		= -c++ -Wall -python -cpperraswarn
 
-#PATH_COMMON		= ~/hermes-python/hermes_common
-#PATH_SOLVERS		= ~/hermes-python/hermes_common/solvers
-#PATH_COMMON_SRC		= ~/hermes/hermes_common/src
-PATH_COMMON		= ~/repos/hermes-python/hermes_common
-PATH_H2D		= ~/repos/hermes-python/hermes2d
+PATH_COMMON		= ~/hermes-python/hermes_common
+PATH_H2D		= ~/hermes-python/hermes2d
 
-PATH_COMMON_SRC		= ~/repos/hermes/hermes_common/src
-PATH_H2D_SRC		= ~/repos/hermes/hermes2d/src
+PATH_COMMON_SRC		= ~/hermes/hermes_common/src
+PATH_H2D_SRC		= ~/hermes/hermes2d/src
 
-PATH_SOLVERS		= ~/repos/hermes-python/hermes_common/solvers
+#PATH_COMMON		= ~/repos/hermes-python/hermes_common
+#PATH_H2D		= ~/repos/hermes-python/hermes2d
+
+#PATH_COMMON_SRC		= ~/repos/hermes/hermes_common/src
+#PATH_H2D_SRC		= ~/repos/hermes/hermes2d/src
 
 PATH_COMMON_INCLUDE	= /usr/local/include/hermes_common
 PATH_H2D_INCLUDE	= /usr/local/include/hermes2d
@@ -55,20 +56,20 @@ common::
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/qsort.i
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/tables.i
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/vector.i	
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/amesos_solver.i	
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/aztecoo_solver.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/dp_interface.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/eigensolver.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/epetra.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/linear_matrix_solver.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/newton_solver_nox.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/nonlinear_solver.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/petsc_solver.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/precond.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/precond_ifpack.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/precond_ml.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/superlu_solver.i
-	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/umfpack_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/amesos_solver.i	
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/aztecoo_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/dp_interface.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/eigensolver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/epetra.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/linear_matrix_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/newton_solver_nox.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/nonlinear_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/petsc_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/precond.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/precond_ifpack.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/precond_ml.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/superlu_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/umfpack_solver.i
 
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
 	@#gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
