@@ -1,3 +1,5 @@
+SWIG_OPT		= -c++ -Wall -python
+
 PATH_COMMON		= ~/hermes-python/hermes_common
 PATH_SOLVERS		= ~/hermes-python/hermes_common/solvers
 PATH_COMMON_SRC		= ~/hermes/hermes_common/src
@@ -5,39 +7,39 @@ PATH_COMMON_SRC		= ~/hermes/hermes_common/src
 INCL_COMMON		= -I/usr/local/include/hermes_common
 
 all:: 
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/api.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/array.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/c99_functions.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/callstack.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/common.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/compat.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/config.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/exceptions.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/hermes_common.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/hermes_function.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/matrix.i	
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/mixins.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/ord.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/qsort.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/tables.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/vector.i	
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/amesos_solver.i	
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/aztecoo_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/dp_interface.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/eigensolver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/epetra.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/linear_matrix_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/newton_solver_nox.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/nonlinear_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/petsc_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/precond.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/precond_ifpack.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/precond_ml.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/superlu_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/umfpack_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/api.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/array.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/c99_functions.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/callstack.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/common.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/compat.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/config.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/exceptions.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/hermes_common.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/hermes_function.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/matrix.i	
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/mixins.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/ord.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/qsort.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/tables.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/vector.i	
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/amesos_solver.i	
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/aztecoo_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/dp_interface.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/eigensolver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/epetra.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/linear_matrix_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/newton_solver_nox.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/nonlinear_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/petsc_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/precond.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/precond_ifpack.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/precond_ml.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/superlu_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/umfpack_solver.i
 
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
-	gcc -fPIC -c $(INCL_COMMON) -I/usr/local/include/hermes2d		$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
+	@#gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/c99_functions.cpp	$(PATH_COMMON)/c99_functions_wrap.cxx 	-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/callstack.cpp		$(PATH_COMMON)/callstack_wrap.cxx 	-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/common_wrap.cxx 		-I/usr/include/python2.7/
@@ -66,7 +68,7 @@ all::
 	g++ -shared 				 	hermes_common/hermes_common_wrap.o 	-o hermes_common/_hermes_common.so
 	g++ -shared hermes_common/hermes_function.o 	hermes_common/hermes_function_wrap.o 	-o hermes_common/_hermes_function.so
 	g++ -shared hermes_common/matrix.o 		hermes_common/matrix_wrap.o 		-o hermes_common/_matrix.so
-	@#g++ -shared hermes_common/mixins.o 		hermes_common/mixins_wrap.o 		-o hermes_common/_mixins.so
+	g++ -shared hermes_common/mixins.o 		hermes_common/mixins_wrap.o 		-o hermes_common/_mixins.so
 	g++ -shared hermes_common/ord.o 		hermes_common/ord_wrap.o 		-o hermes_common/_ord.so
 	g++ -shared hermes_common/qsort.o 		hermes_common/qsort_wrap.o 		-o hermes_common/_qsort.so
 	g++ -shared hermes_common/tables.o 		hermes_common/tables_wrap.o 		-o hermes_common/_tables.so

@@ -3,9 +3,6 @@
 %{
 #include "/usr/local/include/hermes_common/common.h"
 
-#ifndef __HERMES_COMMON_COMMON_H
-#define __HERMES_COMMON_COMMON_H
-
 #include <complex>
 
 #include <stdexcept>
