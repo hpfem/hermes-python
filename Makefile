@@ -1,3 +1,5 @@
+SWIG_OPT		= -c++ -Wall -python
+
 #PATH_COMMON		= ~/hermes-python/hermes_common
 #PATH_SOLVERS		= ~/hermes-python/hermes_common/solvers
 #PATH_COMMON_SRC		= ~/hermes/hermes_common/src
@@ -17,41 +19,40 @@ all::
 	echo "Please type \"make common\" or \"make h2d\"."
 
 h2d::  
-	swig -c++ -python $(INCL_H2D) $(PATH_H2D)/mesh/curved.i
-	swig -c++ -python $(INCL_H2D) $(PATH_H2D)/mesh/mesh.i
+	swig $(SWIG_OPT) $(INCL_H2D) $(PATH_H2D)/mesh/curved.i
+	swig $(SWIG_OPT) $(INCL_H2D) $(PATH_H2D)/mesh/mesh.i
 
-
-common::
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/api.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/array.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/c99_functions.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/callstack.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/common.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/compat.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/config.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/exceptions.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/hermes_common.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/hermes_function.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/matrix.i	
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/mixins.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/ord.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/qsort.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/tables.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/vector.i	
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/amesos_solver.i	
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/aztecoo_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/dp_interface.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/eigensolver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/epetra.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/linear_matrix_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/newton_solver_nox.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/nonlinear_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/petsc_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/precond.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/precond_ifpack.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/precond_ml.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/superlu_solver.i
-	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/umfpack_solver.i
+common:: 
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/api.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/array.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/c99_functions.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/callstack.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/common.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/compat.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/config.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/exceptions.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/hermes_common.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/hermes_function.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/matrix.i	
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/mixins.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/ord.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/qsort.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/tables.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_COMMON)/vector.i	
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/amesos_solver.i	
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/aztecoo_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/dp_interface.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/eigensolver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/epetra.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/linear_matrix_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/newton_solver_nox.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/nonlinear_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/petsc_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/precond.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/precond_ifpack.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/precond_ml.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/superlu_solver.i
+	swig $(SWIG_OPT) $(INCL_COMMON) $(PATH_SOLVERS)/umfpack_solver.i
 
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
 	@#gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
