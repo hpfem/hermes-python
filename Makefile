@@ -11,65 +11,65 @@ PATH_H2D_SRC		= ~/repos/hermes/hermes2d/src
 
 PATH_SOLVERS		= ~/repos/hermes-python/hermes_common/solvers
 
-INCL_COMMON		= /usr/local/include/hermes_common
-INCL_H2D		= /usr/local/include/hermes2d
+PATH_COMMON_INCLUDE	= /usr/local/include/hermes_common
+PATH_H2D_INCLUDE	= /usr/local/include/hermes2d
 
 
 all::
 	echo "Please type \"make common\" or \"make h2d\"."
 
 h2d::  
-	swig $(SWIG_OPT) -I$(INCL_COMMON) -I$(INCL_H2D) $(PATH_H2D)/mesh/curved.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) -I$(INCL_H2D) $(PATH_H2D)/mesh/mesh.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) $(PATH_H2D)/mesh/curved.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) $(PATH_H2D)/mesh/mesh.i
 
 common:: 
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/api.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/array.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/c99_functions.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/callstack.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/common.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/compat.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/config.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/exceptions.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/hermes_common.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/hermes_function.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/matrix.i	
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/mixins.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/ord.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/qsort.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/tables.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_COMMON)/vector.i	
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/amesos_solver.i	
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/aztecoo_solver.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/dp_interface.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/eigensolver.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/epetra.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/linear_matrix_solver.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/newton_solver_nox.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/nonlinear_solver.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/petsc_solver.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/precond.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/precond_ifpack.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/precond_ml.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/superlu_solver.i
-	swig $(SWIG_OPT) -I$(INCL_COMMON) $(PATH_SOLVERS)/umfpack_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/api.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/array.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/c99_functions.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/callstack.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/common.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/compat.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/config.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/exceptions.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/hermes_common.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/hermes_function.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/matrix.i	
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/mixins.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/ord.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/qsort.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/tables.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/vector.i	
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/amesos_solver.i	
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/aztecoo_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/dp_interface.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/eigensolver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/epetra.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/linear_matrix_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/newton_solver_nox.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/nonlinear_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/petsc_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/precond.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/precond_ifpack.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/precond_ml.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/superlu_solver.i
+	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_SOLVERS)/umfpack_solver.i
 
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
-	@#gcc -fPIC -c -I$(INCL_COMMON)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/c99_functions.cpp	$(PATH_COMMON)/c99_functions_wrap.cxx 	-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/callstack.cpp		$(PATH_COMMON)/callstack_wrap.cxx 	-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON)						$(PATH_COMMON)/common_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON)						$(PATH_COMMON)/compat_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON)						$(PATH_COMMON)/config_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/exceptions.cpp		$(PATH_COMMON)/exceptions_wrap.cxx 	-I/usr/include/python2.7/	
-	gcc -fPIC -c -I$(INCL_COMMON)						$(PATH_COMMON)/hermes_common_wrap.cxx 	-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/hermes_function.cpp	$(PATH_COMMON)/hermes_function_wrap.cxx -I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/matrix.cpp		$(PATH_COMMON)/matrix_wrap.cxx 		-I/usr/include/python2.7/
-	@#gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/ord.cpp			$(PATH_COMMON)/ord_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I/usr/include/python2.7/
-	gcc -fPIC -c -I$(INCL_COMMON)						$(PATH_COMMON)/vector_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
+	@#gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/c99_functions.cpp	$(PATH_COMMON)/c99_functions_wrap.cxx 	-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/callstack.cpp		$(PATH_COMMON)/callstack_wrap.cxx 	-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/common_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/compat_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/config_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/exceptions.cpp		$(PATH_COMMON)/exceptions_wrap.cxx 	-I/usr/include/python2.7/	
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/hermes_common_wrap.cxx 	-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/hermes_function.cpp	$(PATH_COMMON)/hermes_function_wrap.cxx -I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/matrix.cpp		$(PATH_COMMON)/matrix_wrap.cxx 		-I/usr/include/python2.7/
+	@#gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/ord.cpp			$(PATH_COMMON)/ord_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/vector_wrap.cxx 		-I/usr/include/python2.7/
 
 	mv *.o hermes_common
 
