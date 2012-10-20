@@ -1,10 +1,27 @@
-PATH_COMMON		= ~/hermes-python/hermes_common
-PATH_SOLVERS		= ~/hermes-python/hermes_common/solvers
-PATH_COMMON_SRC		= ~/hermes/hermes_common/src
+#PATH_COMMON		= ~/hermes-python/hermes_common
+#PATH_SOLVERS		= ~/hermes-python/hermes_common/solvers
+#PATH_COMMON_SRC		= ~/hermes/hermes_common/src
+PATH_COMMON		= ~/repos/hermes-python/hermes_common
+PATH_H2D		= ~/repos/hermes-python/hermes2d
+
+PATH_COMMON_SRC		= ~/repos/hermes/hermes_common/src
+PATH_H2D_SRC		= ~/repos/hermes-python/hermes2d/src
+
+PATH_SOLVERS		= ~/repos/hermes-python/hermes_common/solvers
 
 INCL_COMMON		= -I/usr/local/include/hermes_common
+INCL_H2D		= -I/usr/local/include/hermes2d
 
-all:: 
+
+all::
+	echo "Please type \"make common\" or \"make h2d\"."
+
+h2d::  
+	swig -c++ -python $(INCL_H2D) $(PATH_H2D)/mesh/curved.i
+	swig -c++ -python $(INCL_H2D) $(PATH_H2D)/mesh/mesh.i
+
+
+common::
 	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/api.i
 	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/array.i
 	swig -c++ -python $(INCL_COMMON) $(PATH_COMMON)/c99_functions.i
@@ -52,7 +69,7 @@ all::
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/vector_wrap.cxx 		-I/usr/include/python2.7/
-	
+
 	mv *.o hermes_common
 
 	g++ -shared hermes_common/api.o 		hermes_common/api_wrap.o 		-o hermes_common/_api.so
