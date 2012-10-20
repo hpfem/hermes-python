@@ -37,7 +37,7 @@ all::
 	swig -c++ -python $(INCL_COMMON) $(PATH_SOLVERS)/umfpack_solver.i
 
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/api.cpp			$(PATH_COMMON)/api_wrap.cxx 		-I/usr/include/python2.7/	
-	@#gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c $(INCL_COMMON) -I/usr/local/include/hermes2d		$(PATH_COMMON)/array_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/c99_functions.cpp	$(PATH_COMMON)/c99_functions_wrap.cxx 	-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/callstack.cpp		$(PATH_COMMON)/callstack_wrap.cxx 	-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/common_wrap.cxx 		-I/usr/include/python2.7/
@@ -47,7 +47,7 @@ all::
 	gcc -fPIC -c $(INCL_COMMON)						$(PATH_COMMON)/hermes_common_wrap.cxx 	-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/hermes_function.cpp	$(PATH_COMMON)/hermes_function_wrap.cxx -I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/matrix.cpp		$(PATH_COMMON)/matrix_wrap.cxx 		-I/usr/include/python2.7/
-	@#gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I/usr/include/python2.7/
+	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/ord.cpp			$(PATH_COMMON)/ord_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c $(INCL_COMMON) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I/usr/include/python2.7/
