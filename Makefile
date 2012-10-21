@@ -108,11 +108,11 @@ common::
 	g++ -shared 			 		hermes_common/vector_wrap.o 		-o hermes_common/_vector.so
 
 clean::
-	@rm -f $(PATH_H2D)/*.py
-	@rm -f $(PATH_H2D)/*.pyc
-	@rm -f $(PATH_H2D)/*.cxx
-	@rm -f $(PATH_H2D)/*.so
-	@rm -f $(PATH_H2D)/*.o
+	@rm -f $(PATH_H2D)/*/*.py
+	@rm -f $(PATH_H2D)/*/*.pyc
+	@rm -f $(PATH_H2D)/*/*.cxx
+	@rm -f $(PATH_H2D)/*/*.so
+	@rm -f $(PATH_H2D)/*/*.o
 	@rm -f $(PATH_COMMON)/*.py
 	@rm -f $(PATH_COMMON)/*.pyc
 	@rm -f $(PATH_COMMON)/*.cxx
