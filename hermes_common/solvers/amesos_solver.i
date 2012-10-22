@@ -1,7 +1,15 @@
 %module amesos_solver
+
 %{
 #include "solvers/amesos_solver.h"
+
+#include "config.h"
+#include "solvers/linear_matrix_solver.h"
+#include "solvers/epetra.h"
+#include "compat.h"
+
 %}
+
 
 %import ../config.i
 #ifdef HAVE_AMESOS

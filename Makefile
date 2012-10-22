@@ -39,6 +39,8 @@ h2d::
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/subdomains_h2d_xml.i
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/traverse.i
 
+	gcc -fPIC -c -I$(PATH_H2D_INCLUDE)/mesh/ $(PATH_H2D_SRC)/mesh/curved.cpp $(PATH_H2D)/mesh/curved_wrap.cxx -I/usr/include/python2.7/
+
 common:: 
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/api.i
 	swig $(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/array.i
@@ -87,8 +89,11 @@ common::
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I/usr/include/python2.7/
 	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/vector_wrap.cxx 		-I/usr/include/python2.7/
-
 	mv *.o hermes_common
+
+	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp		$(PATH_COMMON)/solvers/amesos_solver_wrap.cxx 		-I/usr/include/python2.7/
+	mv *.o hermes_common/solvers
+
 
 	g++ -shared hermes_common/api.o 		hermes_common/api_wrap.o 		-o hermes_common/_api.so
 	@#g++ -shared hermes_common/array.o 		hermes_common/array_wrap.o 		-o hermes_common/_array.so
@@ -106,6 +111,7 @@ common::
 	g++ -shared hermes_common/qsort.o 		hermes_common/qsort_wrap.o 		-o hermes_common/_qsort.so
 	g++ -shared hermes_common/tables.o 		hermes_common/tables_wrap.o 		-o hermes_common/_tables.so
 	g++ -shared 			 		hermes_common/vector_wrap.o 		-o hermes_common/_vector.so
+	g++ -shared hermes_common/solvers/amesos_solver.o 		hermes_common/solvers/amesos_solver_wrap.o 		-o hermes_common/solvers/_amesos_solver.so
 
 clean::
 	@rm -f $(PATH_H2D)/*/*.py
