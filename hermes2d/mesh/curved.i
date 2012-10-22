@@ -2,6 +2,9 @@
 
 %{
 #include "mesh/curved.h"
+
+#include "../global.h"
+#include "../shapeset/shapeset_common.h"
 %}
 
 %import ../global.i
