@@ -1,7 +1,4 @@
-# Change only these two lines to point to your 
-# local repos "hermes" and "hermes-python":
-PATH_HERMES		= ~/repos/hermes
-PATH_HERMES_PYTHON	= ~/repos/hermes-python
+# Please see the README file before starting.
 
 SWIG_OPT		= swig -c++ -Wall -python -cpperraswarn
 GCC_OPT			= gcc -fPIC -c
