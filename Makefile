@@ -1,18 +1,17 @@
+# Change only these two lines to point to your 
+# local repos "hermes" and "hermes-python":
+PATH_HERMES		= ~/repos/hermes
+PATH_HERMES_PYTHON	= ~/repos/hermes-python
+
 SWIG_OPT		= swig -c++ -Wall -python -cpperraswarn
 GCC_OPT			= gcc -fPIC -c
 G++_OPT			= g++ -shared
 
-PATH_COMMON		= ~/hermes-python/hermes_common
-PATH_H2D		= ~/hermes-python/hermes2d
+PATH_COMMON		= $(PATH_HERMES_PYTHON)/hermes_common
+PATH_H2D		= $(PATH_HERMES_PYTHON)/hermes2d
 
-PATH_COMMON_SRC		= ~/hermes/hermes_common/src
-PATH_H2D_SRC		= ~/hermes/hermes2d/src
-
-#PATH_COMMON		= ~/repos/hermes-python/hermes_common
-#PATH_H2D		= ~/repos/hermes-python/hermes2d
-
-#PATH_COMMON_SRC		= ~/repos/hermes/hermes_common/src
-#PATH_H2D_SRC		= ~/repos/hermes/hermes2d/src
+PATH_COMMON_SRC		= $(PATH_HERMES)/hermes_common/src
+PATH_H2D_SRC		= $(PATH_HERMES)/hermes2d/src
 
 PATH_COMMON_INCLUDE	= /usr/local/include/hermes_common
 PATH_H2D_INCLUDE	= /usr/local/include/hermes2d
