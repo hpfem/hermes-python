@@ -5,7 +5,7 @@ Step 1:
 ~~~~~~~
 
 Prior to building the wrappers, set the paths to your local 
-repos "hermes" and "hermes-common". This can be done by adding 
+repos "hermes" and "hermes-python". This can be done by adding 
 the following two lines (or similar) to your .basrhx file:
 
 export PATH_HERMES=/home/pavel/repos/hermes
