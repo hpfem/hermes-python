@@ -164,34 +164,139 @@ $(PATH_COMMON)/solvers/superlu_solver_wrap.cxx:: $(PATH_COMMON)/solvers/superlu_
 $(PATH_COMMON)/solvers/umfpack_solver_wrap.cxx:: $(PATH_COMMON)/solvers/umfpack_solver.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/umfpack_solver.i
 
-common:: common-cxx common-obj
-
 common-cxx:: $(PATH_COMMON)/api_wrap.cxx $(PATH_COMMON)/array_wrap.cxx $(PATH_COMMON)/c99_functions_wrap.cxx $(PATH_COMMON)/callstack_wrap.cxx $(PATH_COMMON)/common_wrap.cxx $(PATH_COMMON)/compat_wrap.cxx $(PATH_COMMON)/config_wrap.cxx $(PATH_COMMON)/exceptions_wrap.cxx $(PATH_COMMON)/hermes_common_wrap.cxx $(PATH_COMMON)/hermes_function_wrap.cxx $(PATH_COMMON)/matrix_wrap.cxx $(PATH_COMMON)/mixins_wrap.cxx $(PATH_COMMON)/ord_wrap.cxx $(PATH_COMMON)/qsort_wrap.cxx $(PATH_COMMON)/tables_wrap.cxx $(PATH_COMMON)/vector_wrap.cxx $(PATH_COMMON)/solvers/amesos_solver_wrap.cxx $(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx $(PATH_COMMON)/solvers/dp_interface_wrap.cxx $(PATH_COMMON)/solvers/eigensolver_wrap.cxx $(PATH_COMMON)/solvers/epetra_wrap.cxx $(PATH_COMMON)/solvers/linear_matrix_solver_wrap.cxx $(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx $(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx $(PATH_COMMON)/solvers/petsc_solver_wrap.cxx $(PATH_COMMON)/solvers/precond_wrap.cxx $(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx $(PATH_COMMON)/solvers/precond_ml_wrap.cxx $(PATH_COMMON)/solvers/superlu_solver_wrap.cxx $(PATH_COMMON)/solvers/umfpack_solver_wrap.cxx
+
+#############
+
+$(PATH_COMMON)/obj/api.o:: $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/api.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/api_wrap.o $(PATH_COMMON)/obj/
 
 $(PATH_COMMON)/obj/api_wrap.o:: $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx
 	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/api.cpp $(PATH_COMMON)/api_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
-	mv $(PATH_COMMON)/api.o $(PATH_COMMON)/obj/
-	mv $(PATH_COMMON)/api_wrap.o $(PATH_COMMON)/obj/
-	$(G++_OPT) $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o -o $(PATH_COMMON)/_api.so
+	mv $(PATH_HERMES_PYTHON)/api.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/api_wrap.o $(PATH_COMMON)/obj/
 
+$(PATH_COMMON)/obj/c99_functions.o:: $(PATH_COMMON_SRC)/c99_functions.cpp $(PATH_COMMON)/c99_functions_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/c99_functions.cpp $(PATH_COMMON)/c99_functions_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/c99_functions.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/c99_functions_wrap.o $(PATH_COMMON)/obj/
 
-common-obj:: $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o 
-	@#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/array_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/c99_functions.cpp $(PATH_COMMON)/c99_functions_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/callstack.cpp		$(PATH_COMMON)/callstack_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/common_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/compat_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/config_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/exceptions.cpp		$(PATH_COMMON)/exceptions_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)	
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/hermes_common_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/hermes_function.cpp	$(PATH_COMMON)/hermes_function_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/matrix.cpp		$(PATH_COMMON)/matrix_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	@#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/ord.cpp			$(PATH_COMMON)/ord_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/qsort.cpp		$(PATH_COMMON)/qsort_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/tables.cpp		$(PATH_COMMON)/tables_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/vector_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	mv *.o hermes_common/obj/
+$(PATH_COMMON)/obj/c99_functions_wrap.o:: $(PATH_COMMON_SRC)/c99_functions.cpp $(PATH_COMMON)/c99_functions_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/c99_functions.cpp $(PATH_COMMON)/c99_functions_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/c99_functions.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/c99_functions_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/callstack.o:: $(PATH_COMMON_SRC)/callstack.cpp $(PATH_COMMON)/callstack_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/callstack.cpp $(PATH_COMMON)/callstack_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/callstack.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/callstack_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/callstack_wrap.o:: $(PATH_COMMON_SRC)/callstack.cpp $(PATH_COMMON)/callstack_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/callstack.cpp $(PATH_COMMON)/callstack_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/callstack.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/callstack_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/common_wrap.o:: $(PATH_COMMON)/common_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/common_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/common_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/compat_wrap.o:: $(PATH_COMMON)/compat_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/compat_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/compat_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/config_wrap.o:: $(PATH_COMMON)/config_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/config_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/config_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/exceptions.o:: $(PATH_COMMON_SRC)/exceptions.cpp $(PATH_COMMON)/exceptions_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/exceptions.cpp $(PATH_COMMON)/exceptions_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/exceptions.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/exceptions_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/exceptions_wrap.o:: $(PATH_COMMON_SRC)/exceptions.cpp $(PATH_COMMON)/exceptions_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/exceptions.cpp $(PATH_COMMON)/exceptions_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/exceptions.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/exceptions_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/hermes_common_wrap.o:: $(PATH_COMMON)/hermes_common_wrap.cxx 
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/hermes_common_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/hermes_common_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/hermes_function.o:: $(PATH_COMMON_SRC)/hermes_function.cpp $(PATH_COMMON)/hermes_function_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/hermes_function.cpp $(PATH_COMMON)/hermes_function_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/hermes_function.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/hermes_function_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/hermes_function_wrap.o:: $(PATH_COMMON_SRC)/hermes_function.cpp $(PATH_COMMON)/hermes_function_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/hermes_function.cpp $(PATH_COMMON)/hermes_function_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/hermes_function.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/hermes_function_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/matrix.o:: $(PATH_COMMON_SRC)/matrix.cpp $(PATH_COMMON)/matrix_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/matrix.cpp $(PATH_COMMON)/matrix_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/matrix.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/matrix_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/matrix_wrap.o:: $(PATH_COMMON_SRC)/matrix.cpp $(PATH_COMMON)/matrix_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/matrix.cpp $(PATH_COMMON)/matrix_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/matrix.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/matrix_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/ord.o:: $(PATH_COMMON_SRC)/ord.cpp $(PATH_COMMON)/ord_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/ord.cpp $(PATH_COMMON)/ord_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/ord.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/ord_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/ord_wrap.o:: $(PATH_COMMON_SRC)/ord.cpp $(PATH_COMMON)/ord_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/ord.cpp $(PATH_COMMON)/ord_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/ord.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/ord_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/qsort.o:: $(PATH_COMMON_SRC)/qsort.cpp $(PATH_COMMON)/qsort_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/qsort.cpp $(PATH_COMMON)/qsort_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/qsort.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/qsort_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/qsort_wrap.o:: $(PATH_COMMON_SRC)/qsort.cpp $(PATH_COMMON)/qsort_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/qsort.cpp $(PATH_COMMON)/qsort_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/qsort.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/qsort_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/tables.o:: $(PATH_COMMON_SRC)/tables.cpp $(PATH_COMMON)/tables_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/tables.cpp $(PATH_COMMON)/tables_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/tables.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/tables_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/tables_wrap.o:: $(PATH_COMMON_SRC)/tables.cpp $(PATH_COMMON)/tables_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/tables.cpp $(PATH_COMMON)/tables_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/tables.o $(PATH_COMMON)/obj/
+	mv $(PATH_HERMES_PYTHON)/tables_wrap.o $(PATH_COMMON)/obj/
+
+$(PATH_COMMON)/obj/vector_wrap.o:: $(PATH_COMMON)/vector_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/vector_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/vector_wrap.o $(PATH_COMMON)/obj/
+
+common-obj:: common-cxx \
+	$(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o \
+	$(PATH_COMMON)/obj/c99_functions.o $(PATH_COMMON)/obj/c99_functions_wrap.o \
+	$(PATH_COMMON)/obj/callstack.o $(PATH_COMMON)/obj/callstack_wrap.o \
+	$(PATH_COMMON)/obj/common_wrap.o \
+	$(PATH_COMMON)/obj/compat_wrap.o \
+	$(PATH_COMMON)/obj/config_wrap.o \
+	$(PATH_COMMON)/obj/exceptions.o $(PATH_COMMON)/obj/exceptions_wrap.o \
+	$(PATH_COMMON)/obj/hermes_common_wrap.o \
+	$(PATH_COMMON)/obj/hermes_function.o $(PATH_COMMON)/obj/hermes_function_wrap.o \
+	$(PATH_COMMON)/obj/matrix.o $(PATH_COMMON)/obj/matrix_wrap.o \
+	$(PATH_COMMON)/obj/ord.o $(PATH_COMMON)/obj/ord_wrap.o \
+	$(PATH_COMMON)/obj/qsort.o $(PATH_COMMON)/obj/qsort_wrap.o \
+	$(PATH_COMMON)/obj/tables.o $(PATH_COMMON)/obj/tables_wrap.o \
+	$(PATH_COMMON)/obj/vector_wrap.o
+	
+#############
+	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/array_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
 
 	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp		$(PATH_COMMON)/solvers/amesos_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
 	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp		$(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
@@ -210,7 +315,13 @@ common-obj:: $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o
 	mv *.o hermes_common/solvers
 
 
-	@#$(G++_OPT) hermes_common/array.o 		hermes_common/array_wrap.o 		-o hermes_common/_array.so
+common:: common-obj
+
+#############
+
+	$(G++_OPT) $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o -o $(PATH_COMMON)/_api.so
+
+	#$(G++_OPT) hermes_common/array.o 		hermes_common/array_wrap.o 		-o hermes_common/_array.so
 	$(G++_OPT) hermes_common/c99_functions.o 	hermes_common/c99_functions_wrap.o 	-o hermes_common/_c99_functions.so
 	$(G++_OPT) hermes_common/callstack.o 		hermes_common/callstack_wrap.o 		-o hermes_common/_callstack.so
 	$(G++_OPT) 					hermes_common/common_wrap.o 		-o hermes_common/_common.so
@@ -220,7 +331,7 @@ common-obj:: $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o
 	$(G++_OPT) 				 	hermes_common/hermes_common_wrap.o 	-o hermes_common/_hermes_common.so
 	$(G++_OPT) hermes_common/hermes_function.o 	hermes_common/hermes_function_wrap.o 	-o hermes_common/_hermes_function.so
 	$(G++_OPT) hermes_common/matrix.o 		hermes_common/matrix_wrap.o 		-o hermes_common/_matrix.so
-	@#$(G++_OPT) hermes_common/mixins.o 		hermes_common/mixins_wrap.o 		-o hermes_common/_mixins.so
+	#$(G++_OPT) hermes_common/mixins.o 		hermes_common/mixins_wrap.o 		-o hermes_common/_mixins.so
 	$(G++_OPT) hermes_common/ord.o 			hermes_common/ord_wrap.o 		-o hermes_common/_ord.so
 	$(G++_OPT) hermes_common/qsort.o 		hermes_common/qsort_wrap.o 		-o hermes_common/_qsort.so
 	$(G++_OPT) hermes_common/tables.o 		hermes_common/tables_wrap.o 		-o hermes_common/_tables.so
@@ -256,7 +367,6 @@ clean::
 	@rm -f $(PATH_COMMON)/solvers/*.cxx
 	@rm -f $(PATH_COMMON)/solvers/*.so
 	@rm -f $(PATH_COMMON)/solvers/*.o
-
-	@rm -f ~/hermes-python/*.o
+	@rm -f $(PATH_HERMES_PYTHON)/*.o
 
 
