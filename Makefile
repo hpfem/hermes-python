@@ -91,6 +91,17 @@ common::
 	mv *.o hermes_common
 
 	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp		$(PATH_COMMON)/solvers/amesos_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp		$(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/dp_interface.cpp			$(PATH_COMMON)/solvers/dp_interface_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/eigensolver.cpp			$(PATH_COMMON)/solvers/eigensolver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/epetra.cpp			$(PATH_COMMON)/solvers/epetra_wrap.cxx 			-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/linear_matrix_solver.cpp		$(PATH_COMMON)/solvers/linear_matrix_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/newton_solver_nox.cpp		$(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/nonlinear_solver.cpp		$(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/petsc_solver.cpp			$(PATH_COMMON)/solvers/petsc_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond.cpp			$(PATH_COMMON)/solvers/precond_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ifpack.cpp		$(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+
 	mv *.o hermes_common/solvers
 
 
@@ -111,6 +122,17 @@ common::
 	$(G++_OPT) hermes_common/tables.o 		hermes_common/tables_wrap.o 		-o hermes_common/_tables.so
 	$(G++_OPT) 			 		hermes_common/vector_wrap.o 		-o hermes_common/_vector.so
 	$(G++_OPT) hermes_common/solvers/amesos_solver.o 	hermes_common/solvers/amesos_solver_wrap.o 		-o hermes_common/solvers/_amesos_solver.so
+	$(G++_OPT) hermes_common/solvers/aztecoo_solver.o 	hermes_common/solvers/aztecoo_solver_wrap.o 		-o hermes_common/solvers/_aztecoo_solver.so
+	$(G++_OPT) hermes_common/solvers/dp_interface.o 	hermes_common/solvers/dp_interface_wrap.o 		-o hermes_common/solvers/_dp_interface.so
+	$(G++_OPT) hermes_common/solvers/eigensolver.o 		hermes_common/solvers/eigensolver_wrap.o 		-o hermes_common/solvers/_eigensolver.so
+	$(G++_OPT) hermes_common/solvers/epetra.o 		hermes_common/solvers/epetra_wrap.o 			-o hermes_common/solvers/_epetra.so
+	$(G++_OPT) hermes_common/solvers/linear_matrix_solver.o hermes_common/solvers/linear_matrix_solver_wrap.o 	-o hermes_common/solvers/_linear_matrix_solver.so
+	$(G++_OPT) hermes_common/solvers/newton_solver_nox.o 	hermes_common/solvers/newton_solver_nox_wrap.o 		-o hermes_common/solvers/_newton_solver_nox.so
+	$(G++_OPT) hermes_common/solvers/nonlinear_solver.o 	hermes_common/solvers/nonlinear_solver_wrap.o 		-o hermes_common/solvers/_nonlinear_solver.so
+	$(G++_OPT) hermes_common/solvers/petsc_solver.o 	hermes_common/solvers/petsc_solver_wrap.o 		-o hermes_common/solvers/_petsc_solver.so
+	$(G++_OPT) hermes_common/solvers/precond.o 		hermes_common/solvers/precond_wrap.o 			-o hermes_common/solvers/_precond.so
+	$(G++_OPT) hermes_common/solvers/precond_ifpack.o 	hermes_common/solvers/precond_ifpack_wrap.o 		-o hermes_common/solvers/_precond_ifpack.so
+
 
 clean::
 	@rm -f $(PATH_H2D)/*/*.py
