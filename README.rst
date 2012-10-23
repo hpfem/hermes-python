@@ -8,8 +8,8 @@ Prior to building the wrappers, set the paths to your local
 repos "hermes" and "hermes-common". This can be done by adding 
 the following two lines (or similar) to your .basrhx file:
 
-export PATH_HERMES=/home/pavel/repos/hemes
-export PATH_HERMES_PYTHON=/home/pavel/repos/hermes-common
+export PATH_HERMES=/home/pavel/repos/hermes
+export PATH_HERMES_PYTOHN=/home/pavel/repos/hermes-python
 
 
 Step 2: 
