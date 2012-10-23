@@ -9,7 +9,7 @@ repos "hermes" and "hermes-python". This can be done by adding
 the following two lines (or similar) to your .basrhx file:
 
 export PATH_HERMES=/home/pavel/repos/hermes
-export PATH_HERMES_PYTOHN=/home/pavel/repos/hermes-python
+export PATH_HERMES_PYTHON=/home/pavel/repos/hermes-python
 
 
 Step 2: 
