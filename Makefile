@@ -278,6 +278,124 @@ $(PATH_COMMON)/obj/vector_wrap.o:: $(PATH_COMMON)/vector_wrap.cxx
 	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/vector_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
 	mv $(PATH_HERMES_PYTHON)/vector_wrap.o $(PATH_COMMON)/obj/
 
+$(PATH_COMMON)/obj/solvers/amesos_solver.o:: $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp $(PATH_COMMON)/solvers/amesos_solver_wrap.cxx 
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp $(PATH_COMMON)/solvers/amesos_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/amesos_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/amesos_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/amesos_solver_wrap.o:: $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp $(PATH_COMMON)/solvers/amesos_solver_wrap.cxx 
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp $(PATH_COMMON)/solvers/amesos_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/amesos_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/amesos_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/aztecoo_solver.o:: $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp $(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp $(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/aztecoo_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/aztecoo_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/aztecoo_solver_wrap.o:: $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp $(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp $(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/aztecoo_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/aztecoo_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/dp_interface.o:: $(PATH_COMMON_SRC)/solvers/dp_interface.cpp $(PATH_COMMON)/solvers/dp_interface_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/dp_interface.cpp $(PATH_COMMON)/solvers/dp_interface_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/dp_interface.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/dp_interface_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/dp_interface_wrap.o:: $(PATH_COMMON_SRC)/solvers/dp_interface.cpp $(PATH_COMMON)/solvers/dp_interface_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/dp_interface.cpp $(PATH_COMMON)/solvers/dp_interface_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/dp_interface.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/dp_interface_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/eigensolver_wrap.o:: $(PATH_COMMON)/solvers/eigensolver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/eigensolver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/eigensolver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/epetra.o:: $(PATH_COMMON_SRC)/solvers/epetra.cpp $(PATH_COMMON)/solvers/epetra_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/epetra.cpp $(PATH_COMMON)/solvers/epetra_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/epetra.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/epetra_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/epetra_wrap.o:: $(PATH_COMMON_SRC)/solvers/epetra.cpp $(PATH_COMMON)/solvers/epetra_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/epetra.cpp $(PATH_COMMON)/solvers/epetra_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/epetra.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/epetra_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/linear_matrix_solver.o:: $(PATH_COMMON_SRC)/solvers/linear_matrix_solver.cpp $(PATH_COMMON)/solvers/linear_matrix_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/linear_matrix_solver.cpp $(PATH_COMMON)/solvers/linear_matrix_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/linear_matrix_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/linear_matrix_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/linear_matrix_solver_wrap.o:: $(PATH_COMMON_SRC)/solvers/linear_matrix_solver.cpp $(PATH_COMMON)/solvers/linear_matrix_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/linear_matrix_solver.cpp $(PATH_COMMON)/solvers/linear_matrix_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/linear_matrix_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/linear_matrix_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/newton_solver_nox.o:: $(PATH_COMMON_SRC)/solvers/newton_solver_nox.cpp $(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/newton_solver_nox.cpp $(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/newton_solver_nox.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/newton_solver_nox_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/newton_solver_nox_wrap.o:: $(PATH_COMMON_SRC)/solvers/newton_solver_nox.cpp $(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/newton_solver_nox.cpp $(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/newton_solver_nox.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/newton_solver_nox_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/nonlinear_solver.o:: $(PATH_COMMON_SRC)/solvers/nonlinear_solver.cpp $(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/nonlinear_solver.cpp $(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/nonlinear_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/nonlinear_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/nonlinear_solver_wrap.o:: $(PATH_COMMON_SRC)/solvers/nonlinear_solver.cpp $(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/nonlinear_solver.cpp $(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/nonlinear_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/nonlinear_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/petsc_solver.o:: $(PATH_COMMON_SRC)/solvers/petsc_solver.cpp $(PATH_COMMON)/solvers/petsc_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/petsc_solver.cpp $(PATH_COMMON)/solvers/petsc_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/petsc_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/petsc_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/petsc_solver_wrap.o:: $(PATH_COMMON_SRC)/solvers/petsc_solver.cpp $(PATH_COMMON)/solvers/petsc_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/petsc_solver.cpp $(PATH_COMMON)/solvers/petsc_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/petsc_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/petsc_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/precond_wrap.o:: $(PATH_COMMON)/solvers/precond_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/solvers/precond_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/precond_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/precond_ifpack.o:: $(PATH_COMMON_SRC)/solvers/precond_ifpack.cpp $(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ifpack.cpp $(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/precond_ifpack.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/precond_ifpack_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/precond_ifpack_wrap.o:: $(PATH_COMMON_SRC)/solvers/precond_ifpack.cpp $(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ifpack.cpp $(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/precond_ifpack.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/precond_ifpack_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/precond_ml.o:: $(PATH_COMMON_SRC)/solvers/precond_ml.cpp $(PATH_COMMON)/solvers/precond_ml_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ml.cpp $(PATH_COMMON)/solvers/precond_ml_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/precond_ml.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/precond_ml_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/precond_ml_wrap.o:: $(PATH_COMMON_SRC)/solvers/precond_ml.cpp $(PATH_COMMON)/solvers/precond_ml_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ml.cpp $(PATH_COMMON)/solvers/precond_ml_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/precond_ml.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/precond_ml_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/superlu_solver.o:: $(PATH_COMMON_SRC)/solvers/superlu_solver.cpp $(PATH_COMMON)/solvers/superlu_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/superlu_solver.cpp $(PATH_COMMON)/solvers/superlu_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/superlu_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/superlu_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
+$(PATH_COMMON)/obj/solvers/superlu_solver_wrap.o:: $(PATH_COMMON_SRC)/solvers/superlu_solver.cpp $(PATH_COMMON)/solvers/superlu_solver_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/superlu_solver.cpp $(PATH_COMMON)/solvers/superlu_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/superlu_solver.o $(PATH_COMMON)/obj/solvers/
+	mv $(PATH_HERMES_PYTHON)/superlu_solver_wrap.o $(PATH_COMMON)/obj/solvers/
+
 common-obj:: common-cxx \
 	$(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o \
 	$(PATH_COMMON)/obj/c99_functions.o $(PATH_COMMON)/obj/c99_functions_wrap.o \
@@ -292,64 +410,141 @@ common-obj:: common-cxx \
 	$(PATH_COMMON)/obj/ord.o $(PATH_COMMON)/obj/ord_wrap.o \
 	$(PATH_COMMON)/obj/qsort.o $(PATH_COMMON)/obj/qsort_wrap.o \
 	$(PATH_COMMON)/obj/tables.o $(PATH_COMMON)/obj/tables_wrap.o \
-	$(PATH_COMMON)/obj/vector_wrap.o
-	
-#############
-	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)						$(PATH_COMMON)/array_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/mixins.cpp		$(PATH_COMMON)/mixins_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
+	$(PATH_COMMON)/obj/vector_wrap.o \
+	$(PATH_COMMON)/obj/solvers/amesos_solver.o $(PATH_COMMON)/obj/solvers/amesos_solver_wrap.o \
+	$(PATH_COMMON)/obj/solvers/aztecoo_solver.o $(PATH_COMMON)/obj/solvers/aztecoo_solver_wrap.o \
+	$(PATH_COMMON)/obj/solvers/dp_interface.o $(PATH_COMMON)/obj/solvers/dp_interface_wrap.o \
+	$(PATH_COMMON)/obj/solvers/eigensolver_wrap.o \
+	$(PATH_COMMON)/obj/solvers/epetra.o $(PATH_COMMON)/obj/solvers/epetra_wrap.o \
+	$(PATH_COMMON)/obj/solvers/linear_matrix_solver.o $(PATH_COMMON)/obj/solvers/linear_matrix_solver_wrap.o \
+	$(PATH_COMMON)/obj/solvers/newton_solver_nox.o $(PATH_COMMON)/obj/solvers/newton_solver_nox_wrap.o \
+	$(PATH_COMMON)/obj/solvers/nonlinear_solver.o $(PATH_COMMON)/obj/solvers/nonlinear_solver_wrap.o \
+	$(PATH_COMMON)/obj/solvers/petsc_solver.o $(PATH_COMMON)/obj/solvers/petsc_solver_wrap.o \
+	$(PATH_COMMON)/obj/solvers/precond_wrap.o \
+	$(PATH_COMMON)/obj/solvers/precond_ifpack.o $(PATH_COMMON)/obj/solvers/precond_ifpack_wrap.o \
+	$(PATH_COMMON)/obj/solvers/precond_ml.o $(PATH_COMMON)/obj/solvers/precond_ml_wrap.o \
+	$(PATH_COMMON)/obj/solvers/superlu_solver.o $(PATH_COMMON)/obj/solvers/superlu_solver_wrap.o
 
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/amesos_solver.cpp		$(PATH_COMMON)/solvers/amesos_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/aztecoo_solver.cpp		$(PATH_COMMON)/solvers/aztecoo_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/dp_interface.cpp		$(PATH_COMMON)/solvers/dp_interface_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) 								$(PATH_COMMON)/solvers/eigensolver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/epetra.cpp			$(PATH_COMMON)/solvers/epetra_wrap.cxx 			-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/linear_matrix_solver.cpp	$(PATH_COMMON)/solvers/linear_matrix_solver_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/newton_solver_nox.cpp		$(PATH_COMMON)/solvers/newton_solver_nox_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/nonlinear_solver.cpp		$(PATH_COMMON)/solvers/nonlinear_solver_wrap.cxx 	-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/petsc_solver.cpp		$(PATH_COMMON)/solvers/petsc_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) 								$(PATH_COMMON)/solvers/precond_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ifpack.cpp		$(PATH_COMMON)/solvers/precond_ifpack_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/precond_ml.cpp			$(PATH_COMMON)/solvers/precond_ml_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/superlu_solver.cpp		$(PATH_COMMON)/solvers/superlu_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/umfpack_solver.cpp		$(PATH_COMMON)/solvers/umfpack_solver_wrap.cxx 		-I$(PATH_PYTHON_INCLUDE)
-	mv *.o hermes_common/solvers
-
-
-common:: common-obj
+	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON)/array_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/mixins.cpp $(PATH_COMMON)/mixins_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	#$(GCC_OPT) -I$(PATH_COMMON_INCLUDE)/solvers -I$(PATH_COMMON_INCLUDE) $(PATH_COMMON_SRC)/solvers/umfpack_solver.cpp $(PATH_COMMON)/solvers/umfpack_solver_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
 
 #############
-
+$(PATH_COMMON)/_api.so:: $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o
 	$(G++_OPT) $(PATH_COMMON)/obj/api.o $(PATH_COMMON)/obj/api_wrap.o -o $(PATH_COMMON)/_api.so
 
-	#$(G++_OPT) hermes_common/array.o 		hermes_common/array_wrap.o 		-o hermes_common/_array.so
-	$(G++_OPT) hermes_common/c99_functions.o 	hermes_common/c99_functions_wrap.o 	-o hermes_common/_c99_functions.so
-	$(G++_OPT) hermes_common/callstack.o 		hermes_common/callstack_wrap.o 		-o hermes_common/_callstack.so
-	$(G++_OPT) 					hermes_common/common_wrap.o 		-o hermes_common/_common.so
-	$(G++_OPT) 			 		hermes_common/compat_wrap.o 		-o hermes_common/_compat.so
-	$(G++_OPT) 			 		hermes_common/config_wrap.o 		-o hermes_common/_config.so
-	$(G++_OPT) hermes_common/exceptions.o 		hermes_common/exceptions_wrap.o 	-o hermes_common/_exceptions.so
-	$(G++_OPT) 				 	hermes_common/hermes_common_wrap.o 	-o hermes_common/_hermes_common.so
-	$(G++_OPT) hermes_common/hermes_function.o 	hermes_common/hermes_function_wrap.o 	-o hermes_common/_hermes_function.so
-	$(G++_OPT) hermes_common/matrix.o 		hermes_common/matrix_wrap.o 		-o hermes_common/_matrix.so
-	#$(G++_OPT) hermes_common/mixins.o 		hermes_common/mixins_wrap.o 		-o hermes_common/_mixins.so
-	$(G++_OPT) hermes_common/ord.o 			hermes_common/ord_wrap.o 		-o hermes_common/_ord.so
-	$(G++_OPT) hermes_common/qsort.o 		hermes_common/qsort_wrap.o 		-o hermes_common/_qsort.so
-	$(G++_OPT) hermes_common/tables.o 		hermes_common/tables_wrap.o 		-o hermes_common/_tables.so
-	$(G++_OPT) 			 		hermes_common/vector_wrap.o 		-o hermes_common/_vector.so
-	$(G++_OPT) hermes_common/solvers/amesos_solver.o 	hermes_common/solvers/amesos_solver_wrap.o 		-o hermes_common/solvers/_amesos_solver.so
-	$(G++_OPT) hermes_common/solvers/aztecoo_solver.o 	hermes_common/solvers/aztecoo_solver_wrap.o 		-o hermes_common/solvers/_aztecoo_solver.so
-	$(G++_OPT) hermes_common/solvers/dp_interface.o 	hermes_common/solvers/dp_interface_wrap.o 		-o hermes_common/solvers/_dp_interface.so
-	$(G++_OPT) 				 		hermes_common/solvers/eigensolver_wrap.o 		-o hermes_common/solvers/_eigensolver.so
-	$(G++_OPT) hermes_common/solvers/epetra.o 		hermes_common/solvers/epetra_wrap.o 			-o hermes_common/solvers/_epetra.so
-	$(G++_OPT) hermes_common/solvers/linear_matrix_solver.o hermes_common/solvers/linear_matrix_solver_wrap.o 	-o hermes_common/solvers/_linear_matrix_solver.so
-	$(G++_OPT) hermes_common/solvers/newton_solver_nox.o 	hermes_common/solvers/newton_solver_nox_wrap.o 		-o hermes_common/solvers/_newton_solver_nox.so
-	$(G++_OPT) hermes_common/solvers/nonlinear_solver.o 	hermes_common/solvers/nonlinear_solver_wrap.o 		-o hermes_common/solvers/_nonlinear_solver.so
-	$(G++_OPT) hermes_common/solvers/petsc_solver.o 	hermes_common/solvers/petsc_solver_wrap.o 		-o hermes_common/solvers/_petsc_solver.so
-	$(G++_OPT) 				 		hermes_common/solvers/precond_wrap.o 			-o hermes_common/solvers/_precond.so
-	$(G++_OPT) hermes_common/solvers/precond_ifpack.o 	hermes_common/solvers/precond_ifpack_wrap.o 		-o hermes_common/solvers/_precond_ifpack.so
-	$(G++_OPT) hermes_common/solvers/precond_ml.o 		hermes_common/solvers/precond_ml_wrap.o 		-o hermes_common/solvers/_precond_ml.so
-	$(G++_OPT) hermes_common/solvers/superlu_solver.o 	hermes_common/solvers/superlu_solver_wrap.o 		-o hermes_common/solvers/_superlu_solver.so
-	#$(G++_OPT) hermes_common/solvers/umfpack_solver.o 	hermes_common/solvers/umfpack_solver_wrap.o 		-o hermes_common/solvers/_umfpack_solver.so
+$(PATH_COMMON)/_c99_functions.so:: $(PATH_COMMON)/obj/c99_functions.o $(PATH_COMMON)/obj/c99_functions_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/c99_functions.o $(PATH_COMMON)/obj/c99_functions_wrap.o -o $(PATH_COMMON)/_c99_functions.so
+
+$(PATH_COMMON)/_callstack.so:: $(PATH_COMMON)/obj/callstack.o $(PATH_COMMON)/obj/callstack_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/callstack.o $(PATH_COMMON)/obj/callstack_wrap.o -o $(PATH_COMMON)/_callstack.so
+
+$(PATH_COMMON)/_common.so:: $(PATH_COMMON)/obj/common_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/common_wrap.o -o $(PATH_COMMON)/_common.so
+
+$(PATH_COMMON)/_compat.so:: $(PATH_COMMON)/obj/compat_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/compat_wrap.o -o $(PATH_COMMON)/_compat.so
+
+$(PATH_COMMON)/_config.so:: $(PATH_COMMON)/obj/config_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/config_wrap.o -o $(PATH_COMMON)/_config.so
+
+$(PATH_COMMON)/_exceptions.so:: $(PATH_COMMON)/obj/exceptions.o $(PATH_COMMON)/obj/exceptions_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/exceptions.o $(PATH_COMMON)/obj/exceptions_wrap.o -o $(PATH_COMMON)/_exceptions.so
+
+$(PATH_COMMON)/_hermes_common.so:: $(PATH_COMMON)/obj/hermes_common_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/hermes_common_wrap.o -o $(PATH_COMMON)/_hermes_common.so
+
+$(PATH_COMMON)/_hermes_function.so:: $(PATH_COMMON)/obj/hermes_function.o $(PATH_COMMON)/obj/hermes_function_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/hermes_function.o $(PATH_COMMON)/obj/hermes_function_wrap.o -o $(PATH_COMMON)/_hermes_function.so
+
+$(PATH_COMMON)/_matrix.so:: $(PATH_COMMON)/obj/matrix.o $(PATH_COMMON)/obj/matrix_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/matrix.o $(PATH_COMMON)/obj/matrix_wrap.o -o $(PATH_COMMON)/_matrix.so
+
+$(PATH_COMMON)/_ord.so:: $(PATH_COMMON)/obj/ord.o $(PATH_COMMON)/obj/ord_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/ord.o $(PATH_COMMON)/obj/ord_wrap.o -o $(PATH_COMMON)/_ord.so
+
+$(PATH_COMMON)/_qsort.so:: $(PATH_COMMON)/obj/qsort.o $(PATH_COMMON)/obj/qsort_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/qsort.o $(PATH_COMMON)/obj/qsort_wrap.o -o $(PATH_COMMON)/_qsort.so
+
+$(PATH_COMMON)/_tables.so:: $(PATH_COMMON)/obj/tables.o $(PATH_COMMON)/obj/tables_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/tables.o $(PATH_COMMON)/obj/tables_wrap.o -o $(PATH_COMMON)/_tables.so
+
+$(PATH_COMMON)/_vector.so:: $(PATH_COMMON)/obj/vector_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/vector_wrap.o -o $(PATH_COMMON)/_vector.so
+
+$(PATH_COMMON)/solvers/_amesos_solver.so:: $(PATH_COMMON)/obj/solvers/amesos_solver.o $(PATH_COMMON)/obj/solvers/amesos_solver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/amesos_solver.o $(PATH_COMMON)/obj/solvers/amesos_solver_wrap.o -o $(PATH_COMMON)/solvers/_amesos_solver.so
+
+$(PATH_COMMON)/solvers/_aztecoo_solver.so:: $(PATH_COMMON)/obj/solvers/aztecoo_solver.o $(PATH_COMMON)/obj/solvers/aztecoo_solver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/aztecoo_solver.o $(PATH_COMMON)/obj/solvers/aztecoo_solver_wrap.o -o $(PATH_COMMON)/solvers/_aztecoo_solver.so
+
+$(PATH_COMMON)/solvers/_dp_interface.so:: $(PATH_COMMON)/obj/solvers/dp_interface.o $(PATH_COMMON)/obj/solvers/dp_interface_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/dp_interface.o $(PATH_COMMON)/obj/solvers/dp_interface_wrap.o -o $(PATH_COMMON)/solvers/_dp_interface.so
+
+$(PATH_COMMON)/solvers/_eigensolver.so:: $(PATH_COMMON)/obj/solvers/eigensolver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/eigensolver_wrap.o -o $(PATH_COMMON)/solvers/_eigensolver.so
+
+$(PATH_COMMON)/solvers/_epetra.so:: $(PATH_COMMON)/obj/solvers/epetra.o $(PATH_COMMON)/obj/solvers/epetra_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/epetra.o $(PATH_COMMON)/obj/solvers/epetra_wrap.o -o $(PATH_COMMON)/solvers/_epetra.so
+
+$(PATH_COMMON)/solvers/_linear_matrix_solver.so:: $(PATH_COMMON)/obj/solvers/linear_matrix_solver.o $(PATH_COMMON)/obj/solvers/linear_matrix_solver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/linear_matrix_solver.o $(PATH_COMMON)/obj/solvers/linear_matrix_solver_wrap.o -o $(PATH_COMMON)/solvers/_linear_matrix_solver.so
+
+$(PATH_COMMON)/solvers/_newton_solver_nox.so:: $(PATH_COMMON)/obj/solvers/newton_solver_nox.o $(PATH_COMMON)/obj/solvers/newton_solver_nox_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/newton_solver_nox.o $(PATH_COMMON)/obj/solvers/newton_solver_nox_wrap.o -o $(PATH_COMMON)/solvers/_newton_solver_nox.so
+
+$(PATH_COMMON)/solvers/_nonlinear_solver.so:: $(PATH_COMMON)/obj/solvers/nonlinear_solver.o $(PATH_COMMON)/obj/solvers/nonlinear_solver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/nonlinear_solver.o $(PATH_COMMON)/obj/solvers/nonlinear_solver_wrap.o -o $(PATH_COMMON)/solvers/_nonlinear_solver.so
+
+$(PATH_COMMON)/solvers/_petsc_solver.so:: $(PATH_COMMON)/obj/solvers/petsc_solver.o $(PATH_COMMON)/obj/solvers/petsc_solver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/petsc_solver.o $(PATH_COMMON)/obj/solvers/petsc_solver_wrap.o -o $(PATH_COMMON)/solvers/_petsc_solver.so
+
+ $(PATH_COMMON)/solvers/_precond.so:: $(PATH_COMMON)/obj/solvers/precond_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/precond_wrap.o -o $(PATH_COMMON)/solvers/_precond.so
+
+$(PATH_COMMON)/solvers/_precond_ifpack.so:: $(PATH_COMMON)/obj/solvers/precond_ifpack.o $(PATH_COMMON)/obj/solvers/precond_ifpack_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/precond_ifpack.o $(PATH_COMMON)/obj/solvers/precond_ifpack_wrap.o -o $(PATH_COMMON)/solvers/_precond_ifpack.so
+
+$(PATH_COMMON)/solvers/_precond_ml.so:: $(PATH_COMMON)/obj/solvers/precond_ml.o $(PATH_COMMON)/obj/solvers/precond_ml_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/precond_ml.o $(PATH_COMMON)/obj/solvers/precond_ml_wrap.o -o $(PATH_COMMON)/solvers/_precond_ml.so
+
+$(PATH_COMMON)/solvers/_superlu_solver.so:: $(PATH_COMMON)/obj/solvers/superlu_solver.o $(PATH_COMMON)/obj/solvers/superlu_solver_wrap.o
+	$(G++_OPT) $(PATH_COMMON)/obj/solvers/superlu_solver.o $(PATH_COMMON)/obj/solvers/superlu_solver_wrap.o -o $(PATH_COMMON)/solvers/_superlu_solver.so
+
+common:: common-obj \
+	$(PATH_COMMON)/_api.so \
+	$(PATH_COMMON)/_c99_functions.so \
+	$(PATH_COMMON)/_callstack.so \
+	$(PATH_COMMON)/_common.so \
+	$(PATH_COMMON)/_compat.so \
+	$(PATH_COMMON)/_config.so \
+	$(PATH_COMMON)/_exceptions.so \
+	$(PATH_COMMON)/_hermes_common.so \
+	$(PATH_COMMON)/_hermes_function.so \
+	$(PATH_COMMON)/_matrix.so \
+	$(PATH_COMMON)/_ord.so \
+	$(PATH_COMMON)/_qsort.so \
+	$(PATH_COMMON)/_tables.so \
+	$(PATH_COMMON)/_vector.so \
+	$(PATH_COMMON)/solvers/_amesos_solver.so \
+	$(PATH_COMMON)/solvers/_aztecoo_solver.so \
+	$(PATH_COMMON)/solvers/_dp_interface.so \
+	$(PATH_COMMON)/solvers/_eigensolver.so \
+	$(PATH_COMMON)/solvers/_epetra.so \
+	$(PATH_COMMON)/solvers/_linear_matrix_solver.so \
+	$(PATH_COMMON)/solvers/_newton_solver_nox.so \
+	$(PATH_COMMON)/solvers/_nonlinear_solver.so \
+	$(PATH_COMMON)/solvers/_petsc_solver.so \
+	$(PATH_COMMON)/solvers/_precond.so \
+	$(PATH_COMMON)/solvers/_precond_ifpack.so \
+	$(PATH_COMMON)/solvers/_precond_ml.so \
+	$(PATH_COMMON)/solvers/_superlu_solver.so \
+
+	#$(G++_OPT) $(PATH_COMMON)/obj/array.o $(PATH_COMMON)/obj/array_wrap.o -o $(PATH_COMMON)/_array.so
+	#$(G++_OPT) $(PATH_COMMON)/obj/mixins.o $(PATH_COMMON)/obj/mixins_wrap.o -o $(PATH_COMMON)/_mixins.so
+	#$(G++_OPT) $(PATH_COMMON)/obj/solvers/umfpack_solver.o $(PATH_COMMON)/obj/solvers/umfpack_solver_wrap.o -o $(PATH_COMMON)/solvers/_umfpack_solver.so
+
+#############
 
 clean::
 	@rm -f $(PATH_H2D)/*/*.py
