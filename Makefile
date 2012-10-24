@@ -556,12 +556,12 @@ clean::
 	@rm -f $(PATH_COMMON)/*.pyc
 	@rm -f $(PATH_COMMON)/*.cxx
 	@rm -f $(PATH_COMMON)/*.so
-	@rm -f $(PATH_COMMON)/*.o
+	@rm -f $(PATH_COMMON)/obj/*.o
 	@rm -f $(PATH_COMMON)/solvers/*.py
 	@rm -f $(PATH_COMMON)/solvers/*.pyc
 	@rm -f $(PATH_COMMON)/solvers/*.cxx
 	@rm -f $(PATH_COMMON)/solvers/*.so
-	@rm -f $(PATH_COMMON)/solvers/*.o
+	@rm -f $(PATH_COMMON)/obj/solvers/*.o
 	@rm -f $(PATH_HERMES_PYTHON)/*.o
 
 
