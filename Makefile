@@ -18,59 +18,81 @@ PATH_PYTHON_INCLUDE	= /usr/include/python2.7/
 all::
 	echo "Please type \"make common\" or \"make h2d\"."
 
-h2d:: mesh/curved_wrap.cxx mesh/element_to_refine_wrap.cxx
-#	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/nurbs.i
-#	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/nurbs_matrix.i
-#	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/refmap.i
-	gcc -fPIC -c -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -I$(PATH_H2D_INCLUDE)/mesh -I$(PATH_H2D_INCLUDE)/quadrature -Ihermes_common $(PATH_H2D)/mesh/curved_wrap.cxx $(PATH_H2D)/mesh/element_to_refine_wrap.cxx $(PATH_H2D)/mesh/hash_wrap.cxx $(PATH_H2D)/mesh/mesh_data_wrap.cxx $(PATH_H2D)/mesh/mesh_wrap.cxx $(PATH_H2D)/mesh/mesh_h1d_xml_wrap.cxx $(PATH_H2D)/mesh/mesh_h2d_xml_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_exodusii_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_h1d_xml_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_h2d_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_h2d_xml_wrap.cxx $(PATH_H2D)/mesh/refinement_type_wrap.cxx $(PATH_H2D)/mesh/subdomains_h2d_xml_wrap.cxx $(PATH_H2D)/mesh/traverse_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
-
-mesh/curved_wrap.cxx:: $(PATH_H2D)/mesh/curved.i
+$(PATH_H2D)/mesh/curved_wrap.cxx:: $(PATH_H2D)/mesh/curved.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/curved.i
 
-mesh/element_to_refine_wrap.cxx:: $(PATH_H2D)/mesh/element_to_refine.i
+$(PATH_H2D)/mesh/element_to_refine_wrap.cxx:: $(PATH_H2D)/mesh/element_to_refine.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/element_to_refine.i
 
-mesh/hash_wrap.cxx:: $(PATH_H2D)/mesh/hash.i
+$(PATH_H2D)/mesh/hash_wrap.cxx:: $(PATH_H2D)/mesh/hash.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/hash.i
 
-mesh/mesh_data_wrap.cxx:: $(PATH_H2D)/mesh/mesh_data.i
-	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_data.i
-
-mesh/mesh_wrap.cxx:: $(PATH_H2D)/mesh/mesh.i
+$(PATH_H2D)/mesh/mesh_wrap.cxx:: $(PATH_H2D)/mesh/mesh.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh.i
 
-mesh/mesh_h1d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_h1d_xml.i
+$(PATH_H2D)/mesh/mesh_data_wrap.cxx:: $(PATH_H2D)/mesh/mesh_data.i
+	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_data.i
+
+$(PATH_H2D)/mesh/mesh_h1d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_h1d_xml.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_h1d_xml.i
 
-mesh/mesh_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_h2d_xml.i
+$(PATH_H2D)/mesh/mesh_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_h2d_xml.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_h2d_xml.i
 
-mesh/mesh_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_h2d_xml.i
-	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_h2d_xml.i
-
-mesh/mesh_reader_exodusii_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_exodusii.i
-	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_reader_exodusii.i
-
-mesh/mesh_reader_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader.i
+$(PATH_H2D)/mesh/mesh_reader_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_reader.i
 
-mesh/mesh_reader_h1d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_h1d_xml.i
+$(PATH_H2D)/mesh/mesh_reader_exodusii_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_exodusii.i
+	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_reader_exodusii.i
+
+$(PATH_H2D)/mesh/mesh_reader_h1d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_h1d_xml.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_reader_h1d_xml.i
 
-mesh/mesh_reader_h2d_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_h2d.i
+$(PATH_H2D)/mesh/mesh_reader_h2d_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_h2d.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_reader_h2d.i
 
-mesh/mesh_reader_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_h2d_xml.i
+$(PATH_H2D)/mesh/mesh_reader_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/mesh_reader_h2d_xml.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/mesh_reader_h2d_xml.i
 
-mesh/refinement_type_wrap.cxx:: $(PATH_H2D)/mesh/refinement_type.i
+$(PATH_H2D)/mesh/nurbs_wrap.cxx:: $(PATH_H2D)/mesh/nurbs.i
+	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/nurbs.i
+
+$(PATH_H2D)/mesh/nurbs_matrix_wrap.cxx:: $(PATH_H2D)/mesh/nurbs_matrix.i
+	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/nurbs_matrix.i
+
+$(PATH_H2D)/mesh/refinement_type_wrap.cxx:: $(PATH_H2D)/mesh/refinement_type.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/refinement_type.i
 
-mesh/subdomains_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/subdomains_h2d_xml.i
+$(PATH_H2D)/mesh/refmap_wrap.cxx:: $(PATH_H2D)/mesh/refmap.i
+	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/refmap.i
+
+$(PATH_H2D)/mesh/subdomains_h2d_xml_wrap.cxx:: $(PATH_H2D)/mesh/subdomains_h2d_xml.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/subdomains_h2d_xml.i
 
-mesh/traverse_wrap.cxx:: $(PATH_H2D)/mesh/traverse.i
+$(PATH_H2D)/mesh/traverse_wrap.cxx:: $(PATH_H2D)/mesh/traverse.i
 	$(SWIG_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -Ihermes_common $(PATH_H2D)/mesh/traverse.i
+
+h2d-cxx:: $(PATH_H2D)/mesh/curved_wrap.cxx $(PATH_H2D)/mesh/element_to_refine_wrap.cxx $(PATH_H2D)/mesh/hash_wrap.cxx $(PATH_H2D)/mesh/mesh_wrap.cxx $(PATH_H2D)/mesh/mesh_data_wrap.cxx $(PATH_H2D)/mesh/mesh_h1d_xml_wrap.cxx $(PATH_H2D)/mesh/mesh_h2d_xml_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_exodusii_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_h1d_xml_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_h2d_wrap.cxx $(PATH_H2D)/mesh/mesh_reader_h2d_xml_wrap.cxx $(PATH_H2D)/mesh/refinement_type_wrap.cxx $(PATH_H2D)/mesh/subdomains_h2d_xml_wrap.cxx $(PATH_H2D)/mesh/traverse_wrap.cxx
+#	$(PATH_H2D)/mesh/nurbs_wrap.cxx
+#	$(PATH_H2D)/mesh/nurbs_matrix_wrap.cxx
+#	$(PATH_H2D)/mesh/refmap_wrap.cxx
+
+#############
+
+$(PATH_COMMON)/obj/curved.o:: $(PATH_H2D_SRC)/mesh/curved.cpp $(PATH_H2D)/mesh/curved_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -I$(PATH_H2D_INCLUDE)/mesh -I$(PATH_H2D_INCLUDE)/quadrature -Ihermes_common $(PATH_H2D_SRC)/mesh/curved.cpp $(PATH_H2D)/mesh/curved_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/curved.o $(PATH_H2D)/mesh/obj/
+	mv $(PATH_HERMES_PYTHON)/curved_wrap.o $(PATH_H2D)/mesh/obj/
+
+$(PATH_COMMON)/obj/curved_wrap.o:: $(PATH_H2D_SRC)/mesh/curved.cpp $(PATH_H2D)/mesh/curved_wrap.cxx
+	$(GCC_OPT) -I$(PATH_COMMON_INCLUDE) -I$(PATH_H2D_INCLUDE) -I$(PATH_H2D_INCLUDE)/mesh -I$(PATH_H2D_INCLUDE)/quadrature -Ihermes_common $(PATH_H2D_SRC)/mesh/curved.cpp $(PATH_H2D)/mesh/curved_wrap.cxx -I$(PATH_PYTHON_INCLUDE)
+	mv $(PATH_HERMES_PYTHON)/curved.o $(PATH_H2D)/mesh/obj/
+	mv $(PATH_HERMES_PYTHON)/curved_wrap.o $(PATH_H2D)/mesh/obj/
+
+h2d-obj:: h2d-cxx \
+	$(PATH_COMMON)/obj/curved.o $(PATH_COMMON)/obj/curved_wrap.o \
+
+h2d:: h2d-obj
 
 ##########################################################################################################################
 
