@@ -55,7 +55,7 @@ cdef class PyMatrixFormVolReal(PyFormReal):
 
   def clone(self):
     cdef PyMatrixFormVolReal r = PyMatrixFormVolReal(0,0,init = False)
-    r.thisptr = (<MatrixFormVol[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<MatrixFormVol[double]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -143,7 +143,7 @@ cdef class PyMatrixFormSurfReal(PyFormReal):
 
   def clone(self):
     cdef PyMatrixFormSurfReal r = PyMatrixFormSurfReal(0,0,init = False)
-    r.thisptr = (<MatrixFormSurf[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<MatrixFormSurf[double]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -226,7 +226,7 @@ cdef class PyVectorFormVolReal(PyFormReal):
 
   def clone(self):
     cdef PyVectorFormVolReal r = PyVectorFormVolReal(0,0,init = False)
-    r.thisptr = (<VectorFormVol[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<VectorFormVol[double]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -304,7 +304,7 @@ cdef class PyVectorFormSurfReal(PyFormReal):
 
   def clone(self):
     cdef PyVectorFormSurfReal r = PyVectorFormSurfReal(0,init = False)
-    r.thisptr = (<VectorFormSurf[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<VectorFormSurf[double]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -341,7 +341,7 @@ cdef class PyVectorFormSurfReal(PyFormReal):
 cdef class PyMultiComponentMatrixFormVolReal(PyFormReal):
   def clone(self):
     cdef PyMultiComponentMatrixFormVolReal r = PyMultiComponentMatrixFormVolReal(0,0,init = False)
-    r.thisptr = (<MultiComponentMatrixFormVol[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<MultiComponentMatrixFormVol[double]*> self.thisptr).clone() 
     return r
 
   property sym:
@@ -396,7 +396,7 @@ cdef class PyMultiComponentMatrixFormVolReal(PyFormReal):
 cdef class PyMultiComponentMatrixFormSurfReal(PyFormReal):
   def clone(self):
     cdef PyMultiComponentMatrixFormSurfReal r = PyMultiComponentMatrixFormSurfReal(0,0,init = False)
-    r.thisptr = (<MultiComponentMatrixFormSurf[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<MultiComponentMatrixFormSurf[double]*> self.thisptr).clone() 
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
@@ -444,7 +444,7 @@ cdef class PyMultiComponentMatrixFormSurfReal(PyFormReal):
 cdef class PyMultiComponentVectorFormVolReal(PyFormReal):
   def clone(self):
     cdef PyMultiComponentVectorFormVolReal r = PyMultiComponentVectorFormVolReal(0,0,init = False)
-    r.thisptr = (<MultiComponentVectorFormVol[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<MultiComponentVectorFormVol[double]*> self.thisptr).clone() 
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
@@ -488,7 +488,7 @@ cdef class PyMultiComponentVectorFormSurfReal(PyFormReal):
 
   def clone(self):
     cdef PyVectorFormSurfReal r = PyVectorFormSurfReal(0,0,init = False)
-    r.thisptr = (<MultiComponentVectorFormSurf[double]*> self.thisptr).clone() 
+    r.thisptr = <Form[double]*> (<MultiComponentVectorFormSurf[double]*> self.thisptr).clone() 
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataReal ext, list result):
@@ -994,7 +994,7 @@ cdef class PyMatrixFormVolComplex(PyFormComplex):
 
   def clone(self):
     cdef PyMatrixFormVolComplex r = PyMatrixFormVolComplex(0,0,init = False)
-    r.thisptr = (<MatrixFormVol[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<MatrixFormVol[cComplex[double]]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -1082,7 +1082,7 @@ cdef class PyMatrixFormSurfComplex(PyFormComplex):
 
   def clone(self):
     cdef PyMatrixFormSurfComplex r = PyMatrixFormSurfComplex(0,0,init = False)
-    r.thisptr = (<MatrixFormSurf[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<MatrixFormSurf[cComplex[double]]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -1165,7 +1165,7 @@ cdef class PyVectorFormVolComplex(PyFormComplex):
 
   def clone(self):
     cdef PyVectorFormVolComplex r = PyVectorFormVolComplex(0,0,init = False)
-    r.thisptr = (<VectorFormVol[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<VectorFormVol[cComplex[double]]*> self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -1243,7 +1243,7 @@ cdef class PyVectorFormSurfComplex(PyFormComplex):
 
   def clone(self):
     cdef PyVectorFormSurfComplex r = PyVectorFormSurfComplex(0,0,init = False)
-    r.thisptr = (<VectorFormSurf[cComplex[double]]* > self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<VectorFormSurf[cComplex[double]]* > self.thisptr).clone() 
     return r
   property i:
     def __set__(self, unsigned int value):
@@ -1279,7 +1279,7 @@ cdef class PyVectorFormSurfComplex(PyFormComplex):
 cdef class PyMultiComponentMatrixFormVolComplex(PyFormComplex):
   def clone(self):
     cdef PyMultiComponentMatrixFormVolComplex r = PyMultiComponentMatrixFormVolComplex(0,0,init = False)
-    r.thisptr = (<MultiComponentMatrixFormVol[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<MultiComponentMatrixFormVol[cComplex[double]]*> self.thisptr).clone() 
     return r
 
   property sym:
@@ -1334,7 +1334,7 @@ cdef class PyMultiComponentMatrixFormVolComplex(PyFormComplex):
 cdef class PyMultiComponentMatrixFormSurfComplex(PyFormComplex):
   def clone(self):
     cdef PyMultiComponentMatrixFormSurfComplex r = PyMultiComponentMatrixFormSurfComplex(0,0,init = False)
-    r.thisptr = (<MultiComponentMatrixFormSurf[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<MultiComponentMatrixFormSurf[cComplex[double]]*> self.thisptr).clone() 
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal u, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):
@@ -1382,7 +1382,7 @@ cdef class PyMultiComponentMatrixFormSurfComplex(PyFormComplex):
 cdef class PyMultiComponentVectorFormVolComplex(PyFormComplex):
   def clone(self):
     cdef PyMultiComponentVectorFormVolComplex r = PyMultiComponentVectorFormVolComplex(0,0,init = False)
-    r.thisptr = (<MultiComponentVectorFormVol[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<MultiComponentVectorFormVol[cComplex[double]]*> self.thisptr).clone() 
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):
@@ -1426,7 +1426,7 @@ cdef class PyMultiComponentVectorFormSurfComplex(PyFormComplex):
 
   def clone(self):
     cdef PyMultiComponentVectorFormSurfComplex r = PyMultiComponentVectorFormSurfComplex(0,0,init = False)
-    r.thisptr = (<MultiComponentVectorFormSurf[cComplex[double]]*> self.thisptr).clone() 
+    r.thisptr = <Form[cComplex[double]]*> (<MultiComponentVectorFormSurf[cComplex[double]]*> self.thisptr).clone() 
     return r
 
   def value(self, int n, wt, u_ext, PyFuncReal v, PyGeomReal e, PyExtDataComplex ext, list result):

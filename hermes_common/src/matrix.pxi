@@ -140,7 +140,7 @@ cdef class PySparseMatrixReal(PyMatrixReal): #abstract
     (<SparseMatrix[double] *> self.thisptr).multiply_with_Scalar(value)
   def duplicate(self):
     dup=PySparseMatrixReal()
-    dup.thisptr= (<SparseMatrix[double] *> self.thisptr).duplicate()
+    dup.thisptr= <Matrix[double] *>(<SparseMatrix[double] *> self.thisptr).duplicate()
     return dup
 
   def get_fill_in(self):
@@ -212,7 +212,7 @@ cdef class PySparseMatrixComplex(PyMatrixComplex): #abstract
     (<SparseMatrix[cComplex[double]] *> self.thisptr).multiply_with_Scalar(cComplex[double](value.real,value.imag))
   def duplicate(self):
     dup=PySparseMatrixComplex()
-    dup.thisptr= (<SparseMatrix[cComplex[double]] *> self.thisptr).duplicate()
+    dup.thisptr= <Matrix[cComplex[double]] *> (<SparseMatrix[cComplex[double]] *> self.thisptr).duplicate()
     return dup
 
   def get_fill_in(self):

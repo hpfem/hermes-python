@@ -3,9 +3,9 @@ cdef class PyNewtonSolverReal(PyNonlinearSolverReal):
     if (type(self)!=PyNewtonSolverReal):
       return
     if matrix_solver_type is not None:
-      self.thisptr=new NewtonSolver[double]((<PyDiscreteProblemReal>dp).thisptr, matrix_solver_type)
+      self.thisptr= <NonlinearSolver[double] *> new NewtonSolver[double]((<PyDiscreteProblemReal>dp).thisptr, matrix_solver_type)
     else:
-      self.thisptr=new NewtonSolver[double]((<PyDiscreteProblemReal>dp).thisptr)
+      self.thisptr= <NonlinearSolver[double] *> new NewtonSolver[double]((<PyDiscreteProblemReal>dp).thisptr)
   def solve(self, coeff_vec = None, newton_tol = None, newton_max_iter = None, residual_as_function = None):
     cdef double * c_coeff_vec
     if coeff_vec:
@@ -74,9 +74,9 @@ cdef class PyNewtonSolverComplex(PyNonlinearSolverComplex):
     if (type(self)!=PyNewtonSolverComplex):
       return
     if matrix_solver_type:
-      self.thisptr=new NewtonSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, matrix_solver_type)
+      self.thisptr= <NonlinearSolver[cComplex[double]] *> new NewtonSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, matrix_solver_type)
     else:
-      self.thisptr=new NewtonSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr)
+      self.thisptr= <NonlinearSolver[cComplex[double]] *> new NewtonSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr)
   def solve(self, coeff_vec = None, newton_tol = None, newton_max_iter = None, residual_as_function = None):
     cdef cComplex[double] * c_coeff_vec
     if coeff_vec:

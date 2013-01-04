@@ -1,6 +1,6 @@
 cdef class PyCustomHermes1DFunctionReal(PyHermes1DFunctionReal):
   def __cinit__(self):
-    self.thisptr = new CustomHermes1DFunction[double](self)
+    self.thisptr = <Hermes1DFunction[double] *> new CustomHermes1DFunction[double](self)
     return
 
 cdef public double pyHermes1DFunctionReal_value(object self, double x):
@@ -26,7 +26,7 @@ cdef public Ord pyHermes1DFunction_derivative(object self, Ord x):
 
 cdef class PyCustomHermes2DFunctionReal(PyHermes2DFunctionReal):
   def __cinit__(self):
-    self.thisptr = new CustomHermes2DFunction[double](self)
+    self.thisptr = <Hermes2DFunction[double] *> new CustomHermes2DFunction[double](self)
     return
 
 cdef public double pyHermes2DFunctionReal_value(object self, double x, double y):
@@ -55,7 +55,7 @@ cdef public Ord pyHermes2DFunction_derivative(object self, Ord x, Ord y):
   
 cdef class PyCustomHermes3DFunctionReal(PyHermes3DFunctionReal):
   def __cinit__(self):
-    self.thisptr = new CustomHermes3DFunction[double](self)
+    self.thisptr = <Hermes3DFunction[double] *> new CustomHermes3DFunction[double](self)
     return
 
 cdef public double pyHermes3DFunctionReal_value(object self, double x, double y, double z):

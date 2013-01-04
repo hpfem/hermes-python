@@ -8,10 +8,10 @@ cdef class PyL2ProjBasedSelectorReal(PySelectorReal):
       shapeset = user_shapeset
 
     if shapeset is not None:
-      self.thisptr = <L2ProjBasedSelector[double]*> new L2ProjBasedSelector[double](cand_list, conv_exp, max_order, (<PyL2Shapeset> shapeset).thisptr)
+      self.thisptr = <Selector[double]*> new L2ProjBasedSelector[double](cand_list, conv_exp, max_order, (<PyL2Shapeset> shapeset).thisptr)
       return
     else:
-      self.thisptr = <L2ProjBasedSelector[double]*> new L2ProjBasedSelector[double](cand_list, conv_exp, max_order)
+      self.thisptr = <Selector[double]*> new L2ProjBasedSelector[double](cand_list, conv_exp, max_order)
       return
       
 cdef class PyL2ProjBasedSelectorComplex(PySelectorComplex):
@@ -24,8 +24,8 @@ cdef class PyL2ProjBasedSelectorComplex(PySelectorComplex):
       shapeset = user_shapeset
 
     if shapeset is not None:
-      self.thisptr = <L2ProjBasedSelector[cComplex[double]]*> new L2ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order, (<PyL2Shapeset> shapeset).thisptr)
+      self.thisptr = <Selector[cComplex[double]]*> new L2ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order, (<PyL2Shapeset> shapeset).thisptr)
       return
     else:
-      self.thisptr = <L2ProjBasedSelector[cComplex[double]]*> new L2ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order)
+      self.thisptr = <Selector[cComplex[double]]*> new L2ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order)
       return

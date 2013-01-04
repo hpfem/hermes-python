@@ -10,13 +10,13 @@ cdef class PyH1ProjBasedSelectorReal(PySelectorReal):
     if conv_exp is not None:
       if max_order is not None:
         if user_shapeset is not None:
-          self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order, (<PyH1Shapeset> user_shapeset).thisptr)
+          self.thisptr = <Selector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order, (<PyH1Shapeset> user_shapeset).thisptr)
         else:
-          self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order)
+          self.thisptr = <Selector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp, max_order)
       else:
-        self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp)
+        self.thisptr = <Selector[double]*> new H1ProjBasedSelector[double](cand_list, conv_exp)
     else:
-      self.thisptr = <H1ProjBasedSelector[double]*> new H1ProjBasedSelector[double](cand_list)
+      self.thisptr = <Selector[double]*> new H1ProjBasedSelector[double](cand_list)
     return
       
 cdef class PyH1ProjBasedSelectorComplex(PySelectorComplex):
@@ -31,11 +31,11 @@ cdef class PyH1ProjBasedSelectorComplex(PySelectorComplex):
     if conv_exp is not None:
       if max_order is not None:
         if user_shapeset is not None:
-          self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order, (<PyH1Shapeset> user_shapeset).thisptr)
+          self.thisptr = <Selector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order, (<PyH1Shapeset> user_shapeset).thisptr)
         else:
-          self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order)
+          self.thisptr = <Selector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp, max_order)
       else:
-        self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp)
+        self.thisptr = <Selector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list, conv_exp)
     else:
-      self.thisptr = <H1ProjBasedSelector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list)
+      self.thisptr = <Selector[cComplex[double]]*> new H1ProjBasedSelector[cComplex[double]](cand_list)
     return

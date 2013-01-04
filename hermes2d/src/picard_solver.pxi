@@ -8,16 +8,16 @@ cdef class PyPicardSolverReal(PyNonlinearSolverReal):
       if isinstance(slns_prev_iter,list):
         for s in slns_prev_iter:
           cslns_prev_iter.push_back(<Solution[double]*> s.thisptr)
-        self.thisptr=new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, cslns_prev_iter, <MatrixSolverType> matrix_solver_type)
+        self.thisptr= <NonlinearSolver[double] *> new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, cslns_prev_iter, <MatrixSolverType> matrix_solver_type)
       else:
-        self.thisptr=new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, <Solution[double]*>(<PySolutionReal>slns_prev_iter).thisptr, <MatrixSolverType> matrix_solver_type)
+        self.thisptr= <NonlinearSolver[double] *> new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, <Solution[double]*>(<PySolutionReal>slns_prev_iter).thisptr, <MatrixSolverType> matrix_solver_type)
     else:
       if isinstance(slns_prev_iter,list):
         for s in slns_prev_iter:
           cslns_prev_iter.push_back(<Solution[double]*> s.thisptr)
-        self.thisptr=new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, cslns_prev_iter)
+        self.thisptr= <NonlinearSolver[double] *> new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, cslns_prev_iter)
       else:
-        self.thisptr=new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, <Solution[double]*>(<PySolutionReal>slns_prev_iter).thisptr)
+        self.thisptr= <NonlinearSolver[double] *> new PicardSolver[double]((<PyDiscreteProblemReal>dp).thisptr, <Solution[double]*>(<PySolutionReal>slns_prev_iter).thisptr)
 
   def solve(self, tol = None, max_iter = None, num_last_vectors_used = None, anderson_beta = None):
     if tol:
@@ -45,16 +45,16 @@ cdef class PyPicardSolverComplex(PyNonlinearSolverComplex):
       if isinstance(slns_prev_iter,list):
         for s in slns_prev_iter:
           cslns_prev_iter.push_back(<Solution[cComplex[double]]*> s.thisptr)
-        self.thisptr=new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, cslns_prev_iter, <MatrixSolverType> matrix_solver_type)
+        self.thisptr= <NonlinearSolver[cComplex[double]] *> new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, cslns_prev_iter, <MatrixSolverType> matrix_solver_type)
       else:
-        self.thisptr=new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, <Solution[cComplex[double]]*>(<PySolutionComplex>slns_prev_iter).thisptr, <MatrixSolverType> matrix_solver_type)
+        self.thisptr= <NonlinearSolver[cComplex[double]] *> new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, <Solution[cComplex[double]]*>(<PySolutionComplex>slns_prev_iter).thisptr, <MatrixSolverType> matrix_solver_type)
     else:
       if isinstance(slns_prev_iter,list):
         for s in slns_prev_iter:
           cslns_prev_iter.push_back(<Solution[cComplex[double]]*> s.thisptr)
-        self.thisptr=new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, cslns_prev_iter)
+        self.thisptr= <NonlinearSolver[cComplex[double]] *> new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, cslns_prev_iter)
       else:
-        self.thisptr=new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, <Solution[cComplex[double]]*>(<PySolutionComplex>slns_prev_iter).thisptr)
+        self.thisptr= <NonlinearSolver[cComplex[double]] *> new PicardSolver[cComplex[double]]((<PyDiscreteProblemComplex>dp).thisptr, <Solution[cComplex[double]]*>(<PySolutionComplex>slns_prev_iter).thisptr)
 
   def solve(self, tol = None, max_iter = None, num_last_vectors_used = None, anderson_beta = None):
     if tol:
