@@ -177,8 +177,10 @@ cdef class PyMatrixFormVolErrorReal:
 
     result = self.thisptr.value(n, cwt, cu_ext, (<PyFuncReal> u).thisptr, (<PyFuncReal> v).thisptr, (<PyGeomReal> e).thisptr, (<PyExtDataReal> ext).thisptr)
       
+    cdef Func[double] * pcu_ext
     for i in range(len(u_ext)):
-      del cu_ext[i]
+      pcu_ext = cu_ext[(i)]
+      del pcu_ext
     return result
         
   def ord(self, n, wt, u_ext, u, v, e, ext):
@@ -192,8 +194,10 @@ cdef class PyMatrixFormVolErrorReal:
   
     cdef PyOrd result = PyOrd(self.thisptr.ord(n, cwt, cu_ext, (<PyFuncOrd> u).thisptr, (<PyFuncOrd> v).thisptr, (<PyGeomOrd> e).thisptr, (<PyExtDataOrd> ext).thisptr).get_order())
     
+    cdef Func[Ord] * pcu_ext
     for i in range(len(u_ext)):
-      del cu_ext[i]
+      pcu_ext = cu_ext[(i)]
+      del pcu_ext
     return result
     
     
@@ -374,8 +378,10 @@ cdef class PyMatrixFormVolErrorComplex:
 
     cdef cComplex[double] result = self.thisptr.value(n, cwt, cu_ext, (<PyFuncComplex> u).thisptr, (<PyFuncComplex> v).thisptr, (<PyGeomReal> e).thisptr, (<PyExtDataComplex> ext).thisptr)
      
+    cdef Func[cComplex[double]] * pcu_ext
     for i in range(len(u_ext)):
-      del cu_ext[i]
+      pcu_ext = cu_ext[i]
+      del pcu_ext
     return pcomplex(result)
         
   def ord(self, n, wt, u_ext, u, v, e, ext):
@@ -389,6 +395,8 @@ cdef class PyMatrixFormVolErrorComplex:
   
     cdef PyOrd result = PyOrd(self.thisptr.ord(n, cwt, cu_ext, (<PyFuncOrd> u).thisptr, (<PyFuncOrd> v).thisptr, (<PyGeomOrd> e).thisptr, (<PyExtDataOrd> ext).thisptr).get_order())
     
+    cdef Func[Ord] * pcu_ext
     for i in range(len(u_ext)):
-      del cu_ext[i]
+      pcu_ext = cu_ext[i]
+      del pcu_ext
     return result
